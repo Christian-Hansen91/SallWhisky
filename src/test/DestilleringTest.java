@@ -4,13 +4,14 @@ import model.application.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class DestilleringTest {
     Maltning maltning;
     Destillering destillering;
     Fad fad;
     Destillat destillat;
+    Tapning tapning;
 
     @BeforeEach
     void setup() {
@@ -22,7 +23,6 @@ class DestilleringTest {
 
     @Test
     void opretTapning() {
-        Tapning tapning = destillering.opretTapning(destillat,100,"Music Project");
-
+        assertThrows(IllegalArgumentException.class, () -> destillering.opretTapning(destillat,100,"Music Project"));
     }
 }

@@ -1,6 +1,7 @@
 package model.application;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Fad {
@@ -11,7 +12,7 @@ public class Fad {
     private String ophavsland;
     private LocalDate indkoebsdato;
     private String historik;
-    private List<Destillat> destillater;
+    private List<Destillat> destillater = new ArrayList<>();
 
     public Fad(int kapacitet, String historik) {
         this.kapacitet = kapacitet;

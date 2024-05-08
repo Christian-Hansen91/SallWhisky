@@ -28,7 +28,7 @@ public class Destillat {
             tapninger.add(tapning);
         }
     }
-    //public boolean pladsIToenden
+
     public double hentTotalMaengde() {
         double liter = 0;
         for (Tapning tapning : tapninger) {
@@ -37,4 +37,7 @@ public class Destillat {
         return liter;
     }
 
+    public Fad getFad() {
+        return fad;
+    }
 }

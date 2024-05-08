@@ -21,7 +21,9 @@ public class Destillering {
         this.maltning = maltning;
     }
     public Tapning opretTapning(Destillat destillat, double maengde, String kommentar) {
-
+        if (!destillat.getFad().tjekKapacitet(maengde)) {
+            throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det fad");
+        }
         Tapning tapning = new Tapning(maengde, this, destillat);
         destillat.saetKommentar(kommentar);
         return tapning;
