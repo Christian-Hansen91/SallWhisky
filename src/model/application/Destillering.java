@@ -17,15 +17,24 @@ public class Destillering {
     private String kommentar;
     private double alkoholprocent;
 
-    public Destillering(Maltning maltning) {
-        this.maltning = maltning;
+    public Destillering(int id, LocalDate startdato, LocalDate slutdato, double maengdeVand,
+                        double head, double heart, double tail, String kommentar, double alkoholprocent) {
+        this.id = id;
+        this.startdato = startdato;
+        this.slutdato = slutdato;
+        this.maengdeVand = maengdeVand;
+        this.head = head;
+        this.heart = heart;
+        this.tail = tail;
+        this.kommentar = kommentar;
+        this.alkoholprocent = alkoholprocent;
     }
 
     public Tapning opretTapning(Destillat destillat, double maengde, String kommentar) {
         if (!destillat.getFad().tjekPlads(maengde)) {
             throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det fad");
         }
-        Tapning tapning = new Tapning(maengde, this, destillat);
+        Tapning tapning = new Tapning(maengde, this, destillat, kommentar);
         destillat.saetKommentar(kommentar);
         return tapning;
     }
@@ -35,7 +44,22 @@ public class Destillering {
             throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det valgte fad");
         }
         Destillat destillat = new Destillat(fad);
-        Tapning tapning = new Tapning(maengde, this, destillat);
+        Tapning tapning = new Tapning(maengde, this, destillat, kommentar);
         return tapning;
+    }
+
+    @Override
+    public String toString() {
+        return "Destillering, ID: " + id + "\n" +
+                "Tapninger: " + tapninger + "\n" +
+                "Startdato: " + startdato +
+                ", slutdato: " + slutdato + "\n" +
+                "Vand (L): " + maengdeVand + "\n" +
+                "Malt: " + maltning + "\n" +
+                "Head: " + head +
+                ", heart: " + heart +
+                ", tail: " + tail + "\n" +
+                "Alkoholprocent: " + alkoholprocent + "\n" +
+                "Kommentar: " + kommentar + ".\n";
     }
 }

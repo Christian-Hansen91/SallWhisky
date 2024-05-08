@@ -27,4 +27,16 @@ public class Maltning {
         this.id = totalAntal;
         this.rygemateriale = rygemateriale;
     }
+
+    @Override
+    public String toString() {
+        return "Maltning: " + "\n" +
+                "ID: " + id + "\n" +
+                "Dato: " + dato + "\n" +
+                "Korntype: " + korntype +
+                ", marknavn: " + marknavn + "\n" +
+                "Mængde=" + maengde + "\n" +
+                "Rygemateriale: " + rygemateriale + "\n" +
+                "Kommentar: " + kommentar + "\n";
+    }
 }

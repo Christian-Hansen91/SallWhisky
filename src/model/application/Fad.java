@@ -14,8 +14,11 @@ public class Fad {
     private String historik;
     private List<Destillat> destillater = new ArrayList<>();
 
-    public Fad(int kapacitet, String historik) {
+    public Fad(int id, int kapacitet, String ophavsland, LocalDate indkoebsdato, String historik) {
+        this.id = id;
         this.kapacitet = kapacitet;
+        this.ophavsland = ophavsland;
+        this.indkoebsdato = indkoebsdato;
         this.historik = historik;
     }
 
@@ -38,5 +41,16 @@ public class Fad {
             total += destillat.hentTotalMaengde();
         }
         return total;
+    }
+
+    @Override
+    public String toString() {
+        return "Fad, ID: " + id + "\n" +
+                "Kapacitet: " + kapacitet + "\n" +
+                "Lagerplads: " + lagerplads + "\n" +
+                "Ophavsland: " + ophavsland + "\n" +
+                "Indkøbsdato: " + indkoebsdato + "\n" +
+                "Historik: " + historik + "\n" +
+                "Destillater: " + destillater + "\n";
     }
 }

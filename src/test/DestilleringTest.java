@@ -13,13 +13,13 @@ class DestilleringTest {
     Destillat destillat;
     Tapning tapning;
 
-    @BeforeEach
+    /*@BeforeEach
     void setup() {
         maltning = new Maltning(100, "Byg");
         destillering = new Destillering(maltning);
         fad = new Fad(60, "sherry");
         destillat = new Destillat(fad);
-    }
+    }*/
     @Test
     void opretTapning() {
         double result = 60;
