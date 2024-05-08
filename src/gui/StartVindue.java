@@ -15,7 +15,9 @@ public class StartVindue extends Application {
     private Button btnOpretMaltning = new Button("Opret maltning");
     private Button btnOpretWhiskyDestillering = new Button("Opret whiskydestillering");
     private Button btnOpretGinDestillering = new Button("Opret gindestillering");
-    private Button btnOpretTapning = new Button("Opret tapning");
+    private Button btnOpretDestilleringsTapning = new Button("Opret destilleringstapning");
+    private Button btnOpretOmhaeldning = new Button("Opret omhældning");
+    private Button btnOpretWhiskyTapning = new Button("Opret whiskytapning");
     private Button btnOpretLager = new Button("Opret lager");
     private Button btnOpretFad = new Button("Opret fad");
 
@@ -45,13 +47,18 @@ public class StartVindue extends Application {
         Label lblVelkommen = new Label("Velkommen til Sall Whisky Distillery");
         pane.setHalignment(lblVelkommen, HPos.CENTER);
         lblVelkommen.setTextFill(Color.BURLYWOOD);
-        pane.add(lblVelkommen, 0, 0, 32, 1);
-        btnOpretWhiskyDestillering.setMinWidth(150);
-        btnOpretGinDestillering.setMinWidth(150);
-        btnOpretMaltning.setMinWidth(150);
-        btnOpretLager.setMinWidth(150);
-        btnOpretFad.setMinWidth(150);
-        btnOpretTapning.setMinWidth(150);
+        Label lblMedarbejder = new Label("Medarbejder: Snævar");
+        pane.add(lblMedarbejder, 0, 0, 32, 1);
+        lblMedarbejder.setTextFill(Color.BURLYWOOD);
+        pane.add(lblVelkommen, 1, 0, 32, 1);
+        btnOpretWhiskyDestillering.setMinWidth(160);
+        btnOpretGinDestillering.setMinWidth(160);
+        btnOpretMaltning.setMinWidth(160);
+        btnOpretLager.setMinWidth(160);
+        btnOpretFad.setMinWidth(160);
+        btnOpretDestilleringsTapning.setMinWidth(160);
+        btnOpretWhiskyTapning.setMinWidth(160);
+        btnOpretOmhaeldning.setMinWidth(160);
 
         pane.add(btnOpretWhiskyDestillering, 0, 4, 2, 1);
         pane.setHalignment(btnOpretWhiskyDestillering, HPos.CENTER);
@@ -59,13 +66,19 @@ public class StartVindue extends Application {
         pane.setHalignment(btnOpretGinDestillering, HPos.CENTER);
         pane.add(btnOpretMaltning, 0, 5, 2, 1);
         pane.setHalignment(btnOpretMaltning, HPos.CENTER);
-        pane.add(btnOpretLager, 29, 5, 2, 1);
-        pane.setHalignment(btnOpretLager, HPos.CENTER);
-        pane.add(btnOpretFad, 0, 6, 2, 1);
+        pane.add(btnOpretFad, 29, 5, 2, 1);
         pane.setHalignment(btnOpretFad, HPos.CENTER);
-        pane.add(btnOpretTapning, 29, 6, 2, 1);
-        pane.setHalignment(btnOpretTapning, HPos.CENTER);
-        btnOpretTapning.setOnAction(event -> opretTapningAction());
+        pane.add(btnOpretLager, 0, 6, 2, 1);
+        pane.setHalignment(btnOpretLager, HPos.CENTER);
+        pane.add(btnOpretOmhaeldning, 29, 6, 2, 1);
+        pane.setHalignment(btnOpretOmhaeldning, HPos.CENTER);
+        pane.add(btnOpretDestilleringsTapning, 0, 7, 2, 1);
+        pane.setHalignment(btnOpretDestilleringsTapning, HPos.CENTER);
+        pane.add(btnOpretWhiskyTapning, 29, 7, 2, 1);
+        pane.setHalignment(btnOpretWhiskyTapning, HPos.CENTER);
+
+
+        btnOpretDestilleringsTapning.setOnAction(event -> opretTapningAction());
 
 
     }
