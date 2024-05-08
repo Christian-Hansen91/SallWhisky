@@ -1,6 +1,7 @@
 package model.application;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Fad {
@@ -11,7 +12,7 @@ public class Fad {
     private String ophavsland;
     private LocalDate indkoebsdato;
     private String historik;
-    private List<Destillat> destillater;
+    private List<Destillat> destillater = new ArrayList<>();
 
     public Fad(int kapacitet, String historik) {
         this.kapacitet = kapacitet;
@@ -24,11 +25,18 @@ public class Fad {
         }
     }
 
-    public boolean tjekKapacitet(double liter) {
+    public boolean tjekPlads(double liter) {
         double nuvaerendeIndhold = 0;
         for (Destillat destillat : destillater) {
             nuvaerendeIndhold += destillat.hentTotalMaengde();
         }
         return nuvaerendeIndhold + liter <= kapacitet;
+    }
+    public double hentOpbrugtKapacitet() {
+        double total = 0;
+        for (Destillat destillat : destillater) {
+            total += destillat.hentTotalMaengde();
+        }
+        return total;
     }
 }
