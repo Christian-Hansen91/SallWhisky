@@ -25,11 +25,18 @@ public class Fad {
         }
     }
 
-    public boolean tjekKapacitet(double liter) {
+    public boolean tjekPlads(double liter) {
         double nuvaerendeIndhold = 0;
         for (Destillat destillat : destillater) {
             nuvaerendeIndhold += destillat.hentTotalMaengde();
         }
         return nuvaerendeIndhold + liter <= kapacitet;
+    }
+    public double hentOpbrugtKapacitet() {
+        double total = 0;
+        for (Destillat destillat : destillater) {
+            total += destillat.hentTotalMaengde();
+        }
+        return total;
     }
 }

@@ -20,12 +20,22 @@ public class Destillering {
     public Destillering(Maltning maltning) {
         this.maltning = maltning;
     }
+
     public Tapning opretTapning(Destillat destillat, double maengde, String kommentar) {
-        if (!destillat.getFad().tjekKapacitet(maengde)) {
+        if (!destillat.getFad().tjekPlads(maengde)) {
             throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det fad");
         }
         Tapning tapning = new Tapning(maengde, this, destillat);
         destillat.saetKommentar(kommentar);
+        return tapning;
+    }
+
+    public Tapning opretTapningNytDestillat(Fad fad, double maengde) {
+        if (!fad.tjekPlads(maengde)) {
+            throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det valgte fad");
+        }
+        Destillat destillat = new Destillat(fad);
+        Tapning tapning = new Tapning(maengde, this, destillat);
         return tapning;
     }
 }
