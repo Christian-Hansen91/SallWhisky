@@ -55,9 +55,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-<<<<<<< HEAD
-=======
     <orderEntry type="library" exported="" name="javafx" level="application" />
->>>>>>> gui
   </component>
 </module>
