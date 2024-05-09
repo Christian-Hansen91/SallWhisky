@@ -9,19 +9,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Controller {
-    public static Maltning opretMaltning(double maengde, String korntype) {
-        Maltning maltning = new Maltning(maengde, korntype);
+    public static Maltning opretMaltning(double maengde, String korntype, String marknavn) {
+        Maltning maltning = new Maltning(maengde, korntype, marknavn);
         Storage.addMaltning(maltning);
         return maltning;
     }
-    public static Maltning opretMaltning(double maengde, String korntype, String rygemateriale) {
-        Maltning maltning = new Maltning(maengde, korntype, rygemateriale);
+    public static Maltning opretMaltning(double maengde, String korntype, String marknavn, String rygemateriale) {
+        Maltning maltning = new Maltning(maengde, korntype, marknavn, rygemateriale);
         Storage.addMaltning(maltning);
         return maltning;
     }
 
-    public static Fad opretFad(int id, int kapacitet, String ophavsland, LocalDate indkoebsdato, String historik) {
-        Fad fad = new Fad(id, kapacitet, ophavsland, indkoebsdato, historik);
+    public static Fad opretFad(int id, LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
+        Fad fad = new Fad(id, indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik);
         Storage.addFad(fad);
         return fad;
     }

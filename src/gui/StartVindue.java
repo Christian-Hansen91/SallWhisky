@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 public class StartVindue extends Application {
     private OpretDestilleringsTapningsVindue opretDestilleringsTapningsVindue;
+    private OpretWhiskydestilleringsVindue opretWhiskydestilleringsVindue;
     private Button btnOpretMaltning = new Button("Opret maltning");
     private Button btnOpretWhiskyDestillering = new Button("Opret whiskydestillering");
     private Button btnOpretGinDestillering = new Button("Opret gindestillering");
@@ -32,6 +33,7 @@ public class StartVindue extends Application {
         stage.setScene(scene);
         stage.show();
 
+        opretWhiskydestilleringsVindue = new OpretWhiskydestilleringsVindue("Opret whiskydestillering", stage);
         opretDestilleringsTapningsVindue = new OpretDestilleringsTapningsVindue("Opret destilleringstapning", stage);
     }
 
@@ -78,12 +80,16 @@ public class StartVindue extends Application {
         pane.setHalignment(btnOpretWhiskyTapning, HPos.CENTER);
 
 
-        btnOpretDestilleringsTapning.setOnAction(event -> opretTapningAction());
-
+        btnOpretDestilleringsTapning.setOnAction(event -> opretDestilleringsTapningAction());
+        btnOpretWhiskyDestillering.setOnAction(event -> opretWhiskydestilleringsAction());
 
     }
 
-    private void opretTapningAction() {
+    private void opretWhiskydestilleringsAction() {
+        opretWhiskydestilleringsVindue.showAndWait();
+    }
+
+    private void opretDestilleringsTapningAction() {
         opretDestilleringsTapningsVindue.showAndWait();
     }
 

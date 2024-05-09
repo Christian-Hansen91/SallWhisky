@@ -7,18 +7,19 @@ import java.util.List;
 public class Destillat {
     private static int totalAntal;
     private int id;
-    private List<Tapning> tapninger = new ArrayList<>();
     private LocalDate dato;
-    private Fad fad;
     private String kommentar;
+    private List<Tapning> tapninger = new ArrayList<>();
+    private Fad fad;
+
 
     public Destillat(Fad fad) {
-        this.fad = fad;
-        fad.tilfoejDestillat(this);
-        this.dato = LocalDate.now();
-        this.kommentar = kommentar;
         Destillat.totalAntal++;
         this.id = totalAntal;
+        this.dato = LocalDate.now();
+        this.kommentar = kommentar;
+        this.fad = fad;
+        fad.tilfoejDestillat(this);
     }
     public void saetKommentar(String kommentar) {
         this.kommentar = kommentar;

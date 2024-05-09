@@ -7,18 +7,22 @@ import java.util.List;
 public class Fad {
     private static int totalAntal;
     private int id;
-    private int kapacitet;
-    private String lagerplads;
-    private String ophavsland;
     private LocalDate indkoebsdato;
+    private String fadtype;
+    private int kapacitet;
+    private String ophavsland;
+    private String leverandoer;
     private String historik;
+    private Lager lager;
     private List<Destillat> destillater = new ArrayList<>();
 
-    public Fad(int id, int kapacitet, String ophavsland, LocalDate indkoebsdato, String historik) {
+    public Fad(int id, LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
         this.id = id;
+        this.indkoebsdato = indkoebsdato;
+        this.fadtype = fadtype;
         this.kapacitet = kapacitet;
         this.ophavsland = ophavsland;
-        this.indkoebsdato = indkoebsdato;
+        this.leverandoer = leverandoer;
         this.historik = historik;
     }
 
@@ -46,10 +50,11 @@ public class Fad {
     @Override
     public String toString() {
         return "Fad, ID: " + id + "\n" +
-                "Kapacitet: " + kapacitet + "\n" +
-                "Lagerplads: " + lagerplads + "\n" +
-                "Ophavsland: " + ophavsland + "\n" +
                 "Indkøbsdato: " + indkoebsdato + "\n" +
+                "Fadtype: " + fadtype + "\n" +
+                "Kapacitet: " + kapacitet + "\n" +
+                "Ophavsland: " + ophavsland +
+                ", leverandør: " + leverandoer + "\n" +
                 "Historik: " + historik + "\n" +
                 "Destillater: " + destillater + "\n";
     }
