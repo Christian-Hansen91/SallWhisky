@@ -3,6 +3,7 @@ package controller;
 import model.application.Destillering;
 import model.application.Fad;
 import model.application.Maltning;
+import model.application.Medarbejder;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -27,8 +28,8 @@ public class Controller {
     }
 
     public static Destillering opretDestillering(Maltning maltning, LocalDate startdato, LocalDate slutdato, double maengdeVand,
-                                                 double head, double heart, double tail, String kommentar, double alkoholprocent) {
-        Destillering destillering = new Destillering(maltning, startdato, slutdato, maengdeVand, head, heart, tail, kommentar, alkoholprocent);
+                                                 double head, double heart, double tail, String kommentar, double alkoholprocent, Medarbejder medarbejder) {
+        Destillering destillering = new Destillering(maltning, startdato, slutdato, maengdeVand, head, heart, tail, kommentar, alkoholprocent, medarbejder);
         Storage.addDestillering(destillering);
         return destillering;
     }
