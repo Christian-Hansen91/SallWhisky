@@ -26,9 +26,9 @@ public class Controller {
         return fad;
     }
 
-    public static Destillering opretDestillering(int id, LocalDate startdato, LocalDate slutdato, double maengdeVand,
+    public static Destillering opretDestillering(Maltning maltning, LocalDate startdato, LocalDate slutdato, double maengdeVand,
                                                  double head, double heart, double tail, String kommentar, double alkoholprocent) {
-        Destillering destillering = new Destillering(id, startdato, slutdato, maengdeVand, head, heart, tail, kommentar, alkoholprocent);
+        Destillering destillering = new Destillering(maltning, startdato, slutdato, maengdeVand, head, heart, tail, kommentar, alkoholprocent);
         Storage.addDestillering(destillering);
         return destillering;
     }

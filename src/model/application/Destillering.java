@@ -17,9 +17,11 @@ public class Destillering {
     private List<Tapning> tapninger;
     private Maltning maltning;
 
-    public Destillering(int newMakeNr, LocalDate startdato, LocalDate slutdato, double maengdeVaeske,
+    public Destillering(Maltning maltning, LocalDate startdato, LocalDate slutdato, double maengdeVaeske,
                         double head, double heart, double tail, String kommentar, double alkoholprocent) {
-        this.newMakeNr = newMakeNr;
+        Destillering.totalAntal++;
+        this.newMakeNr = totalAntal;
+        this.maltning = maltning;
         this.startdato = startdato;
         this.slutdato = slutdato;
         this.maengdeVaeske = maengdeVaeske;
