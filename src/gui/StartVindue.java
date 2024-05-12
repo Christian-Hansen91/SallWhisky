@@ -6,11 +6,17 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class StartVindue extends Application {
+    private OpretMedarbejderVindue opretMedarbejderVindue;
+    private LogIndVindue logIndVindue;
+    private OpretMaltningVindue opretMaltningVindue;
+    private OpretLagerVindue opretLagerVindue;
+    private OpretFadVindue opretFadVindue;
     private OpretDestilleringsTapningsVindue opretDestilleringsTapningsVindue;
     private OpretWhiskydestilleringsVindue opretWhiskydestilleringsVindue;
     private Button btnOpretMaltning = new Button("Opret maltning");
@@ -21,6 +27,9 @@ public class StartVindue extends Application {
     private Button btnOpretWhiskyTapning = new Button("Opret whiskytapning");
     private Button btnOpretLager = new Button("Opret lager");
     private Button btnOpretFad = new Button("Opret fad");
+    private Button btnOpretMedarbejder = new Button("Opret medarbejder");
+    private Button btnLogInd = new Button("Log ind");
+    private TextField txfMedarbejder = new TextField();
 
 
     public void start(Stage stage) throws Exception {
@@ -33,6 +42,11 @@ public class StartVindue extends Application {
         stage.setScene(scene);
         stage.show();
 
+        logIndVindue = new LogIndVindue("Log ind", stage);
+        opretMedarbejderVindue = new OpretMedarbejderVindue("Opret medarbejder", stage);
+        opretMaltningVindue = new OpretMaltningVindue("Opret maltning", stage);
+        opretLagerVindue = new OpretLagerVindue("Opret lager", stage);
+        opretFadVindue = new OpretFadVindue("Opret fad", stage);
         opretWhiskydestilleringsVindue = new OpretWhiskydestilleringsVindue("Opret whiskydestillering", stage);
         opretDestilleringsTapningsVindue = new OpretDestilleringsTapningsVindue("Opret destilleringstapning", stage);
     }
@@ -49,9 +63,16 @@ public class StartVindue extends Application {
         Label lblVelkommen = new Label("Velkommen til Sall Whisky Distillery");
         pane.setHalignment(lblVelkommen, HPos.CENTER);
         lblVelkommen.setTextFill(Color.BURLYWOOD);
-        Label lblMedarbejder = new Label("Medarbejder: Snævar");
-        pane.add(lblMedarbejder, 0, 0, 32, 1);
+        Label lblMedarbejder = new Label("Medarbejder: ");
+        pane.add(lblMedarbejder, 0, 1, 32, 1);
         lblMedarbejder.setTextFill(Color.BURLYWOOD);
+        pane.add(txfMedarbejder, 0, 2, 2, 1);
+        pane.setHalignment(txfMedarbejder, HPos.RIGHT);
+        txfMedarbejder.setMaxWidth(160);
+        pane.add(btnLogInd, 0, 0, 32, 1);
+        pane.setHalignment(btnLogInd, HPos.LEFT);
+        pane.add(btnOpretMedarbejder, 29, 0, 2, 1);
+        pane.setHalignment(btnOpretMedarbejder, HPos.RIGHT);
         pane.add(lblVelkommen, 1, 0, 32, 1);
         btnOpretWhiskyDestillering.setMinWidth(160);
         btnOpretGinDestillering.setMinWidth(160);
@@ -79,10 +100,34 @@ public class StartVindue extends Application {
         pane.add(btnOpretWhiskyTapning, 29, 7, 2, 1);
         pane.setHalignment(btnOpretWhiskyTapning, HPos.CENTER);
 
-
+        btnLogInd.setOnAction(event -> logIndAction());
+        btnOpretMedarbejder.setOnAction(event -> opretMedarbejderAction());
+        btnOpretMaltning.setOnAction(event -> opretMaltningAction());
+        btnOpretLager.setOnAction(event -> opretLagerAction());
+        btnOpretFad.setOnAction(event -> opretFadAction());
         btnOpretDestilleringsTapning.setOnAction(event -> opretDestilleringsTapningAction());
         btnOpretWhiskyDestillering.setOnAction(event -> opretWhiskydestilleringsAction());
 
+    }
+
+    private void logIndAction() {
+        logIndVindue.showAndWait();
+    }
+
+    private void opretMedarbejderAction() {
+        opretMedarbejderVindue.showAndWait();
+    }
+
+    private void opretFadAction() {
+        opretFadVindue.showAndWait();
+    }
+
+    private void opretMaltningAction() {
+        opretMaltningVindue.showAndWait();
+    }
+
+    private void opretLagerAction() {
+        opretLagerVindue.showAndWait();
     }
 
     private void opretWhiskydestilleringsAction() {

@@ -4,11 +4,13 @@ public class Medarbejder {
     private String navn;
     private int id;
     private int tlfNr;
+    private static int totalAntal;
 
-    public Medarbejder(String navn, int id, int tlfNr) {
+    public Medarbejder(int id, String navn, int tlfNr) {
+        this.id = totalAntal;
         this.navn = navn;
-        this.id = id;
         this.tlfNr = tlfNr;
+        Medarbejder.totalAntal++;
     }
 
     public String getNavn() {
@@ -25,6 +27,6 @@ public class Medarbejder {
 
     @Override
     public String toString() {
-        return "Navn: " + navn + ", ID: " + id + ", Tlf.:" + tlfNr + ".";
+        return "ID: " + id + ", Navn: " + navn + ", Tlf.:" + tlfNr + ".";
     }
 }
