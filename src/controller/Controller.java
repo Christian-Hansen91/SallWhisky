@@ -32,7 +32,7 @@ public class Controller {
     public static Whiskydestillering opretWhiskydestillering(Maltning maltning, LocalDate startdato, LocalDate slutdato, double maengdeVand,
                                                              double head, double heart, double tail, String kommentar, double alkoholprocent, Medarbejder medarbejder) {
         Whiskydestillering whiskydestillering = new Whiskydestillering(maltning, startdato, slutdato, maengdeVand, head, heart, tail, kommentar, alkoholprocent, medarbejder);
-        Storage.addDestillering(whiskydestillering);
+        Storage.addWhiskydestillering(whiskydestillering);
         return whiskydestillering;
     }
     public static Whisky opretWhisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,

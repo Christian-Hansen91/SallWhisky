@@ -45,7 +45,7 @@ public class Storage {
     public static void addFad(Fad fad) {
         fade.add(fad);
     }
-    public static void addDestillering(Whiskydestillering whiskydestillering) {
+    public static void addWhiskydestillering(Whiskydestillering whiskydestillering) {
         whiskydestilleringer.add(whiskydestillering);
     }
     public static void addMaltning(Maltning maltning) {
