@@ -16,7 +16,7 @@ public class Fad {
     private Lager lager;
     private List<Destillat> destillater = new ArrayList<>();
 
-    public Fad(int id, LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
+    public Fad(LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
         this.id = id;
         this.indkoebsdato = indkoebsdato;
         this.fadtype = fadtype;

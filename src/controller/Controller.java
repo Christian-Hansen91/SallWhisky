@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Controller {
-    public static Medarbejder opretMedarbejder(int id, String navn, int tlfNr) {
-        Medarbejder medarbejder = new Medarbejder(id, navn, tlfNr);
+    public static Medarbejder opretMedarbejder(String navn, int tlfNr) {
+        Medarbejder medarbejder = new Medarbejder(navn, tlfNr);
         Storage.addMedarbejder(medarbejder);
         return medarbejder;
     }
@@ -24,7 +24,7 @@ public class Controller {
     }
 
     public static Fad opretFad(int id, LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
-        Fad fad = new Fad(id, indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik);
+        Fad fad = new Fad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik);
         Storage.addFad(fad);
         return fad;
     }

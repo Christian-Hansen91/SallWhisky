@@ -6,7 +6,7 @@ public class Medarbejder {
     private int tlfNr;
     private static int totalAntal;
 
-    public Medarbejder(int id, String navn, int tlfNr) {
+    public Medarbejder(String navn, int tlfNr) {
         this.id = totalAntal;
         this.navn = navn;
         this.tlfNr = tlfNr;
