@@ -1,48 +1,59 @@
 package test;
 
 import model.application.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class WhiskydestilleringTest {
     Maltning maltning;
-    Whiskydestillering whiskydestillering;
+    Whiskydestillering whiskyDestillering;
+    Medarbejder medarbejder;
     Fad fad;
     Destillat destillat;
     Tapning tapning;
 
-    /*@BeforeEach
+    @BeforeEach
     void setup() {
-        maltning = new Maltning(100, "Byg");
-        destillering = new Destillering(maltning);
-        fad = new Fad(60, "sherry");
+        maltning = new Maltning(100, "Byg","Lars' Mark");
+        medarbejder = new Medarbejder("alice",5050);
+        whiskyDestillering = new Whiskydestillering(maltning, LocalDate.now(), LocalDate.now(),1000,50,850,150,"test",60,medarbejder);
+        fad = new Fad(LocalDate.now(),"eg",70,"spanien","spanish cooperage","sherry");
         destillat = new Destillat(fad);
-    }*/
+    }
     @Test
     void opretTapning() {
         double result = 60;
         assertEquals(0,fad.hentOpbrugtKapacitet());
-        assertDoesNotThrow(() -> whiskydestillering.opretTapning(destillat, result,"test project"));
+        assertDoesNotThrow(() -> whiskyDestillering.opretTapning(destillat, result,"test project"));
         assertEquals(result,fad.hentOpbrugtKapacitet());
     }
     @Test
     void opretTapningOverfyldt() {
         assertEquals(0,fad.hentOpbrugtKapacitet());
-        assertThrows(IllegalArgumentException.class, () -> whiskydestillering.opretTapning(destillat,100,"Music Project"));
+        assertThrows(IllegalArgumentException.class, () -> whiskyDestillering.opretTapning(destillat,100,"Music Project"));
         assertEquals(0,fad.hentOpbrugtKapacitet());
     }
     @Test
     void opretTapningNytDestillatOverfyldt() {
         assertEquals(0,fad.hentOpbrugtKapacitet());
-        assertThrows(IllegalArgumentException.class, () -> whiskydestillering.opretTapningNytDestillat(fad, 100));
+        assertThrows(IllegalArgumentException.class, () -> whiskyDestillering.opretTapningNytDestillat(fad, 100));
         assertEquals(0,fad.hentOpbrugtKapacitet());
     }
     @Test
     void opretTapningNytDestillat() {
         double result = 60;
         assertEquals(0,fad.hentOpbrugtKapacitet());
-        assertDoesNotThrow(() -> whiskydestillering.opretTapningNytDestillat(fad, result));
+        assertDoesNotThrow(() -> whiskyDestillering.opretTapningNytDestillat(fad, result));
         assertEquals(result,fad.hentOpbrugtKapacitet());
+    }
+
+    @Test
+    void opretMaltning() {
+        Maltning maltning = new Maltning(500, "byg","Lars");
+        assertNotNull(maltning);
     }
 }

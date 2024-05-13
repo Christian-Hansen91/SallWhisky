@@ -24,7 +24,7 @@ public class Controller {
     }
 
     public static Fad opretFad(int id, LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
-        Fad fad = new Fad(id, indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik);
+        Fad fad = new Fad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik);
         Storage.addFad(fad);
         return fad;
     }
