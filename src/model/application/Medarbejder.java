@@ -6,11 +6,15 @@ public class Medarbejder {
     private int tlfNr;
     private static int totalAntal;
 
-    public Medarbejder(int id, String navn, int tlfNr) {
+    public Medarbejder(String navn, int tlfNr) {
+        Medarbejder.totalAntal++;
         this.id = totalAntal;
         this.navn = navn;
         this.tlfNr = tlfNr;
-        Medarbejder.totalAntal++;
+    }
+
+    public static int getTotalAntal() {
+        return totalAntal;
     }
 
     public String getNavn() {

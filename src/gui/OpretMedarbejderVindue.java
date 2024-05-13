@@ -1,14 +1,18 @@
 package gui;
 
+import controller.Controller;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.application.Medarbejder;
+import storage.Storage;
 
 public class OpretMedarbejderVindue extends Stage {
     private Label lblId = new Label("ID: ");
@@ -19,12 +23,15 @@ public class OpretMedarbejderVindue extends Stage {
     private TextField txfTlfNr = new TextField();
     private Button btnGem = new Button("Gem");
     private Button btnAnnuller = new Button("Anuller");
+    private Medarbejder medarbejder = null;
+    private StartVindue startVindue = null;
 
 
-    public OpretMedarbejderVindue(String title, Stage owner) {
+    public OpretMedarbejderVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);
+        this.startVindue = startVindue;
 
-        setTitle("Log ind");
+        setTitle("Opret medarbejder");
         GridPane pane = new GridPane();
         this.initContent(pane);
 
@@ -49,6 +56,7 @@ public class OpretMedarbejderVindue extends Stage {
         pane.add(txfId, 2, 2, 2, 1);
         txfId.setMaxWidth(175);
         pane.setHalignment(txfId, HPos.CENTER);
+        txfId.setText(Medarbejder.getTotalAntal() + "");
 
         pane.add(lblNavn, 0, 3, 2, 1);
         pane.add(txfNavn, 2, 3, 2, 1);
@@ -64,5 +72,27 @@ public class OpretMedarbejderVindue extends Stage {
         pane.add(btnAnnuller, 30, 16);
         pane.setHalignment(btnGem, HPos.RIGHT);
         pane.setHalignment(btnAnnuller, HPos.RIGHT);
+
+        btnGem.setOnAction(event -> gemAction());
+    }
+
+    private void gemAction() {
+        String navn = txfNavn.getText().trim();
+        String tlfNr = txfTlfNr.getText().trim();
+
+        if (!navn.isEmpty() && !tlfNr.isEmpty()) {
+            medarbejder = Controller.opretMedarbejder(navn, Integer.parseInt(tlfNr));
+            txfNavn.clear();
+            txfTlfNr.clear();
+            Controller.addMedarbejder(medarbejder);
+            startVindue.setMedarbejder(medarbejder);
+            this.hide();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Fejl i opretning af medarbejder");
+            alert.setHeaderText("Manglende information");
+            alert.setContentText("Der mangler noget information for at oprette medarbejderen.");
+            alert.show();
+        }
     }
 }

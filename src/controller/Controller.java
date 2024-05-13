@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Controller {
-    public static Medarbejder opretMedarbejder(int id, String navn, int tlfNr) {
-        Medarbejder medarbejder = new Medarbejder(id, navn, tlfNr);
+    public static Medarbejder opretMedarbejder(String navn, int tlfNr) {
+        Medarbejder medarbejder = new Medarbejder(navn, tlfNr);
         Storage.addMedarbejder(medarbejder);
         return medarbejder;
     }
@@ -48,6 +48,15 @@ public class Controller {
         return gindestillering;
     }
 
+    public static ArrayList<Medarbejder> getMedarbejder() {
+        return Storage.getMedarbejdere();
+    }
+    public static ArrayList<Whisky> getWhisky() {
+        return Storage.getWhiskyer();
+    }
+    public static ArrayList<Gindestillering> getGindestillering() {
+        return Storage.getGindestilleringer();
+    }
     public static ArrayList<Maltning> getMaltning() {
         return Storage.getMaltninger();
     }
@@ -60,5 +69,8 @@ public class Controller {
         return Storage.getWhiskydestilleringer();
     }
 
+
+    public static void addMedarbejder(Medarbejder medarbejder) { Storage.addMedarbejder(medarbejder);
+    }
 
 }
