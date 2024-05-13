@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.application.Medarbejder;
 
 public class StartVindue extends Application {
     private OpretMedarbejderVindue opretMedarbejderVindue;
@@ -30,7 +31,8 @@ public class StartVindue extends Application {
     private Button btnOpretMedarbejder = new Button("Opret medarbejder");
     private Button btnLogInd = new Button("Log ind");
     private TextField txfMedarbejder = new TextField();
-
+    private Medarbejder medarbejder = null;
+    private Label lblMedarbejder = new Label("Medarbejder: ");
 
     public void start(Stage stage) throws Exception {
 
@@ -42,8 +44,8 @@ public class StartVindue extends Application {
         stage.setScene(scene);
         stage.show();
 
-        logIndVindue = new LogIndVindue("Log ind", stage);
-        opretMedarbejderVindue = new OpretMedarbejderVindue("Opret medarbejder", stage);
+        logIndVindue = new LogIndVindue("Log ind", stage, this);
+        opretMedarbejderVindue = new OpretMedarbejderVindue("Opret medarbejder", stage, this);
         opretMaltningVindue = new OpretMaltningVindue("Opret maltning", stage);
         opretLagerVindue = new OpretLagerVindue("Opret lager", stage);
         opretFadVindue = new OpretFadVindue("Opret fad", stage);
@@ -63,12 +65,8 @@ public class StartVindue extends Application {
         Label lblVelkommen = new Label("Velkommen til Sall Whisky Distillery");
         pane.setHalignment(lblVelkommen, HPos.CENTER);
         lblVelkommen.setTextFill(Color.BURLYWOOD);
-        Label lblMedarbejder = new Label("Medarbejder: ");
         pane.add(lblMedarbejder, 0, 1, 32, 1);
         lblMedarbejder.setTextFill(Color.BURLYWOOD);
-        pane.add(txfMedarbejder, 0, 2, 2, 1);
-        pane.setHalignment(txfMedarbejder, HPos.RIGHT);
-        txfMedarbejder.setMaxWidth(160);
         pane.add(btnLogInd, 0, 0, 32, 1);
         pane.setHalignment(btnLogInd, HPos.LEFT);
         pane.add(btnOpretMedarbejder, 29, 0, 2, 1);
@@ -110,12 +108,18 @@ public class StartVindue extends Application {
 
     }
 
+    private void txfMedarbejderAction() {
+        txfMedarbejder.setText(medarbejder.getNavn());
+    }
+
     private void logIndAction() {
         logIndVindue.showAndWait();
+        opdaterMedarbejderLabel();
     }
 
     private void opretMedarbejderAction() {
         opretMedarbejderVindue.showAndWait();
+        opdaterMedarbejderLabel();
     }
 
     private void opretFadAction() {
@@ -138,4 +142,12 @@ public class StartVindue extends Application {
         opretDestilleringsTapningsVindue.showAndWait();
     }
 
+    public void setMedarbejder(Medarbejder medarbejder) {
+        this.medarbejder = medarbejder;
+    }
+    public void opdaterMedarbejderLabel() {
+        if (!(medarbejder == null)) {
+            lblMedarbejder.setText("Medarbejder: " + medarbejder.getNavn());
+        }
+    }
 }

@@ -10,10 +10,14 @@ public class Medarbejder {
     private ArrayList<Whiskydestillering> whiskydestilleringer = new ArrayList<>();
 
     public Medarbejder(String navn, int tlfNr) {
+        Medarbejder.totalAntal++;
         this.id = totalAntal;
         this.navn = navn;
         this.tlfNr = tlfNr;
-        Medarbejder.totalAntal++;
+    }
+
+    public static int getTotalAntal() {
+        return totalAntal;
     }
 
     public String getNavn() {

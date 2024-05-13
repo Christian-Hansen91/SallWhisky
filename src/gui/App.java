@@ -4,6 +4,7 @@ import controller.Controller;
 import javafx.application.Application;
 import model.application.Fad;
 import model.application.Maltning;
+import model.application.Medarbejder;
 
 import java.time.LocalDate;
 
@@ -25,5 +26,8 @@ public class App {
         //Destillering destillering1 = Controller.opretDestillering(maltning1, LocalDate.of(2024, 5, 1), LocalDate.of(2024, 5, 2), 10.0, 22.0, 100.0, 28.0, "OK", 52.5);
         //Destillering destillering2 = Controller.opretDestillering(maltning2, LocalDate.of(2024, 4, 16), LocalDate.of(2024, 4, 16), 30.0, 8.0, 100.0, 25.0, "OBS, tåler fortynding", 59.9);
 
+        Medarbejder medarbejder1 = Controller.opretMedarbejder("Snævar", 20202020);
+        Medarbejder medarbejder2 = Controller.opretMedarbejder("Thomas", 45454545);
+        Medarbejder medarbejder3 = Controller.opretMedarbejder("Martin", 30102040);
     }
 }

@@ -1,24 +1,34 @@
 package gui;
 
+import controller.Controller;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.application.Medarbejder;
+import storage.Storage;
+
+import java.util.List;
 
 public class LogIndVindue extends Stage {
-    private Label lblId = new Label("ID: ");
+    private ComboBox<Medarbejder> cbVaelgMedarbejder = new ComboBox<>();
+    private Label lblvaelg = new Label("Vælg en medarbejder på listen for at logge ind: ");
     private TextField txfId = new TextField();
+    private Button btnLogInd = new Button("Log ind");
+    private Button btnAnnuller = new Button("Anuller");
+    private StartVindue startVindue = null;
+    private Medarbejder medarbejder = null;
 
-
-    public LogIndVindue(String title, Stage owner) {
+    public LogIndVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);
+        this.startVindue = startVindue;
 
-        setTitle("Opret medarbejder");
+        setTitle("Log ind");
         GridPane pane = new GridPane();
         this.initContent(pane);
 
@@ -35,13 +45,36 @@ public class LogIndVindue extends Stage {
         pane.setVgap(10);
         pane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
 
-        lblId.setTextFill(Color.BURLYWOOD);
+        lblvaelg.setTextFill(Color.BURLYWOOD);
 
 
-        pane.add(lblId, 0, 2, 2, 1);
-        pane.add(txfId, 2, 2, 2, 1);
-        txfId.setMaxWidth(175);
-        pane.setHalignment(txfId, HPos.RIGHT);
+        pane.add(lblvaelg, 0, 2, 15, 1);
 
+        pane.add(cbVaelgMedarbejder, 0, 3, 15, 1);
+        cbVaelgMedarbejder.setMaxWidth(160);
+        cbVaelgMedarbejder.getItems().setAll(Controller.getMedarbejder());
+
+        pane.add(btnLogInd, 29, 16);
+        pane.add(btnAnnuller, 30, 16);
+        pane.setHalignment(btnLogInd, HPos.RIGHT);
+        pane.setHalignment(btnAnnuller, HPos.RIGHT);
+
+        btnLogInd.setOnAction(event -> logIndAction());
+    }
+
+    private void logIndAction() {
+        medarbejder = cbVaelgMedarbejder.getSelectionModel().getSelectedItem();
+
+        if (!cbVaelgMedarbejder.getSelectionModel().isEmpty()) {
+            cbVaelgMedarbejder.getSelectionModel().clearSelection();
+            startVindue.setMedarbejder(medarbejder);
+            this.hide();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Fejl i log ind");
+            alert.setHeaderText("Manglende information");
+            alert.setContentText("Vælg en medarbejder på listen for at logge ind.");
+            alert.show();
+        }
     }
 }
