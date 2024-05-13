@@ -3,7 +3,8 @@ package model.application;
 import java.time.LocalDate;
 
 public class Gindestillering {
-    private static int ginNr;
+    private static int totalAntal;
+    private int ginNr;
     private LocalDate startdato;
     private LocalDate slutdato;
     private double vandTilfoejet;
@@ -12,14 +13,15 @@ public class Gindestillering {
 
     public Gindestillering(LocalDate startdato, LocalDate slutdato,
                            double vandTilfoejet, double alkoholprocent, double liter) {
+        Gindestillering.totalAntal++;
+        this.ginNr = totalAntal;
         this.startdato = startdato;
         this.slutdato = slutdato;
         this.vandTilfoejet = vandTilfoejet;
         this.alkoholprocent = alkoholprocent;
         this.liter = liter;
     }
-
-    public static int getGinNr() {
+    public int getGinNr() {
         return ginNr;
     }
 

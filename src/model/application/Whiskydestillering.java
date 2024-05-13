@@ -32,6 +32,7 @@ public class Whiskydestillering {
         this.kommentar = kommentar;
         this.alkoholprocent = alkoholprocent;
         this.medarbejder = medarbejder;
+        medarbejder.tilfoejDestillering(this);
     }
 
     public Tapning opretTapning(Destillat destillat, double maengde, String kommentar) {

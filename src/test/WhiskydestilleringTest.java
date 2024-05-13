@@ -54,6 +54,16 @@ class WhiskydestilleringTest {
     @Test
     void opretMaltning() {
         Maltning maltning = new Maltning(500, "byg","Lars");
-        assertNotNull(maltning);
+        assertEquals("Lars",maltning.getMarknavn());
+        assertNull(maltning.getRygemateriale());
+        maltning = new Maltning(250,"også byg","Lars mark 2", "tørv");
+        assertEquals("tørv", maltning.getRygemateriale());
+    }
+
+    @Test
+    void opretDestillering() {
+        whiskyDestillering = new Whiskydestillering(maltning,LocalDate.now(),LocalDate.now().plusDays(5),100,50,850,150,"testdestillering",60,medarbejder);
+        assertNotNull(whiskyDestillering);
+        assertEquals(whiskyDestillering,medarbejder.getWhiskydestilleringer().get(medarbejder.getWhiskydestilleringer().size() - 1));
     }
 }

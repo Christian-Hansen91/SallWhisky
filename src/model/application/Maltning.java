@@ -12,6 +12,22 @@ public class Maltning {
     private String kommentar;
     private static int totalAntal;
 
+    public String getKornsort() {
+        return kornsort;
+    }
+
+    public String getMarknavn() {
+        return marknavn;
+    }
+
+    public double getMaengde() {
+        return maengde;
+    }
+
+    public String getRygemateriale() {
+        return rygemateriale;
+    }
+
     public Maltning(double maengde, String kornsort, String marknavn) {
         this.id = totalAntal;
         this.dato = LocalDate.now();
