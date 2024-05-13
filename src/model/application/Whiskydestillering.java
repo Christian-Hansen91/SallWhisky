@@ -3,7 +3,7 @@ package model.application;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Destillering {
+public class Whiskydestillering {
     private static int totalAntal;
     private int newMakeNr;
     private LocalDate startdato;
@@ -18,9 +18,9 @@ public class Destillering {
     private Maltning maltning;
     private Medarbejder medarbejder;
 
-    public Destillering(Maltning maltning, LocalDate startdato, LocalDate slutdato, double maengdeVaeske,
-                        double head, double heart, double tail, String kommentar, double alkoholprocent, Medarbejder medarbejder) {
-        Destillering.totalAntal++;
+    public Whiskydestillering(Maltning maltning, LocalDate startdato, LocalDate slutdato, double maengdeVaeske,
+                              double head, double heart, double tail, String kommentar, double alkoholprocent, Medarbejder medarbejder) {
+        Whiskydestillering.totalAntal++;
         this.newMakeNr = totalAntal;
         this.maltning = maltning;
         this.startdato = startdato;

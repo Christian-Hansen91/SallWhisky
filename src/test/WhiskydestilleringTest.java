@@ -1,14 +1,13 @@
 package test;
 
 import model.application.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DestilleringTest {
+class WhiskydestilleringTest {
     Maltning maltning;
-    Destillering destillering;
+    Whiskydestillering whiskydestillering;
     Fad fad;
     Destillat destillat;
     Tapning tapning;
@@ -24,26 +23,26 @@ class DestilleringTest {
     void opretTapning() {
         double result = 60;
         assertEquals(0,fad.hentOpbrugtKapacitet());
-        assertDoesNotThrow(() -> destillering.opretTapning(destillat, result,"test project"));
+        assertDoesNotThrow(() -> whiskydestillering.opretTapning(destillat, result,"test project"));
         assertEquals(result,fad.hentOpbrugtKapacitet());
     }
     @Test
     void opretTapningOverfyldt() {
         assertEquals(0,fad.hentOpbrugtKapacitet());
-        assertThrows(IllegalArgumentException.class, () -> destillering.opretTapning(destillat,100,"Music Project"));
+        assertThrows(IllegalArgumentException.class, () -> whiskydestillering.opretTapning(destillat,100,"Music Project"));
         assertEquals(0,fad.hentOpbrugtKapacitet());
     }
     @Test
     void opretTapningNytDestillatOverfyldt() {
         assertEquals(0,fad.hentOpbrugtKapacitet());
-        assertThrows(IllegalArgumentException.class, () -> destillering.opretTapningNytDestillat(fad, 100));
+        assertThrows(IllegalArgumentException.class, () -> whiskydestillering.opretTapningNytDestillat(fad, 100));
         assertEquals(0,fad.hentOpbrugtKapacitet());
     }
     @Test
     void opretTapningNytDestillat() {
         double result = 60;
         assertEquals(0,fad.hentOpbrugtKapacitet());
-        assertDoesNotThrow(() -> destillering.opretTapningNytDestillat(fad, result));
+        assertDoesNotThrow(() -> whiskydestillering.opretTapningNytDestillat(fad, result));
         assertEquals(result,fad.hentOpbrugtKapacitet());
     }
 }

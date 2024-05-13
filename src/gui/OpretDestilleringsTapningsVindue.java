@@ -10,7 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.Destillat;
-import model.application.Destillering;
+import model.application.Whiskydestillering;
 import model.application.Fad;
 import model.application.Tapning;
 import storage.Storage;
@@ -36,7 +36,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
     private TextField txfId = new TextField();
     private Destillat destillat = null;
     private Tapning tapning = null;
-    private Destillering destillering = null;
+    private Whiskydestillering whiskydestillering = null;
 
     public OpretDestilleringsTapningsVindue(String title, Stage owner) {
         this.initOwner(owner);
@@ -78,10 +78,10 @@ public class OpretDestilleringsTapningsVindue extends Stage {
         pane.add(cbDestilleringer, 0, 3);
         cbDestilleringer.setMaxWidth(200);
         cbDestilleringer.setValue("Vælg destillering");
-        List<Destillering> destilleringer = Storage.getDestilleringer();
+        List<Whiskydestillering> destilleringer = Storage.getWhiskydestilleringer();
         ObservableList<String> observableList = FXCollections.observableArrayList();
-        for (Destillering destillering : destilleringer) {
-            observableList.add(destillering.toString());
+        for (Whiskydestillering whiskydestillering : destilleringer) {
+            observableList.add(whiskydestillering.toString());
         }
         cbDestilleringer.getItems().addAll(observableList);
 
