@@ -1,10 +1,14 @@
 package model.application;
 
+import java.util.ArrayList;
+
 public class Lager {
     private String navn;
+    private ArrayList<ArrayList<Lagerenhed>> reolliste = new ArrayList<>();
 
-    //reol og hylde her som attributter eller i sine egne klasser??
-
+    public Lager(String navn) {
+        this.navn = navn;
+    }
 
     @Override
     public String toString() {

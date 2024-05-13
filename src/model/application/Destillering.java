@@ -16,10 +16,13 @@ public class Destillering {
     private String kommentar;
     private List<Tapning> tapninger;
     private Maltning maltning;
+    private Medarbejder medarbejder;
 
-    public Destillering(int newMakeNr, LocalDate startdato, LocalDate slutdato, double maengdeVaeske,
-                        double head, double heart, double tail, String kommentar, double alkoholprocent) {
-        this.newMakeNr = newMakeNr;
+    public Destillering(Maltning maltning, LocalDate startdato, LocalDate slutdato, double maengdeVaeske,
+                        double head, double heart, double tail, String kommentar, double alkoholprocent, Medarbejder medarbejder) {
+        Destillering.totalAntal++;
+        this.newMakeNr = totalAntal;
+        this.maltning = maltning;
         this.startdato = startdato;
         this.slutdato = slutdato;
         this.maengdeVaeske = maengdeVaeske;
@@ -28,6 +31,7 @@ public class Destillering {
         this.tail = tail;
         this.kommentar = kommentar;
         this.alkoholprocent = alkoholprocent;
+        this.medarbejder = medarbejder;
     }
 
     public Tapning opretTapning(Destillat destillat, double maengde, String kommentar) {
