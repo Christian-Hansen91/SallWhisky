@@ -47,6 +47,11 @@ public class Controller {
         Storage.addGindestillering(gindestillering);
         return gindestillering;
     }
+    public static Lager opretLager(String navn, Lagerenhed[][] reolliste){
+        Lager lager = new Lager(navn, reolliste);
+        Storage.addLager(lager);
+        return lager;
+    }
 
     public static ArrayList<Medarbejder> getMedarbejder() {
         return Storage.getMedarbejdere();
