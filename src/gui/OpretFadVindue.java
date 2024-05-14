@@ -14,7 +14,7 @@ public class OpretFadVindue extends Stage {
     private TextField txfId = new TextField();
 
 
-    public OpretFadVindue(String title, Stage owner) {
+    public OpretFadVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);
 
         setTitle("Opret fad");

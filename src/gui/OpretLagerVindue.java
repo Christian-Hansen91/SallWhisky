@@ -14,7 +14,7 @@ public class OpretLagerVindue extends Stage {
     private TextField txfId = new TextField();
 
 
-    public OpretLagerVindue(String title, Stage owner) {
+    public OpretLagerVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);
 
         setTitle("Opret lager");

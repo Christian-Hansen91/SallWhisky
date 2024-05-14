@@ -38,7 +38,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
     private Tapning tapning = null;
     private Whiskydestillering whiskydestillering = null;
 
-    public OpretDestilleringsTapningsVindue(String title, Stage owner) {
+    public OpretDestilleringsTapningsVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);
 
         setTitle("Opret destilleringstapning");

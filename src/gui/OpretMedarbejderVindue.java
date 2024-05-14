@@ -84,7 +84,6 @@ public class OpretMedarbejderVindue extends Stage {
             medarbejder = Controller.opretMedarbejder(navn, Integer.parseInt(tlfNr));
             txfNavn.clear();
             txfTlfNr.clear();
-            Controller.addMedarbejder(medarbejder);
             startVindue.setMedarbejder(medarbejder);
             this.hide();
         } else {

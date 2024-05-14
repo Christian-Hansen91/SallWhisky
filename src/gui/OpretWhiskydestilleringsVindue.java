@@ -31,7 +31,7 @@ public class OpretWhiskydestilleringsVindue extends Stage {
     private Button btnGem = new Button("Gem");
     private Button btnAnnuller = new Button("Anuller");
 
-    public OpretWhiskydestilleringsVindue(String title, Stage owner) {
+    public OpretWhiskydestilleringsVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);
 
         setTitle("Opret Whiskydestillering");

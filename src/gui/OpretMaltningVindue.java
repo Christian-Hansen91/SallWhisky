@@ -14,7 +14,7 @@ public class OpretMaltningVindue extends Stage {
     private TextField txfId = new TextField();
 
 
-    public OpretMaltningVindue(String title, Stage owner) {
+    public OpretMaltningVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);
 
         setTitle("Opret maltning");
