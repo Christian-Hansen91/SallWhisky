@@ -74,6 +74,9 @@ public class Controller {
         return Storage.getWhiskydestilleringer();
     }
 
+    public static ArrayList<Lager> getLagre() {
+        return Storage.getLagre();
+    }
 
     public static void addMedarbejder(Medarbejder medarbejder) { Storage.addMedarbejder(medarbejder);
     }
@@ -82,6 +85,12 @@ public class Controller {
     }
 
     public static void addWhiskydestillering(Whiskydestillering whiskydestillering) { Storage.addWhiskydestillering(whiskydestillering);
+    }
+
+    public static void addFad(Fad fad) { Storage.addFad(fad);
+    }
+
+    public static void addLager(Lager lager) { Storage.addLager(lager);
     }
 
 }

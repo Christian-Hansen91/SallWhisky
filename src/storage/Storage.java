@@ -33,6 +33,10 @@ public class Storage {
         return new ArrayList<>(maltninger);
     }
 
+    public static ArrayList<Lager> getLagre() {
+        return new ArrayList<>(lagre);
+    }
+
 
     public static void addGindestillering(Gindestillering gindestillering) {
         gindestilleringer.add(gindestillering);

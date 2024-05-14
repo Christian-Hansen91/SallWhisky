@@ -14,6 +14,9 @@ public class App {
     }
 
     private static void initStorage() {
+        Lager lager1 = Controller.opretLager("Lars' lager", new Lagerenhed[10][4]);
+        Lager lager2 = Controller.opretLager("Container lager", new Lagerenhed[2][2]);
+
         Medarbejder medarbejder1 = Controller.opretMedarbejder("Snævar", 20202020);
         Medarbejder medarbejder2 = Controller.opretMedarbejder("Thomas", 45454545);
         Medarbejder medarbejder3 = Controller.opretMedarbejder("Martin", 30102040);
@@ -27,7 +30,5 @@ public class App {
 
         Whiskydestillering whiskydestillering1 = Controller.opretWhiskydestillering(maltning1, LocalDate.of(2024, 5, 1), LocalDate.of(2024, 5, 2), 10.0, 22.0, 100.0, 28.0, "OK", 52.5, medarbejder1);
         Whiskydestillering whiskydestillering2 = Controller.opretWhiskydestillering(maltning2, LocalDate.of(2024, 4, 16), LocalDate.of(2024, 4, 16), 30.0, 8.0, 100.0, 25.0, "OBS, tåler fortynding", 59.9, medarbejder2);
-
-        Lager lager1 = Controller.opretLager("lager1", new Lagerenhed[1][2]);
     }
 }

@@ -1,8 +1,12 @@
 package model.application;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Lager {
     private String navn;
     private Lagerenhed[][] reolliste;
+    private static List<Fad> fade = new ArrayList<>();
 
     public Lager(String navn, Lagerenhed[][] reolliste) {
         this.navn = navn;
@@ -11,7 +15,7 @@ public class Lager {
 
     @Override
     public String toString() {
-        return "Lagernavn: " + navn;
+        return navn;
     }
 
     public void addReol(int antalHylder) {
@@ -21,6 +25,12 @@ public class Lager {
         }
         reolliste = newArray;
         reolliste[reolliste.length-1] = new Lagerenhed[antalHylder];
+    }
+
+    public static void tilfoejFad(Fad fad) {
+        if (!fade.contains(fad)) {
+            fade.add(fad);
+        }
     }
 
     public void addLagerenhedAt(int row, int column, Lagerenhed lagerenhed) {
