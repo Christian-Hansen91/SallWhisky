@@ -27,7 +27,6 @@ public class Gindestillering {
     public Ingrediensmaengde tilfoejIngrediensmaengde(Ingrediens ingrediens, double maengde) {
         Ingrediensmaengde nyIngrediensmaengde = new Ingrediensmaengde(maengde, this, ingrediens);
         ingredienser.add(nyIngrediensmaengde);
-
         return nyIngrediensmaengde;
     }
     public int getGinNr() {
