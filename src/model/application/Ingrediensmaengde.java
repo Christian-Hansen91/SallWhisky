@@ -10,4 +10,14 @@ public class Ingrediensmaengde {
         this.gindestillering = gindestillering;
         this.ingrediens = ingrediens;
     }
+    public void tilfoejMaengde(double maengde) {
+        this.maengde += maengde;
+    }
+    public Ingrediens hentIngrediens() {
+        return ingrediens;
+    }
+
+    public double hentMaengde() {
+        return maengde;
+    }
 }
