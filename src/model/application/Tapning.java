@@ -17,6 +17,7 @@ public class Tapning {
         this.dato = LocalDate.now();
         this.kommentar = kommentar;
     }
+
     public double getMaengde() {
         return maengde;
     }

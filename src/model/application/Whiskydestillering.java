@@ -39,7 +39,7 @@ public class Whiskydestillering {
 
     public Tapning opretTapning(Destillat destillat, double maengde, String kommentar) {
         if (!destillat.getFad().tjekPlads(maengde)) {
-            throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det fad");
+            throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det valgte fad");
         }
         Tapning tapning = new Tapning(maengde, this, destillat, kommentar);
         destillat.saetKommentar(kommentar);
@@ -63,6 +63,10 @@ public class Whiskydestillering {
 
     public static int getTotalAntal() {
         return totalAntal;
+    }
+
+    public int getNewMakeNr() {
+        return newMakeNr;
     }
 
     @Override

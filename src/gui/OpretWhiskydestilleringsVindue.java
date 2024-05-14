@@ -149,6 +149,11 @@ public class OpretWhiskydestilleringsVindue extends Stage {
 
             Controller.addWhiskydestillering(whiskydestillering);
             this.hide();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Whiskydestillering oprettet");
+            alert.setContentText("SUCCES! Der er oprettet en whiskydestillering");
+            alert.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Fejl i opretning af whiskydestilleringen");
