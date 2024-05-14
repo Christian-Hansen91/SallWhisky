@@ -1,6 +1,7 @@
 package model.application;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Gindestillering {
     private static int totalAntal;
@@ -10,6 +11,7 @@ public class Gindestillering {
     private double vandTilfoejet;
     private double alkoholprocent;
     private double liter;
+    private ArrayList<Ingrediensmaengde> ingredienser = new ArrayList<>();
 
     public Gindestillering(LocalDate startdato, LocalDate slutdato,
                            double vandTilfoejet, double alkoholprocent, double liter) {
@@ -20,6 +22,13 @@ public class Gindestillering {
         this.vandTilfoejet = vandTilfoejet;
         this.alkoholprocent = alkoholprocent;
         this.liter = liter;
+    }
+
+    public Ingrediensmaengde tilfoejIngrediensmaengde(Ingrediens ingrediens, double maengde) {
+        Ingrediensmaengde nyIngrediensmaengde = new Ingrediensmaengde(maengde, this, ingrediens);
+        ingredienser.add(nyIngrediensmaengde);
+
+        return nyIngrediensmaengde;
     }
     public int getGinNr() {
         return ginNr;

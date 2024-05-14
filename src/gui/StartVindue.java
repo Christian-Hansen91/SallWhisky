@@ -33,9 +33,10 @@ public class StartVindue extends Application {
     private TextField txfMedarbejder = new TextField();
     private Medarbejder medarbejder = null;
     private Label lblMedarbejder = new Label("Medarbejder: ");
+    private Stage stage;
 
     public void start(Stage stage) throws Exception {
-
+        this.stage = stage;
         stage.setTitle("Sall Whisky Distillery");
         GridPane pane = new GridPane();
         this.initContent(pane);
@@ -44,13 +45,6 @@ public class StartVindue extends Application {
         stage.setScene(scene);
         stage.show();
 
-        logIndVindue = new LogIndVindue("Log ind", stage, this);
-        opretMedarbejderVindue = new OpretMedarbejderVindue("Opret medarbejder", stage, this);
-        opretMaltningVindue = new OpretMaltningVindue("Opret maltning", stage);
-        opretLagerVindue = new OpretLagerVindue("Opret lager", stage);
-        opretFadVindue = new OpretFadVindue("Opret fad", stage);
-        opretWhiskydestilleringsVindue = new OpretWhiskydestilleringsVindue("Opret whiskydestillering", stage);
-        opretDestilleringsTapningsVindue = new OpretDestilleringsTapningsVindue("Opret destilleringstapning", stage);
     }
 
     private void initContent(GridPane pane) {
@@ -113,32 +107,39 @@ public class StartVindue extends Application {
     }
 
     private void logIndAction() {
+        logIndVindue = new LogIndVindue("Log ind", stage, this);
         logIndVindue.showAndWait();
         opdaterMedarbejderLabel();
     }
 
     private void opretMedarbejderAction() {
+        opretMedarbejderVindue = new OpretMedarbejderVindue("Opret medarbejder", stage, this);
         opretMedarbejderVindue.showAndWait();
         opdaterMedarbejderLabel();
     }
 
     private void opretFadAction() {
+        opretFadVindue = new OpretFadVindue("Opret fad", stage,this);
         opretFadVindue.showAndWait();
     }
 
     private void opretMaltningAction() {
+        opretMaltningVindue = new OpretMaltningVindue("Opret maltning", stage, this);
         opretMaltningVindue.showAndWait();
     }
 
     private void opretLagerAction() {
+        opretLagerVindue = new OpretLagerVindue("Opret lager", stage, this);
         opretLagerVindue.showAndWait();
     }
 
     private void opretWhiskydestilleringsAction() {
+        opretWhiskydestilleringsVindue = new OpretWhiskydestilleringsVindue("Opret whiskydestillering", stage, this);
         opretWhiskydestilleringsVindue.showAndWait();
     }
 
     private void opretDestilleringsTapningAction() {
+        opretDestilleringsTapningsVindue = new OpretDestilleringsTapningsVindue("Opret destilleringstapning", stage, this);
         opretDestilleringsTapningsVindue.showAndWait();
     }
 
