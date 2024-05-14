@@ -2,9 +2,7 @@ package gui;
 
 import controller.Controller;
 import javafx.application.Application;
-import model.application.Fad;
-import model.application.Maltning;
-import model.application.Medarbejder;
+import model.application.*;
 
 import java.time.LocalDate;
 
@@ -29,5 +27,7 @@ public class App {
         Medarbejder medarbejder1 = Controller.opretMedarbejder("Snævar", 20202020);
         Medarbejder medarbejder2 = Controller.opretMedarbejder("Thomas", 45454545);
         Medarbejder medarbejder3 = Controller.opretMedarbejder("Martin", 30102040);
+
+        Lager lager1 = Controller.opretLager("lager1", new Lagerenhed[1][2]);
     }
 }

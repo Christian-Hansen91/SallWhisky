@@ -11,6 +11,7 @@ public class Storage {
     private static ArrayList<Maltning> maltninger = new ArrayList<>();
     private static ArrayList<Gindestillering> gindestilleringer = new ArrayList<>();
     private static ArrayList<Whisky> whiskyer = new ArrayList<>();
+    private static ArrayList<Lager> lagre = new ArrayList<>();
 
 
     public static ArrayList<Whisky> getWhiskyer() {
@@ -50,5 +51,8 @@ public class Storage {
     }
     public static void addMaltning(Maltning maltning) {
         maltninger.add(maltning);
+    }
+    public static void addLager(Lager lager) {
+        lagre.add(lager);
     }
 }

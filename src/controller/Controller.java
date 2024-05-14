@@ -42,10 +42,15 @@ public class Controller {
         return whisky;
     }
     public static Gindestillering opretGindestillering(LocalDate startdato, LocalDate slutdato,
-                                                       double vandTilfoejet, double alkoholprocent, double liter) {
-        Gindestillering gindestillering = new Gindestillering(startdato, slutdato, vandTilfoejet, alkoholprocent, liter);
+                                                       double vandTilfoejet, double alkoholprocent, double liter, double maengdeEnebaer) {
+        Gindestillering gindestillering = new Gindestillering(startdato, slutdato, vandTilfoejet, alkoholprocent, liter, maengdeEnebaer);
         Storage.addGindestillering(gindestillering);
         return gindestillering;
+    }
+    public static Lager opretLager(String navn, Lagerenhed[][] reolliste){
+        Lager lager = new Lager(navn, reolliste);
+        Storage.addLager(lager);
+        return lager;
     }
 
     public static ArrayList<Medarbejder> getMedarbejdere() {
