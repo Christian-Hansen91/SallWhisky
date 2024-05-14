@@ -15,12 +15,12 @@ public class Lager {
     }
 
     public void addReol(int antalHylder) {
-        Lagerenhed[][] newArray = new Lagerenhed[reolliste.length + 1][];
-        for (int i = 0; i < reolliste.length + 1; i++) {
+        Lagerenhed[][] newArray = new Lagerenhed[reolliste.length+1][];
+        for (int i = 0; i < reolliste.length; i++) {
             newArray[i] = reolliste[i];
         }
         reolliste = newArray;
-        reolliste[reolliste.length] = new Lagerenhed[antalHylder];
+        reolliste[reolliste.length-1] = new Lagerenhed[antalHylder];
     }
 
     public void addLagerenhedAt(int row, int column, Lagerenhed lagerenhed) {
