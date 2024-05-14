@@ -37,13 +37,13 @@ public class Maltning {
         this.maengde = maengde;
     }
     public Maltning(double maengde, String kornsort, String marknavn, String rygemateriale) {
+        Maltning.totalAntal++;
         this.id = totalAntal;
         this.dato = LocalDate.now();
         this.kornsort = kornsort;
         this.marknavn = marknavn;
         this.maengde = maengde;
         this.rygemateriale = rygemateriale;
-        Maltning.totalAntal++;
     }
 
     public static int getTotalAntal() {
