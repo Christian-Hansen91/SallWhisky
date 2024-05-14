@@ -1,17 +1,33 @@
 package model.application;
 
-import java.util.ArrayList;
-
 public class Lager {
     private String navn;
-    private ArrayList<ArrayList<Lagerenhed>> reolliste = new ArrayList<>();
+    private Lagerenhed[][] reolliste;
 
-    public Lager(String navn) {
+    public Lager(String navn, Lagerenhed[][] reolliste) {
         this.navn = navn;
+        this.reolliste = reolliste;
     }
 
     @Override
     public String toString() {
         return "Lagernavn: " + navn;
+    }
+
+    public void addReol(int antalHylder) {
+        Lagerenhed[][] newArray = new Lagerenhed[reolliste.length + 1][];
+        for (int i = 0; i < reolliste.length + 1; i++) {
+            newArray[i] = reolliste[i];
+        }
+        reolliste = newArray;
+        reolliste[reolliste.length] = new Lagerenhed[antalHylder];
+    }
+
+    public void addLagerenhedAt(int row, int column, Lagerenhed lagerenhed) {
+        reolliste[row][column] = lagerenhed;
+    }
+
+    public Lagerenhed getLagerenhedAt(int row, int column) {
+        return reolliste[row][column];
     }
 }
