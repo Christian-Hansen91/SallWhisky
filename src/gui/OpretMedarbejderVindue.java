@@ -86,6 +86,10 @@ public class OpretMedarbejderVindue extends Stage {
             txfTlfNr.clear();
             startVindue.setMedarbejder(medarbejder);
             this.hide();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Oprettet");
+            alert.setContentText("SUCCES! Medarbejderen er oprettet.");
+            alert.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Fejl i opretning af medarbejder");

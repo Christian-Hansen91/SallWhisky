@@ -23,7 +23,7 @@ public class Controller {
         return maltning;
     }
 
-    public static Fad opretFad(int id, LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
+    public static Fad opretFad(LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
         Fad fad = new Fad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik);
         Storage.addFad(fad);
         return fad;
@@ -48,29 +48,35 @@ public class Controller {
         return gindestillering;
     }
 
-    public static ArrayList<Medarbejder> getMedarbejder() {
+    public static ArrayList<Medarbejder> getMedarbejdere() {
         return Storage.getMedarbejdere();
     }
-    public static ArrayList<Whisky> getWhisky() {
+    public static ArrayList<Whisky> getWhiskyer() {
         return Storage.getWhiskyer();
     }
-    public static ArrayList<Gindestillering> getGindestillering() {
+    public static ArrayList<Gindestillering> getGindestilleringer() {
         return Storage.getGindestilleringer();
     }
-    public static ArrayList<Maltning> getMaltning() {
+    public static ArrayList<Maltning> getMaltninger() {
         return Storage.getMaltninger();
     }
 
-    public static ArrayList<Fad> getFad() {
+    public static ArrayList<Fad> getFade() {
         return Storage.getFade();
     }
 
-    public static ArrayList<Whiskydestillering> getWhiskydestillering() {
+    public static ArrayList<Whiskydestillering> getWhiskydestilleringer() {
         return Storage.getWhiskydestilleringer();
     }
 
 
     public static void addMedarbejder(Medarbejder medarbejder) { Storage.addMedarbejder(medarbejder);
+    }
+
+    public static void addMaltning(Maltning maltning) { Storage.addMaltning(maltning);
+    }
+
+    public static void addWhiskydestillering(Whiskydestillering whiskydestillering) { Storage.addWhiskydestillering(whiskydestillering);
     }
 
 }

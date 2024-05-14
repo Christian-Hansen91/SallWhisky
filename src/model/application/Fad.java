@@ -14,7 +14,7 @@ public class Fad {
     private String leverandoer;
     private String historik;
     private Lager lager;
-    private List<Destillat> destillater = new ArrayList<>();
+    private static List<Destillat> destillater = new ArrayList<>();
 
     public Fad(LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
         totalAntal++;
@@ -27,7 +27,7 @@ public class Fad {
         this.historik = historik;
     }
 
-    public void tilfoejDestillat(Destillat destillat) {
+    public static void tilfoejDestillat(Destillat destillat) {
         if (!destillater.contains(destillat)) {
             destillater.add(destillat);
         }
@@ -40,12 +40,17 @@ public class Fad {
         }
         return nuvaerendeIndhold + liter <= kapacitet;
     }
+
     public double hentOpbrugtKapacitet() {
         double total = 0;
         for (Destillat destillat : destillater) {
             total += destillat.hentTotalMaengde();
         }
         return total;
+    }
+
+    public static int getTotalAntal() {
+        return totalAntal;
     }
 
     @Override

@@ -134,7 +134,7 @@ public class StartVindue extends Application {
     }
 
     private void opretWhiskydestilleringsAction() {
-        opretWhiskydestilleringsVindue = new OpretWhiskydestilleringsVindue("Opret whiskydestillering", stage, this);
+        opretWhiskydestilleringsVindue = new OpretWhiskydestilleringsVindue("Opret whiskydestillering", stage, this, medarbejder);
         opretWhiskydestilleringsVindue.showAndWait();
     }
 

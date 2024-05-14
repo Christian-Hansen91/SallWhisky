@@ -1,5 +1,7 @@
 package model.application;
 
+import storage.Storage;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -51,6 +53,16 @@ public class Whiskydestillering {
         Destillat destillat = new Destillat(fad);
         Tapning tapning = new Tapning(maengde, this, destillat, kommentar);
         return tapning;
+    }
+
+    public Destillat opretDestillat(Fad fad) {
+        Destillat destillat = new Destillat(fad);
+        Fad.tilfoejDestillat(destillat);
+        return destillat;
+    }
+
+    public static int getTotalAntal() {
+        return totalAntal;
     }
 
     @Override

@@ -1,8 +1,6 @@
 package gui;
 
 import controller.Controller;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -11,9 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.Medarbejder;
-import storage.Storage;
-
-import java.util.List;
 
 public class LogIndVindue extends Stage {
     private ComboBox<Medarbejder> cbVaelgMedarbejder = new ComboBox<>();
@@ -52,7 +47,7 @@ public class LogIndVindue extends Stage {
 
         pane.add(cbVaelgMedarbejder, 0, 3, 15, 1);
         cbVaelgMedarbejder.setMaxWidth(160);
-        cbVaelgMedarbejder.getItems().setAll(Controller.getMedarbejder());
+        cbVaelgMedarbejder.getItems().setAll(Controller.getMedarbejdere());
 
         pane.add(btnLogInd, 29, 16);
         pane.add(btnAnnuller, 30, 16);

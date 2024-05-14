@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
@@ -21,8 +22,8 @@ import java.util.List;
 public class OpretDestilleringsTapningsVindue extends Stage {
     private Label lblId = new Label("ID: ");
     private DatePicker dato = new DatePicker(LocalDate.now());
-    private ComboBox<String> cbDestilleringer = new ComboBox<>();
-    private ComboBox<String> cbFade = new ComboBox<>();
+    private ComboBox<Whiskydestillering> cbDestilleringer = new ComboBox<>();
+    private ComboBox<Fad> cbFade = new ComboBox<>();
     private Label lblKommentar = new Label("Kommentar: ");
     private TextField txfKommentar = new TextField();
     private Label lblDestillat = new Label("Destillat");
@@ -77,13 +78,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
 
         pane.add(cbDestilleringer, 0, 3);
         cbDestilleringer.setMaxWidth(200);
-        cbDestilleringer.setValue("Vælg destillering");
-        List<Whiskydestillering> destilleringer = Storage.getWhiskydestilleringer();
-        ObservableList<String> observableList = FXCollections.observableArrayList();
-        for (Whiskydestillering whiskydestillering : destilleringer) {
-            observableList.add(whiskydestillering.toString());
-        }
-        cbDestilleringer.getItems().addAll(observableList);
+        cbDestilleringer.getItems().addAll(Controller.getWhiskydestilleringer());
 
         pane.add(lblMaengdeILiter, 0, 4);
         pane.add(txfMaengdeILiter, 0, 5);
@@ -106,13 +101,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
         pane.setHalignment(lblTilfoejTilFad, HPos.RIGHT);
         pane.add(cbFade, 15, 9, 2, 1);
         cbFade.setMaxWidth(200);
-        cbFade.setValue("Vælg fad");
-        List<Fad> fade = Storage.getFade();
-        ObservableList<String> observableListFad = FXCollections.observableArrayList();
-        for (Fad fad : fade) {
-            observableListFad.add(fad.toString());
-        }
-        cbFade.getItems().addAll(observableListFad);
+        cbFade.getItems().addAll(Controller.getFade());
 
         pane.add(btnOpretDestillat, 15, 10, 2, 1);
         pane.setHalignment(btnOpretDestillat, HPos.RIGHT);
@@ -121,7 +110,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
 
     private void opretTapningTilDestillatAction() {
         LocalDate dagsdato = dato.getValue();
-        String valgtDestillering = cbDestilleringer.getSelectionModel().getSelectedItem();
+        //String valgtDestillering = cbDestilleringer.getSelectionModel().getSelectedItem();
         String valgtMaengde = txfMaengdeILiter.getText().trim();
         String valgtKommentar = txfKommentar.getText().trim();
 
@@ -133,9 +122,9 @@ public class OpretDestilleringsTapningsVindue extends Stage {
     private void gemDestillatAction() {
         //String id1 = id;
         LocalDate dato1 = dato.getValue();
-        String fad = cbFade.getSelectionModel().getSelectedItem();
+        Fad fad = cbFade.getSelectionModel().getSelectedItem();
         String kommentar = txfKommentar.getText().trim();
 
-        //destillat = Controller.opretDestillat();
+        destillat = whiskydestillering.opretDestillat(fad);
     }
 }

@@ -29,13 +29,12 @@ public class Maltning {
     }
 
     public Maltning(double maengde, String kornsort, String marknavn) {
+        Maltning.totalAntal++;
         this.id = totalAntal;
         this.dato = LocalDate.now();
         this.kornsort = kornsort;
         this.marknavn = marknavn;
         this.maengde = maengde;
-        Maltning.totalAntal++;
-
     }
     public Maltning(double maengde, String kornsort, String marknavn, String rygemateriale) {
         this.id = totalAntal;
@@ -45,6 +44,10 @@ public class Maltning {
         this.maengde = maengde;
         this.rygemateriale = rygemateriale;
         Maltning.totalAntal++;
+    }
+
+    public static int getTotalAntal() {
+        return totalAntal;
     }
 
     @Override
