@@ -95,11 +95,9 @@ public class OpretMaltningVindue extends Stage {
     private void gemAction() {
         String kornsort = txfKornsort.getText().trim();
         String marknavn = txfMarknavn.getText().trim();
-        int maengde = Integer.parseInt(txfMaengde.getText().trim());
-        String rygemateriale = txfRygemateriale.getText().trim();
-        String kommentar = txaKommentar.getText().trim();
+        double maengde = Double.parseDouble(txfMaengde.getText().trim());
 
-        if (!kornsort.isEmpty()&& !marknavn.isEmpty()&& !(maengde == 0) && !kommentar.isEmpty()) {
+        if (!kornsort.isEmpty()&& !marknavn.isEmpty()&& !(maengde == 0)) {
             maltning = Controller.opretMaltning(maengde, kornsort, marknavn);
 
             txfKornsort.clear();
@@ -107,6 +105,10 @@ public class OpretMaltningVindue extends Stage {
             txfMarknavn.clear();
             Controller.addMaltning(maltning);
             this.hide();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Maltning oprettet");
+            alert.setContentText("SUCCES! Maltningen er oprettet.");
+            alert.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Fejl i opretning af maltning");
