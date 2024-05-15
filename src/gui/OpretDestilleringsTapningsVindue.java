@@ -84,7 +84,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
 
         pane.add(btnOpretTapning, 0, 10);
         pane.setHalignment(btnOpretTapning, HPos.RIGHT);
-        btnOpretTapning.setOnAction(event -> opretTapningTilDestillatAction());
+        //btnOpretTapning.setOnAction(event -> opretTapningTilDestillatAction());
 
         pane.add(lblDestillat, 15, 1, 2, 1);
         pane.setHalignment(lblDestillat, HPos.CENTER);
@@ -101,7 +101,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
 
         pane.add(btnOpretDestillat, 15, 10, 2, 1);
         pane.setHalignment(btnOpretDestillat, HPos.RIGHT);
-        btnOpretDestillat.setOnAction(event -> gemDestillatAction());
+        //btnOpretDestillat.setOnAction(event -> gemDestillatAction());
     }
 
     /*private void opretTapningTilDestillatAction() {

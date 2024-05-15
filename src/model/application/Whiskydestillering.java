@@ -57,7 +57,7 @@ public class Whiskydestillering {
         for (VaeskeTilDestillat vaeskeTilDestillat : tapninger) {
             maengde += vaeskeTilDestillat.getMaengde();
         }
-        return maengde + liter <= maengdeVaeske;
+        return maengde + liter <= heart;
     }
 
     @Override
