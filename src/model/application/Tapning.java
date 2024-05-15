@@ -9,9 +9,8 @@ public class Tapning {
     private double maengde;
     private String kommentar;
 
-    Tapning(double maengde, Whiskydestillering whiskydestillering, Destillat destillat, String kommentar) {
+    Tapning(double maengde, Whiskydestillering whiskydestillering, String kommentar) {
         this.maengde = maengde;
-        this.destillat = destillat;
         destillat.tilfoejTapning(this);
         this.whiskydestillering = whiskydestillering;
         this.dato = LocalDate.now();

@@ -1,8 +1,6 @@
 package model.application;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Fad {
     private static int totalAntal;
@@ -14,7 +12,7 @@ public class Fad {
     private String leverandoer;
     private String historik;
     private Lager lager;
-    private static List<Destillat> destillater = new ArrayList<>();
+    private Destillat destillat;
 
     public Fad(LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
         totalAntal++;
@@ -27,15 +25,13 @@ public class Fad {
         this.historik = historik;
     }
 
-    public static void tilfoejDestillat(Destillat destillat) {
-        if (!destillater.contains(destillat)) {
-            destillater.add(destillat);
-        }
+    public void saetDestillat(Destillat destillat) {
+        this.destillat = destillat;
     }
 
-    public boolean tjekPlads(double liter) {
+   /* public boolean tjekPlads(double liter) {
         double nuvaerendeIndhold = 0;
-        for (Destillat destillat : destillater) {
+        if {
             nuvaerendeIndhold += destillat.hentTotalMaengde();
         }
         return nuvaerendeIndhold + liter <= kapacitet;
@@ -47,11 +43,19 @@ public class Fad {
             total += destillat.hentTotalMaengde();
         }
         return total;
-    }
+    }*/
 
     public static int getTotalAntal() {
         return totalAntal;
     }
+
+   /* private void gemDestillatAction() {
+        LocalDate dato1 = dato.getValue();
+        String kommentar = txfKommentar.getText().trim();
+        Fad fad = cbFade.getSelectionModel().getSelectedItem();
+
+        destillat = whiskydestillering.opretDestillat(fad);
+    }*/
 
     @Override
     public String toString() {

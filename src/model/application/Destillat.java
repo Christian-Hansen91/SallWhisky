@@ -19,7 +19,7 @@ public class Destillat {
         this.dato = LocalDate.now();
         this.kommentar = kommentar;
         this.fad = fad;
-        fad.tilfoejDestillat(this);
+        fad.saetDestillat(this);
     }
     public void saetKommentar(String kommentar) {
         this.kommentar = kommentar;

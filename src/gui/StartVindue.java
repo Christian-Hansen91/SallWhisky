@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -150,5 +151,29 @@ public class StartVindue extends Application {
         if (!(medarbejder == null)) {
             lblMedarbejder.setText("Medarbejder: " + medarbejder.getNavn());
         }
+    }
+
+    public static void fejlIOprettelseAlert(String text) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Fejl i oprettelse");
+        alert.setHeaderText("Manglende information");
+        alert.setContentText(text);
+        alert.show();
+    }
+
+    public static void kommafejlAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Fejl i oprettelse");
+        alert.setHeaderText("Hov!");
+        alert.setContentText("Kommafejl. Skriv \".\" i stedet for \",\" ved talmængder.");
+        alert.show();
+    }
+
+    public static void succesIOprettelseAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Oprettelse gennemført");
+        alert.setHeaderText("SUCCES!");
+        alert.setContentText("Din oprettelse er gennemført og gemt.");
+        alert.show();
     }
 }

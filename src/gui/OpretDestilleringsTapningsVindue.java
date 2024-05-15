@@ -77,7 +77,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
         pane.add(dato, 0, 2);
 
         pane.add(cbDestilleringer, 0, 3, 2, 1);
-        cbDestilleringer.setMaxWidth(200);
+        cbDestilleringer.setMaxWidth(175);
         cbDestilleringer.getItems().addAll(Controller.getWhiskydestilleringer());
 
         pane.add(lblMaengdeILiter, 0, 4);
@@ -108,22 +108,15 @@ public class OpretDestilleringsTapningsVindue extends Stage {
         btnOpretDestillat.setOnAction(event -> gemDestillatAction());
     }
 
-    private void opretTapningTilDestillatAction() {
+    /*private void opretTapningTilDestillatAction() {
         LocalDate dagsdato = dato.getValue();
-        String maengde = txfMaengdeILiter.getText().trim();
+        double maengde = Double.parseDouble(txfMaengdeILiter.getText().trim());
         String kommentar = txfKommentar.getText().trim();
 
-        tapning = whiskydestillering.opretTapning(destillat, Double.parseDouble(maengde), kommentar);
+        tapning = whiskydestillering.opretTapning(maengde, kommentar);
         destillat.tilfoejTapning(tapning);
 
-        txaDestillat.setText(tapning.toString());
-    }
+        txaDestillat.setText(tapning.toString() + "\n");
+    }*/
 
-    private void gemDestillatAction() {
-        LocalDate dato1 = dato.getValue();
-        String kommentar = txfKommentar.getText().trim();
-        Fad fad = cbFade.getSelectionModel().getSelectedItem();
-
-        destillat = whiskydestillering.opretDestillat(fad);
-    }
 }

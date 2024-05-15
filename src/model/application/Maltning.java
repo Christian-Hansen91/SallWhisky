@@ -56,8 +56,8 @@ public class Maltning {
                 "Dato: " + dato + "\n" +
                 "Korntype: " + kornsort +
                 ", marknavn: " + marknavn + "\n" +
-                "Mængde=" + maengde + "\n" +
+                "Mængde: " + maengde + "\n" +
                 "Rygemateriale: " + rygemateriale + "\n" +
-                "Kommentar: " + kommentar + "\n";
+                "Kommentar: " + kommentar;
     }
 }

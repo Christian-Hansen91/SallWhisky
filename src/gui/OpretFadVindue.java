@@ -127,16 +127,9 @@ public class OpretFadVindue extends Stage {
             txaHistorik.clear();
             Controller.addFad(fad);
             this.hide();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Fad oprettet");
-            alert.setContentText("SUCCES! Fadet er oprettet.");
-            alert.show();
+            StartVindue.succesIOprettelseAlert();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Fejl i opretning af fad");
-            alert.setHeaderText("Manglende information");
-            alert.setContentText("Der mangler noget information for at oprette fadet.");
-            alert.show();
+            StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette fadet.");
         }
 
         if(!(lager1.equals(null))) {

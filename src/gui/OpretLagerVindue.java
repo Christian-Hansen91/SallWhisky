@@ -70,6 +70,8 @@ public class OpretLagerVindue extends Stage {
             int reoler = Integer.parseInt(txtReoler.getText());
             int hylder = Integer.parseInt(txtHylder.getText());
             Controller.opretLager(navn, new Lagerenhed[reoler][hylder]);
+            this.hide();
+            StartVindue.succesIOprettelseAlert();
         }
         catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);

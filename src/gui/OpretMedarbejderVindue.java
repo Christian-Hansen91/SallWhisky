@@ -4,7 +4,6 @@ import controller.Controller;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -12,7 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.Medarbejder;
-import storage.Storage;
 
 public class OpretMedarbejderVindue extends Stage {
     private Label lblId = new Label("ID: ");
@@ -86,16 +84,9 @@ public class OpretMedarbejderVindue extends Stage {
             txfTlfNr.clear();
             startVindue.setMedarbejder(medarbejder);
             this.hide();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Oprettet");
-            alert.setContentText("SUCCES! Medarbejderen er oprettet.");
-            alert.show();
+            StartVindue.succesIOprettelseAlert();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Fejl i opretning af medarbejder");
-            alert.setHeaderText("Manglende information");
-            alert.setContentText("Der mangler noget information for at oprette medarbejderen.");
-            alert.show();
+            StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette medarbejderen.");
         }
     }
 }

@@ -1,7 +1,5 @@
 package model.application;
 
-import storage.Storage;
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -37,27 +35,27 @@ public class Whiskydestillering {
         medarbejder.tilfoejDestillering(this);
     }
 
-    public Tapning opretTapning(Destillat destillat, double maengde, String kommentar) {
-        if (!destillat.getFad().tjekPlads(maengde)) {
-            throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det valgte fad");
-        }
-        Tapning tapning = new Tapning(maengde, this, destillat, kommentar);
-        destillat.saetKommentar(kommentar);
+    public Tapning opretTapning(double maengde, String kommentar) {
+        Tapning tapning = new Tapning(maengde, this, kommentar);
         return tapning;
     }
+
 
     public Tapning opretTapningNytDestillat(Fad fad, double maengde) {
         if (!fad.tjekPlads(maengde)) {
             throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det valgte fad");
         }
         Destillat destillat = new Destillat(fad);
-        Tapning tapning = new Tapning(maengde, this, destillat, kommentar);
+        Tapning tapning = new Tapning(maengde, this, kommentar);
         return tapning;
     }
 
     public Destillat opretDestillat(Fad fad) {
+        /*if (!destillat.getFad().tjekPlads(maengde)) {
+            throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det valgte fad");
+        }*/
         Destillat destillat = new Destillat(fad);
-        Fad.tilfoejDestillat(destillat);
+        .saetDestillat(destillat);
         return destillat;
     }
 
@@ -76,11 +74,11 @@ public class Whiskydestillering {
                 "Startdato: " + startdato +
                 ", slutdato: " + slutdato + "\n" +
                 "Væske (L): " + maengdeVaeske + "\n" +
-                "Malt: " + maltning + "\n" +
                 "Head: " + head +
                 ", heart: " + heart +
                 ", tail: " + tail + "\n" +
                 "Alkoholprocent: " + alkoholprocent + "\n" +
-                "Kommentar: " + kommentar + ".\n";
+                "Kommentar: " + kommentar + ".\n\n" +
+                "Malt: " + maltning + "\n";
     }
 }
