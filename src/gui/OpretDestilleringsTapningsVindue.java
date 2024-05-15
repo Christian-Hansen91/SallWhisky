@@ -1,8 +1,6 @@
 package gui;
 
 import controller.Controller;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -13,11 +11,9 @@ import javafx.stage.Stage;
 import model.application.Destillat;
 import model.application.Whiskydestillering;
 import model.application.Fad;
-import model.application.Tapning;
-import storage.Storage;
+import model.application.VaeskeTilDestillat;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class OpretDestilleringsTapningsVindue extends Stage {
     private Label lblId = new Label("ID: ");
@@ -36,7 +32,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
     private TextField txfMaengdeILiter = new TextField();
     private TextField txfId = new TextField();
     private Destillat destillat = null;
-    private Tapning tapning = null;
+    private VaeskeTilDestillat vaeskeTilDestillat = null;
     private Whiskydestillering whiskydestillering = null;
 
     public OpretDestilleringsTapningsVindue(String title, Stage owner, StartVindue startVindue) {

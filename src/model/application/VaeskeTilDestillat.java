@@ -2,14 +2,14 @@ package model.application;
 
 import java.time.LocalDate;
 
-public class Tapning {
+public class VaeskeTilDestillat {
     private Whiskydestillering whiskydestillering;
     private Destillat destillat;
     private LocalDate dato;
     private double maengde;
     private String kommentar;
 
-    Tapning(double maengde, Whiskydestillering whiskydestillering, String kommentar) {
+    VaeskeTilDestillat(double maengde, Whiskydestillering whiskydestillering, String kommentar) {
         this.maengde = maengde;
         destillat.tilfoejTapning(this);
         this.whiskydestillering = whiskydestillering;

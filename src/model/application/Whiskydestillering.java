@@ -14,7 +14,7 @@ public class Whiskydestillering {
     private double tail;
     private double alkoholprocent;
     private String kommentar;
-    private List<Tapning> tapninger;
+    private List<VaeskeTilDestillat> tapninger = new ArrayList<>();
     private Maltning maltning;
     private Medarbejder medarbejder;
 
@@ -35,28 +35,13 @@ public class Whiskydestillering {
         medarbejder.tilfoejDestillering(this);
     }
 
-    public Tapning opretTapning(double maengde, String kommentar) {
-        Tapning tapning = new Tapning(maengde, this, kommentar);
-        return tapning;
-    }
-
-
-    public Tapning opretTapningNytDestillat(Fad fad, double maengde) {
-        if (!fad.tjekPlads(maengde)) {
-            throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det valgte fad");
+    public VaeskeTilDestillat opretVaeskeTilDestillat(double maengde, String kommentar) {
+        if (tjekNokMaengde(maengde)) {
+            VaeskeTilDestillat vaeskeTilDestillat = new VaeskeTilDestillat(maengde, this, kommentar);
+            return vaeskeTilDestillat;
+        } else {
+            throw new IllegalArgumentException("Der er ikke nok destillat til at lave denne tapning");
         }
-        Destillat destillat = new Destillat(fad);
-        Tapning tapning = new Tapning(maengde, this, kommentar);
-        return tapning;
-    }
-
-    public Destillat opretDestillat(Fad fad) {
-        /*if (!destillat.getFad().tjekPlads(maengde)) {
-            throw new IllegalArgumentException("Der er ikke plads til den ønskede mængde i det valgte fad");
-        }*/
-        Destillat destillat = new Destillat(fad);
-        .saetDestillat(destillat);
-        return destillat;
     }
 
     public static int getTotalAntal() {
@@ -65,6 +50,14 @@ public class Whiskydestillering {
 
     public int getNewMakeNr() {
         return newMakeNr;
+    }
+
+    private boolean tjekNokMaengde(double liter) {
+        double maengde = 0;
+        for (VaeskeTilDestillat vaeskeTilDestillat : tapninger) {
+            maengde += vaeskeTilDestillat.getMaengde();
+        }
+        return maengde + liter <= maengdeVaeske;
     }
 
     @Override

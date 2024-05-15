@@ -9,7 +9,7 @@ public class Destillat {
     private int id;
     private LocalDate dato;
     private String kommentar;
-    private List<Tapning> tapninger = new ArrayList<>();
+    private List<VaeskeTilDestillat> tapninger = new ArrayList<>();
     private Fad fad;
 
 
@@ -24,16 +24,16 @@ public class Destillat {
     public void saetKommentar(String kommentar) {
         this.kommentar = kommentar;
     }
-    public void tilfoejTapning(Tapning tapning) {
-        if (!tapninger.contains(tapning)) {
-            tapninger.add(tapning);
+    public void tilfoejTapning(VaeskeTilDestillat vaeskeTilDestillat) {
+        if (!tapninger.contains(vaeskeTilDestillat)) {
+            tapninger.add(vaeskeTilDestillat);
         }
     }
 
     public double hentTotalMaengde() {
         double liter = 0;
-        for (Tapning tapning : tapninger) {
-            liter += tapning.getMaengde();
+        for (VaeskeTilDestillat vaeskeTilDestillat : tapninger) {
+            liter += vaeskeTilDestillat.getMaengde();
         }
         return liter;
     }

@@ -2,11 +2,8 @@ package test;
 
 import model.application.*;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class WhiskydestilleringTest {
     Maltning maltning;
@@ -14,7 +11,7 @@ class WhiskydestilleringTest {
     Medarbejder medarbejder;
     Fad fad;
     Destillat destillat;
-    Tapning tapning;
+    VaeskeTilDestillat vaeskeTilDestillat;
 
     @BeforeEach
     void setup() {

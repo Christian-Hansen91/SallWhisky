@@ -65,7 +65,5 @@ public class Fad {
                 "Kapacitet: " + kapacitet + "\n" +
                 "Ophavsland: " + ophavsland +
                 ", leverandør: " + leverandoer + "\n" +
-                "Historik: " + historik + "\n" +
-                "Destillater: " + destillater + "\n";
-    }
+                "Historik: " + historik + "\n";}
 }
