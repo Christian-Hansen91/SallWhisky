@@ -13,8 +13,6 @@ import model.application.Maltning;
 import java.time.LocalDate;
 
 public class OpretMaltningVindue extends Stage {
-    private Label lblId = new Label("ID: ");
-    private TextField txfId = new TextField();
     private DatePicker dpdato = new DatePicker(LocalDate.now());
     private Label lblkornsort = new Label("Kornsort: ");
     private TextField txfKornsort = new TextField();
@@ -50,7 +48,6 @@ public class OpretMaltningVindue extends Stage {
         pane.setVgap(10);
         pane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
 
-        lblId.setTextFill(Color.BURLYWOOD);
         lblkornsort.setTextFill(Color.BURLYWOOD);
         lblMarknavn.setTextFill(Color.BURLYWOOD);
         lblMaengde.setTextFill(Color.BURLYWOOD);
@@ -58,21 +55,17 @@ public class OpretMaltningVindue extends Stage {
         lblKommentar.setTextFill(Color.BURLYWOOD);
 
 
-        pane.add(lblId, 0, 2, 2, 1);
-        pane.add(txfId, 2, 2, 2, 1);
-        txfId.setMinWidth(110);
-        pane.setHalignment(txfId, HPos.RIGHT);
-        pane.add(dpdato, 0, 3, 4, 1);
-        pane.add(lblkornsort, 0, 4, 2, 1);
-        pane.add(txfKornsort, 2, 4, 2, 1);
+        pane.add(dpdato, 0, 2, 4, 1);
+        pane.add(lblkornsort, 0, 3, 2, 1);
+        pane.add(txfKornsort, 2, 3, 2, 1);
         txfKornsort.setMinWidth(110);
         pane.setHalignment(txfKornsort, HPos.RIGHT);
-        pane.add(lblMarknavn, 0, 5, 2, 1);
-        pane.add(txfMarknavn, 2, 5, 2, 1);
+        pane.add(lblMarknavn, 0, 4, 2, 1);
+        pane.add(txfMarknavn, 2, 4, 2, 1);
         txfMarknavn.setMinWidth(110);
         pane.setHalignment(txfMarknavn, HPos.RIGHT);
-        pane.add(lblMaengde, 0, 6, 2, 1);
-        pane.add(txfMaengde, 2, 6, 2, 1);
+        pane.add(lblMaengde, 0, 5, 2, 1);
+        pane.add(txfMaengde, 2, 5, 2, 1);
         txfMaengde.setMinWidth(110);
         pane.setHalignment(txfMaengde, HPos.RIGHT);
 

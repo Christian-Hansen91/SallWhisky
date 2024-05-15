@@ -19,8 +19,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class OpretWhiskydestilleringsVindue extends Stage {
-    private Label lblNewMakeNr = new Label("New Make nr.:");
-    private TextField txfNewMakeNr = new TextField();
     private DatePicker dpStartdato = new DatePicker();
     private DatePicker dpSlutdato = new DatePicker(LocalDate.now());
     private Label lblVaeskeMaengde = new Label("Væskemængde: ");
@@ -64,7 +62,6 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         pane.setVgap(10);
         pane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
 
-        lblNewMakeNr.setTextFill(Color.BURLYWOOD);
         lblVaeskeMaengde.setTextFill(Color.BURLYWOOD);
         lblHead.setTextFill(Color.BURLYWOOD);
         lblHeart.setTextFill(Color.BURLYWOOD);
@@ -81,34 +78,28 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         cbMaltning.setMaxWidth(175);
         cbMaltning.getItems().setAll(Storage.getMaltninger());
 
-        pane.add(lblNewMakeNr, 0, 2);
-        pane.add(txfNewMakeNr, 1, 2);
-        txfNewMakeNr.setMaxWidth(75);
-        pane.setHalignment(txfNewMakeNr, HPos.RIGHT);
-        txfNewMakeNr.setText(Whiskydestillering.getTotalAntal() + "");
+        pane.add(dpStartdato, 0, 2, 2, 1);
+        pane.add(dpSlutdato, 0, 3, 2, 1);
 
-        pane.add(dpStartdato, 0, 3, 2, 1);
-        pane.add(dpSlutdato, 0, 4, 2, 1);
-
-        pane.add(lblVaeskeMaengde, 0, 5);
-        pane.add(txfVaeskeMaengde, 1, 5);
+        pane.add(lblVaeskeMaengde, 0, 4);
+        pane.add(txfVaeskeMaengde, 1, 4);
         txfVaeskeMaengde.setMaxWidth(75);
         pane.setHalignment(txfVaeskeMaengde, HPos.RIGHT);
-        pane.add(lblHead, 0, 6);
-        pane.add(txfHead, 1, 6);
+        pane.add(lblHead, 0, 5);
+        pane.add(txfHead, 1, 5);
         txfHead.setMaxWidth(75);
         pane.setHalignment(txfHead, HPos.RIGHT);
-        pane.add(lblHeart, 0, 7);
-        pane.add(txfHeart, 1, 7);
+        pane.add(lblHeart, 0, 6);
+        pane.add(txfHeart, 1, 6);
         txfHeart.setMaxWidth(75);
         pane.setHalignment(txfHeart, HPos.RIGHT);
-        pane.add(lblTail, 0, 8);
-        pane.add(txfTail, 1, 8);
+        pane.add(lblTail, 0, 7);
+        pane.add(txfTail, 1, 7);
         txfTail.setMaxWidth(75);
         pane.setHalignment(txfTail, HPos.RIGHT);
 
-        pane.add(lblAlkoholprocent, 0, 9);
-        pane.add(txfAlkoholprocent, 1, 9);
+        pane.add(lblAlkoholprocent, 0, 8);
+        pane.add(txfAlkoholprocent, 1, 8);
         txfAlkoholprocent.setMaxWidth(75);
         pane.setHalignment(txfAlkoholprocent, HPos.RIGHT);
 
