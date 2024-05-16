@@ -129,7 +129,6 @@ public class OpretWhiskyTapningsVindue extends Stage {
         cbLager.setItems(listLager);
         cbLager.setValue(Controller.getLagre().get(0));
         pane.add(lvLedigeLagerPladser, 2, 1);
-        //TODO herunder skal det laves, så man får lagret fra comboboksen
         updateLvLedigeLagerpladser();
         cbLager.setOnAction(event -> updateLvLedigeLagerpladser());
     }
@@ -157,6 +156,7 @@ public class OpretWhiskyTapningsVindue extends Stage {
         Destillat destillat = cbDestilleringer.getValue();
         VaeskeTilWhisky vaeskeTilWhisky = destillat.opretVaeskeTilWhisky(maengdeWhisky);
         listVaeskeTilWhiskyAdded.add(vaeskeTilWhisky);
+        listDestillarier = FXCollections.observableArrayList();
         listDestillarier.addAll(Controller.getDestillater());
         lvVaeskeTilWhisky.setItems(listVaeskeTilWhiskyAdded);
         cbDestilleringer.setItems(listDestillarier);
@@ -175,10 +175,9 @@ public class OpretWhiskyTapningsVindue extends Stage {
         double flaskeStr = Double.parseDouble((cbKapacitet.getSelectionModel().getSelectedItem()));
         double vandTilfoejet = Double.parseDouble(txfVandTilfoejet.getText().trim());
         double alcoholprocent = Double.parseDouble(txfAlcoholprocent.getText().trim());
-        Whisky whisky = new Whisky(datoForTapning, navn, beskrivelse,flaskeStr, vandTilfoejet, alcoholprocent);
+        String betegnelse = whiskyBetegnelse();
+        Whisky whisky = Controller.opretWhisky(datoForTapning, navn, beskrivelse,flaskeStr, vandTilfoejet, alcoholprocent, betegnelse);
         cbLager.getValue().addLagerenhedAt(stringToInts(), whisky);
-
-        //destillat = whiskydestillering.opretDestillat(whiskydestillering1);
     }
 
     private void updateLvLedigeLagerpladser() {
@@ -194,28 +193,36 @@ public class OpretWhiskyTapningsVindue extends Stage {
 
     private ArrayList<Integer> stringToInts() {
         ArrayList<Integer> plads = new ArrayList<>();
-        int pladsReol = Integer.parseInt(lvLedigeLagerPladser.getSelectionModel().getSelectedItem().substring(7))-1;
-        int pladsHylde = Integer.parseInt(lvLedigeLagerPladser.getSelectionModel().getSelectedItem().substring(17))-1;
+        int pladsReol = Integer.parseInt(lvLedigeLagerPladser.getSelectionModel().getSelectedItem().substring(6,7))-1;
+        int pladsHylde = Integer.parseInt(lvLedigeLagerPladser.getSelectionModel().getSelectedItem().substring(16,17))-1;
         plads.add(pladsReol);
         plads.add(pladsHylde);
         return plads;
     }
     public String whiskyBetegnelse(){
-        boolean sammeMalt=false;
-        for (int i = 0; i <listVaeskeTilWhiskyAdded.size() ; i++) {
-            //Maltning currentMaltning = listVaeskeTilWhiskyAdded.get(i).getDestillat()...
-            //listVaeskeTilWhiskyAdded
-        }
         String betegnelse = null;
+        boolean fraAndetDestillari = erWhiskyFraAndetDestillari();
         if(listVaeskeTilWhiskyAdded.size()==1 && Double.parseDouble(txfVandTilfoejet.getText())==0){
             betegnelse="Cask strength";
         }
         else if(listVaeskeTilWhiskyAdded.size()==1){
             betegnelse="Sinle cask";
         }
-        //else if()
-        //else
+        else if(fraAndetDestillari){
+        betegnelse = "Blended";
+        }
+        else{
+            betegnelse = "Single Malt";
 
+        }
         return betegnelse;
+    }
+    public boolean erWhiskyFraAndetDestillari(){
+        for (int i = 0; i <listVaeskeTilWhiskyAdded.size() ; i++) {
+            for (int j = 0; j <listVaeskeTilWhiskyAdded.get(i).getDestillat().getVaeskeTilDestillater().size() ; j++) {
+                return listVaeskeTilWhiskyAdded.get(i).getDestillat().getVaeskeTilDestillater().get(j).getWhiskydestillering().equals(Controller.getWhiskydestilleringer().get(0));
+            }
+        }
+        return false;
     }
 }

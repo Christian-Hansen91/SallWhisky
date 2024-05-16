@@ -63,6 +63,11 @@ public class Destillat {
         return id;
     }
 
+    public List<VaeskeTilDestillat> getVaeskeTilDestillater() {
+        List<VaeskeTilDestillat> vaeskeTilDestillater = this.vaeskeTilDestillater;
+        return vaeskeTilDestillater;
+    }
+
     @Override
     public String toString() {
         return "Destillat{" +

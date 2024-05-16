@@ -15,7 +15,7 @@ public class Whisky implements Lagerenhed{
     private Lager lager;
 
     public Whisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
-                  double vandTilfoejet, double alkoholprocent) {
+                  double vandTilfoejet, double alkoholprocent, String betegnelse) {
         this.totalAntal++;
         this.nr=totalAntal;
         this.dato = dato;
@@ -24,6 +24,7 @@ public class Whisky implements Lagerenhed{
         this.flaskeStr = flaskeStr;
         this.vandTilfoejet = vandTilfoejet;
         this.alkoholprocent = alkoholprocent;
+        this.whiskyBetegnelse = betegnelse;
     }
 
     public LocalDate getDato() {
