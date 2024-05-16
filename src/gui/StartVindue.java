@@ -26,9 +26,9 @@ public class StartVindue extends Application {
     private Button btnOpretMaltning = new Button("Opret maltning");
     private Button btnOpretWhiskyDestillering = new Button("Opret whiskydestillering");
     private Button btnOpretGinDestillering = new Button("Opret gindestillering");
-    private Button btnOpretDestilleringsTapning = new Button("Opret destilleringstapning");
+    private Button btnOpretDestilleringsTapning = new Button("Opret destillat (til fad)");
     private Button btnOpretOmhaeldning = new Button("Opret omhældning");
-    private Button btnOpretWhiskyTapning = new Button("Opret whiskytapning");
+    private Button btnOpretWhiskyTapning = new Button("Opret whisky (tapning)");
     private Button btnOpretLager = new Button("Opret lager");
     private Button btnOpretFad = new Button("Opret fad");
     private Button btnOpretMedarbejder = new Button("Opret medarbejder");
