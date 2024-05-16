@@ -19,8 +19,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class OpretWhiskydestilleringsVindue extends Stage {
-    private Label lblNewMakeNr = new Label("New Make nr.:");
-    private TextField txfNewMakeNr = new TextField();
     private DatePicker dpStartdato = new DatePicker();
     private DatePicker dpSlutdato = new DatePicker(LocalDate.now());
     private Label lblVaeskeMaengde = new Label("Væskemængde: ");
@@ -64,7 +62,6 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         pane.setVgap(10);
         pane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
 
-        lblNewMakeNr.setTextFill(Color.BURLYWOOD);
         lblVaeskeMaengde.setTextFill(Color.BURLYWOOD);
         lblHead.setTextFill(Color.BURLYWOOD);
         lblHeart.setTextFill(Color.BURLYWOOD);
@@ -80,12 +77,6 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         pane.add(cbMaltning, 0, 1, 4, 1);
         cbMaltning.setMaxWidth(175);
         cbMaltning.getItems().setAll(Storage.getMaltninger());
-
-        pane.add(lblNewMakeNr, 0, 2);
-        pane.add(txfNewMakeNr, 1, 2);
-        txfNewMakeNr.setMaxWidth(75);
-        pane.setHalignment(txfNewMakeNr, HPos.RIGHT);
-        txfNewMakeNr.setText(Whiskydestillering.getTotalAntal() + "");
 
         pane.add(dpStartdato, 0, 3, 2, 1);
         pane.add(dpSlutdato, 0, 4, 2, 1);
@@ -149,19 +140,9 @@ public class OpretWhiskydestilleringsVindue extends Stage {
 
             Controller.addWhiskydestillering(whiskydestillering);
             this.hide();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Whiskydestillering oprettet");
-            alert.setContentText("SUCCES! Der er oprettet en whiskydestillering");
-            alert.show();
+            StartVindue.succesIOprettelseAlert();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Fejl i opretning af whiskydestilleringen");
-            alert.setHeaderText("Manglende information");
-            alert.setContentText("Der mangler noget information for at oprette whiskydestilleringen.");
-            alert.show();
+            StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette whiskydestilleringen.");
         }
     }
-
-
 }

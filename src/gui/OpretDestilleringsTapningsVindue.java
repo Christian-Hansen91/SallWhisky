@@ -84,7 +84,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
 
         pane.add(btnOpretTapning, 0, 10);
         pane.setHalignment(btnOpretTapning, HPos.RIGHT);
-        btnOpretTapning.setOnAction(event -> opretTapningTilDestillatAction());
+        //btnOpretTapning.setOnAction(event -> opretTapningTilDestillatAction());
 
         pane.add(lblDestillat, 15, 1, 2, 1);
         pane.setHalignment(lblDestillat, HPos.CENTER);
@@ -115,4 +115,11 @@ public class OpretDestilleringsTapningsVindue extends Stage {
         txaDestillat.setText(tapning.toString() + "\n");
     }*/
 
+     private void gemDestillatAction() {
+        LocalDate dato1 = dato.getValue();
+        String kommentar = txfKommentar.getText().trim();
+        Fad fad = cbFade.getSelectionModel().getSelectedItem();
+
+        //destillat = whiskydestillering.opretDestillat(fad);
+    }
 }

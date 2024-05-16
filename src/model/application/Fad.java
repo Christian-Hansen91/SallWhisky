@@ -49,14 +49,6 @@ public class Fad {
         return totalAntal;
     }
 
-   /* private void gemDestillatAction() {
-        LocalDate dato1 = dato.getValue();
-        String kommentar = txfKommentar.getText().trim();
-        Fad fad = cbFade.getSelectionModel().getSelectedItem();
-
-        destillat = whiskydestillering.opretDestillat(fad);
-    }*/
-
     @Override
     public String toString() {
         return "Fad, ID: " + id + "\n" +
