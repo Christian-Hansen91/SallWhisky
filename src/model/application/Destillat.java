@@ -65,15 +65,12 @@ public class Destillat {
 
     @Override
     public String toString() {
-        return "Destillat{" +
-                "id=" + id +
-                ", dato=" + dato +
-                ", kommentar='" + kommentar + '\'' +
-                ", vaeskeTilDestillater=" + vaeskeTilDestillater +
-                ", vaeskeTilWhiskyer=" + vaeskeTilWhiskyer +
-                ", fad=" + fad +
-                ", angelShare=" + angelShare +
-                ", maengde=" + hentTotalMaengde() +
-                '}';
+        return "Destillat, ID: " + id + "\n" +
+                "Dato: " + dato + "\n" +
+                "Blanding: " + vaeskeTilDestillater + "\n" +
+                "Mængde: " + hentTotalMaengde() + "\n" +
+                "Fad: " + fad + "\n" +
+                "Kommentar: " + kommentar + "\n" +
+                "Angel share: " + angelShare + "\n";
     }
 }

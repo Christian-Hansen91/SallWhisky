@@ -15,7 +15,7 @@ import model.application.VaeskeTilDestillat;
 
 import java.time.LocalDate;
 
-public class OpretDestilleringsTapningsVindue extends Stage {
+public class OpretDestillatVindue extends Stage {
     private DatePicker dato = new DatePicker(LocalDate.now());
     private ComboBox<Whiskydestillering> cbDestilleringer = new ComboBox<>();
     private ComboBox<Fad> cbFade = new ComboBox<>();
@@ -33,7 +33,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
     private VaeskeTilDestillat vaeskeTilDestillat = null;
     private Whiskydestillering whiskydestillering = null;
 
-    public OpretDestilleringsTapningsVindue(String title, Stage owner, StartVindue startVindue) {
+    public OpretDestillatVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);
 
         setTitle("Opret destilleringstapning");
