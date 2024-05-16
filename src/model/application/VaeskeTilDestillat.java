@@ -18,6 +18,11 @@ public class VaeskeTilDestillat {
     public double getMaengde() {
         return maengde;
     }
+
+    public Whiskydestillering getWhiskydestillering() {
+        return whiskydestillering;
+    }
+
     @Override
     public String toString() {
         return "Tapning: " + "\n" +
