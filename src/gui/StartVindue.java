@@ -109,7 +109,7 @@ public class StartVindue extends Application {
     }
 
     private void soegningAction() {
-        soegningsVindue = new SoegningsVindue();
+        soegningsVindue = new SoegningsVindue("Søgning",stage);
         soegningsVindue.showAndWait();
     }
 

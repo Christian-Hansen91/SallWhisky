@@ -26,7 +26,7 @@ public class Fad {
     }
 
     public void saetDestillat(Destillat destillat) {
-        this.destillat = destillat;
+        this.destillat = this.destillat;
     }
 
     public boolean tjekPlads(double liter) {

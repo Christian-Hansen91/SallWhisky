@@ -35,7 +35,14 @@ public class Destillat {
         return liter;
     }
 
+    public String hentKommentar() {
+        return kommentar;
+    }
+
     public Fad getFad() {
         return fad;
+    }
+    public int hentId() {
+        return id;
     }
 }

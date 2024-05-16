@@ -93,4 +93,63 @@ public class Controller {
     public static void addLager(Lager lager) { Storage.addLager(lager);
     }
 
+    public static ArrayList<Whisky> soegWhiskyBeskrivelse(String beskrivelse) {
+        ArrayList<Whisky> alleWhiskyer = Storage.getWhiskyer();
+        ArrayList<Whisky> whiskyer = new ArrayList<>();
+
+        if (!beskrivelse.isEmpty()) {
+            for (Whisky whisky : alleWhiskyer) {
+                if (whisky.getBeskrivelse().toLowerCase().contains(beskrivelse.toLowerCase())) {
+                    whiskyer.add(whisky);
+                }
+            }
+        }
+
+        return whiskyer;
+    }
+
+    public static ArrayList<Whisky> soegWhiskyId(int nr) {
+        ArrayList<Whisky> alleWhiskyer = Storage.getWhiskyer();
+        ArrayList<Whisky> whiskyer = new ArrayList<>();
+
+        if (nr != 0) {
+            for (Whisky whisky : alleWhiskyer) {
+                if (whisky.getNr() == nr) {
+                    whiskyer.add(whisky);
+                }
+            }
+        }
+
+        return whiskyer;
+    }
+
+    public static ArrayList<Destillat> soegDestillatKommentar(String kommentar) {
+        ArrayList<Destillat> destillater = new ArrayList<>();
+        for (Destillat destillat : Storage.getDestillater()) {
+            if(destillat.hentKommentar().contains(kommentar)) {
+                destillater.add(destillat);
+            }
+        }
+
+        return destillater;
+    }
+    public static ArrayList<Destillat> soegDestillatId(int id) {
+        ArrayList<Destillat> destillater = new ArrayList<>();
+        for (Destillat destillat : Storage.getDestillater()) {
+            if (destillat.hentId() == id) {
+                destillater.add(destillat);
+            }
+        }
+
+        return destillater;
+    }
+
+    public ArrayList<Whisky> fjernWhiskyerUnderTre(ArrayList<Whisky> alleWhiskyer) {
+        ArrayList<Whisky> whiskyer = new ArrayList<>();
+        for (Whisky whisky : alleWhiskyer) {
+
+        }
+
+        return whiskyer;
+    }
 }

@@ -2,9 +2,10 @@ package model.application;
 
 import java.time.LocalDate;
 
-public class Whisky implements Lagerenhed{
+public class Whisky implements Lagerenhed {
     private LocalDate dato;
-    private static int nr;
+    private static int totalAntal;
+    private int nr;
     private String navn;
     private String beskrivelse;
     private double flaskeStr;
@@ -14,6 +15,8 @@ public class Whisky implements Lagerenhed{
 
     public Whisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
                   double vandTilfoejet, double alkoholprocent) {
+        Whisky.totalAntal++;
+        this.nr = totalAntal;
         this.dato = dato;
         this.navn = navn;
         this.beskrivelse = beskrivelse;
@@ -26,8 +29,11 @@ public class Whisky implements Lagerenhed{
         return dato;
     }
 
-    public static int getNr() {
+    public int getNr() {
         return nr;
+    }
+    public static int getTotalAntal() {
+        return totalAntal;
     }
 
     public String getNavn() {
@@ -52,5 +58,13 @@ public class Whisky implements Lagerenhed{
 
     public double getAlkoholprocent() {
         return alkoholprocent;
+    }
+    public int lagringsdage() {
+        int dage = 0;
+        LocalDate foersteDestillering;
+        return dage;
+    }
+    public String toString() {
+        return "#" + nr + ": " + navn + " - \"" + beskrivelse + "\" på " + flaskeStr + " liter";
     }
 }

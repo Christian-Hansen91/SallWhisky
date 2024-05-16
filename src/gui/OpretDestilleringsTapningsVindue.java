@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.application.Destillat;
+import model.application.Whisky;
 import model.application.Whiskydestillering;
 import model.application.Fad;
 import model.application.VaeskeTilDestillat;
@@ -31,7 +31,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
     private Label lblMaengdeILiter = new Label("Mængde (L): ");
     private TextField txfMaengdeILiter = new TextField();
     private TextField txfId = new TextField();
-    private Destillat destillat = null;
+    private Whisky whisky = null;
     private VaeskeTilDestillat vaeskeTilDestillat = null;
     private Whiskydestillering whiskydestillering = null;
 

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class VaeskeTilDestillat {
     private Whiskydestillering whiskydestillering;
-    private Destillat destillat;
+    private Whisky whisky;
     private LocalDate dato;
     private double maengde;
     private String kommentar;
