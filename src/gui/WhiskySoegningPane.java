@@ -38,14 +38,11 @@ public class WhiskySoegningPane extends SoegningPane {
         btnSoeg.setOnAction(e -> soegAction());
 
     }
-
-
-
     private void soegAction() {
         lvResultater.getItems().clear();
         lvResultater.getItems().addAll(Controller.soegWhiskyBeskrivelse(txfBeskrivelse.getText()));
         lvResultater.getItems().addAll(Controller.soegWhiskyId(saniterInputId()));
-        //fad mv.
+        //mv.
     }
 
     private int saniterInputId() {

@@ -4,7 +4,9 @@ import model.application.*;
 import storage.Storage;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     public static Medarbejder opretMedarbejder(String navn, int tlfNr) {
@@ -37,7 +39,7 @@ public class Controller {
     }
     public static Whisky opretWhisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
                                      double vandTilfoejet, double alkoholprocent, Lager lager[][]) {
-        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, lager);
+        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent);
         Storage.addWhisky(whisky);
         return whisky;
     }
@@ -54,6 +56,7 @@ public class Controller {
     }
     public static Destillat opretDestillat(Fad fad){
         Destillat destillat = new Destillat(fad);
+        Storage.addDestillat(destillat);
         return destillat;
     }
 
@@ -138,9 +141,11 @@ public class Controller {
 
     public static ArrayList<Destillat> soegDestillatKommentar(String kommentar) {
         ArrayList<Destillat> destillater = new ArrayList<>();
-        for (Destillat destillat : Storage.getDestillater()) {
-            if(destillat.hentKommentar().contains(kommentar)) {
-                destillater.add(destillat);
+        if (!kommentar.isEmpty()) {
+            for (Destillat destillat : Storage.getDestillater()) {
+                if (destillat.getKommentar().contains(kommentar)) {
+                    destillater.add(destillat);
+                }
             }
         }
 
@@ -149,7 +154,7 @@ public class Controller {
     public static ArrayList<Destillat> soegDestillatId(int id) {
         ArrayList<Destillat> destillater = new ArrayList<>();
         for (Destillat destillat : Storage.getDestillater()) {
-            if (destillat.hentId() == id) {
+            if (destillat.getId() == id) {
                 destillater.add(destillat);
             }
         }
@@ -157,12 +162,14 @@ public class Controller {
         return destillater;
     }
 
-    public ArrayList<Whisky> fjernWhiskyerUnderTre(ArrayList<Whisky> alleWhiskyer) {
-        ArrayList<Whisky> whiskyer = new ArrayList<>();
-        for (Whisky whisky : alleWhiskyer) {
-
+    public static List<Destillat> fjernUnderTre(List<Destillat> alleDestillat) {
+        ArrayList<Destillat> gamleDestillater = new ArrayList<>();
+        for (Destillat destillat : alleDestillat) {
+            if (ChronoUnit.YEARS.between(destillat.getDato(),LocalDate.now()) >= 3) {
+                gamleDestillater.add(destillat);
+            }
         }
 
-        return whiskyer;
+        return gamleDestillater;
     }
 }

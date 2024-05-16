@@ -34,6 +34,11 @@ public class App {
         Whiskydestillering whiskydestillering2 = Controller.opretWhiskydestillering(maltning2, LocalDate.of(2024, 4, 16), LocalDate.of(2024, 4, 16), 30.0, 8.0, 100.0, 25.0, "OBS, tåler fortynding", 59.9, medarbejder2);
 
         Destillat destilla1 = Controller.opretDestillat(fad1);
-        destilla1.tilfoejTapning(whiskydestillering1.opretVaeskeTilDestillat(100, ""));
+        destilla1.tilfoejTapning(whiskydestillering1.opretVaeskeTilDestillat(100));
+        destilla1.saetKommentar("Sall præst har velsignet dette fad");
+        Destillat destillat2 = Controller.opretDestillat(fad2);
+        destillat2.tilfoejTapning(whiskydestillering2.opretVaeskeTilDestillat(50));
+        destillat2.saetKommentar("Special Edition");
+        destillat2.setDato(LocalDate.of(2018,1,2));
     }
 }

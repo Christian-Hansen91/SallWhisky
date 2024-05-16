@@ -105,7 +105,7 @@ public class StartVindue extends Application {
         btnOpretDestilleringsTapning.setOnAction(event -> opretDestilleringsTapningAction());
         btnOpretWhiskyDestillering.setOnAction(event -> opretWhiskydestilleringsAction());
         btnSoeg.setOnAction(event -> soegningAction());
-        btnOpretWhiskyTapning.setOnAction(event -> opretWhiskyTapningAction());
+       // btnOpretWhiskyTapning.setOnAction(event -> opretWhiskyTapningAction());
 
 
     }
@@ -155,10 +155,10 @@ public class StartVindue extends Application {
         opretDestilleringsTapningsVindue = new OpretDestilleringsTapningsVindue("Opret destilleringstapning", stage, this);
         opretDestilleringsTapningsVindue.showAndWait();
     }
-    private void opretWhiskyTapningAction() {
+   /* private void opretWhiskyTapningAction() {
         opretWhiskyTapningsVindue = new OpretWhiskyTapningsVindue("Opret whiskytapning", stage, this);
         opretWhiskyTapningsVindue.showAndWait();
-    }
+    }*/
 
     public void setMedarbejder(Medarbejder medarbejder) {
         this.medarbejder = medarbejder;

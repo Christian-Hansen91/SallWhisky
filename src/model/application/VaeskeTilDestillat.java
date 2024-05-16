@@ -9,7 +9,7 @@ public class VaeskeTilDestillat {
     private double maengde;
     private String kommentar;
 
-    VaeskeTilDestillat(double maengde, Whiskydestillering whiskydestillering, String kommentar) {
+    VaeskeTilDestillat(double maengde, Whiskydestillering whiskydestillering) {
         this.maengde = maengde;
         this.whiskydestillering = whiskydestillering;
         this.dato = LocalDate.now();

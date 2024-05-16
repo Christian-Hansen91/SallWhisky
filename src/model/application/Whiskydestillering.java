@@ -35,9 +35,9 @@ public class Whiskydestillering {
         medarbejder.tilfoejDestillering(this);
     }
 
-    public VaeskeTilDestillat opretVaeskeTilDestillat(double maengde, String kommentar) {
+    public VaeskeTilDestillat opretVaeskeTilDestillat(double maengde) {
         if (tjekNokMaengde(maengde)) {
-            VaeskeTilDestillat vaeskeTilDestillat = new VaeskeTilDestillat(maengde, this, kommentar);
+            VaeskeTilDestillat vaeskeTilDestillat = new VaeskeTilDestillat(maengde, this);
             return vaeskeTilDestillat;
         } else {
             throw new IllegalArgumentException("Der er ikke nok destillat til at lave denne tapning");

@@ -62,7 +62,7 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         pane.setVgap(10);
         pane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
 
-        lblNewMakeNr.setTextFill(Color.BURLYWOOD);
+        //lblNewMakeNr.setTextFill(Color.BURLYWOOD);
         lblVaeskeMaengde.setTextFill(Color.BURLYWOOD);
         lblHead.setTextFill(Color.BURLYWOOD);
         lblHeart.setTextFill(Color.BURLYWOOD);

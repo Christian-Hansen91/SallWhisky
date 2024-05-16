@@ -18,7 +18,7 @@ public class Destillat {
         Destillat.totalAntal++;
         this.id = totalAntal;
         this.dato = LocalDate.now();
-        this.kommentar = kommentar;
+        this.kommentar = "";
         this.fad = fad;
         fad.saetDestillat(this);
     }
@@ -75,5 +75,16 @@ public class Destillat {
                 ", angelShare=" + angelShare +
                 ", maengde=" + hentTotalMaengde() +
                 '}';
+    }
+
+    public String getKommentar() {
+        return kommentar;
+    }
+
+    public LocalDate getDato() {
+        return dato;
+    }
+    public void setDato(LocalDate dato) {
+        this.dato = dato;
     }
 }

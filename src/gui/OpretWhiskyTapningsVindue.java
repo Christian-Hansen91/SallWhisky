@@ -180,7 +180,7 @@ public class OpretWhiskyTapningsVindue extends Stage {
         double alcoholprocent = Double.parseDouble(txfAlcoholprocent.getText().trim());
 
         //TODO mangler lager
-        cbLager.getValue().addLagerenhedAt(stringToInts(), lagerenhed);
+        //cbLager.getValue().addLagerenhedAt(stringToInts(), lagerenhed);
 
         //destillat = whiskydestillering.opretDestillat(whiskydestillering1);
     }
