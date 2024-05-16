@@ -32,6 +32,9 @@ public class Fad {
     public boolean tjekPlads(double liter) {
         return hentOpbrugtKapacitet() + liter <= kapacitet;
     }
+    public Destillat getDestillat() {
+        return destillat;
+    }
 
     public double hentOpbrugtKapacitet() {
         return destillat.hentTotalMaengde();

@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 import model.application.Medarbejder;
 
 public class OpretMedarbejderVindue extends Stage {
-    private Label lblId = new Label("ID: ");
-    private TextField txfId = new TextField();
     private Label lblNavn = new Label("Navn: ");
     private TextField txfNavn = new TextField();
     private Label lblTlfNr = new Label("Tlf.nr: ");
@@ -46,23 +44,16 @@ public class OpretMedarbejderVindue extends Stage {
         pane.setVgap(10);
         pane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
 
-        lblId.setTextFill(Color.BURLYWOOD);
         lblNavn.setTextFill(Color.BURLYWOOD);
         lblTlfNr.setTextFill(Color.BURLYWOOD);
 
-        pane.add(lblId, 0, 2, 2, 1);
-        pane.add(txfId, 2, 2, 2, 1);
-        txfId.setMaxWidth(175);
-        pane.setHalignment(txfId, HPos.CENTER);
-        txfId.setText(Medarbejder.getTotalAntal() + "");
-
-        pane.add(lblNavn, 0, 3, 2, 1);
-        pane.add(txfNavn, 2, 3, 2, 1);
+        pane.add(lblNavn, 0, 2, 2, 1);
+        pane.add(txfNavn, 2, 2, 2, 1);
         txfNavn.setMaxWidth(175);
         pane.setHalignment(txfNavn, HPos.CENTER);
 
-        pane.add(lblTlfNr, 0, 4, 2, 1);
-        pane.add(txfTlfNr, 2, 4, 2, 1);
+        pane.add(lblTlfNr, 0, 3, 2, 1);
+        pane.add(txfTlfNr, 2, 3, 2, 1);
         txfTlfNr.setMaxWidth(175);
         pane.setHalignment(txfTlfNr, HPos.CENTER);
 
