@@ -21,6 +21,7 @@ public class StartVindue extends Application {
     private OpretFadVindue opretFadVindue;
     private OpretDestilleringsTapningsVindue opretDestilleringsTapningsVindue;
     private OpretWhiskydestilleringsVindue opretWhiskydestilleringsVindue;
+    private OpretWhiskyTapningsVindue opretWhiskyTapningsVindue;
     private SoegningsVindue soegningsVindue;
     private Button btnOpretMaltning = new Button("Opret maltning");
     private Button btnOpretWhiskyDestillering = new Button("Opret whiskydestillering");

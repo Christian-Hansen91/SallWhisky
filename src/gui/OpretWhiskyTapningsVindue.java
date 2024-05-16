@@ -10,10 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.application.Destillat;
-import model.application.Lager;
-import model.application.VaeskeTilWhisky;
-import model.application.Whiskydestillering;
+import model.application.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -172,15 +169,14 @@ public class OpretWhiskyTapningsVindue extends Stage {
 
     private void gemDestillatAction() {
         antalFlakserForAtTappe();
-        String kommentar = txfBeskrivelse.getText().trim();
-        LocalDate localDate = dato.getValue();
+        String beskrivelse = txfBeskrivelse.getText().trim();
+        LocalDate datoForTapning = dato.getValue();
         String navn = txfNavn.getText().trim();
         double flaskeStr = Double.parseDouble((cbKapacitet.getSelectionModel().getSelectedItem()));
         double vandTilfoejet = Double.parseDouble(txfVandTilfoejet.getText().trim());
         double alcoholprocent = Double.parseDouble(txfAlcoholprocent.getText().trim());
-
-        //TODO mangler lager
-        cbLager.getValue().addLagerenhedAt(stringToInts(), lagerenhed);
+        Whisky whisky = new Whisky(datoForTapning, navn, beskrivelse,flaskeStr, vandTilfoejet, alcoholprocent);
+        cbLager.getValue().addLagerenhedAt(stringToInts(), whisky);
 
         //destillat = whiskydestillering.opretDestillat(whiskydestillering1);
     }
@@ -203,5 +199,23 @@ public class OpretWhiskyTapningsVindue extends Stage {
         plads.add(pladsReol);
         plads.add(pladsHylde);
         return plads;
+    }
+    public String whiskyBetegnelse(){
+        boolean sammeMalt=false;
+        for (int i = 0; i <listVaeskeTilWhiskyAdded.size() ; i++) {
+            //Maltning currentMaltning = listVaeskeTilWhiskyAdded.get(i).getDestillat()...
+            //listVaeskeTilWhiskyAdded
+        }
+        String betegnelse = null;
+        if(listVaeskeTilWhiskyAdded.size()==1 && Double.parseDouble(txfVandTilfoejet.getText())==0){
+            betegnelse="Cask strength";
+        }
+        else if(listVaeskeTilWhiskyAdded.size()==1){
+            betegnelse="Sinle cask";
+        }
+        //else if()
+        //else
+
+        return betegnelse;
     }
 }

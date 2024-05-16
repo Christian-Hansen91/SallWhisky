@@ -4,7 +4,8 @@ import java.time.LocalDate;
 
 public class Whisky implements Lagerenhed{
     private LocalDate dato;
-    private static int nr;
+    private int nr;
+    private static int totalAntal;
     private String navn;
     private String beskrivelse;
     private double flaskeStr;
@@ -14,7 +15,9 @@ public class Whisky implements Lagerenhed{
     private Lager lager;
 
     public Whisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
-                  double vandTilfoejet, double alkoholprocent, Lager lager[][]) {
+                  double vandTilfoejet, double alkoholprocent) {
+        this.totalAntal++;
+        this.nr=totalAntal;
         this.dato = dato;
         this.navn = navn;
         this.beskrivelse = beskrivelse;
@@ -27,7 +30,7 @@ public class Whisky implements Lagerenhed{
         return dato;
     }
 
-    public static int getNr() {
+    public int getNr() {
         return nr;
     }
 
