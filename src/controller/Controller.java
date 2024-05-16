@@ -4,7 +4,9 @@ import model.application.*;
 import storage.Storage;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     public static Medarbejder opretMedarbejder(String navn, int tlfNr) {
@@ -37,7 +39,7 @@ public class Controller {
     }
     public static Whisky opretWhisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
                                      double vandTilfoejet, double alkoholprocent, Lager lager[][]) {
-        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, lager);
+        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent);
         Storage.addWhisky(whisky);
         return whisky;
     }
@@ -54,6 +56,7 @@ public class Controller {
     }
     public static Destillat opretDestillat(Fad fad){
         Destillat destillat = new Destillat(fad);
+        Storage.addDestillat(destillat);
         return destillat;
     }
 
@@ -106,4 +109,71 @@ public class Controller {
     public static void addLager(Lager lager) { Storage.addLager(lager);
     }
 
+    public static ArrayList<Whisky> soegWhiskyBeskrivelse(String beskrivelse) {
+        ArrayList<Whisky> alleWhiskyer = Storage.getWhiskyer();
+        ArrayList<Whisky> whiskyer = new ArrayList<>();
+
+        if (!beskrivelse.isEmpty()) {
+            for (Whisky whisky : alleWhiskyer) {
+                if (whisky.getBeskrivelse().toLowerCase().contains(beskrivelse.toLowerCase())) {
+                    whiskyer.add(whisky);
+                }
+            }
+        }
+
+        return whiskyer;
+    }
+
+    public static ArrayList<Whisky> soegWhiskyId(int nr) {
+        ArrayList<Whisky> alleWhiskyer = Storage.getWhiskyer();
+        ArrayList<Whisky> whiskyer = new ArrayList<>();
+
+        if (nr != 0) {
+            for (Whisky whisky : alleWhiskyer) {
+                if (whisky.getNr() == nr) {
+                    whiskyer.add(whisky);
+                }
+            }
+        }
+
+        return whiskyer;
+    }
+
+    public static ArrayList<Destillat> soegDestillatKommentar(String kommentar) {
+        ArrayList<Destillat> destillater = new ArrayList<>();
+        if (!kommentar.isEmpty()) {
+            for (Destillat destillat : Storage.getDestillater()) {
+                if (destillat.getKommentar().contains(kommentar)) {
+                    destillater.add(destillat);
+                }
+            }
+        }
+
+        return destillater;
+    }
+    public static ArrayList<Destillat> soegDestillatId(int id) {
+        ArrayList<Destillat> destillater = new ArrayList<>();
+        for (Destillat destillat : Storage.getDestillater()) {
+            if (destillat.getId() == id) {
+                destillater.add(destillat);
+            }
+        }
+
+        return destillater;
+    }
+
+    public static List<Destillat> fjernUnderTre(List<Destillat> alleDestillat) {
+        ArrayList<Destillat> gamleDestillater = new ArrayList<>();
+        for (Destillat destillat : alleDestillat) {
+            if (ChronoUnit.YEARS.between(destillat.getDato(),LocalDate.now()) >= 3) {
+                gamleDestillater.add(destillat);
+            }
+        }
+
+        return gamleDestillater;
+    }
+
+    public static boolean lagerpladsLedig(Lager lager, int reol, int hylde) {
+        return lager.lagerpladsLedig(reol, hylde);
+    }
 }

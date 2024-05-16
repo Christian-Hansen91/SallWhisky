@@ -12,6 +12,7 @@ public class Storage {
     private static ArrayList<Gindestillering> gindestilleringer = new ArrayList<>();
     private static ArrayList<Whisky> whiskyer = new ArrayList<>();
     private static ArrayList<Lager> lagre = new ArrayList<>();
+    private static ArrayList<Destillat> destillater = new ArrayList<>();
 
 
     public static ArrayList<Whisky> getWhiskyer() {
@@ -36,6 +37,9 @@ public class Storage {
     public static ArrayList<Lager> getLagre() {
         return new ArrayList<>(lagre);
     }
+    public static ArrayList<Destillat> getDestillater() {
+        return new ArrayList<>(destillater);
+    }
 
 
     public static void addGindestillering(Gindestillering gindestillering) {
@@ -58,5 +62,8 @@ public class Storage {
     }
     public static void addLager(Lager lager) {
         lagre.add(lager);
+    }
+    public static void addDestillat(Destillat destillat) {
+        destillater.add(destillat);
     }
 }

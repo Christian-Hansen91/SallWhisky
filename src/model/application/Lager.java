@@ -33,8 +33,8 @@ public class Lager {
         reolliste[reolliste.length - 1] = new Lagerenhed[antalHylder];
     }
 
-    public void addLagerenhedAt(ArrayList<Integer> plads, Lagerenhed lagerenhed) {
-        reolliste[plads.get(0)][plads.get(1)] = lagerenhed;
+    public void addLagerenhedAt(int reol, int hylde, Lagerenhed lagerenhed) {
+        reolliste[reol][hylde] = lagerenhed;
     }
 
     public Lagerenhed getLagerenhedAt(int row, int column) {
@@ -48,5 +48,9 @@ public class Lager {
     public Lagerenhed[][] getReolliste() {
         Lagerenhed[][] reolliste1 = reolliste;
         return reolliste1;
+    }
+
+    public boolean lagerpladsLedig(int reol, int hylde) {
+        return reolliste[reol][hylde] == null;
     }
 }

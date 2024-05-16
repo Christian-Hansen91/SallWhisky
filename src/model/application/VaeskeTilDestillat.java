@@ -4,12 +4,12 @@ import java.time.LocalDate;
 
 public class VaeskeTilDestillat {
     private Whiskydestillering whiskydestillering;
-    private Destillat destillat;
+    private Whisky whisky;
     private LocalDate dato;
     private double maengde;
     private String kommentar;
 
-    VaeskeTilDestillat(double maengde, Whiskydestillering whiskydestillering, String kommentar) {
+    VaeskeTilDestillat(double maengde, Whiskydestillering whiskydestillering) {
         this.maengde = maengde;
         this.whiskydestillering = whiskydestillering;
         this.dato = LocalDate.now();
@@ -18,6 +18,11 @@ public class VaeskeTilDestillat {
     public double getMaengde() {
         return maengde;
     }
+
+    public Whiskydestillering getWhiskydestillering() {
+        return whiskydestillering;
+    }
+
     @Override
     public String toString() {
         return "Tapning: " + "\n" +

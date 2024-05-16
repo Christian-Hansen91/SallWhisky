@@ -18,7 +18,7 @@ public class Destillat {
         Destillat.totalAntal++;
         this.id = totalAntal;
         this.dato = LocalDate.now();
-        this.kommentar = kommentar;
+        this.kommentar = "";
         this.fad = fad;
         fad.saetDestillat(this);
     }
@@ -63,6 +63,11 @@ public class Destillat {
         return id;
     }
 
+    public List<VaeskeTilDestillat> getVaeskeTilDestillater() {
+        List<VaeskeTilDestillat> vaeskeTilDestillater = this.vaeskeTilDestillater;
+        return vaeskeTilDestillater;
+    }
+
     @Override
     public String toString() {
         return "Destillat, ID: " + id + "\n" +
@@ -72,5 +77,16 @@ public class Destillat {
                 "Fad: " + fad + "\n" +
                 "Kommentar: " + kommentar + "\n" +
                 "Angel share: " + angelShare + "\n";
+    }
+
+    public String getKommentar() {
+        return kommentar;
+    }
+
+    public LocalDate getDato() {
+        return dato;
+    }
+    public void setDato(LocalDate dato) {
+        this.dato = dato;
     }
 }

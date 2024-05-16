@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import model.application.Destillat;
 import model.application.Lager;
 import model.application.VaeskeTilWhisky;
+import model.application.Whiskydestillering;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -49,6 +50,8 @@ public class OpretWhiskyVindue extends Stage {
     private Label lbl1 = new Label("Vælg destillat(er)");
     private Label lbl2 = new Label("Lav din whisky");
     private Label lbl3 = new Label("Gem din whisky");
+    private Lager valgtLager;
+    private int reol, hylde;
 
     public OpretWhiskyVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);
@@ -158,6 +161,16 @@ public class OpretWhiskyVindue extends Stage {
         updateLvLedigeLagerpladser();
         cbLager.setOnAction(event -> updateLvLedigeLagerpladser());
 
+        //christians temp lagerknapværk
+        Button btnVaelgLager = new Button("Vælg lager");
+        pane.add(btnVaelgLager,0,10);
+        btnVaelgLager.setOnAction(e -> vaelgLager());
+    }
+    private void vaelgLager() {
+        LagerVindue lagerVindue = new LagerVindue(this);
+        lagerVindue.showAndWait();
+    }
+
         pane.add(btnOpretWhisky, 4, 8, 2, 1);
         pane.setHalignment(btnOpretWhisky, HPos.RIGHT);
         btnOpretWhisky.setOnAction(event -> gemWhiskyAction());
@@ -228,5 +241,12 @@ public class OpretWhiskyVindue extends Stage {
         plads.add(pladsReol);
         plads.add(pladsHylde);
         return plads;
+    }
+    public void setValgtLager(Lager lager) {
+        this.valgtLager = lager;
+    }
+    public void setValgtReolHylde(int reol, int hylde) {
+        this.reol = reol;
+        this.hylde = hylde;
     }
 }

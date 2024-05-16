@@ -2,7 +2,7 @@ package model.application;
 
 import java.time.LocalDate;
 
-public class Fad {
+public class Fad implements Lagerenhed{
     private static int totalAntal;
     private int id;
     private LocalDate indkoebsdato;
@@ -26,7 +26,7 @@ public class Fad {
     }
 
     public void saetDestillat(Destillat destillat) {
-        this.destillat = destillat;
+        this.destillat = this.destillat;
     }
 
     public boolean tjekPlads(double liter) {

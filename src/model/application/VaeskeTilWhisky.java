@@ -20,5 +20,9 @@ public class VaeskeTilWhisky {
                 ", maengde=" + maengde +
                 '}';
     }
+
+    public Destillat getDestillat() {
+        return destillat;
+    }
 }
 
