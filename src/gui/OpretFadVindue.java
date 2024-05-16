@@ -16,8 +16,8 @@ import java.time.LocalDate;
 public class OpretFadVindue extends Stage {
     private Label lblFadtype = new Label("Fadtype: ");
     private TextField txfFadetype = new TextField();
-    private Label lblKapacitet = new Label("Kapacitet: ");
-    private ComboBox<String> cbKapacitet = new ComboBox<>();
+    private Label lblKapacitet = new Label("Kapacitet (L): ");
+    private ComboBox<Integer> cbKapacitet = new ComboBox<>();
     private Label lblLagerplads = new Label("Vælg en lagerplads");
     private ComboBox<Lager> cbLager = new ComboBox<>();
     private Lager lager = null;
@@ -72,8 +72,7 @@ public class OpretFadVindue extends Stage {
         pane.add(lblKapacitet, 0, 2);
         pane.add(cbKapacitet, 2, 2, 3, 1);
         cbKapacitet.setMaxWidth(150);
-        cbKapacitet.setValue("Vælg kapacitet");
-        cbKapacitet.getItems().addAll("30L", "60L", "90L", "120L", "150L", "200L");
+        cbKapacitet.getItems().addAll(30, 60, 90, 120, 150, 200);
         pane.setHalignment(cbKapacitet, HPos.RIGHT);
         pane.add(lblIndkoebsdato, 0, 3);
         pane.add(dpIndkoebsdato, 2, 3, 3, 1);
@@ -111,7 +110,7 @@ public class OpretFadVindue extends Stage {
 
     private void gemAction() {
         String fadtype = txfFadetype.getText().trim();
-        int kapacitet = Integer.parseInt((cbKapacitet.getSelectionModel().getSelectedItem()));
+        int kapacitet = (cbKapacitet.getSelectionModel().getSelectedItem());
         String ophavsland = txfOphavsland.getText().trim();
         String leverandoer = txfLeverandoer.getText().trim();
         LocalDate indkoebsdato = dpIndkoebsdato.getValue();
@@ -125,15 +124,12 @@ public class OpretFadVindue extends Stage {
             txfOphavsland.clear();
             txfLeverandoer.clear();
             txaHistorik.clear();
-            Controller.addFad(fad);
             this.hide();
             StartVindue.succesIOprettelseAlert();
         } else {
             StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette fadet.");
         }
 
-        if(!(lager1.equals(null))) {
-            //HJÆLP
-        }
+        //OBS MANGLER VALG AF LAGERPLADS. NU VÆLGER MAN BARE ET LAGER
     }
 }

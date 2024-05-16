@@ -62,6 +62,7 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         pane.setVgap(10);
         pane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
 
+        lblNewMakeNr.setTextFill(Color.BURLYWOOD);
         lblVaeskeMaengde.setTextFill(Color.BURLYWOOD);
         lblHead.setTextFill(Color.BURLYWOOD);
         lblHeart.setTextFill(Color.BURLYWOOD);
@@ -140,17 +141,9 @@ public class OpretWhiskydestilleringsVindue extends Stage {
 
             Controller.addWhiskydestillering(whiskydestillering);
             this.hide();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Whiskydestillering oprettet");
-            alert.setContentText("SUCCES! Der er oprettet en whiskydestillering");
-            alert.show();
+            StartVindue.succesIOprettelseAlert();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Fejl i opretning af whiskydestilleringen");
-            alert.setHeaderText("Manglende information");
-            alert.setContentText("Der mangler noget information for at oprette whiskydestilleringen.");
-            alert.show();
+            StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette whiskydestilleringen.");
         }
     }
 

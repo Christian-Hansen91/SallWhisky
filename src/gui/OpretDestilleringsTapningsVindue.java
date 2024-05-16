@@ -107,4 +107,11 @@ public class OpretDestilleringsTapningsVindue extends Stage {
         txaDestillat.setText(tapning.toString() + "\n");
     }*/
 
+     private void gemDestillatAction() {
+        LocalDate dato1 = dato.getValue();
+        String kommentar = txfKommentar.getText().trim();
+        Fad fad = cbFade.getSelectionModel().getSelectedItem();
+
+        //destillat = whiskydestillering.opretDestillat(fad);
+    }
 }

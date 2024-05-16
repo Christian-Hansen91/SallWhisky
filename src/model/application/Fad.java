@@ -42,6 +42,7 @@ public class Fad {
     public static int getTotalAntal() {
         return totalAntal;
     }
+
     @Override
     public String toString() {
         return "Fad, ID: " + id + "\n" +

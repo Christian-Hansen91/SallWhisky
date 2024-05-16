@@ -21,7 +21,7 @@ public class StartVindue extends Application {
     private OpretFadVindue opretFadVindue;
     private OpretDestilleringsTapningsVindue opretDestilleringsTapningsVindue;
     private OpretWhiskydestilleringsVindue opretWhiskydestilleringsVindue;
-    private OpretWhiskyTapningsVindue opretWhiskyTapningsVindue;
+    private SoegningsVindue soegningsVindue;
     private Button btnOpretMaltning = new Button("Opret maltning");
     private Button btnOpretWhiskyDestillering = new Button("Opret whiskydestillering");
     private Button btnOpretGinDestillering = new Button("Opret gindestillering");
@@ -36,6 +36,7 @@ public class StartVindue extends Application {
     private Medarbejder medarbejder = null;
     private Label lblMedarbejder = new Label("Medarbejder: ");
     private Stage stage;
+    private Button btnSoeg = new Button("Søg");
 
     public void start(Stage stage) throws Exception {
         this.stage = stage;
@@ -93,6 +94,8 @@ public class StartVindue extends Application {
         pane.setHalignment(btnOpretDestilleringsTapning, HPos.CENTER);
         pane.add(btnOpretWhiskyTapning, 29, 7, 2, 1);
         pane.setHalignment(btnOpretWhiskyTapning, HPos.CENTER);
+        pane.add(btnSoeg, 30, 8);
+        pane.setHalignment(btnSoeg, HPos.RIGHT);
 
         btnLogInd.setOnAction(event -> logIndAction());
         btnOpretMedarbejder.setOnAction(event -> opretMedarbejderAction());
@@ -101,12 +104,16 @@ public class StartVindue extends Application {
         btnOpretFad.setOnAction(event -> opretFadAction());
         btnOpretDestilleringsTapning.setOnAction(event -> opretDestilleringsTapningAction());
         btnOpretWhiskyDestillering.setOnAction(event -> opretWhiskydestilleringsAction());
+        btnSoeg.setOnAction(event -> soegningAction());
         btnOpretWhiskyTapning.setOnAction(event -> opretWhiskyTapningAction());
 
 
     }
 
-
+    private void soegningAction() {
+        soegningsVindue = new SoegningsVindue();
+        soegningsVindue.showAndWait();
+    }
 
     private void txfMedarbejderAction() {
         txfMedarbejder.setText(medarbejder.getNavn());
