@@ -2,7 +2,7 @@ package model.application;
 
 import java.time.LocalDate;
 
-public class Whisky implements Lagerenhed {
+public class Whisky implements Lagerenhed{
     private LocalDate dato;
     private static int totalAntal;
     private int nr;
@@ -12,6 +12,7 @@ public class Whisky implements Lagerenhed {
     private double vandTilfoejet;
     private String whiskyBetegnelse;
     private double alkoholprocent;
+    private Lager lager;
 
     public Whisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
                   double vandTilfoejet, double alkoholprocent) {

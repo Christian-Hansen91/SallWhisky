@@ -25,16 +25,15 @@ public class App {
         Maltning maltning2 = Controller.opretMaltning(500.0, "Stairway", "Mosevang");
         Maltning maltning3 = Controller.opretMaltning(600.0, "Irina", "Mosevang", "Tørv");
 
+
+
         Fad fad1 = Controller.opretFad(LocalDate.of(2023, 03, 10), "EX-Bourbon", 60, "USA", "American Whisky Company", "Bourbon");
         Fad fad2 = Controller.opretFad(LocalDate.of(2023, 8, 05), "EX-Oloroso", 120, "Spanien", "Espania Whisky", "Cherry, 3. lagring");
 
         Whiskydestillering whiskydestillering1 = Controller.opretWhiskydestillering(maltning1, LocalDate.of(2024, 5, 1), LocalDate.of(2024, 5, 2), 10.0, 22.0, 100.0, 28.0, "OK", 52.5, medarbejder1);
         Whiskydestillering whiskydestillering2 = Controller.opretWhiskydestillering(maltning2, LocalDate.of(2024, 4, 16), LocalDate.of(2024, 4, 16), 30.0, 8.0, 100.0, 25.0, "OBS, tåler fortynding", 59.9, medarbejder2);
 
-        Destillat destillat1 = new Destillat(fad1);
-        destillat1.saetKommentar("test af destillatsøgning");
-        Destillat destillat2 = new Destillat(fad2);
-        destillat2.saetKommentar("højhus");
-        Whisky whisky1 = Controller.opretWhisky(LocalDate.now(),"Whisky Number Five","Whisky med et twist af Latinamerika",0.7,0,60);
+        Destillat destilla1 = Controller.opretDestillat(fad1);
+        destilla1.tilfoejTapning(whiskydestillering1.opretVaeskeTilDestillat(100, ""));
     }
 }

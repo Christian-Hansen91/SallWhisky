@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.application.Whisky;
+import model.application.Destillat;
 import model.application.Whiskydestillering;
 import model.application.Fad;
 import model.application.VaeskeTilDestillat;
@@ -16,7 +16,6 @@ import model.application.VaeskeTilDestillat;
 import java.time.LocalDate;
 
 public class OpretDestilleringsTapningsVindue extends Stage {
-    private Label lblId = new Label("ID: ");
     private DatePicker dato = new DatePicker(LocalDate.now());
     private ComboBox<Whiskydestillering> cbDestilleringer = new ComboBox<>();
     private ComboBox<Fad> cbFade = new ComboBox<>();
@@ -30,8 +29,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
     private Label lblTilfoejTilFad = new Label("Tilføj til fad:");
     private Label lblMaengdeILiter = new Label("Mængde (L): ");
     private TextField txfMaengdeILiter = new TextField();
-    private TextField txfId = new TextField();
-    private Whisky whisky = null;
+    private Destillat destillat = null;
     private VaeskeTilDestillat vaeskeTilDestillat = null;
     private Whiskydestillering whiskydestillering = null;
 
@@ -55,17 +53,11 @@ public class OpretDestilleringsTapningsVindue extends Stage {
         pane.setVgap(10);
         pane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
 
-        lblId.setTextFill(Color.BURLYWOOD);
         lblKommentar.setTextFill(Color.BURLYWOOD);
         lblDestillat.setTextFill(Color.BURLYWOOD);
         lblTapning.setTextFill(Color.BURLYWOOD);
         lblTilfoejTilFad.setTextFill(Color.BURLYWOOD);
         lblMaengdeILiter.setTextFill(Color.BURLYWOOD);
-
-        pane.add(lblId, 15, 2, 2, 1);
-        pane.add(txfId, 15, 2, 2, 1);
-        txfId.setMaxWidth(175);
-        pane.setHalignment(txfId, HPos.RIGHT);
 
         pane.add(lblTapning, 0, 1);
         pane.setHalignment(lblTapning, HPos.CENTER);
@@ -88,14 +80,14 @@ public class OpretDestilleringsTapningsVindue extends Stage {
 
         pane.add(lblDestillat, 15, 1, 2, 1);
         pane.setHalignment(lblDestillat, HPos.CENTER);
-        pane.add(txaDestillat, 15, 3, 2, 5);
+        pane.add(txaDestillat, 15, 2, 2, 5);
         pane.setHalignment(txaDestillat, HPos.CENTER);
         txaDestillat.setMaxWidth(200);
         txaDestillat.setMinHeight(100);
 
-        pane.add(lblTilfoejTilFad, 15, 8, 2, 1);
+        pane.add(lblTilfoejTilFad, 15, 7, 2, 1);
         pane.setHalignment(lblTilfoejTilFad, HPos.RIGHT);
-        pane.add(cbFade, 15, 9, 2, 1);
+        pane.add(cbFade, 15, 8, 2, 1);
         cbFade.setMaxWidth(200);
         cbFade.getItems().addAll(Controller.getFade());
 

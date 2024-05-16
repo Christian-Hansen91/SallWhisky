@@ -57,6 +57,7 @@
     </orderEntry>
 
     <orderEntry type="library" exported="" name="javafx" level="application" />
+    <orderEntry type="library" exported="" name="javafx.base" level="application" />
 
   </component>
 </module>
