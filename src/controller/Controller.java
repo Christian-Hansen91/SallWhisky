@@ -172,4 +172,8 @@ public class Controller {
 
         return gamleDestillater;
     }
+
+    public static boolean lagerpladsLedig(Lager lager, int reol, int hylde) {
+        return lager.lagerpladsLedig(reol, hylde);
+    }
 }

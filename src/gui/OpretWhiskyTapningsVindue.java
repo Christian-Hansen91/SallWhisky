@@ -51,6 +51,8 @@ public class OpretWhiskyTapningsVindue extends Stage {
     private ListView<String> lvLedigeLagerPladser = new ListView<>();
     private ComboBox<Lager> cbLager = new ComboBox<>();
     private ObservableList<Lager> listLager = FXCollections.observableArrayList();
+    private Lager valgtLager;
+    private int reol, hylde;
 
 
     public OpretWhiskyTapningsVindue(String title, Stage owner, StartVindue startVindue) {
@@ -135,6 +137,15 @@ public class OpretWhiskyTapningsVindue extends Stage {
         //TODO herunder skal det laves, så man får lagret fra comboboksen
         updateLvLedigeLagerpladser();
         cbLager.setOnAction(event -> updateLvLedigeLagerpladser());
+
+        //christians temp lagerknapværk
+        Button btnVaelgLager = new Button("Vælg lager");
+        pane.add(btnVaelgLager,0,10);
+        btnVaelgLager.setOnAction(e -> vaelgLager());
+    }
+    private void vaelgLager() {
+        LagerVindue lagerVindue = new LagerVindue(this);
+        lagerVindue.showAndWait();
     }
 
 
@@ -203,5 +214,12 @@ public class OpretWhiskyTapningsVindue extends Stage {
         plads.add(pladsReol);
         plads.add(pladsHylde);
         return plads;
+    }
+    public void setValgtLager(Lager lager) {
+        this.valgtLager = lager;
+    }
+    public void setValgtReolHylde(int reol, int hylde) {
+        this.reol = reol;
+        this.hylde = hylde;
     }
 }

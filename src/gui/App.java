@@ -40,5 +40,8 @@ public class App {
         destillat2.tilfoejTapning(whiskydestillering2.opretVaeskeTilDestillat(50));
         destillat2.saetKommentar("Special Edition");
         destillat2.setDato(LocalDate.of(2018,1,2));
+        lager1.addLagerenhedAt(2, 1, fad2);
+        lager1.addReol(6);
+
     }
 }
