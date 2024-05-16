@@ -56,6 +56,7 @@ public class Controller {
     public static ArrayList<Medarbejder> getMedarbejdere() {
         return Storage.getMedarbejdere();
     }
+
     public static ArrayList<Whisky> getWhiskyer() {
         return Storage.getWhiskyer();
     }
@@ -76,6 +77,13 @@ public class Controller {
 
     public static ArrayList<Lager> getLagre() {
         return Storage.getLagre();
+    }
+    public static ArrayList<Destillat> getDestillater() {
+        ArrayList<Destillat> destillater = new ArrayList<>();
+        for (int i = 0; i < getFade().size(); i++) {
+            destillater.addAll(getFade().get(i).getDestillater());
+        }
+        return destillater;
     }
 
     public static void addMedarbejder(Medarbejder medarbejder) { Storage.addMedarbejder(medarbejder);

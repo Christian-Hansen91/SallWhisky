@@ -21,6 +21,7 @@ public class StartVindue extends Application {
     private OpretFadVindue opretFadVindue;
     private OpretDestilleringsTapningsVindue opretDestilleringsTapningsVindue;
     private OpretWhiskydestilleringsVindue opretWhiskydestilleringsVindue;
+    private OpretWhiskyTapningsVindue opretWhiskyTapningsVindue;
     private Button btnOpretMaltning = new Button("Opret maltning");
     private Button btnOpretWhiskyDestillering = new Button("Opret whiskydestillering");
     private Button btnOpretGinDestillering = new Button("Opret gindestillering");
@@ -100,8 +101,12 @@ public class StartVindue extends Application {
         btnOpretFad.setOnAction(event -> opretFadAction());
         btnOpretDestilleringsTapning.setOnAction(event -> opretDestilleringsTapningAction());
         btnOpretWhiskyDestillering.setOnAction(event -> opretWhiskydestilleringsAction());
+        btnOpretWhiskyTapning.setOnAction(event -> opretWhiskyTapningAction());
+
 
     }
+
+
 
     private void txfMedarbejderAction() {
         txfMedarbejder.setText(medarbejder.getNavn());
@@ -142,6 +147,10 @@ public class StartVindue extends Application {
     private void opretDestilleringsTapningAction() {
         opretDestilleringsTapningsVindue = new OpretDestilleringsTapningsVindue("Opret destilleringstapning", stage, this);
         opretDestilleringsTapningsVindue.showAndWait();
+    }
+    private void opretWhiskyTapningAction() {
+        opretWhiskyTapningsVindue = new OpretWhiskyTapningsVindue("Opret whiskytapning", stage, this);
+        opretWhiskyTapningsVindue.showAndWait();
     }
 
     public void setMedarbejder(Medarbejder medarbejder) {
