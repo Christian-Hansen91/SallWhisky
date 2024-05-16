@@ -165,15 +165,14 @@ public class OpretWhiskyVindue extends Stage {
         Button btnVaelgLager = new Button("Vælg lager");
         pane.add(btnVaelgLager,0,10);
         btnVaelgLager.setOnAction(e -> vaelgLager());
-    }
-    private void vaelgLager() {
-        LagerVindue lagerVindue = new LagerVindue(this);
-        lagerVindue.showAndWait();
-    }
 
         pane.add(btnOpretWhisky, 4, 8, 2, 1);
         pane.setHalignment(btnOpretWhisky, HPos.RIGHT);
         btnOpretWhisky.setOnAction(event -> gemWhiskyAction());
+    }
+    private void vaelgLager() {
+        LagerVindue lagerVindue = new LagerVindue(this);
+        lagerVindue.showAndWait();
     }
 
     private void setToemDestilat() {

@@ -60,16 +60,21 @@ public class StartVindue extends Application {
         pane.setVgap(10);
         pane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
 
-        Label lblVelkommen = new Label("Velkommen til Sall Whisky Distillery");
+        Label lblVelkommen = new Label("     Velkommen til Sall Whisky Distillery    ");
         pane.setHalignment(lblVelkommen, HPos.CENTER);
         lblVelkommen.setTextFill(Color.BURLYWOOD);
-        pane.add(lblMedarbejder, 0, 1, 32, 1);
+        pane.add(lblVelkommen, 2, 0, 2, 1);
+
+        pane.add(lblMedarbejder, 0, 1, 2, 1);
         lblMedarbejder.setTextFill(Color.BURLYWOOD);
-        pane.add(btnLogInd, 0, 0, 32, 1);
+        pane.add(btnSoeg, 5, 1);
+        pane.setHalignment(btnSoeg, HPos.RIGHT);
+
+        pane.add(btnLogInd, 0, 0, 2, 1);
         pane.setHalignment(btnLogInd, HPos.LEFT);
-        pane.add(btnOpretMedarbejder, 29, 0, 2, 1);
+        pane.add(btnOpretMedarbejder, 4, 0, 2, 1);
         pane.setHalignment(btnOpretMedarbejder, HPos.RIGHT);
-        pane.add(lblVelkommen, 1, 0, 32, 1);
+
         btnOpretWhiskyDestillering.setMinWidth(160);
         btnOpretGinDestillering.setMinWidth(160);
         btnOpretMaltning.setMinWidth(160);
@@ -80,23 +85,22 @@ public class StartVindue extends Application {
         btnOpretOmhaeldning.setMinWidth(160);
 
         pane.add(btnOpretWhiskyDestillering, 0, 4, 2, 1);
-        pane.setHalignment(btnOpretWhiskyDestillering, HPos.CENTER);
-        pane.add(btnOpretGinDestillering, 29, 4, 2, 1);
-        pane.setHalignment(btnOpretGinDestillering, HPos.CENTER);
+        pane.setHalignment(btnOpretWhiskyDestillering, HPos.LEFT);
+        pane.add(btnOpretGinDestillering, 4, 4, 2, 1);
+        pane.setHalignment(btnOpretGinDestillering, HPos.RIGHT);
         pane.add(btnOpretMaltning, 0, 5, 2, 1);
-        pane.setHalignment(btnOpretMaltning, HPos.CENTER);
-        pane.add(btnOpretFad, 29, 5, 2, 1);
-        pane.setHalignment(btnOpretFad, HPos.CENTER);
+        pane.setHalignment(btnOpretMaltning, HPos.LEFT);
+        pane.add(btnOpretFad, 4, 5, 2, 1);
+        pane.setHalignment(btnOpretFad, HPos.RIGHT);
+
         pane.add(btnOpretLager, 0, 6, 2, 1);
-        pane.setHalignment(btnOpretLager, HPos.CENTER);
-        pane.add(btnOpretOmhaeldning, 29, 6, 2, 1);
-        pane.setHalignment(btnOpretOmhaeldning, HPos.CENTER);
+        pane.setHalignment(btnOpretLager, HPos.LEFT);
+        pane.add(btnOpretOmhaeldning, 4, 6, 2, 1);
+        pane.setHalignment(btnOpretOmhaeldning, HPos.RIGHT);
         pane.add(btnOpretDestilleringsTapning, 0, 7, 2, 1);
-        pane.setHalignment(btnOpretDestilleringsTapning, HPos.CENTER);
-        pane.add(btnOpretWhiskyTapning, 29, 7, 2, 1);
-        pane.setHalignment(btnOpretWhiskyTapning, HPos.CENTER);
-        pane.add(btnSoeg, 30, 8);
-        pane.setHalignment(btnSoeg, HPos.RIGHT);
+        pane.setHalignment(btnOpretDestilleringsTapning, HPos.LEFT);
+        pane.add(btnOpretWhiskyTapning, 4, 7, 2, 1);
+        pane.setHalignment(btnOpretWhiskyTapning, HPos.RIGHT);
 
         btnLogInd.setOnAction(event -> logIndAction());
         btnOpretMedarbejder.setOnAction(event -> opretMedarbejderAction());

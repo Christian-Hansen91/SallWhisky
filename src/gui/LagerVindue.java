@@ -8,9 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import model.application.Lager;
 import model.application.Lagerenhed;
 
@@ -20,14 +18,14 @@ public class LagerVindue extends Stage {
     private final String lagerpladsLedig = " -fx-color: green;" + overallStyle;
     private final String lagerpladsOptaget = " -fx-color: red;" + overallStyle;
     private int laengde, bredde;
-    private OpretWhiskyTapningsVindue whiskyTapningsVindue;
+    private OpretWhiskyVindue opretWhiskyVindue;
     private ComboBox<Lager> cbLager;
     private GridPane lagerPane;
     private int reol, hylde;
     private Label lblValg = new Label("");
 
-    public LagerVindue(OpretWhiskyTapningsVindue whiskyVindue) {
-        this.whiskyTapningsVindue = whiskyVindue;
+    public LagerVindue(OpretWhiskyVindue whiskyVindue) {
+        this.opretWhiskyVindue = whiskyVindue;
         setTitle("Vælg lager");
 
         setResizable(true);
@@ -82,7 +80,7 @@ public class LagerVindue extends Stage {
     }
 
     private void bekraeftAction() {
-        whiskyTapningsVindue.setValgtReolHylde(reol, hylde);
+        opretWhiskyVindue.setValgtReolHylde(reol, hylde);
         close();
     }
 
