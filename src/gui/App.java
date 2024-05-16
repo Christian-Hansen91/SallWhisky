@@ -33,7 +33,7 @@ public class App {
         Whiskydestillering whiskydestillering1 = Controller.opretWhiskydestillering(maltning1, LocalDate.of(2024, 5, 1), LocalDate.of(2024, 5, 2), 10.0, 22.0, 100.0, 28.0, "OK", 52.5, medarbejder1);
         Whiskydestillering whiskydestillering2 = Controller.opretWhiskydestillering(maltning2, LocalDate.of(2024, 4, 16), LocalDate.of(2024, 4, 16), 30.0, 8.0, 100.0, 25.0, "OBS, tåler fortynding", 59.9, medarbejder2);
 
-        Destillat destilla1 = whiskydestillering1.opretDestillat(fad1);
-        System.out.println(destilla1);
+        Destillat destilla1 = Controller.opretDestillat(fad1);
+        destilla1.tilfoejTapning(whiskydestillering1.opretVaeskeTilDestillat(100, ""));
     }
 }

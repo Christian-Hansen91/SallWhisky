@@ -1,6 +1,8 @@
 package gui;
 
 import controller.Controller;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -9,11 +11,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.Destillat;
-import model.application.Fad;
-import model.application.Tapning;
+import model.application.Lager;
+import model.application.VaeskeTilWhisky;
 import model.application.Whiskydestillering;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class OpretWhiskyTapningsVindue extends Stage {
     private DatePicker dato = new DatePicker(LocalDate.now());
@@ -24,7 +27,7 @@ public class OpretWhiskyTapningsVindue extends Stage {
     private Label lblNavn = new Label("Navn: ");
     private TextField txfNavn = new TextField();
     private Label lblDestillat = new Label("Destillat");
-    private TextArea txaDestillat = new TextArea();
+    private ListView lvVaeskeTilWhisky = new ListView();
     private Button btnOpretTapning = new Button("Opret tapning til whisky");
     private Label lblTapning = new Label("Tapning ");
     private Button btnOpretDestillat = new Button("Opret destillat");
@@ -34,7 +37,6 @@ public class OpretWhiskyTapningsVindue extends Stage {
     private Label lblMaengdeILiter = new Label("Mængde (L): ");
     private TextField txfMaengdeILiter = new TextField();
     private Destillat destillat = null;
-    private Tapning tapning = null;
     private Whiskydestillering whiskydestillering = null;
     private ComboBox<String> cbKapacitet = new ComboBox();
     private Label lblVandTilfoejet = new Label("Vand tilføjet (L): ");
@@ -42,7 +44,13 @@ public class OpretWhiskyTapningsVindue extends Stage {
     private Label lblAlcoholprocent = new Label("Alcoholprocent: ");
     private TextField txfAlcoholprocent = new TextField();
     private boolean toemDestilat = false;
-
+    private TextField txfToemDestilat = new TextField();
+    private ObservableList<VaeskeTilWhisky> listVaeskeTilWhiskyAdded = FXCollections.observableArrayList();
+    private ObservableList<Destillat> listDestillarier = FXCollections.observableArrayList();
+    private TextField txfantalFlasker = new TextField();
+    private ListView<String> lvLedigeLagerPladser = new ListView<>();
+    private ComboBox<Lager> cbLager = new ComboBox<>();
+    private ObservableList<Lager> listLager = FXCollections.observableArrayList();
 
 
     public OpretWhiskyTapningsVindue(String title, Stage owner, StartVindue startVindue) {
@@ -83,10 +91,10 @@ public class OpretWhiskyTapningsVindue extends Stage {
         cbDestilleringer.setMaxWidth(200);
         cbDestilleringer.getItems().addAll(Controller.getDestillater());
 
-
         pane.add(lblMaengdeILiter, 0, 2);
         pane.add(txfMaengdeILiter, 0, 3);
-        pane.add(txaDestillat,0,4);
+        pane.add(lvVaeskeTilWhisky, 0, 4);
+        pane.add(txfToemDestilat, 0, 8);
         pane.add(lblBeskrivelse, 1, 3);
         pane.add(txfBeskrivelse, 1, 4);
         pane.add(lblNavn, 1, 5);
@@ -104,51 +112,96 @@ public class OpretWhiskyTapningsVindue extends Stage {
         btnToemDestillat.setOnAction(event -> setToemDestilat());
 
 
-        pane.add(cbKapacitet, 15, 7, 3, 1);
+        pane.add(cbKapacitet, 2, 7, 3, 1);
         cbKapacitet.setMaxWidth(150);
         cbKapacitet.setValue("Vælg flasketype");
-        cbKapacitet.getItems().addAll("1", "2", "3");
+        cbKapacitet.getItems().addAll("0.5", "0.7", "1");
         pane.setHalignment(cbKapacitet, HPos.RIGHT);
 
-        pane.add(btnOpretDestillat, 15, 10, 2, 1);
+        pane.add(btnOpretDestillat, 2, 10, 2, 1);
         pane.setHalignment(btnOpretDestillat, HPos.RIGHT);
         btnOpretDestillat.setOnAction(event -> gemDestillatAction());
+
+        pane.add(txfantalFlasker, 2, 0);
+
+        pane.add(cbLager, 2, 2, 3, 1);
+        cbLager.setMaxWidth(150);
+        for (int i = 0; i < Controller.getLagre().size(); i++) {
+            listLager.add(Controller.getLagre().get(i));
+        }
+        cbLager.setItems(listLager);
+        cbLager.setValue(Controller.getLagre().get(0));
+        pane.add(lvLedigeLagerPladser, 2, 1);
+        //TODO herunder skal det laves, så man får lagret fra comboboksen
+        updateLvLedigeLagerpladser();
+        cbLager.setOnAction(event -> updateLvLedigeLagerpladser());
     }
+
 
     private void setToemDestilat() {
         this.toemDestilat = true;
-        //TODO indikater for at dette er valgt
+        txfToemDestilat.setText("Du tømmer destillatet");
     }
 
-    private double antalFlakserForAtTappe() {
-        System.out.println(0.7/0.7);
+    private void antalFlakserForAtTappe() {
         double antalFlasker = 0;
-        double meangdeLiter = Integer.parseInt(txfMaengdeILiter.getText());
-        double kapacitet = Integer.parseInt((cbKapacitet.getSelectionModel().getSelectedItem())) - Integer.parseInt(txfVandTilfoejet.getText());
-        antalFlasker =  meangdeLiter / kapacitet;
-        System.out.println(antalFlasker);
-        antalFlasker =  meangdeLiter % kapacitet;
-        System.out.println(antalFlasker);
-        return antalFlasker;
+        double meangdeLiter = 0;
+        for (int i = 0; i < listVaeskeTilWhiskyAdded.size(); i++) {
+            meangdeLiter += listVaeskeTilWhiskyAdded.get(i).getMaengde();
+        }
+        meangdeLiter += Double.parseDouble(txfVandTilfoejet.getText());
+        double kapacitet = Double.parseDouble((cbKapacitet.getSelectionModel().getSelectedItem()));
+        antalFlasker = meangdeLiter / kapacitet;
+        txfantalFlasker.setText("" + antalFlasker);
     }
 
     private void opretTapningTilWhiskyAction() {
-        double meangdeWhisky = Double.parseDouble(txfMaengdeILiter.getText());
+        double maengdeWhisky = Double.parseDouble(txfMaengdeILiter.getText());
         Destillat destillat = cbDestilleringer.getValue();
-        //tapning = destillat.opretTapning(destillat, Double.parseDouble(maengde), kommentar);
-        //todo her skal oprettes en tapning
-        destillat.tilfoejTapning(tapning);
-        txaDestillat.setText(tapning.toString());
-        if(toemDestilat==true){
-            //todo set angelshare på destilat
+        VaeskeTilWhisky vaeskeTilWhisky = destillat.opretVaeskeTilWhisky(maengdeWhisky);
+        listVaeskeTilWhiskyAdded.add(vaeskeTilWhisky);
+        listDestillarier.addAll(Controller.getDestillater());
+        lvVaeskeTilWhisky.setItems(listVaeskeTilWhiskyAdded);
+        cbDestilleringer.setItems(listDestillarier);
+        if (toemDestilat == true) {
+            destillat.saetAngelShare();
+            toemDestilat = false;
+            txfToemDestilat.clear();
         }
-
     }
 
     private void gemDestillatAction() {
+        antalFlakserForAtTappe();
         String kommentar = txfBeskrivelse.getText().trim();
-        Whiskydestillering whiskydestillering1 = cbFade.getSelectionModel().getSelectedItem();
+        LocalDate localDate = dato.getValue();
+        String navn = txfNavn.getText().trim();
+        double flaskeStr = Double.parseDouble((cbKapacitet.getSelectionModel().getSelectedItem()));
+        double vandTilfoejet = Double.parseDouble(txfVandTilfoejet.getText().trim());
+        double alcoholprocent = Double.parseDouble(txfAlcoholprocent.getText().trim());
+
+        //TODO mangler lager
+        cbLager.getValue().addLagerenhedAt(stringToInts(), lagerenhed);
 
         //destillat = whiskydestillering.opretDestillat(whiskydestillering1);
+    }
+
+    private void updateLvLedigeLagerpladser() {
+        ObservableList<String> listLedigeLagerPladser = FXCollections.observableArrayList();
+        for (int i = 0; i < cbLager.getValue().getReolliste().length; i++) {
+            for (int j = 0; j < cbLager.getValue().getReolliste()[i].length; j++) {
+                if (cbLager.getValue().getReolliste()[i][j] == null)
+                    listLedigeLagerPladser.add("Reol: " + (i + 1) + ", plads: " + (j + 1));
+            }
+        }
+        lvLedigeLagerPladser.setItems(listLedigeLagerPladser);
+    }
+
+    private ArrayList<Integer> stringToInts() {
+        ArrayList<Integer> plads = new ArrayList<>();
+        int pladsReol = Integer.parseInt(lvLedigeLagerPladser.getSelectionModel().getSelectedItem().substring(7))-1;
+        int pladsHylde = Integer.parseInt(lvLedigeLagerPladser.getSelectionModel().getSelectedItem().substring(17))-1;
+        plads.add(pladsReol);
+        plads.add(pladsHylde);
+        return plads;
     }
 }

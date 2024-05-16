@@ -36,8 +36,8 @@ public class Controller {
         return whiskydestillering;
     }
     public static Whisky opretWhisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
-                                     double vandTilfoejet, double alkoholprocent) {
-        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent);
+                                     double vandTilfoejet, double alkoholprocent, Lager lager[][]) {
+        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, lager);
         Storage.addWhisky(whisky);
         return whisky;
     }
@@ -52,6 +52,11 @@ public class Controller {
         Storage.addLager(lager);
         return lager;
     }
+    public static Destillat opretDestillat(Fad fad){
+        Destillat destillat = new Destillat(fad);
+        return destillat;
+    }
+
 
     public static ArrayList<Medarbejder> getMedarbejdere() {
         return Storage.getMedarbejdere();
@@ -71,6 +76,7 @@ public class Controller {
         return Storage.getFade();
     }
 
+
     public static ArrayList<Whiskydestillering> getWhiskydestilleringer() {
         return Storage.getWhiskydestilleringer();
     }
@@ -81,11 +87,10 @@ public class Controller {
     public static ArrayList<Destillat> getDestillater() {
         ArrayList<Destillat> destillater = new ArrayList<>();
         for (int i = 0; i < getFade().size(); i++) {
-            destillater.addAll(getFade().get(i).getDestillater());
+            destillater.add(getFade().get(i).getDestillat());
         }
         return destillater;
     }
-
     public static void addMedarbejder(Medarbejder medarbejder) { Storage.addMedarbejder(medarbejder);
     }
 
