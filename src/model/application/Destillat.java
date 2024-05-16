@@ -27,6 +27,7 @@ public class Destillat {
             tapninger.add(vaeskeTilDestillat);
         }
     }
+
     public double hentTotalMaengde() {
         double liter = 0;
         for (VaeskeTilDestillat vaeskeTilDestillat : tapninger) {
