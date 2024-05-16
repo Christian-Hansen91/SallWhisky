@@ -11,8 +11,6 @@ public class Destillat {
     private String kommentar;
     private List<VaeskeTilDestillat> tapninger = new ArrayList<>();
     private Fad fad;
-
-
     public Destillat(Fad fad) {
         Destillat.totalAntal++;
         this.id = totalAntal;
@@ -29,7 +27,6 @@ public class Destillat {
             tapninger.add(vaeskeTilDestillat);
         }
     }
-
     public double hentTotalMaengde() {
         double liter = 0;
         for (VaeskeTilDestillat vaeskeTilDestillat : tapninger) {

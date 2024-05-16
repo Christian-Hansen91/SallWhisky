@@ -101,7 +101,7 @@ public class OpretDestilleringsTapningsVindue extends Stage {
 
         pane.add(btnOpretDestillat, 15, 10, 2, 1);
         pane.setHalignment(btnOpretDestillat, HPos.RIGHT);
-        btnOpretDestillat.setOnAction(event -> gemDestillatAction());
+        //btnOpretDestillat.setOnAction(event -> gemDestillatAction());
     }
 
     /*private void opretTapningTilDestillatAction() {

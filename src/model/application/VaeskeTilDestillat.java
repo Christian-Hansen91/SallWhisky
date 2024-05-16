@@ -11,16 +11,13 @@ public class VaeskeTilDestillat {
 
     VaeskeTilDestillat(double maengde, Whiskydestillering whiskydestillering, String kommentar) {
         this.maengde = maengde;
-        destillat.tilfoejTapning(this);
         this.whiskydestillering = whiskydestillering;
         this.dato = LocalDate.now();
         this.kommentar = kommentar;
     }
-
     public double getMaengde() {
         return maengde;
     }
-
     @Override
     public String toString() {
         return "Tapning: " + "\n" +

@@ -29,22 +29,13 @@ public class Fad {
         this.destillat = destillat;
     }
 
-   /* public boolean tjekPlads(double liter) {
-        double nuvaerendeIndhold = 0;
-        if {
-            nuvaerendeIndhold += destillat.hentTotalMaengde();
-        }
-        return nuvaerendeIndhold + liter <= kapacitet;
+    public boolean tjekPlads(double liter) {
+        return hentOpbrugtKapacitet() + liter <= kapacitet;
     }
 
     public double hentOpbrugtKapacitet() {
-        double total = 0;
-        for (Destillat destillat : destillater) {
-            total += destillat.hentTotalMaengde();
-        }
-        return total;
-    }*/
-
+        return destillat.hentTotalMaengde();
+    }
     public static int getTotalAntal() {
         return totalAntal;
     }
@@ -57,5 +48,6 @@ public class Fad {
                 "Kapacitet: " + kapacitet + "\n" +
                 "Ophavsland: " + ophavsland +
                 ", leverandør: " + leverandoer + "\n" +
-                "Historik: " + historik + "\n";}
+                "Historik: " + historik + "\n";
+    }
 }
