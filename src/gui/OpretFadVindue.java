@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.Fad;
 import model.application.Lager;
+import model.application.Medarbejder;
 
 import java.time.LocalDate;
 
@@ -34,8 +35,11 @@ public class OpretFadVindue extends Stage {
     private Button btnGem = new Button("Gem");
     private Button btnAnnuller = new Button("Annuller");
     private Fad fad = null;
+    private Medarbejder medarbejder;
+    private StartVindue startVindue;
 
     public OpretFadVindue(String title, Stage owner, StartVindue startVindue) {
+        this.startVindue = startVindue;
         this.initOwner(owner);
 
         setTitle("Opret fad");
@@ -63,7 +67,6 @@ public class OpretFadVindue extends Stage {
         lblKapacitet.setTextFill(Color.BURLYWOOD);
         lblIndkoebsdato.setTextFill(Color.BURLYWOOD);
         lblLagerplads.setTextFill(Color.BURLYWOOD);
-
 
         pane.add(lblFadtype, 0, 1);
         pane.add(txfFadetype, 2, 1, 3, 1);
@@ -105,7 +108,12 @@ public class OpretFadVindue extends Stage {
         btnGem.setOnAction(event -> gemAction());
         pane.add(btnAnnuller, 26, 7);
         pane.setHalignment(btnAnnuller, HPos.RIGHT);
+        btnAnnuller.setOnAction(event -> annullerAction());
 
+    }
+
+    private void annullerAction() {
+        this.hide();
     }
 
     private void gemAction() {
@@ -116,9 +124,10 @@ public class OpretFadVindue extends Stage {
         LocalDate indkoebsdato = dpIndkoebsdato.getValue();
         String historik = txaHistorik.getText().trim();
         Lager lager1 = cbLager.getValue();
+        medarbejder = startVindue.getMedarbejder();
 
         if (!fadtype.isEmpty()&& !ophavsland.isEmpty()&& !leverandoer.isEmpty()) {
-            fad = Controller.opretFad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik);
+            fad = Controller.opretFad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik, medarbejder);
 
             txfFadetype.clear();
             txfOphavsland.clear();

@@ -13,8 +13,9 @@ public class Fad implements Lagerenhed{
     private String historik;
     private Lager lager;
     private Destillat destillat;
+    private Medarbejder medarbejder;
 
-    public Fad(LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
+    public Fad(LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik, Medarbejder medarbejder) {
         totalAntal++;
         this.id = totalAntal;
         this.indkoebsdato = indkoebsdato;
@@ -23,6 +24,7 @@ public class Fad implements Lagerenhed{
         this.ophavsland = ophavsland;
         this.leverandoer = leverandoer;
         this.historik = historik;
+        this.medarbejder = medarbejder;
     }
 
     public void saetDestillat(Destillat destillat) {

@@ -14,29 +14,29 @@ public class App {
     }
 
     private static void initStorage() {
-        Lager lager1 = Controller.opretLager("Lars' lager", new Lagerenhed[10][4]);
-        Lager lager2 = Controller.opretLager("Container lager", new Lagerenhed[2][2]);
-
         Medarbejder medarbejder1 = Controller.opretMedarbejder("Snævar", 20202020);
         Medarbejder medarbejder2 = Controller.opretMedarbejder("Thomas", 45454545);
         Medarbejder medarbejder3 = Controller.opretMedarbejder("Martin", 30102040);
 
-        Maltning maltning1 = Controller.opretMaltning(800.0, "Evergreen", "Stadsgaard", "Tørv");
-        Maltning maltning2 = Controller.opretMaltning(500.0, "Stairway", "Mosevang");
-        Maltning maltning3 = Controller.opretMaltning(600.0, "Irina", "Mosevang", "Tørv");
-        Maltning maltning4 = Controller.opretMaltning(0.0, null, null);
+        Lager lager1 = Controller.opretLager("Lars' lager", new Lagerenhed[10][4], medarbejder1);
+        Lager lager2 = Controller.opretLager("Container lager", new Lagerenhed[2][2], medarbejder1);
 
-        Fad fad1 = Controller.opretFad(LocalDate.of(2023, 03, 10), "EX-Bourbon", 60, "USA", "American Whisky Company", "Bourbon");
-        Fad fad2 = Controller.opretFad(LocalDate.of(2023, 8, 05), "EX-Oloroso", 120, "Spanien", "Espania Whisky", "Cherry, 3. lagring");
+        Maltning maltning1 = Controller.opretMaltning(800.0, "Evergreen", "Stadsgaard", "Tørv", medarbejder1);
+        Maltning maltning2 = Controller.opretMaltning(500.0, "Stairway", "Mosevang", medarbejder2);
+        Maltning maltning3 = Controller.opretMaltning(600.0, "Irina", "Mosevang", "Tørv", medarbejder3);
+        Maltning maltning4 = Controller.opretMaltning(0.0, null, null, null);
+
+        Fad fad1 = Controller.opretFad(LocalDate.of(2023, 03, 10), "EX-Bourbon", 60, "USA", "American Whisky Company", "Bourbon", medarbejder2);
+        Fad fad2 = Controller.opretFad(LocalDate.of(2023, 8, 05), "EX-Oloroso", 120, "Spanien", "Espania Whisky", "Cherry, 3. lagring", medarbejder3);
 
         Whiskydestillering whiskydestillering1 = Controller.opretWhiskydestillering(maltning1, LocalDate.of(2024, 5, 1), LocalDate.of(2024, 5, 2), 10.0, 22.0, 100.0, 28.0, "OK", 52.5, medarbejder1);
         Whiskydestillering whiskydestillering2 = Controller.opretWhiskydestillering(maltning2, LocalDate.of(2024, 4, 16), LocalDate.of(2024, 4, 16), 30.0, 8.0, 100.0, 25.0, "OBS, tåler fortynding", 59.9, medarbejder2);
         Whiskydestillering whiskydestillering3 = Controller.opretWhiskydestillering(maltning4, null, null, 0.0, 0.0, 0.0, 0.0, "Andet. Destilleringen kommer udefra", 0.0, medarbejder3);
 
-        Destillat destilla1 = Controller.opretDestillat(fad1);
+        Destillat destilla1 = Controller.opretDestillat(fad1, medarbejder2);
         destilla1.tilfoejTapning(whiskydestillering1.opretVaeskeTilDestillat(100));
         destilla1.saetKommentar("Sall præst har velsignet dette fad");
-        Destillat destillat2 = Controller.opretDestillat(fad2);
+        Destillat destillat2 = Controller.opretDestillat(fad2, medarbejder1);
         destillat2.tilfoejTapning(whiskydestillering2.opretVaeskeTilDestillat(50));
         destillat2.saetKommentar("Special Edition");
         destillat2.setDato(LocalDate.of(2018,1,2));

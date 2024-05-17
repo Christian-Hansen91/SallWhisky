@@ -10,10 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.application.Destillat;
-import model.application.Lager;
-import model.application.VaeskeTilWhisky;
-import model.application.Whiskydestillering;
+import model.application.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -52,6 +49,7 @@ public class OpretWhiskyVindue extends Stage {
     private Label lbl3 = new Label("Gem din whisky");
     private Lager valgtLager;
     private int reol, hylde;
+    private Medarbejder medarbejder;
 
     public OpretWhiskyVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);

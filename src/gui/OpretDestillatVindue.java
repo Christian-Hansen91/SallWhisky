@@ -32,8 +32,10 @@ public class OpretDestillatVindue extends Stage {
     private Destillat destillat = null;
     private VaeskeTilDestillat vaeskeTilDestillat = null;
     private Whiskydestillering whiskydestillering = null;
+    private StartVindue startVindue;
 
     public OpretDestillatVindue(String title, Stage owner, StartVindue startVindue) {
+        this.startVindue = startVindue;
         this.initOwner(owner);
 
         setTitle("Opret destilleringstapning");
@@ -59,39 +61,40 @@ public class OpretDestillatVindue extends Stage {
         lblTilfoejTilFad.setTextFill(Color.BURLYWOOD);
         lblMaengdeILiter.setTextFill(Color.BURLYWOOD);
 
-        pane.add(lblTapning, 0, 1);
+        pane.add(new Label("                                  "), 2, 0);
+        pane.add(lblTapning, 0, 0);
         pane.setHalignment(lblTapning, HPos.CENTER);
 
-        pane.add(dato, 0, 2);
+        pane.add(dato, 0, 1);
 
-        pane.add(cbDestilleringer, 0, 3, 2, 1);
+        pane.add(cbDestilleringer, 0, 2, 2, 1);
         cbDestilleringer.setMaxWidth(175);
         cbDestilleringer.getItems().addAll(Controller.getWhiskydestilleringer());
 
-        pane.add(lblMaengdeILiter, 0, 4);
-        pane.add(txfMaengdeILiter, 0, 5);
-        pane.add(lblKommentar, 0, 6);
-        pane.add(txfKommentar, 0, 7);
+        pane.add(lblMaengdeILiter, 0, 3);
+        pane.add(txfMaengdeILiter, 0, 4);
+        pane.add(lblKommentar, 0, 5);
+        pane.add(txfKommentar, 0, 6);
         txfKommentar.setMaxWidth(200);
 
-        pane.add(btnOpretTapning, 0, 10);
+        pane.add(btnOpretTapning, 0, 9);
         pane.setHalignment(btnOpretTapning, HPos.RIGHT);
         //btnOpretTapning.setOnAction(event -> opretTapningTilDestillatAction());
 
-        pane.add(lblDestillat, 15, 1, 2, 1);
+        pane.add(lblDestillat, 3, 0, 2, 1);
         pane.setHalignment(lblDestillat, HPos.CENTER);
-        pane.add(txaDestillat, 15, 2, 2, 5);
+        pane.add(txaDestillat, 3, 1, 2, 5);
         pane.setHalignment(txaDestillat, HPos.CENTER);
         txaDestillat.setMaxWidth(200);
         txaDestillat.setMinHeight(100);
 
-        pane.add(lblTilfoejTilFad, 15, 7, 2, 1);
+        pane.add(lblTilfoejTilFad, 3, 6, 2, 1);
         pane.setHalignment(lblTilfoejTilFad, HPos.RIGHT);
-        pane.add(cbFade, 15, 8, 2, 1);
+        pane.add(cbFade, 3, 7, 2, 1);
         cbFade.setMaxWidth(200);
         cbFade.getItems().addAll(Controller.getFade());
 
-        pane.add(btnOpretDestillat, 15, 10, 2, 1);
+        pane.add(btnOpretDestillat, 3, 9, 2, 1);
         pane.setHalignment(btnOpretDestillat, HPos.RIGHT);
         //btnOpretDestillat.setOnAction(event -> gemDestillatAction());
     }

@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -111,13 +112,15 @@ public class StartVindue extends Application {
         btnOpretWhiskyDestillering.setOnAction(event -> opretWhiskydestilleringsAction());
         btnSoeg.setOnAction(event -> soegningAction());
         btnOpretWhiskyTapning.setOnAction(event -> opretWhiskyTapningAction());
-
-
     }
 
     private void soegningAction() {
         soegningsVindue = new SoegningsVindue("Søgning",stage);
         soegningsVindue.showAndWait();
+    }
+
+    public Medarbejder getMedarbejder() {
+        return medarbejder;
     }
 
     private void txfMedarbejderAction() {

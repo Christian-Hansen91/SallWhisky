@@ -40,11 +40,13 @@ public class OpretWhiskydestilleringsVindue extends Stage {
     private Maltning maltning = null;
     private Whiskydestillering whiskydestillering = null;
     private Medarbejder medarbejder;
+    private StartVindue startVindue;
 
     public OpretWhiskydestilleringsVindue(String title, Stage owner, StartVindue startVindue, Medarbejder medarbejder) {
+        this.startVindue = startVindue;
+        this.medarbejder = medarbejder;
         this.initOwner(owner);
 
-        this.medarbejder = medarbejder;
         setTitle("Opret Whiskydestillering");
         GridPane pane = new GridPane();
         this.initContent(pane);
@@ -114,6 +116,11 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         pane.setHalignment(btnGem, HPos.CENTER);
         btnGem.setOnAction(event -> gemAction());
         pane.setHalignment(btnAnnuller, HPos.RIGHT);
+        btnAnnuller.setOnAction(event -> annullerAction());
+    }
+
+    private void annullerAction() {
+        this.hide();
     }
 
     private void gemAction() {
@@ -126,7 +133,7 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         double alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
         Maltning maltning = cbMaltning.getSelectionModel().getSelectedItem();
         String kommentar = txaKommentar.getText().trim();
-        String medarbejder1 = medarbejder.getNavn().trim();
+        medarbejder = startVindue.getMedarbejder();
 
         if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(maengdeVaeske == 0) && !(head == 0) && !(heart == 0) && !(tail == 0)&& !(alkoholprocent == 0)) {
             whiskydestillering = Controller.opretWhiskydestillering(maltning, startdato, slutdato, maengdeVaeske, head, heart, tail, kommentar, alkoholprocent, medarbejder);

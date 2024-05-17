@@ -13,14 +13,16 @@ public class Destillat {
     private List<VaeskeTilWhisky> vaeskeTilWhiskyer = new ArrayList<>();
     private Fad fad;
     private double angelShare = 0;
+    private Medarbejder medarbejder;
 
-    public Destillat(Fad fad) {
+    public Destillat(Fad fad, Medarbejder medarbejder) {
         Destillat.totalAntal++;
         this.id = totalAntal;
         this.dato = LocalDate.now();
         this.kommentar = "";
         this.fad = fad;
         fad.saetDestillat(this);
+        this.medarbejder = medarbejder;
     }
 
     public void saetKommentar(String kommentar) {

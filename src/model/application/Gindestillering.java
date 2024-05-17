@@ -12,9 +12,10 @@ public class Gindestillering {
     private double alkoholprocent;
     private double liter;
     private ArrayList<Ingrediensmaengde> ingredienser = new ArrayList<>();
+    private Medarbejder medarbejder;
 
     public Gindestillering(LocalDate startdato, LocalDate slutdato,
-                           double vandTilfoejet, double alkoholprocent, double liter, double maengdeEnebaer) {
+                           double vandTilfoejet, double alkoholprocent, double liter, double maengdeEnebaer, Medarbejder medarbejder) {
         Gindestillering.totalAntal++;
         this.ginNr = totalAntal;
         this.startdato = startdato;
@@ -23,6 +24,7 @@ public class Gindestillering {
         this.alkoholprocent = alkoholprocent;
         this.liter = liter;
         tilfoejIngrediensmaengde(Ingrediens.ENEBAER, maengdeEnebaer);
+        this.medarbejder = medarbejder;
     }
 
     public void tilfoejIngrediensmaengde(Ingrediens ingrediens, double maengde) {

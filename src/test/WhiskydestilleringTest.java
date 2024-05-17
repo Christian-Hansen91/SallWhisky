@@ -18,11 +18,11 @@ class WhiskydestilleringTest {
 
     @BeforeEach
     void setup() {
-        maltning = new Maltning(100, "Byg","Lars' Mark");
         medarbejder = new Medarbejder("alice",5050);
+        maltning = new Maltning(100, "Byg","Lars' Mark", medarbejder);
         whiskyDestillering = new Whiskydestillering(maltning, LocalDate.now(), LocalDate.now(),1000,50,850,150,"test",60,medarbejder);
-        fad = new Fad(LocalDate.now(),"eg",70,"spanien","spanish cooperage","sherry");
-        destillat = new Destillat(fad);
+        fad = new Fad(LocalDate.now(),"eg",70,"spanien","spanish cooperage","sherry", medarbejder);
+        destillat = new Destillat(fad, medarbejder);
     }
 
     @Test
@@ -39,10 +39,10 @@ class WhiskydestilleringTest {
     }
     @Test
     void opretMaltning() {
-        Maltning maltning = new Maltning(500, "byg","Lars");
+        Maltning maltning = new Maltning(500, "byg","Lars", medarbejder);
         assertEquals("Lars",maltning.getMarknavn());
         assertNull(maltning.getRygemateriale());
-        maltning = new Maltning(250,"også byg","Lars mark 2", "tørv");
+        maltning = new Maltning(250,"også byg","Lars mark 2", "tørv", medarbejder);
         assertEquals("tørv", maltning.getRygemateriale());
     }
 

@@ -12,22 +12,23 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.Lagerenhed;
+import model.application.Medarbejder;
 
 public class OpretLagerVindue extends Stage {
     private Label lblId = new Label("ID: ");
     private Label lblReol = new Label("Antal reoler: ");
     private Label lblHylde = new Label("Antal hylder: ");
     private Label lblNavn = new Label("Navn: ");
-
     private TextField txfId = new TextField();
     private TextField txtReoler = new TextField();
     private TextField txtHylder = new TextField();
     private TextField txtNavn = new TextField();
     private Button btnOpretLager = new Button("Opret lager");
-
-
+    private Medarbejder medarbejder;
+    private StartVindue startVindue;
 
     public OpretLagerVindue(String title, Stage owner, StartVindue startVindue) {
+        this.startVindue = startVindue;
         this.initOwner(owner);
 
         setTitle("Opret lager");
@@ -69,7 +70,9 @@ public class OpretLagerVindue extends Stage {
             String navn = txtNavn.getText();
             int reoler = Integer.parseInt(txtReoler.getText());
             int hylder = Integer.parseInt(txtHylder.getText());
-            Controller.opretLager(navn, new Lagerenhed[reoler][hylder]);
+            medarbejder = startVindue.getMedarbejder();
+
+            Controller.opretLager(navn, new Lagerenhed[reoler][hylder], medarbejder);
             this.hide();
             StartVindue.succesIOprettelseAlert();
         }
