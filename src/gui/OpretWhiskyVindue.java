@@ -133,7 +133,6 @@ public class OpretWhiskyVindue extends Stage {
         pane.add(txfAlkoholprocent, 3, 8);
         txfAlkoholprocent.setMaxWidth(75);
 
-
         pane.add(cbFlaskestr, 4, 1, 2, 1);
         cbFlaskestr.setMinWidth(175);
         cbFlaskestr.setValue("Vælg flaskestørrelse");
