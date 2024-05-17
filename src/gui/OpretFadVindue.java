@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.Fad;
 import model.application.Lager;
-import model.application.Medarbejder;
 
 import java.time.LocalDate;
 
@@ -152,5 +151,11 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
         }
 
         //OBS MANGLER VALG AF LAGERPLADS. NU VÆLGER MAN BARE ET LAGER
+    }
+    @Override
+    public void setValgtReolHylde(Lager lager, int reol, int hylde) {
+        this.lager = lager;
+        this.reol = reol;
+        this.hylde = hylde;
     }
 }
