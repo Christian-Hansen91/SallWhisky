@@ -35,6 +35,7 @@ public class Lager {
 
     public void addLagerenhedAt(int reol, int hylde, Lagerenhed lagerenhed) {
         reolliste[reol][hylde] = lagerenhed;
+        lagerenhed.tilfoejLager(this, reol, hylde);
     }
 
     public Lagerenhed getLagerenhedAt(int row, int column) {
