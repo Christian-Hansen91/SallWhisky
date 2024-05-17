@@ -166,7 +166,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
 
 
         //christians temp lagerknapværk
-        Button btnVaelgLager = new Button("Vælg lager");
+        btnVaelgLager = new Button("Vælg lager");
         pane.add(btnVaelgLager, 0, 10);
         btnVaelgLager.setOnAction(e -> vaelgLager());
 
@@ -236,7 +236,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
             if(alkoholprocent>100 || alkoholprocent<40)
                 throw new IllegalArgumentException("Fejl i alcoholsprocent, endten for høj eller for lav");
-            Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent);
+            Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, lager, medarbejder);
             antalFlaskerForAtTappe();
         } catch (Exception e) {
             StartVindue.fejlIOprettelseAlert(e.getMessage());
