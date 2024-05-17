@@ -23,6 +23,9 @@ public class Destillat {
         fad.saetDestillat(this);
     }
 
+    private void kontrollerMaengdeIFad(Fad fad) {
+    }
+
     public void saetKommentar(String kommentar) {
         this.kommentar = kommentar;
     }
