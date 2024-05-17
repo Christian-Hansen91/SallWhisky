@@ -99,9 +99,6 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
         btnVaelgLager.setOnAction(e -> vaelgLager());
         pane.add(lblLagerplads, 24, 1, 3, 1);
         pane.add(btnVaelgLager, 24, 2, 3, 1);
-        cbLager.setMinWidth(175);
-        cbLager.getItems().addAll(Controller.getLagre());
-
 
         pane.add(lblLager,24,3,3,1);
         pane.add(btnGem, 24, 7, 2, 1);
@@ -129,11 +126,9 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
         String leverandoer = txfLeverandoer.getText().trim();
         LocalDate indkoebsdato = dpIndkoebsdato.getValue();
         String historik = txaHistorik.getText().trim();
-        Lager lager1 = cbLager.getValue();
 
         if (!fadtype.isEmpty()&& !ophavsland.isEmpty()&& !leverandoer.isEmpty()) {
             fad = Controller.opretFad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik);
-
             txfFadetype.clear();
             txfOphavsland.clear();
             txfLeverandoer.clear();
@@ -143,10 +138,7 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
         } else {
             StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette fadet.");
         }
-
-        //OBS MANGLER VALG AF LAGERPLADS. NU VÆLGER MAN BARE ET LAGER
     }
-
     @Override
     public void setValgtReolHylde(Lager lager, int reol, int hylde) {
         this.lager = lager;
