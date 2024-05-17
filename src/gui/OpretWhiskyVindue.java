@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.application.*;
 import model.application.Destillat;
 import model.application.Lager;
 import model.application.VaeskeTilWhisky;
@@ -51,6 +52,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     private Label lbl3 = new Label("Gem din whisky");
     private Lager lager;
     private int reol, hylde;
+    private Medarbejder medarbejder;
 
     public OpretWhiskyVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);
@@ -156,7 +158,6 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         LagerVindue lagerVindue = new LagerVindue(this);
         lagerVindue.showAndWait();
     }
-
 
     private void setToemDestilat() {
         this.toemDestilat = true;
