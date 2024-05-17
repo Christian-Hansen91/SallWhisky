@@ -133,7 +133,6 @@ public class OpretWhiskyVindue extends Stage {
         pane.add(txfAlkoholprocent, 3, 8);
         txfAlkoholprocent.setMaxWidth(75);
 
-
         pane.add(cbFlaskestr, 4, 1, 2, 1);
         cbFlaskestr.setMinWidth(175);
         cbFlaskestr.setValue("Vælg flaskestørrelse");
@@ -145,25 +144,9 @@ public class OpretWhiskyVindue extends Stage {
         txfantalFlasker.setMaxWidth(75);
         pane.setHalignment(txfantalFlasker, HPos.RIGHT);
 
-        pane.add(cbLager, 4, 4, 2, 1);
-        cbLager.setMinWidth(175);
-        pane.setHalignment(cbLager, HPos.RIGHT);
-        for (int i = 0; i < Controller.getLagre().size(); i++) {
-            listLager.add(Controller.getLagre().get(i));
-        }
-        cbLager.setItems(listLager);
-        cbLager.setValue(Controller.getLagre().get(0));
-        pane.add(lvLedigeLagerPladser, 4, 5, 2, 3);
-        lvLedigeLagerPladser.setMaxWidth(175);
-        lvLedigeLagerPladser.setMinHeight(70);
-        pane.setHalignment(lvLedigeLagerPladser, HPos.RIGHT);
-        //TODO herunder skal det laves, så man får lagret fra comboboksen
-        updateLvLedigeLagerpladser();
-        cbLager.setOnAction(event -> updateLvLedigeLagerpladser());
-
-        //christians temp lagerknapværk
-        Button btnVaelgLager = new Button("Vælg lager");
-        pane.add(btnVaelgLager,0,10);
+        Button btnVaelgLager = new Button("Vælg lagerplads her");
+        pane.add(btnVaelgLager,4,5, 2, 1);
+        pane.setHalignment(btnVaelgLager, HPos.RIGHT);
         btnVaelgLager.setOnAction(e -> vaelgLager());
 
         pane.add(btnOpretWhisky, 4, 8, 2, 1);
