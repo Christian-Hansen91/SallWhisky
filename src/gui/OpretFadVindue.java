@@ -103,9 +103,6 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
         btnVaelgLager.setOnAction(e -> vaelgLager());
         pane.add(lblLagerplads, 24, 1, 3, 1);
         pane.add(btnVaelgLager, 24, 2, 3, 1);
-        cbLager.setMinWidth(175);
-        cbLager.getItems().addAll(Controller.getLagre());
-
 
         pane.add(lblLager,24,3,3,1);
         pane.add(btnGem, 24, 7, 2, 1);
