@@ -28,7 +28,7 @@ public class Fad implements Lagerenhed{
     }
 
     public void saetDestillat(Destillat destillat) {
-        this.destillat = this.destillat;
+        this.destillat = destillat;
     }
 
     public boolean tjekPlads(double liter) {

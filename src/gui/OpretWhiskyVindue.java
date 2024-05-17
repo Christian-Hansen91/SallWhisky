@@ -14,6 +14,7 @@ import model.application.*;
 import model.application.Destillat;
 import model.application.Lager;
 import model.application.VaeskeTilWhisky;
+import model.application.Whiskydestillering;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     private Lager lager;
     private int reol, hylde;
     private Medarbejder medarbejder;
+    private Exception manglendeOplysningerException = new Exception("Et eller flere felter er ikke udfyldt");
 
     public OpretWhiskyVindue(String title, Stage owner, StartVindue startVindue) {
         this.initOwner(owner);
@@ -134,6 +136,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         pane.add(txfAlkoholprocent, 3, 8);
         txfAlkoholprocent.setMaxWidth(75);
 
+
         pane.add(cbFlaskestr, 4, 1, 2, 1);
         cbFlaskestr.setMinWidth(175);
         cbFlaskestr.setValue("Vælg flaskestørrelse");
@@ -148,6 +151,23 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         Button btnVaelgLager = new Button("Vælg lagerplads her");
         pane.add(btnVaelgLager,4,5, 2, 1);
         pane.setHalignment(btnVaelgLager, HPos.RIGHT);
+        pane.add(cbLager, 4, 4, 2, 1);
+        cbLager.setMinWidth(175);
+        pane.setHalignment(cbLager, HPos.RIGHT);
+        for (int i = 0; i < Controller.getLagre().size(); i++) {
+            listLager.add(Controller.getLagre().get(i));
+        }
+        cbLager.setItems(listLager);
+        cbLager.setValue(Controller.getLagre().get(0));
+        pane.add(lvLedigeLagerPladser, 4, 5, 2, 3);
+        lvLedigeLagerPladser.setMaxWidth(175);
+        lvLedigeLagerPladser.setMinHeight(70);
+        pane.setHalignment(lvLedigeLagerPladser, HPos.RIGHT);
+
+
+        //christians temp lagerknapværk
+        btnVaelgLager = new Button("Vælg lager");
+        pane.add(btnVaelgLager, 0, 10);
         btnVaelgLager.setOnAction(e -> vaelgLager());
 
         pane.add(btnOpretWhisky, 4, 8, 2, 1);
@@ -177,54 +197,53 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     }
 
     private void opretVaeskeTilWhiskyAction() {
-        double maengdeWhisky = Double.parseDouble(txfMaengdeILiter.getText());
-        Destillat destillat = cbDestillater.getValue();
-        VaeskeTilWhisky vaeskeTilWhisky = destillat.opretVaeskeTilWhisky(maengdeWhisky);
-        listVaeskeTilWhiskyAdded.add(vaeskeTilWhisky);
-        listDestillater.addAll(Controller.getDestillater());
-        lvVaeskeTilWhisky.setItems(listVaeskeTilWhiskyAdded);
-        cbDestillater.setItems(listDestillater);
-        if (toemDestilat == true) {
-            destillat.saetAngelShare();
-            toemDestilat = false;
-            txfToemDestillat.clear();
+        double maengdeWhisky = 0;
+        Destillat destillat = null;
+        try {
+            if (txfMaengdeILiter.getText() == "" || cbDestillater.getValue() == null)
+                throw new Exception(manglendeOplysningerException);
+            maengdeWhisky = Double.parseDouble(txfMaengdeILiter.getText());
+            destillat = cbDestillater.getValue();
+
+            VaeskeTilWhisky vaeskeTilWhisky = destillat.opretVaeskeTilWhisky(maengdeWhisky);
+            listVaeskeTilWhiskyAdded.add(vaeskeTilWhisky);
+
+
+            listDestillater.addAll(Controller.getDestillater());
+            lvVaeskeTilWhisky.setItems(listVaeskeTilWhiskyAdded);
+            cbDestillater.setItems(listDestillater);
+            if (toemDestilat == true) {
+                destillat.saetAngelShare();
+                toemDestilat = false;
+                txfToemDestillat.clear();
+            }
+        } catch (Exception e) {
+            StartVindue.fejlIOprettelseAlert(e.getMessage());
         }
     }
 
     private void gemWhiskyAction() {
-        antalFlaskerForAtTappe();
-        String kommentar = txfBeskrivelse.getText().trim();
-        LocalDate localDate = dpDato.getValue();
-        String navn = txfNavn.getText().trim();
-        double flaskeStr = Double.parseDouble((cbFlaskestr.getSelectionModel().getSelectedItem()));
-        double vandTilfoejet = Double.parseDouble(txfVandTilfoejet.getText().trim());
-        double alcoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
-
-        //TODO mangler lager
-        //cbLager.getValue().addLagerenhedAt(stringToInts(), lagerenhed);
-
-        //destillat = whiskydestillering.opretDestillat(whiskydestillering1);
-    }
-
-    private void updateLvLedigeLagerpladser() {
-        ObservableList<String> listLedigeLagerPladser = FXCollections.observableArrayList();
-        for (int i = 0; i < cbLager.getValue().getReolliste().length; i++) {
-            for (int j = 0; j < cbLager.getValue().getReolliste()[i].length; j++) {
-                if (cbLager.getValue().getReolliste()[i][j] == null)
-                    listLedigeLagerPladser.add("Reol: " + (i + 1) + ", plads: " + (j + 1));
-            }
+        try {
+            String beskrivelse = txfBeskrivelse.getText().trim();
+            LocalDate localDate = dpDato.getValue();
+            String navn = txfNavn.getText().trim();
+            if (navn == "" || beskrivelse == "" || txfVandTilfoejet.getText().trim() == "" || txfAlkoholprocent.getText().trim() == "" || cbFlaskestr.getValue() == "")
+                throw new NullPointerException("Udfyld alle felterne");
+            double vandTilfoejet = 0;
+            double alkoholprocent = 0;
+            double flaskeStr = Double.parseDouble((cbFlaskestr.getSelectionModel().getSelectedItem()));
+            vandTilfoejet = Double.parseDouble(txfVandTilfoejet.getText().trim());
+            alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
+            if(alkoholprocent>100 || alkoholprocent<40)
+                throw new IllegalArgumentException("Fejl i alcoholsprocent, endten for høj eller for lav");
+            Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, lager, medarbejder);
+            antalFlaskerForAtTappe();
+        } catch (Exception e) {
+            StartVindue.fejlIOprettelseAlert(e.getMessage());
         }
-        lvLedigeLagerPladser.setItems(listLedigeLagerPladser);
     }
 
-    private ArrayList<Integer> stringToInts() {
-        ArrayList<Integer> plads = new ArrayList<>();
-        int pladsReol = Integer.parseInt(lvLedigeLagerPladser.getSelectionModel().getSelectedItem().substring(7)) - 1;
-        int pladsHylde = Integer.parseInt(lvLedigeLagerPladser.getSelectionModel().getSelectedItem().substring(17)) - 1;
-        plads.add(pladsReol);
-        plads.add(pladsHylde);
-        return plads;
-    }
+
     public void setValgtLager(Lager lager) {
         this.lager = lager;
     }

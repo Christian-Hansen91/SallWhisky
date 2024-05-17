@@ -25,6 +25,9 @@ public class Destillat {
         this.medarbejder = medarbejder;
     }
 
+    private void kontrollerMaengdeIFad(Fad fad) {
+    }
+
     public void saetKommentar(String kommentar) {
         this.kommentar = kommentar;
     }
