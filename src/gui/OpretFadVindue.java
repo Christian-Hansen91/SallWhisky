@@ -13,7 +13,7 @@ import model.application.Lager;
 
 import java.time.LocalDate;
 
-public class OpretFadVindue extends Stage {
+public class OpretFadVindue extends Stage implements LagerenhedsVindue {
     private Label lblFadtype = new Label("Fadtype: ");
     private TextField txfFadetype = new TextField();
     private Label lblKapacitet = new Label("Kapacitet (L): ");
@@ -34,10 +34,14 @@ public class OpretFadVindue extends Stage {
     private Button btnGem = new Button("Gem");
     private Button btnAnnuller = new Button("Annuller");
     private Fad fad = null;
+    private Medarbejder medarbejder;
+    private StartVindue startVindue;
+    private int reol, hylde;
+    private Label lblLager = new Label("");
 
     public OpretFadVindue(String title, Stage owner, StartVindue startVindue) {
+        this.startVindue = startVindue;
         this.initOwner(owner);
-
         setTitle("Opret fad");
         GridPane pane = new GridPane();
         this.initContent(pane);
@@ -63,7 +67,7 @@ public class OpretFadVindue extends Stage {
         lblKapacitet.setTextFill(Color.BURLYWOOD);
         lblIndkoebsdato.setTextFill(Color.BURLYWOOD);
         lblLagerplads.setTextFill(Color.BURLYWOOD);
-
+        lblLager.setTextFill(Color.BURLYWOOD);
 
         pane.add(lblFadtype, 0, 1);
         pane.add(txfFadetype, 2, 1, 3, 1);
@@ -94,18 +98,33 @@ public class OpretFadVindue extends Stage {
         pane.add(txaKommentar, 2, 7, 3, 1);
         txaKommentar.setMaxWidth(150);
         pane.setHalignment(txaKommentar, HPos.RIGHT);
-
+        Button btnVaelgLager = new Button("Vælg lager");
+        btnVaelgLager.setOnAction(e -> vaelgLager());
         pane.add(lblLagerplads, 24, 1, 3, 1);
-        pane.add(cbLager, 24, 2, 3, 1);
-        cbLager.setMinWidth(175);
-        cbLager.getItems().addAll(Controller.getLagre());
+        pane.add(btnVaelgLager, 24, 2, 3, 1);
 
+        pane.add(lblLager,24,3,3,1);
         pane.add(btnGem, 24, 7, 2, 1);
         pane.setHalignment(btnGem, HPos.RIGHT);
         btnGem.setOnAction(event -> gemAction());
         pane.add(btnAnnuller, 26, 7);
         pane.setHalignment(btnAnnuller, HPos.RIGHT);
+        btnAnnuller.setOnAction(event -> annullerAction());
+    }
+    private void vaelgLager() {
+        LagerVindue lagerVindue = new LagerVindue(this);
+        lagerVindue.showAndWait();
+        opdaterLagerLabels();
+    }
 
+    private void opdaterLagerLabels() {
+        if (lager != null) {
+            lblLager.setText("Lager: " + lager.getNavn() + ", reol " + reol + " hylde " + hylde);
+        }
+    }
+
+    private void annullerAction() {
+        this.hide();
     }
 
     private void gemAction() {
@@ -116,9 +135,10 @@ public class OpretFadVindue extends Stage {
         LocalDate indkoebsdato = dpIndkoebsdato.getValue();
         String historik = txaHistorik.getText().trim();
         Lager lager1 = cbLager.getValue();
+        medarbejder = startVindue.getMedarbejder();
 
         if (!fadtype.isEmpty()&& !ophavsland.isEmpty()&& !leverandoer.isEmpty()) {
-            fad = Controller.opretFad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik);
+            fad = Controller.opretFad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik, medarbejder);
 
             txfFadetype.clear();
             txfOphavsland.clear();
@@ -131,5 +151,11 @@ public class OpretFadVindue extends Stage {
         }
 
         //OBS MANGLER VALG AF LAGERPLADS. NU VÆLGER MAN BARE ET LAGER
+    }
+    @Override
+    public void setValgtReolHylde(Lager lager, int reol, int hylde) {
+        this.lager = lager;
+        this.reol = reol;
+        this.hylde = hylde;
     }
 }

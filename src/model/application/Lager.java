@@ -7,10 +7,12 @@ public class Lager {
     private static List<Fad> fade = new ArrayList<>();
     private String navn;
     private Lagerenhed[][] reolliste;
+    private Medarbejder medarbejder;
 
-    public Lager(String navn, Lagerenhed[][] reolliste) {
+    public Lager(String navn, Lagerenhed[][] reolliste, Medarbejder medarbejder) {
         this.navn = navn;
         this.reolliste = reolliste;
+        this.medarbejder = medarbejder;
     }
 
     public static void tilfoejFad(Fad fad) {
@@ -35,6 +37,7 @@ public class Lager {
 
     public void addLagerenhedAt(int reol, int hylde, Lagerenhed lagerenhed) {
         reolliste[reol][hylde] = lagerenhed;
+        lagerenhed.tilfoejLager(this, reol, hylde);
     }
 
     public Lagerenhed getLagerenhedAt(int row, int column) {

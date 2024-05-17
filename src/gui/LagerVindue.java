@@ -1,6 +1,7 @@
 package gui;
 
 import controller.Controller;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,17 +16,17 @@ import model.application.Lagerenhed;
 public class LagerVindue extends Stage {
     private Lager lager;
     private final String overallStyle = "-fx-font-size: 15; -fx-border-sets: -5; -fx-border-radius: 5; -fx-border-width: 2";
-    private final String lagerpladsLedig = " -fx-color: green;" + overallStyle;
-    private final String lagerpladsOptaget = " -fx-color: red;" + overallStyle;
+    private final String lagerpladsLedig = " -fx-color: burlywood;" + overallStyle;
+    private final String lagerpladsOptaget = " -fx-color: darkred;" + overallStyle;
     private int laengde, bredde;
-    private OpretWhiskyVindue opretWhiskyVindue;
+    private LagerenhedsVindue lagerenhedsVindue;
     private ComboBox<Lager> cbLager;
     private GridPane lagerPane;
     private int reol, hylde;
     private Label lblValg = new Label("");
 
-    public LagerVindue(OpretWhiskyVindue whiskyVindue) {
-        this.opretWhiskyVindue = whiskyVindue;
+    public LagerVindue(LagerenhedsVindue lagerenhedsVindue) {
+        this.lagerenhedsVindue = lagerenhedsVindue;
         setTitle("Vælg lager");
 
         setResizable(true);
@@ -58,7 +59,11 @@ public class LagerVindue extends Stage {
             opdaterValgtLager();
             opdaterLagerVindue();
         });
-
+        gridPane.add(new Label("                                                           "), 1, 1);
+        Button btnBekraeft = new Button("Bekræft");
+        btnBekraeft.setOnAction(e -> bekraeftAction());
+        gridPane.add(btnBekraeft, 2,1);
+        gridPane.setHalignment(btnBekraeft, HPos.RIGHT);
     }
 
     private void opdaterLagerVindue() {
@@ -74,18 +79,20 @@ public class LagerVindue extends Stage {
                 btnHylde.setOnAction(e -> vaelgReolHylde(finalI, finalJ));
             }
         }
-        Button btnBekraeft = new Button("Bekræft");
-        btnBekraeft.setOnAction(e -> bekraeftAction());
-        lagerPane.add(btnBekraeft, laengde, bredde + 1);
     }
 
     private void bekraeftAction() {
-        opretWhiskyVindue.setValgtReolHylde(reol, hylde);
+        if (Controller.lagerpladsLedig(lager,reol,hylde)) {
+            lagerenhedsVindue.setValgtReolHylde(lager, reol, hylde);
+        } else {
+            lblValg.setText("Den ønskede plads er optaget. Vælg en anden.");
+        }
         close();
     }
 
     private void vaelgReolHylde(int reol, int hylde) {
         if (Controller.lagerpladsLedig(lager, reol, hylde)) {
+
             this.reol = reol;
             this.hylde = hylde;
             lblValg.setText("Du har valgt " + lager.getNavn() + ", reol " + reol + ", hylde " + hylde);
@@ -121,5 +128,4 @@ public class LagerVindue extends Stage {
 
         return bredde;
     }
-
 }

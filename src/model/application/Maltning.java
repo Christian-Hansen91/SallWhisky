@@ -1,5 +1,7 @@
 package model.application;
 
+import gui.StartVindue;
+
 import java.time.LocalDate;
 
 public class Maltning {
@@ -11,6 +13,7 @@ public class Maltning {
     private String rygemateriale;
     private String kommentar;
     private static int totalAntal;
+    private Medarbejder medarbejder;
 
     public String getKornsort() {
         return kornsort;
@@ -28,15 +31,16 @@ public class Maltning {
         return rygemateriale;
     }
 
-    public Maltning(double maengde, String kornsort, String marknavn) {
+    public Maltning(double maengde, String kornsort, String marknavn, Medarbejder medarbejder) {
         Maltning.totalAntal++;
         this.id = totalAntal;
         this.dato = LocalDate.now();
         this.kornsort = kornsort;
         this.marknavn = marknavn;
         this.maengde = maengde;
+        this.medarbejder = medarbejder;
     }
-    public Maltning(double maengde, String kornsort, String marknavn, String rygemateriale) {
+    public Maltning(double maengde, String kornsort, String marknavn, String rygemateriale, Medarbejder medarbejder) {
         Maltning.totalAntal++;
         this.id = totalAntal;
         this.dato = LocalDate.now();
@@ -44,6 +48,7 @@ public class Maltning {
         this.marknavn = marknavn;
         this.maengde = maengde;
         this.rygemateriale = rygemateriale;
+        this.medarbejder = medarbejder;
     }
 
     public static int getTotalAntal() {

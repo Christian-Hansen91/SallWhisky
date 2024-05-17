@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.Maltning;
+import model.application.Medarbejder;
 
 import java.time.LocalDate;
 
@@ -27,8 +28,12 @@ public class OpretMaltningVindue extends Stage {
     private Maltning maltning;
     private Button btnGem = new Button("Gem");
     private Button btnAnnuller = new Button("Annuller");
+    private Label lblDato = new Label("Dato for oprettelse:");
+    private Medarbejder medarbejder;
+    private StartVindue startVindue;
 
     public OpretMaltningVindue(String title, Stage owner, StartVindue startVindue) {
+        this.startVindue = startVindue;
         this.initOwner(owner);
 
         setTitle("Opret maltning");
@@ -53,19 +58,21 @@ public class OpretMaltningVindue extends Stage {
         lblMaengde.setTextFill(Color.BURLYWOOD);
         lblRygemateriale.setTextFill(Color.BURLYWOOD);
         lblKommentar.setTextFill(Color.BURLYWOOD);
+        lblDato.setTextFill(Color.BURLYWOOD);
 
 
-        pane.add(dpdato, 0, 2, 4, 1);
-        pane.add(lblkornsort, 0, 3, 2, 1);
-        pane.add(txfKornsort, 2, 3, 2, 1);
+        pane.add(lblDato, 0, 2, 2, 1);
+        pane.add(dpdato, 0, 3, 4, 1);
+        pane.add(lblkornsort, 0, 4, 2, 1);
+        pane.add(txfKornsort, 2, 4, 2, 1);
         txfKornsort.setMinWidth(110);
         pane.setHalignment(txfKornsort, HPos.RIGHT);
-        pane.add(lblMarknavn, 0, 4, 2, 1);
-        pane.add(txfMarknavn, 2, 4, 2, 1);
+        pane.add(lblMarknavn, 0, 5, 2, 1);
+        pane.add(txfMarknavn, 2, 5, 2, 1);
         txfMarknavn.setMinWidth(110);
         pane.setHalignment(txfMarknavn, HPos.RIGHT);
-        pane.add(lblMaengde, 0, 5, 2, 1);
-        pane.add(txfMaengde, 2, 5, 2, 1);
+        pane.add(lblMaengde, 0, 6, 2, 1);
+        pane.add(txfMaengde, 2, 6, 2, 1);
         txfMaengde.setMinWidth(110);
         pane.setHalignment(txfMaengde, HPos.RIGHT);
 
@@ -83,11 +90,18 @@ public class OpretMaltningVindue extends Stage {
         btnGem.setOnAction(event -> gemAction());
         pane.add(btnAnnuller, 25, 7, 2, 1);
         pane.setHalignment(btnAnnuller, HPos.RIGHT);
+        btnAnnuller.setOnAction(event -> annullerAction());
+    }
+
+    private void annullerAction() {
+        this.hide();
     }
 
     private void gemAction() {
         String kornsort = txfKornsort.getText().trim();
         String marknavn = txfMarknavn.getText().trim();
+        medarbejder = startVindue.getMedarbejder();
+
         double maengde = 0.0;
         try {
             maengde = Double.parseDouble(txfMaengde.getText().trim());
@@ -95,7 +109,7 @@ public class OpretMaltningVindue extends Stage {
             String kommentar = txaKommentar.getText().trim();
 
             if (!kornsort.isEmpty() && !marknavn.isEmpty() && !(maengde == 0.0)) {
-                maltning = Controller.opretMaltning(maengde, kornsort, marknavn);
+                maltning = Controller.opretMaltning(maengde, kornsort, marknavn, medarbejder);
 
                 txfKornsort.clear();
                 txfMaengde.clear();

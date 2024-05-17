@@ -3,6 +3,7 @@ package test;
 import model.application.Gindestillering;
 import model.application.Ingrediens;
 import model.application.Ingrediensmaengde;
+import model.application.Medarbejder;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -16,7 +17,8 @@ class GindestilleringTest {
 
     @Test
     void gindestilleringConstructor() { //tester enebær-constructor og indeholderIngrediens
-        gindestillering = new Gindestillering(LocalDate.now(), LocalDate.now().plusDays(3), 50, 50, 1000, 200);
+        Medarbejder medarbejder = new Medarbejder("christian", 1234);
+        gindestillering = new Gindestillering(LocalDate.now(), LocalDate.now().plusDays(3), 50, 50, 1000, 200, medarbejder);
         boolean indeholderEnebaer = false;
         indeholderEnebaer = gindestillering.ginIndeholderIngrediens(Ingrediens.ENEBAER);
         assertTrue(indeholderEnebaer);
@@ -24,7 +26,8 @@ class GindestilleringTest {
 
     @Test
     void tilfoejIngrediensmaengde() {
-        gindestillering = new Gindestillering(LocalDate.now(), LocalDate.now().plusDays(3), 50, 50, 1000, 200);
+        Medarbejder medarbejder = new Medarbejder("christian", 1234);
+        gindestillering = new Gindestillering(LocalDate.now(), LocalDate.now().plusDays(3), 50, 50, 1000, 200, medarbejder);
         gindestillering.tilfoejIngrediensmaengde(Ingrediens.ENEBAER,500);
         double result = gindestillering.maengdeAfIngrediens(Ingrediens.ENEBAER);
         assertEquals(result, 700);

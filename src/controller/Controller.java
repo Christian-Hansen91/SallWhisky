@@ -14,19 +14,19 @@ public class Controller {
         Storage.addMedarbejder(medarbejder);
         return medarbejder;
     }
-    public static Maltning opretMaltning(double maengde, String korntype, String marknavn) {
-        Maltning maltning = new Maltning(maengde, korntype, marknavn);
+    public static Maltning opretMaltning(double maengde, String korntype, String marknavn, Medarbejder medarbejder) {
+        Maltning maltning = new Maltning(maengde, korntype, marknavn, medarbejder);
         Storage.addMaltning(maltning);
         return maltning;
     }
-    public static Maltning opretMaltning(double maengde, String korntype, String marknavn, String rygemateriale) {
-        Maltning maltning = new Maltning(maengde, korntype, marknavn, rygemateriale);
+    public static Maltning opretMaltning(double maengde, String korntype, String marknavn, String rygemateriale, Medarbejder medarbejder) {
+        Maltning maltning = new Maltning(maengde, korntype, marknavn, rygemateriale, medarbejder);
         Storage.addMaltning(maltning);
         return maltning;
     }
 
-    public static Fad opretFad(LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik) {
-        Fad fad = new Fad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik);
+    public static Fad opretFad(LocalDate indkoebsdato, String fadtype, int kapacitet, String ophavsland, String leverandoer, String historik, Medarbejder medarbejder) {
+        Fad fad = new Fad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik, medarbejder);
         Storage.addFad(fad);
         return fad;
     }
@@ -38,24 +38,24 @@ public class Controller {
         return whiskydestillering;
     }
     public static Whisky opretWhisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
-                                     double vandTilfoejet, double alkoholprocent) {
-        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent);
+                                     double vandTilfoejet, double alkoholprocent, Lager lager[][], Medarbejder medarbejder) {
+        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder);
         Storage.addWhisky(whisky);
         return whisky;
     }
     public static Gindestillering opretGindestillering(LocalDate startdato, LocalDate slutdato,
-                                                       double vandTilfoejet, double alkoholprocent, double liter, double maengdeEnebaer) {
-        Gindestillering gindestillering = new Gindestillering(startdato, slutdato, vandTilfoejet, alkoholprocent, liter, maengdeEnebaer);
+                                                       double vandTilfoejet, double alkoholprocent, double liter, double maengdeEnebaer, Medarbejder medarbejder) {
+        Gindestillering gindestillering = new Gindestillering(startdato, slutdato, vandTilfoejet, alkoholprocent, liter, maengdeEnebaer, medarbejder);
         Storage.addGindestillering(gindestillering);
         return gindestillering;
     }
-    public static Lager opretLager(String navn, Lagerenhed[][] reolliste){
-        Lager lager = new Lager(navn, reolliste);
+    public static Lager opretLager(String navn, Lagerenhed[][] reolliste, Medarbejder medarbejder){
+        Lager lager = new Lager(navn, reolliste, medarbejder);
         Storage.addLager(lager);
         return lager;
     }
-    public static Destillat opretDestillat(Fad fad){
-        Destillat destillat = new Destillat(fad);
+    public static Destillat opretDestillat(Fad fad, Medarbejder medarbejder){
+        Destillat destillat = new Destillat(fad, medarbejder);
         Storage.addDestillat(destillat);
         return destillat;
     }

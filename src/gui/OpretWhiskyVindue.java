@@ -10,14 +10,16 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.application.*;
 import model.application.Destillat;
 import model.application.Lager;
 import model.application.VaeskeTilWhisky;
-import model.application.Whisky;
+import model.application.Whiskydestillering;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class OpretWhiskyVindue extends Stage {
+public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     private DatePicker dpDato = new DatePicker(LocalDate.now());
     private ComboBox<Destillat> cbDestillater = new ComboBox<>();
     private Label lblBeskrivelse = new Label("Beskrivelse: ");
@@ -49,8 +51,9 @@ public class OpretWhiskyVindue extends Stage {
     private Label lbl1 = new Label("Vælg destillat(er)");
     private Label lbl2 = new Label("Lav din whisky");
     private Label lbl3 = new Label("Gem din whisky");
-    private Lager valgtLager;
+    private Lager lager;
     private int reol, hylde;
+    private Medarbejder medarbejder;
     private Exception manglendeOplysningerException = new Exception("Et eller flere felter er ikke udfyldt");
 
     public OpretWhiskyVindue(String title, Stage owner, StartVindue startVindue) {
@@ -97,7 +100,6 @@ public class OpretWhiskyVindue extends Stage {
         cbDestillater.setMaxWidth(175);
         cbDestillater.setMinHeight(70);
         cbDestillater.getItems().addAll(Controller.getDestillater());
-
 
         pane.add(lblMaengdeILiter, 0, 4);
         pane.add(txfMaengdeILiter, 1, 4);
@@ -146,6 +148,9 @@ public class OpretWhiskyVindue extends Stage {
         txfantalFlasker.setMaxWidth(75);
         pane.setHalignment(txfantalFlasker, HPos.RIGHT);
 
+        Button btnVaelgLager = new Button("Vælg lagerplads her");
+        pane.add(btnVaelgLager,4,5, 2, 1);
+        pane.setHalignment(btnVaelgLager, HPos.RIGHT);
         pane.add(cbLager, 4, 4, 2, 1);
         cbLager.setMinWidth(175);
         pane.setHalignment(cbLager, HPos.RIGHT);
@@ -169,7 +174,6 @@ public class OpretWhiskyVindue extends Stage {
         pane.setHalignment(btnOpretWhisky, HPos.RIGHT);
         btnOpretWhisky.setOnAction(event -> gemWhiskyAction());
     }
-
     private void vaelgLager() {
         LagerVindue lagerVindue = new LagerVindue(this);
         lagerVindue.showAndWait();
@@ -241,10 +245,11 @@ public class OpretWhiskyVindue extends Stage {
 
 
     public void setValgtLager(Lager lager) {
-        this.valgtLager = lager;
+        this.lager = lager;
     }
-
-    public void setValgtReolHylde(int reol, int hylde) {
+    @Override
+    public void setValgtReolHylde(Lager lager, int reol, int hylde) {
+        this.lager = lager;
         this.reol = reol;
         this.hylde = hylde;
     }
