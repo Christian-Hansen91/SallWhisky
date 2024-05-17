@@ -19,14 +19,14 @@ public class LagerVindue extends Stage {
     private final String lagerpladsLedig = " -fx-color: burlywood;" + overallStyle;
     private final String lagerpladsOptaget = " -fx-color: darkred;" + overallStyle;
     private int laengde, bredde;
-    private OpretWhiskyVindue opretWhiskyVindue;
+    private LagerenhedsVindue lagerenhedsVindue;
     private ComboBox<Lager> cbLager;
     private GridPane lagerPane;
     private int reol, hylde;
     private Label lblValg = new Label("");
 
-    public LagerVindue(OpretWhiskyVindue whiskyVindue) {
-        this.opretWhiskyVindue = whiskyVindue;
+    public LagerVindue(LagerenhedsVindue lagerenhedsVindue) {
+        this.lagerenhedsVindue = lagerenhedsVindue;
         setTitle("Vælg lager");
 
         setResizable(true);
@@ -82,12 +82,17 @@ public class LagerVindue extends Stage {
     }
 
     private void bekraeftAction() {
-        opretWhiskyVindue.setValgtReolHylde(reol, hylde);
+        if (Controller.lagerpladsLedig(lager,reol,hylde)) {
+            lagerenhedsVindue.setValgtReolHylde(lager, reol, hylde);
+        } else {
+            lblValg.setText("Den ønskede plads er optaget. Vælg en anden.");
+        }
         close();
     }
 
     private void vaelgReolHylde(int reol, int hylde) {
         if (Controller.lagerpladsLedig(lager, reol, hylde)) {
+
             this.reol = reol;
             this.hylde = hylde;
             lblValg.setText("Du har valgt " + lager.getNavn() + ", reol " + reol + ", hylde " + hylde);
@@ -123,5 +128,4 @@ public class LagerVindue extends Stage {
 
         return bredde;
     }
-
 }

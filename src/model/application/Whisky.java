@@ -70,4 +70,12 @@ public class Whisky implements Lagerenhed{
     public String toString() {
         return "#" + nr + ": " + navn + " - \"" + beskrivelse + "\" på " + flaskeStr + " liter";
     }
+
+    @Override
+    public void tilfoejLager(Lager lager, int reol, int hylde) {
+        if (!lager.equals(this.lager)) {
+            this.lager = lager;
+            lager.addLagerenhedAt(reol, hylde, this);
+        }
+    }
 }

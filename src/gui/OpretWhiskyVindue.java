@@ -11,11 +11,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.*;
+import model.application.Destillat;
+import model.application.Lager;
+import model.application.VaeskeTilWhisky;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class OpretWhiskyVindue extends Stage {
+public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     private DatePicker dpDato = new DatePicker(LocalDate.now());
     private ComboBox<Destillat> cbDestillater = new ComboBox<>();
     private Label lblBeskrivelse = new Label("Beskrivelse: ");
@@ -47,7 +50,7 @@ public class OpretWhiskyVindue extends Stage {
     private Label lbl1 = new Label("Vælg destillat(er)");
     private Label lbl2 = new Label("Lav din whisky");
     private Label lbl3 = new Label("Gem din whisky");
-    private Lager valgtLager;
+    private Lager lager;
     private int reol, hylde;
     private Medarbejder medarbejder;
 

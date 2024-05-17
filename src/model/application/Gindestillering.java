@@ -3,7 +3,7 @@ package model.application;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Gindestillering {
+public class Gindestillering implements Lagerenhed {
     private static int totalAntal;
     private int ginNr;
     private LocalDate startdato;
@@ -13,6 +13,7 @@ public class Gindestillering {
     private double liter;
     private ArrayList<Ingrediensmaengde> ingredienser = new ArrayList<>();
     private Medarbejder medarbejder;
+    private Lager lager;
 
     public Gindestillering(LocalDate startdato, LocalDate slutdato,
                            double vandTilfoejet, double alkoholprocent, double liter, double maengdeEnebaer, Medarbejder medarbejder) {
@@ -67,6 +68,13 @@ public class Gindestillering {
             if (ingrediensmaengde.hentIngrediens().equals(ingrediens)) {
                 ingrediensmaengde.tilfoejMaengde(maengde);
             }
+        }
+    }
+
+    public void tilfoejLager(Lager lager, int reol, int hylde) {
+        if (!lager.equals(this.lager)) {
+            this.lager = lager;
+            lager.addLagerenhedAt(reol, hylde, this);
         }
     }
 

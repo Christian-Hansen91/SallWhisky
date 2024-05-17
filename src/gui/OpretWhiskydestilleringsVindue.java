@@ -126,11 +126,20 @@ public class OpretWhiskydestilleringsVindue extends Stage {
     private void gemAction() {
         LocalDate startdato = dpStartdato.getValue();
         LocalDate slutdato = dpSlutdato.getValue();
-        int maengdeVaeske = Integer.parseInt(txfVaeskeMaengde.getText().trim());
-        double head = Double.parseDouble(txfHead.getText().trim());
-        double heart = Double.parseDouble(txfHeart.getText().trim());
-        double tail = Double.parseDouble(txfTail.getText().trim());
-        double alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
+        int maengdeVaeske = 0;
+        double head = 0;
+        double heart = 0;
+        double tail = 0;
+        double alkoholprocent = 0;
+        try {
+            maengdeVaeske = Integer.parseInt(txfVaeskeMaengde.getText().trim());
+            head = Double.parseDouble(txfHead.getText().trim());
+            heart = Double.parseDouble(txfHeart.getText().trim());
+            tail = Double.parseDouble(txfTail.getText().trim());
+            alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
+        } catch (NumberFormatException e) {
+            StartVindue.kommafejlAlert();
+        }
         Maltning maltning = cbMaltning.getSelectionModel().getSelectedItem();
         String kommentar = txaKommentar.getText().trim();
         medarbejder = startVindue.getMedarbejder();
@@ -150,6 +159,18 @@ public class OpretWhiskydestilleringsVindue extends Stage {
             StartVindue.succesIOprettelseAlert();
         } else {
             StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette whiskydestilleringen.");
+        String medarbejder1 = medarbejder.getNavn().trim();
+        try {
+            if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(maengdeVaeske == 0) && !(head == 0) && !(heart == 0) && !(tail == 0) && !(alkoholprocent == 0)) {
+                whiskydestillering = Controller.opretWhiskydestillering(maltning, startdato, slutdato, maengdeVaeske, head, heart, tail, kommentar, alkoholprocent, medarbejder);
+                Controller.addWhiskydestillering(whiskydestillering);
+                this.hide();
+                StartVindue.succesIOprettelseAlert();
+            } else {
+                StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette whiskydestilleringen.");
+            }
+        } catch (NullPointerException e) {
+            StartVindue.fejlIOprettelseAlert("Udfyld alle felter for at oprette en destillering");
         }
     }
 

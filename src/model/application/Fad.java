@@ -55,4 +55,12 @@ public class Fad implements Lagerenhed{
                 ", leverandør: " + leverandoer + "\n" +
                 "Historik: " + historik + "\n";
     }
+
+    @Override
+    public void tilfoejLager(Lager lager, int reol, int hylde) {
+        if (!lager.equals(this.lager)) {
+            this.lager = lager;
+            lager.addLagerenhedAt(reol, hylde, this);
+        }
+    }
 }
