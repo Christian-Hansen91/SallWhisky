@@ -63,6 +63,7 @@ public class Maltning {
                 ", marknavn: " + marknavn + "\n" +
                 "Mængde: " + maengde + "\n" +
                 "Rygemateriale: " + rygemateriale + "\n" +
-                "Kommentar: " + kommentar;
+                "Kommentar: " + kommentar + "\n" +
+                "Medarbejder: " + medarbejder;
     }
 }

@@ -1,6 +1,7 @@
 package model.application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Lager {
@@ -19,11 +20,6 @@ public class Lager {
         if (!fade.contains(fad)) {
             fade.add(fad);
         }
-    }
-
-    @Override
-    public String toString() {
-        return navn;
     }
 
     public void addReol(int antalHylder) {
@@ -55,5 +51,10 @@ public class Lager {
 
     public boolean lagerpladsLedig(int reol, int hylde) {
         return reolliste[reol][hylde] == null;
+    }
+
+    @Override
+    public String toString() {
+        return "Lager: " + navn;
     }
 }

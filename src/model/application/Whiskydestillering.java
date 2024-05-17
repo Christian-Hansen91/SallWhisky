@@ -72,6 +72,7 @@ public class Whiskydestillering {
                 ", tail: " + tail + "\n" +
                 "Alkoholprocent: " + alkoholprocent + "\n" +
                 "Kommentar: " + kommentar + ".\n\n" +
-                "Malt: " + maltning + "\n";
+                "Malt: " + maltning + "\n" +
+                "Medarbejder: " + medarbejder;
     }
 }

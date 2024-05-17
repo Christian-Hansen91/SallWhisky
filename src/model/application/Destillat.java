@@ -78,7 +78,8 @@ public class Destillat {
                 "Mængde: " + hentTotalMaengde() + "\n" +
                 "Fad: " + fad + "\n" +
                 "Kommentar: " + kommentar + "\n" +
-                "Angel share: " + angelShare + "\n";
+                "Angel share: " + angelShare + "\n" +
+                "Medarbejder: " + medarbejder;
     }
 
     public String getKommentar() {

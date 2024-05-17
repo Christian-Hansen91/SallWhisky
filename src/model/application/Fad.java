@@ -53,7 +53,8 @@ public class Fad implements Lagerenhed{
                 "Kapacitet: " + kapacitet + "\n" +
                 "Ophavsland: " + ophavsland +
                 ", leverandør: " + leverandoer + "\n" +
-                "Historik: " + historik + "\n";
+                "Historik: " + historik + "\n" +
+                "Medarbejder: " + medarbejder;
     }
 
     @Override

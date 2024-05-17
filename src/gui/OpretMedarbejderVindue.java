@@ -63,6 +63,11 @@ public class OpretMedarbejderVindue extends Stage {
         pane.setHalignment(btnAnnuller, HPos.RIGHT);
 
         btnGem.setOnAction(event -> gemAction());
+        btnAnnuller.setOnAction(event -> annullerAction());
+    }
+
+    private void annullerAction() {
+        this.hide();
     }
 
     private void gemAction() {
@@ -73,6 +78,7 @@ public class OpretMedarbejderVindue extends Stage {
             medarbejder = Controller.opretMedarbejder(navn, Integer.parseInt(tlfNr));
             txfNavn.clear();
             txfTlfNr.clear();
+
             startVindue.setMedarbejder(medarbejder);
             this.hide();
             StartVindue.succesIOprettelseAlert();

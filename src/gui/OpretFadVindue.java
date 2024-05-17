@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.Fad;
 import model.application.Lager;
+import model.application.Medarbejder;
 
 import java.time.LocalDate;
 
@@ -158,4 +159,5 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
         this.reol = reol;
         this.hylde = hylde;
     }
+
 }

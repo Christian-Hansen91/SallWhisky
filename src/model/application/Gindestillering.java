@@ -101,4 +101,17 @@ public class Gindestillering implements Lagerenhed {
     public double getLiter() {
         return liter;
     }
+
+    @Override
+    public String toString() {
+        return "Gindestillering, Nr:" + ginNr + "\n" +
+                "Startdato: " + startdato + "\n" +
+                "Slutdato: " + slutdato + "\n" +
+                "Vand Ttlføjet: " + vandTilfoejet + "\n" +
+                "Alkoholprocent: " + alkoholprocent + "\n" +
+                "Liter: " + liter + "\n" +
+                "Ingredienser: " + ingredienser + "\n" +
+                "Lager: " + lager + "\n" +
+                "Medarbejder: " + medarbejder;
+    }
 }
