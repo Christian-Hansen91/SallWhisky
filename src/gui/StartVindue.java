@@ -38,7 +38,6 @@ public class StartVindue extends Application {
     private Label lblMedarbejder = new Label("Medarbejder: ");
     private Stage stage;
     private Button btnSoeg = new Button("Søg");
-
     public void start(Stage stage) throws Exception {
         this.stage = stage;
         stage.setTitle("Sall Whisky Distillery");
@@ -48,9 +47,7 @@ public class StartVindue extends Application {
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.show();
-
     }
-
     private void initContent(GridPane pane) {
         pane.setGridLinesVisible(false);
         pane.setPadding(new Insets(20));
@@ -111,8 +108,7 @@ public class StartVindue extends Application {
         btnOpretWhiskyDestillering.setOnAction(event -> opretWhiskydestilleringsAction());
         btnSoeg.setOnAction(event -> soegningAction());
         btnOpretWhiskyTapning.setOnAction(event -> opretWhiskyTapningAction());
-
-
+        opdaterKnapper();
     }
 
     private void soegningAction() {
@@ -127,7 +123,21 @@ public class StartVindue extends Application {
     private void logIndAction() {
         logIndVindue = new LogIndVindue("Log ind", stage, this);
         logIndVindue.showAndWait();
+        opdaterKnapper();
         opdaterMedarbejderLabel();
+    }
+
+    private void opdaterKnapper() {
+            boolean loggedIn = medarbejder == null;
+            btnOpretFad.setDisable(loggedIn);
+            btnOpretMaltning.setDisable(loggedIn);
+            btnOpretDestilleringsTapning.setDisable(loggedIn);
+            btnOpretOmhaeldning.setDisable(loggedIn);
+            btnOpretWhiskyDestillering.setDisable(loggedIn);
+            btnOpretWhiskyTapning.setDisable(loggedIn);
+            btnOpretGinDestillering.setDisable(loggedIn);
+            btnOpretLager.setDisable(loggedIn);
+            btnSoeg.setDisable(loggedIn);
     }
 
     private void opretMedarbejderAction() {

@@ -13,12 +13,11 @@ import javafx.stage.Stage;
 import model.application.Destillat;
 import model.application.Lager;
 import model.application.VaeskeTilWhisky;
-import model.application.Whiskydestillering;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class OpretWhiskyVindue extends Stage {
+public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     private DatePicker dpDato = new DatePicker(LocalDate.now());
     private ComboBox<Destillat> cbDestillater = new ComboBox<>();
     private Label lblBeskrivelse = new Label("Beskrivelse: ");
@@ -50,7 +49,7 @@ public class OpretWhiskyVindue extends Stage {
     private Label lbl1 = new Label("Vælg destillat(er)");
     private Label lbl2 = new Label("Lav din whisky");
     private Label lbl3 = new Label("Gem din whisky");
-    private Lager valgtLager;
+    private Lager lager;
     private int reol, hylde;
 
     public OpretWhiskyVindue(String title, Stage owner, StartVindue startVindue) {
@@ -158,6 +157,7 @@ public class OpretWhiskyVindue extends Stage {
         lagerVindue.showAndWait();
     }
 
+
     private void setToemDestilat() {
         this.toemDestilat = true;
         txfToemDestillat.setText("Du tømmer destillatet");
@@ -224,10 +224,8 @@ public class OpretWhiskyVindue extends Stage {
         plads.add(pladsHylde);
         return plads;
     }
-    public void setValgtLager(Lager lager) {
-        this.valgtLager = lager;
-    }
-    public void setValgtReolHylde(int reol, int hylde) {
+    public void setValgtReolHylde(Lager lager, int reol, int hylde) {
+        this.lager = lager;
         this.reol = reol;
         this.hylde = hylde;
     }
