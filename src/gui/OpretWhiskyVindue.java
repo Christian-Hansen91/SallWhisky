@@ -226,9 +226,11 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         return plads;
     }
     public void setValgtLager(Lager lager) {
-        this.valgtLager = lager;
+        this.lager = lager;
     }
-    public void setValgtReolHylde(int reol, int hylde) {
+    @Override
+    public void setValgtReolHylde(Lager lager, int reol, int hylde) {
+        this.lager = lager;
         this.reol = reol;
         this.hylde = hylde;
     }

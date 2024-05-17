@@ -144,7 +144,7 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         String kommentar = txaKommentar.getText().trim();
         medarbejder = startVindue.getMedarbejder();
 
-        if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(maengdeVaeske == 0) && !(head == 0) && !(heart == 0) && !(tail == 0)&& !(alkoholprocent == 0)) {
+        if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(maengdeVaeske == 0) && !(head == 0) && !(heart == 0) && !(tail == 0) && !(alkoholprocent == 0)) {
             whiskydestillering = Controller.opretWhiskydestillering(maltning, startdato, slutdato, maengdeVaeske, head, heart, tail, kommentar, alkoholprocent, medarbejder);
 
             txfHead.clear();
@@ -159,20 +159,19 @@ public class OpretWhiskydestilleringsVindue extends Stage {
             StartVindue.succesIOprettelseAlert();
         } else {
             StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette whiskydestilleringen.");
-        String medarbejder1 = medarbejder.getNavn().trim();
-        try {
-            if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(maengdeVaeske == 0) && !(head == 0) && !(heart == 0) && !(tail == 0) && !(alkoholprocent == 0)) {
-                whiskydestillering = Controller.opretWhiskydestillering(maltning, startdato, slutdato, maengdeVaeske, head, heart, tail, kommentar, alkoholprocent, medarbejder);
-                Controller.addWhiskydestillering(whiskydestillering);
-                this.hide();
-                StartVindue.succesIOprettelseAlert();
-            } else {
-                StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette whiskydestilleringen.");
+            String medarbejder1 = medarbejder.getNavn().trim();
+            try {
+                if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(maengdeVaeske == 0) && !(head == 0) && !(heart == 0) && !(tail == 0) && !(alkoholprocent == 0)) {
+                    whiskydestillering = Controller.opretWhiskydestillering(maltning, startdato, slutdato, maengdeVaeske, head, heart, tail, kommentar, alkoholprocent, medarbejder);
+                    Controller.addWhiskydestillering(whiskydestillering);
+                    this.hide();
+                    StartVindue.succesIOprettelseAlert();
+                } else {
+                    StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette whiskydestilleringen.");
+                }
+            } catch (NullPointerException e) {
+                StartVindue.fejlIOprettelseAlert("Udfyld alle felter for at oprette en destillering");
             }
-        } catch (NullPointerException e) {
-            StartVindue.fejlIOprettelseAlert("Udfyld alle felter for at oprette en destillering");
         }
     }
-
-
 }
