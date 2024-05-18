@@ -123,6 +123,5 @@ public class OpretMaltningVindue extends Stage {
         } catch (Exception e) {
             StartVindue.kommafejlAlert();
         }
-
     }
 }

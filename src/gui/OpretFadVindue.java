@@ -19,7 +19,7 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
     private TextField txfFadetype = new TextField();
     private Label lblKapacitet = new Label("Kapacitet (L): ");
     private ComboBox<Integer> cbKapacitet = new ComboBox<>();
-    private Label lblLagerplads = new Label("Vælg en lagerplads");
+    private Label lblLagerplads = new Label("Vælg en lagerplads:");
     private ComboBox<Lager> cbLager = new ComboBox<>();
     private Lager lager = null;
     private Label lblOphavsland = new Label("Ophavsland: ");
@@ -103,6 +103,8 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
         btnVaelgLager.setOnAction(e -> vaelgLager());
         pane.add(lblLagerplads, 24, 1, 3, 1);
         pane.add(btnVaelgLager, 24, 2, 3, 1);
+        pane.setHalignment(btnVaelgLager, HPos.RIGHT);
+        pane.setHalignment(lblLagerplads, HPos.RIGHT);
 
         pane.add(lblLager,24,3,3,1);
         pane.add(btnGem, 24, 7, 2, 1);

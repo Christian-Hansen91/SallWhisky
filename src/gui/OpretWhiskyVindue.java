@@ -14,10 +14,8 @@ import model.application.*;
 import model.application.Destillat;
 import model.application.Lager;
 import model.application.VaeskeTilWhisky;
-import model.application.Whiskydestillering;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     private DatePicker dpDato = new DatePicker(LocalDate.now());
@@ -112,7 +110,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
 
         pane.add(btnToemDestillat, 0, 7, 2, 1);
         pane.setHalignment(btnToemDestillat, HPos.LEFT);
-        btnToemDestillat.setOnAction(event -> setToemDestilat());
+        btnToemDestillat.setOnAction(event -> setToemDestillat());
         pane.add(txfToemDestillat, 0, 8, 2, 1);
         pane.setHalignment(txfToemDestillat, HPos.RIGHT);
         txfToemDestillat.setMaxWidth(175);
@@ -149,25 +147,8 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         pane.setHalignment(txfantalFlasker, HPos.RIGHT);
 
         Button btnVaelgLager = new Button("Vælg lagerplads her");
-        pane.add(btnVaelgLager,4,5, 2, 1);
+        pane.add(btnVaelgLager, 4,5, 2, 1);
         pane.setHalignment(btnVaelgLager, HPos.RIGHT);
-        pane.add(cbLager, 4, 4, 2, 1);
-        cbLager.setMinWidth(175);
-        pane.setHalignment(cbLager, HPos.RIGHT);
-        for (int i = 0; i < Controller.getLagre().size(); i++) {
-            listLager.add(Controller.getLagre().get(i));
-        }
-        cbLager.setItems(listLager);
-        cbLager.setValue(Controller.getLagre().get(0));
-        pane.add(lvLedigeLagerPladser, 4, 5, 2, 3);
-        lvLedigeLagerPladser.setMaxWidth(175);
-        lvLedigeLagerPladser.setMinHeight(70);
-        pane.setHalignment(lvLedigeLagerPladser, HPos.RIGHT);
-
-
-        //christians temp lagerknapværk
-        btnVaelgLager = new Button("Vælg lager");
-        pane.add(btnVaelgLager, 0, 10);
         btnVaelgLager.setOnAction(e -> vaelgLager());
 
         pane.add(btnOpretWhisky, 4, 8, 2, 1);
@@ -179,9 +160,9 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         lagerVindue.showAndWait();
     }
 
-    private void setToemDestilat() {
+    private void setToemDestillat() {
         this.toemDestilat = true;
-        txfToemDestillat.setText("Du tømmer destillatet");
+        txfToemDestillat.setText("Du har tømt destillatet");
     }
 
     private void antalFlaskerForAtTappe() {
@@ -235,7 +216,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             vandTilfoejet = Double.parseDouble(txfVandTilfoejet.getText().trim());
             alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
             if(alkoholprocent>100 || alkoholprocent<40)
-                throw new IllegalArgumentException("Fejl i alcoholsprocent, endten for høj eller for lav");
+                throw new IllegalArgumentException("Fejl i alkoholsprocent, enten for høj eller for lav");
             Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, lager, medarbejder);
             antalFlaskerForAtTappe();
         } catch (Exception e) {

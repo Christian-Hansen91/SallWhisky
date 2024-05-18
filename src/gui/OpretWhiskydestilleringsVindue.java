@@ -106,13 +106,13 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         pane.setHalignment(txfAlkoholprocent, HPos.RIGHT);
 
         pane.add(lblKommentar, 22, 1, 2, 1);
-        pane.add(txaKommentar, 22, 2, 2, 7);
+        pane.add(txaKommentar, 22, 2, 2, 6);
         txaKommentar.setMaxWidth(150);
         txaKommentar.setMaxHeight(250);
         pane.setHalignment(txaKommentar, HPos.RIGHT);
 
-        pane.add(btnGem, 22, 9, 2, 1);
-        pane.add(btnAnnuller, 22, 9, 2, 1);
+        pane.add(btnGem, 22, 8, 2, 1);
+        pane.add(btnAnnuller, 22, 8, 2, 1);
         pane.setHalignment(btnGem, HPos.CENTER);
         btnGem.setOnAction(event -> gemAction());
         pane.setHalignment(btnAnnuller, HPos.RIGHT);
