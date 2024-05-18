@@ -24,6 +24,7 @@ public class StartVindue extends Application {
     private OpretWhiskydestilleringsVindue opretWhiskydestilleringsVindue;
     private OpretWhiskyVindue opretWhiskyVindue;
     private SoegningsVindue soegningsVindue;
+    private OpretGindestilleringVindue opretGindestilleringVindue;
     private Button btnOpretMaltning = new Button("Opret maltning");
     private Button btnOpretWhiskyDestillering = new Button("Opret whiskydestillering");
     private Button btnOpretGinDestillering = new Button("Opret gindestillering");
@@ -111,6 +112,7 @@ public class StartVindue extends Application {
         btnOpretWhiskyDestillering.setOnAction(event -> opretWhiskydestilleringsAction());
         btnSoeg.setOnAction(event -> soegningAction());
         btnOpretWhiskyTapning.setOnAction(event -> opretWhiskyTapningAction());
+        btnOpretGinDestillering.setOnAction(event -> opretGindestilleringVindueAction());
         opdaterKnapper();
     }
 
@@ -171,6 +173,11 @@ public class StartVindue extends Application {
     private void opretWhiskydestilleringsAction() {
         opretWhiskydestilleringsVindue = new OpretWhiskydestilleringsVindue("Opret whiskydestillering", stage, this, medarbejder);
         opretWhiskydestilleringsVindue.showAndWait();
+    }
+
+    private void opretGindestilleringVindueAction() {
+        opretGindestilleringVindue = new OpretGindestilleringVindue("Opret gindestillering", stage, this, medarbejder);
+        opretGindestilleringVindue.showAndWait();
     }
 
     private void opretDestilleringsTapningAction() {

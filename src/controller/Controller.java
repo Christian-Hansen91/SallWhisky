@@ -103,6 +103,9 @@ public class Controller {
     public static void addWhiskydestillering(Whiskydestillering whiskydestillering) { Storage.addWhiskydestillering(whiskydestillering);
     }
 
+    public static void addGindestillering(Gindestillering gindestillering) { Storage.addGindestillering(gindestillering);
+    }
+
     public static void addFad(Fad fad) { Storage.addFad(fad);
     }
 

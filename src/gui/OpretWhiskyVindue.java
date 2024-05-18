@@ -38,7 +38,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     private Label lblAlcoholprocent = new Label("Alcoholprocent: ");
     private TextField txfAlkoholprocent = new TextField();
     private boolean toemDestilat = false;
-    private TextField txfToemDestillat = new TextField();
+    private Label lblToemDestillat = new Label("");
     private ObservableList<VaeskeTilWhisky> listVaeskeTilWhiskyAdded = FXCollections.observableArrayList();
     private ObservableList<Destillat> listDestillater = FXCollections.observableArrayList();
     private TextField txfantalFlasker = new TextField();
@@ -85,7 +85,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         lblAlcoholprocent.setTextFill(Color.BURLYWOOD);
         lblVandTilfoejet.setTextFill(Color.BURLYWOOD);
         lblAntalFlasker.setTextFill(Color.BURLYWOOD);
-
+        lblToemDestillat.setTextFill(Color.BURLYWOOD);
 
         pane.add(lbl1, 0, 0, 2, 1);
         pane.setHalignment(lbl1, HPos.CENTER);
@@ -111,9 +111,9 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         pane.add(btnToemDestillat, 0, 7, 2, 1);
         pane.setHalignment(btnToemDestillat, HPos.LEFT);
         btnToemDestillat.setOnAction(event -> setToemDestillat());
-        pane.add(txfToemDestillat, 0, 8, 2, 1);
-        pane.setHalignment(txfToemDestillat, HPos.RIGHT);
-        txfToemDestillat.setMaxWidth(175);
+        pane.add(lblToemDestillat, 0, 8, 2, 1);
+        pane.setHalignment(lblToemDestillat, HPos.RIGHT);
+        lblToemDestillat.setMaxWidth(175);
 
 
         pane.add(dpDato, 2, 1, 2, 1);
@@ -162,7 +162,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
 
     private void setToemDestillat() {
         this.toemDestilat = true;
-        txfToemDestillat.setText("Du har tømt destillatet");
+        lblToemDestillat.setText("Du har tømt destillatet");
     }
 
     private void antalFlaskerForAtTappe() {
@@ -196,7 +196,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             if (toemDestilat == true) {
                 destillat.saetAngelShare();
                 toemDestilat = false;
-                txfToemDestillat.clear();
+                lblToemDestillat.setText("");
             }
         } catch (Exception e) {
             StartVindue.fejlIOprettelseAlert(e.getMessage());

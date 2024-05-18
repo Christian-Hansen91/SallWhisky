@@ -68,7 +68,6 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         lblHead.setTextFill(Color.BURLYWOOD);
         lblHeart.setTextFill(Color.BURLYWOOD);
         lblTail.setTextFill(Color.BURLYWOOD);
-        lblVaeskeMaengde.setTextFill(Color.BURLYWOOD);
         lblAlkoholprocent.setTextFill(Color.BURLYWOOD);
         lblKommentar.setTextFill(Color.BURLYWOOD);
         lblOverskrift.setTextFill(Color.BURLYWOOD);
