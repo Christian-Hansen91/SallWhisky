@@ -44,6 +44,8 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
     private Label lblIngrediensMaengde = new Label("Mængde: ");
     private TextField txfIngrediensMaengde = new TextField();
     private ArrayList<Ingrediensmaengde> ingredienser = new ArrayList<>();
+    private ListView<Ingrediensmaengde> lvIngrediensmaengder;
+    private ComboBox<Ingrediens> cbIngredienser;
 
 
     public OpretGindestilleringVindue(String title, Stage owner, StartVindue startVindue, Medarbejder medarbejder) {
@@ -114,16 +116,16 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
 
 
         //pane.add(lblMaengdeEnebaer, 2, 1);
-        pane.add(txfEnebaer, 2, 1,2,1);
+        pane.add(txfEnebaer, 2, 1, 2, 1);
         txfEnebaer.setPromptText("Enebær (g):");
         pane.setHalignment(txfEnebaer, HPos.RIGHT);
 
         pane.add(lblTilfoejIngrediens, 2, 2, 2, 1);
-        ComboBox<Ingrediens> cbIngredienser = new ComboBox<>();
+        cbIngredienser = new ComboBox<>();
         cbIngredienser.setPromptText("Vælg ingrediens");
         pane.setHalignment(cbIngredienser, HPos.RIGHT);
         cbIngredienser.setPrefWidth(150);
-        pane.add(cbIngredienser,2,3,2,1);
+        pane.add(cbIngredienser, 2, 3, 2, 1);
         cbIngredienser.getItems().setAll(Ingrediens.values());
 
         //Tilføj combobox eller lignende med enum ingredienser, måske man kan skrive hvad
@@ -131,30 +133,32 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
         //man kan ikke lave enum på runtime :(
 
         //pane.add(lblIngrediensMaengde, 2, 5);
-        pane.add(txfIngrediensMaengde, 2, 4,2,1);
+        pane.add(txfIngrediensMaengde, 2, 4, 2, 1);
         txfIngrediensMaengde.setPromptText("Mængde (g):");
         pane.setHalignment(txfIngrediensMaengde, HPos.RIGHT);
 
         Button btnTilfoejIngrediens = new Button("Tilføj ingrediens");
-        pane.add(btnTilfoejIngrediens,2,5,2,1);
+        pane.add(btnTilfoejIngrediens, 2, 5, 2, 1);
+        pane.setHalignment(btnTilfoejIngrediens, HPos.RIGHT);
+        btnTilfoejIngrediens.setOnAction(e -> opdaterIngrediensLv());
 
 
         //pane.add(lblVandTilfoejet, 2, 6);
         //pane.add(lblLiter, 4,1);
-        pane.add(txfLiter, 2,6);
+        pane.add(txfLiter, 2, 6);
         txfLiter.setPromptText("Liter i alt:");
-        pane.setHalignment(txfLiter,HPos.RIGHT);
+        pane.setHalignment(txfLiter, HPos.RIGHT);
         txfLiter.setMaxWidth(75);
 
         //pane.add(lblKommentar, 4, 2, 2, 1);
 
-        ListView<Ingrediensmaengde> lvIngrediensmaengder = new ListView<>();
-        pane.add(lvIngrediensmaengder,4,1,3,4);
+        lvIngrediensmaengder = new ListView<>();
+        pane.add(lvIngrediensmaengder, 4, 1, 3, 4);
 
 
         pane.add(btnVaelgLager, 4, 5);
         pane.setHalignment(btnVaelgLager, HPos.LEFT);
-        pane.add(lblLager, 5, 5,2,1);
+        pane.add(lblLager, 5, 5, 2, 1);
 
         pane.add(btnGem, 6, 6);
         pane.add(btnAnnuller, 4, 6);
@@ -164,6 +168,25 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
         btnGem.setOnAction(event -> gemAction());
         btnAnnuller.setOnAction(event -> annullerAction());
         btnVaelgLager.setOnAction(event -> vaelgLagerAction());
+    }
+
+    private void opdaterIngrediensLv() {
+        if (this.gindestillering == null) {
+            opretGindestillering();
+        }
+        try {
+            if (cbIngredienser.getSelectionModel().getSelectedItem() == null) {
+                StartVindue.fejlIOprettelseAlert("Vælg en ingrediens i listen");
+            } else {
+                gindestillering.tilfoejIngrediensmaengde(cbIngredienser.getSelectionModel().getSelectedItem(), Double.parseDouble(txfIngrediensMaengde.getText()));
+                lvIngrediensmaengder.getItems().clear();
+                lvIngrediensmaengder.getItems().setAll(gindestillering.hentIngredienser());
+            }
+        } catch (NumberFormatException e) {
+            StartVindue.kommafejlAlert();
+        } catch (NullPointerException e) {
+            StartVindue.fejlIOprettelseAlert("Du skal udfylde alle felter før du kan oprette en gindestillering");
+        }
     }
 
     private void vaelgLagerAction() {
@@ -189,7 +212,7 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
         this.hylde = hylde;
     }
 
-    private void gemAction() {
+    private void opretGindestillering() {
         LocalDate startdato = dpStartdato.getValue();
         LocalDate slutdato = dpSlutdato.getValue();
         double vandTilfoejet = 0.0;
@@ -209,16 +232,6 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
 
         if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(vandTilfoejet == 0.0) && !(liter == 0.0) && !(alkoholprocent == 0.0) && !(maengdeEnebaer == 0.0)) {
             gindestillering = Controller.opretGindestillering(startdato, slutdato, vandTilfoejet, alkoholprocent, liter, maengdeEnebaer, medarbejder);
-
-            txfLiter.clear();
-            txfVandtilfoejet.clear();
-            txaKommentar.clear();
-            txfAlkoholprocent.clear();
-            txfEnebaer.clear();
-
-            Controller.addGindestillering(gindestillering);
-            this.hide();
-            StartVindue.succesIOprettelseAlert();
         } else {
             StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette gindestilleringen.");
             String medarbejder1 = medarbejder.getNavn().trim();
@@ -235,5 +248,16 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
                 StartVindue.fejlIOprettelseAlert("Udfyld alle felter for at oprette en destillering");
             }
         }
+    }
+
+    private void gemAction() {
+        if (!lager.equals(null)) {
+            lager.addLagerenhedAt(reol, hylde, gindestillering);
+            this.hide();
+            StartVindue.succesIOprettelseAlert();
+        } else {
+            StartVindue.fejlIOprettelseAlert("Vælg en lagerplads");
+        }
+
     }
 }

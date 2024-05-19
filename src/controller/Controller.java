@@ -60,6 +60,9 @@ public class Controller {
         return destillat;
     }
 
+    public static void tilfoejIngrediensmaengde(Ingrediens ingrediens, double maengde, Gindestillering gindestillering) {
+        gindestillering.tilfoejIngrediensmaengde(ingrediens,maengde);
+    }
 
     public static ArrayList<Medarbejder> getMedarbejdere() {
         return Storage.getMedarbejdere();

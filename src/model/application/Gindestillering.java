@@ -29,11 +29,13 @@ public class Gindestillering implements Lagerenhed {
     }
 
     public void tilfoejIngrediensmaengde(Ingrediens ingrediens, double maengde) {
-        if (ginIndeholderIngrediens(ingrediens)) {
-            tilfoejMaengdeTilIngrediens(ingrediens, maengde);
-        } else {
-            Ingrediensmaengde nyIngrediensmaengde = new Ingrediensmaengde(maengde, this, ingrediens);
-            ingredienser.add(nyIngrediensmaengde);
+        if (maengde > 0) {
+            if (ginIndeholderIngrediens(ingrediens)) {
+                tilfoejMaengdeTilIngrediens(ingrediens, maengde);
+            } else {
+                Ingrediensmaengde nyIngrediensmaengde = new Ingrediensmaengde(maengde, this, ingrediens);
+                ingredienser.add(nyIngrediensmaengde);
+            }
         }
     }
 
@@ -63,7 +65,7 @@ public class Gindestillering implements Lagerenhed {
         return maengde;
     }
 
-    public void tilfoejMaengdeTilIngrediens(Ingrediens ingrediens, double maengde) {
+    private void tilfoejMaengdeTilIngrediens(Ingrediens ingrediens, double maengde) {
         for (Ingrediensmaengde ingrediensmaengde : ingredienser) {
             if (ingrediensmaengde.hentIngrediens().equals(ingrediens)) {
                 ingrediensmaengde.tilfoejMaengde(maengde);

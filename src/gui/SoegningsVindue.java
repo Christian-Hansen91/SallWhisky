@@ -39,12 +39,15 @@ public class SoegningsVindue extends Stage {
         destillatSoegning.setContent(new DestillatSoegningPane());
         WhiskySoegningPane whiskyPane = new WhiskySoegningPane();
         whiskySoegning.setContent(whiskyPane);
-        //whiskySoegning.setOnSelectionChanged(event -> );
 
         Tab fadSoening = new Tab("Fadsøgning");
         tabPane.getTabs().add(fadSoening);
         FadSoegningPane fadPane = new FadSoegningPane();
         fadSoening.setContent(fadPane);
 
+        Tab ginSoegning = new Tab("Ginsøgning");
+        tabPane.getTabs().add(ginSoegning);
+        GinsoegningPane ginsoegningPane = new GinsoegningPane();
+        ginSoegning.setContent(ginsoegningPane);
     }
 }

@@ -20,4 +20,8 @@ public class Ingrediensmaengde {
     public double hentMaengde() {
         return maengde;
     }
+
+    public String toString() {
+        return ingrediens.toString().substring(0,1) + ingrediens.toString().substring(1).toLowerCase() + ": " + maengde + " gram";
+    }
 }
