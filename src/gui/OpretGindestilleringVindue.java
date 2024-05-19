@@ -8,13 +8,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.application.Gindestillering;
-import model.application.Lager;
-import model.application.Maltning;
-import model.application.Medarbejder;
+import model.application.*;
 import storage.Storage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class OpretGindestilleringVindue extends Stage implements LagerenhedsVindue {
     private Label lblDatoer = new Label("Vælg start- og slutdato:");
@@ -38,13 +36,14 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
     private Gindestillering gindestillering = null;
     private Medarbejder medarbejder;
     private StartVindue startVindue;
-    private Button btnVaelgLager = new Button("Vælg lagerplads");
+    private Button btnVaelgLager = new Button("Lagerplads");
     private Lager lager = null;
     private int reol, hylde;
     private Label lblLager = new Label("");
     private Label lblTilfoejIngrediens = new Label("Tilføj ingredienser:");
     private Label lblIngrediensMaengde = new Label("Mængde: ");
     private TextField txfIngrediensMaengde = new TextField();
+    private ArrayList<Ingrediensmaengde> ingredienser = new ArrayList<>();
 
 
     public OpretGindestilleringVindue(String title, Stage owner, StartVindue startVindue, Medarbejder medarbejder) {
@@ -61,7 +60,7 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
     }
 
     private void initContent(GridPane pane) {
-        pane.setGridLinesVisible(false);
+        pane.setGridLinesVisible(true);
         pane.setPadding(new Insets(20));
         pane.setPrefHeight(315);
         pane.setPrefWidth(600);
@@ -81,65 +80,89 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
         lblIngrediensMaengde.setTextFill(Color.BURLYWOOD);
         lblNavn.setTextFill(Color.BURLYWOOD);
 
-        pane.add(lblOverskrift, 0, 0, 6, 1);
+        pane.add(lblOverskrift, 0, 0, 8, 1);
         pane.setHalignment(lblOverskrift, HPos.CENTER);
 
-        pane.add(lblDatoer, 0,1,2,1);
+        //pane.add(lblDatoer, 0,1,2,1);
         pane.add(dpStartdato, 0, 2, 2, 1);
+        dpStartdato.setPromptText("Startdato");
         pane.add(dpSlutdato, 0, 3, 2, 1);
+        dpSlutdato.setPromptText("Slutdato");
 
-        pane.add(lblNavn, 0, 4, 2, 1);
-        pane.add(txfNavn, 0, 5, 2, 1);
+        dpStartdato.getEditor().setDisable(true);
+        dpSlutdato.getEditor().setDisable(true);
+
+        //pane.add(lblNavn, 0, 4, 2, 1);
+        pane.add(txfNavn, 0, 1, 2, 1);
+        txfNavn.setPromptText("Navngiv gin:");
         pane.setHalignment(txfNavn, HPos.RIGHT);
 
-        pane.add(lblAlkoholprocent, 0, 6);
-        pane.add(txfAlkoholprocent, 1, 6);
+        pane.add(txaKommentar, 0, 4, 2, 2);
+        txaKommentar.setPromptText("Tilføj kommentar:");
+        txaKommentar.setMaxWidth(175);
+        pane.setHalignment(txaKommentar, HPos.LEFT);
+
+        //pane.add(lblAlkoholprocent, 0, 6);
+        pane.add(txfAlkoholprocent, 0, 6);
         txfAlkoholprocent.setMaxWidth(75);
+        txfAlkoholprocent.setPromptText("Alkoholprocent:");
         pane.setHalignment(txfAlkoholprocent, HPos.RIGHT);
-
-
-        pane.add(lblMaengdeEnebaer, 2, 1);
-        pane.add(txfEnebaer, 3, 1);
-        txfEnebaer.setMaxWidth(75);
-        pane.setHalignment(txfEnebaer, HPos.RIGHT);
-
-        pane.add(lblTilfoejIngrediens, 2, 2, 2, 1);
-
-        //Tilføj combobox eller lignende med enum ingredienser, måske man kan skrive hvad
-        // som helst og så oprettes ny enum automatisk?? Sejt
-
-        pane.add(lblIngrediensMaengde, 2, 5);
-        pane.add(txfIngrediensMaengde, 3, 5);
-        txfIngrediensMaengde.setMaxWidth(75);
-        pane.setHalignment(txfIngrediensMaengde, HPos.RIGHT);
-
-        pane.add(lblVandTilfoejet, 2, 6);
-        pane.add(txfVandtilfoejet, 3, 6);
+        pane.add(txfVandtilfoejet, 1, 6);
+        txfVandtilfoejet.setPromptText("Vand tilføjet:");
         txfVandtilfoejet.setMaxWidth(75);
         pane.setHalignment(txfVandtilfoejet, HPos.RIGHT);
 
 
-        pane.add(lblLiter, 4,1);
-        pane.add(txfLiter, 5,1);
+        //pane.add(lblMaengdeEnebaer, 2, 1);
+        pane.add(txfEnebaer, 2, 1,2,1);
+        txfEnebaer.setPromptText("Enebær (g):");
+        pane.setHalignment(txfEnebaer, HPos.RIGHT);
+
+        pane.add(lblTilfoejIngrediens, 2, 2, 2, 1);
+        ComboBox<Ingrediens> cbIngredienser = new ComboBox<>();
+        cbIngredienser.setPromptText("Vælg ingrediens");
+        pane.setHalignment(cbIngredienser, HPos.RIGHT);
+        cbIngredienser.setPrefWidth(150);
+        pane.add(cbIngredienser,2,3,2,1);
+        cbIngredienser.getItems().setAll(Ingrediens.values());
+
+        //Tilføj combobox eller lignende med enum ingredienser, måske man kan skrive hvad
+        // som helst og så oprettes ny enum automatisk?? Sejt
+        //man kan ikke lave enum på runtime :(
+
+        //pane.add(lblIngrediensMaengde, 2, 5);
+        pane.add(txfIngrediensMaengde, 2, 4,2,1);
+        txfIngrediensMaengde.setPromptText("Mængde (g):");
+        pane.setHalignment(txfIngrediensMaengde, HPos.RIGHT);
+
+        Button btnTilfoejIngrediens = new Button("Tilføj ingrediens");
+        pane.add(btnTilfoejIngrediens,2,5,2,1);
+
+
+        //pane.add(lblVandTilfoejet, 2, 6);
+        //pane.add(lblLiter, 4,1);
+        pane.add(txfLiter, 2,6);
+        txfLiter.setPromptText("Liter i alt:");
+        pane.setHalignment(txfLiter,HPos.RIGHT);
         txfLiter.setMaxWidth(75);
-        pane.setHalignment(txfLiter, HPos.RIGHT);
 
-        pane.add(lblKommentar, 4, 2, 2, 1);
-        pane.add(txaKommentar, 4, 3, 2, 1);
-        txaKommentar.setMaxWidth(175);
-        pane.setHalignment(txaKommentar, HPos.RIGHT);
+        //pane.add(lblKommentar, 4, 2, 2, 1);
 
-        pane.add(btnVaelgLager, 4, 4, 2, 1);
-        pane.setHalignment(btnVaelgLager, HPos.RIGHT);
-        pane.add(lblLager, 4, 5, 2, 1);
+        ListView<Ingrediensmaengde> lvIngrediensmaengder = new ListView<>();
+        pane.add(lvIngrediensmaengder,4,1,3,4);
 
-        pane.add(btnGem, 4, 6, 2, 1);
-        pane.add(btnAnnuller, 4, 6, 2, 1);
-        pane.setHalignment(btnGem, HPos.CENTER);
+
+        pane.add(btnVaelgLager, 4, 5);
+        pane.setHalignment(btnVaelgLager, HPos.LEFT);
+        pane.add(lblLager, 5, 5,2,1);
+
+        pane.add(btnGem, 6, 6);
+        pane.add(btnAnnuller, 4, 6);
+        pane.setHalignment(btnGem, HPos.RIGHT);
+        pane.setHalignment(btnAnnuller, HPos.LEFT);
+
         btnGem.setOnAction(event -> gemAction());
-        pane.setHalignment(btnAnnuller, HPos.RIGHT);
         btnAnnuller.setOnAction(event -> annullerAction());
-
         btnVaelgLager.setOnAction(event -> vaelgLagerAction());
     }
 
