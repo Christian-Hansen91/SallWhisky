@@ -32,7 +32,7 @@ public class Destillat {
         this.kommentar = kommentar;
     }
 
-    public void tilfoejTapning(VaeskeTilDestillat vaeskeTilDestillat) {
+    public void tilfoejVaeskeTilDestillat(VaeskeTilDestillat vaeskeTilDestillat) {
         if (!this.vaeskeTilDestillater.contains(vaeskeTilDestillat)) {
             this.vaeskeTilDestillater.add(vaeskeTilDestillat);
         }

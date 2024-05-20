@@ -30,7 +30,7 @@ class WhiskydestilleringTest {
         double maengde = 60;
         VaeskeTilDestillat vaeskeTilDestillat = whiskyDestillering.opretVaeskeTilDestillat(maengde);
         assertEquals(0,fad.hentOpbrugtKapacitet());
-        destillat.tilfoejTapning(vaeskeTilDestillat);
+        destillat.tilfoejVaeskeTilDestillat(vaeskeTilDestillat);
         assertDoesNotThrow(() -> whiskyDestillering.opretVaeskeTilDestillat(maengde));
         assertEquals(maengde,fad.hentOpbrugtKapacitet());
         assertThrows(IllegalArgumentException.class, () -> whiskyDestillering.opretVaeskeTilDestillat(10000));

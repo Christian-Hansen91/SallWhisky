@@ -8,10 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.application.Destillat;
-import model.application.Whiskydestillering;
-import model.application.Fad;
-import model.application.VaeskeTilDestillat;
+import model.application.*;
+import storage.Storage;
 
 import java.time.LocalDate;
 
@@ -22,7 +20,7 @@ public class OpretDestillatVindue extends Stage {
     private Label lblKommentar = new Label("Kommentar: ");
     private TextField txfKommentar = new TextField();
     private Label lblDestillat = new Label("Destillat");
-    private TextArea txaDestillat = new TextArea();
+    private ListView<VaeskeTilDestillat> lvwDestillat = new ListView<>();
     private Button btnOpretTapning = new Button("Opret tapning til destillat");
     private Label lblTapning = new Label("Tapning ");
     private Button btnOpretDestillat = new Button("Opret destillat");
@@ -33,6 +31,8 @@ public class OpretDestillatVindue extends Stage {
     private VaeskeTilDestillat vaeskeTilDestillat = null;
     private Whiskydestillering whiskydestillering = null;
     private StartVindue startVindue;
+    private Fad fad = null;
+    private Medarbejder medarbejder;
 
     public OpretDestillatVindue(String title, Stage owner, StartVindue startVindue) {
         this.startVindue = startVindue;
@@ -80,14 +80,14 @@ public class OpretDestillatVindue extends Stage {
 
         pane.add(btnOpretTapning, 0, 9);
         pane.setHalignment(btnOpretTapning, HPos.RIGHT);
-        //btnOpretTapning.setOnAction(event -> opretTapningTilDestillatAction());
+        btnOpretTapning.setOnAction(event -> opretVaeskeTilDestillatAction());
 
         pane.add(lblDestillat, 3, 0, 2, 1);
         pane.setHalignment(lblDestillat, HPos.CENTER);
-        pane.add(txaDestillat, 3, 1, 2, 5);
-        pane.setHalignment(txaDestillat, HPos.CENTER);
-        txaDestillat.setMaxWidth(200);
-        txaDestillat.setMinHeight(100);
+        pane.add(lvwDestillat, 3, 1, 2, 5);
+        pane.setHalignment(lvwDestillat, HPos.CENTER);
+        lvwDestillat.setMaxWidth(200);
+        lvwDestillat.setMinHeight(100);
 
         pane.add(lblTilfoejTilFad, 3, 6, 2, 1);
         pane.setHalignment(lblTilfoejTilFad, HPos.RIGHT);
@@ -97,25 +97,33 @@ public class OpretDestillatVindue extends Stage {
 
         pane.add(btnOpretDestillat, 3, 9, 2, 1);
         pane.setHalignment(btnOpretDestillat, HPos.RIGHT);
-        //btnOpretDestillat.setOnAction(event -> gemDestillatAction());
+        btnOpretDestillat.setOnAction(event -> gemDestillatAction());
     }
 
-    /*private void opretTapningTilDestillatAction() {
+    private void opretVaeskeTilDestillatAction() {
         LocalDate dagsdato = dato.getValue();
         double maengde = Double.parseDouble(txfMaengdeILiter.getText().trim());
         String kommentar = txfKommentar.getText().trim();
 
-        tapning = whiskydestillering.opretTapning(maengde, kommentar);
-        destillat.tilfoejTapning(tapning);
+        whiskydestillering = cbDestilleringer.getSelectionModel().getSelectedItem();
+        vaeskeTilDestillat = whiskydestillering.opretVaeskeTilDestillat(maengde);
+        //destillat.tilfoejVaeskeTilDestillat(vaeskeTilDestillat); HJÆLP
+        lvwDestillat.getItems().setAll(destillat.getVaeskeTilDestillater());
+    }
 
-        txaDestillat.setText(tapning.toString() + "\n");
-    }*/
-
-     private void gemDestillatAction() {
+    private void gemDestillatAction() {
         LocalDate dato1 = dato.getValue();
         String kommentar = txfKommentar.getText().trim();
-        Fad fad = cbFade.getSelectionModel().getSelectedItem();
+        fad = cbFade.getSelectionModel().getSelectedItem();
+        medarbejder = startVindue.getMedarbejder();
 
-        //destillat = whiskydestillering.opretDestillat(fad);
+        if (!(dato1.isBefore(LocalDate.now())) && !(fad == null)) {
+            destillat = Controller.opretDestillat(fad, medarbejder);
+            Controller.getDestillater().add(destillat);
+            this.hide();
+            StartVindue.succesIOprettelseAlert();
+        } else {
+            StartVindue.fejlIOprettelseAlert("Udfyld alle felter for at oprette destillatet.");
+        }
     }
 }

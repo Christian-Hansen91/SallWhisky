@@ -258,6 +258,5 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
         } else {
             StartVindue.fejlIOprettelseAlert("Vælg en lagerplads");
         }
-
     }
 }

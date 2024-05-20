@@ -25,7 +25,7 @@ public class VaeskeTilDestillat {
 
     @Override
     public String toString() {
-        return "Tapning: " + "\n" +
+        return "Væske til destillat: " + "\n" +
                 "Destillering: " + whiskydestillering + "\n" +
                 "Dato: " + dato + "\n" +
                 "Mængde: " + maengde + "\n" +
