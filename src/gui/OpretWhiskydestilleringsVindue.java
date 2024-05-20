@@ -78,8 +78,10 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         pane.add(cbMaltning, 0, 1, 4, 1);
         cbMaltning.setMaxWidth(175);
         cbMaltning.getItems().setAll(Storage.getMaltninger());
+        cbMaltning.setPromptText("Vælg maltning");
 
         pane.add(dpStartdato, 0, 2, 2, 1);
+        dpStartdato.setPromptText("Vælg startdato");
         pane.add(dpSlutdato, 0, 3, 2, 1);
 
         pane.add(lblVaeskeMaengde, 0, 4);
