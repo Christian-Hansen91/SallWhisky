@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class VaeskeTilDestillat {
     private Whiskydestillering whiskydestillering;
-    private Whisky whisky;
     private LocalDate dato;
     private double maengde;
     private String kommentar;
@@ -12,9 +11,10 @@ public class VaeskeTilDestillat {
     VaeskeTilDestillat(double maengde, Whiskydestillering whiskydestillering) {
         this.maengde = maengde;
         this.whiskydestillering = whiskydestillering;
+        whiskydestillering.tilfoejVaeskemaengde(this);
         this.dato = LocalDate.now();
-        this.kommentar = kommentar;
     }
+
     public double getMaengde() {
         return maengde;
     }
@@ -25,10 +25,17 @@ public class VaeskeTilDestillat {
 
     @Override
     public String toString() {
-        return "VÆSKE TIL DESTILLAT: " + "\n" +
-                whiskydestillering + "\n" +
-                "Dato: " + dato + "\n" +
-                "Mængde: " + maengde + "\n" +
-                "Kommentar: " + kommentar + "\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Whiskydestillering #"+whiskydestillering.getNewMakeNr() + ":\n" +
+                "\tDato: " + dato + "\n" +
+                "\tMængde: " + maengde + "\n");
+        return sb.toString();
+    }
+
+    public void fjernVaeske() {
+        if (whiskydestillering != null) {
+            whiskydestillering.fjernVaeske(this);
+            whiskydestillering = null;
+        }
     }
 }

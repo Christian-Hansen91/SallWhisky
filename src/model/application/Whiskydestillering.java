@@ -60,19 +60,36 @@ public class Whiskydestillering {
         return maengde + liter <= heart;
     }
 
+    public double hentTilgaengeligVaeske() {
+        double vaeskeTilbage = heart;
+        for (VaeskeTilDestillat vaeskeTilDestillat : tapninger) {
+            vaeskeTilbage -= vaeskeTilDestillat.getMaengde();
+        }
+        return vaeskeTilbage;
+    }
+
     @Override
     public String toString() {
         return "Destillering, ID: " + newMakeNr + "\n" +
-                "Tapninger: " + tapninger + "\n" +
                 "Startdato: " + startdato +
                 ", slutdato: " + slutdato + "\n" +
-                "Væske (L): " + maengdeVaeske + "\n" +
-                "Head: " + head +
-                ", heart: " + heart +
-                ", tail: " + tail + "\n" +
+                "Tilgængelig væske (L): " + hentTilgaengeligVaeske() + "\n" +
                 "Alkoholprocent: " + alkoholprocent + "\n" +
                 "Kommentar: " + kommentar + ".\n\n" +
                 "Malt: " + maltning + "\n" +
                 "Medarbejder: " + medarbejder;
+    }
+
+    public void tilfoejVaeskemaengde(VaeskeTilDestillat vaeskeTilDestillat) {
+        if (!tapninger.contains(vaeskeTilDestillat)) {
+            tapninger.add(vaeskeTilDestillat);
+        }
+    }
+
+    public void fjernVaeske(VaeskeTilDestillat vaeskeTilDestillat) {
+        if (tapninger.contains(vaeskeTilDestillat)) {
+            tapninger.remove(vaeskeTilDestillat);
+            vaeskeTilDestillat.fjernVaeske();
+        }
     }
 }

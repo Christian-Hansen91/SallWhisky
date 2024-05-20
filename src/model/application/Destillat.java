@@ -8,7 +8,7 @@ public class Destillat {
     private static int totalAntal;
     private int id;
     private LocalDate dato;
-    private String kommentar;
+    private List<String> kommentar = new ArrayList<>();
     private List<VaeskeTilDestillat> vaeskeTilDestillater = new ArrayList<>();
     private List<VaeskeTilWhisky> vaeskeTilWhiskyer = new ArrayList<>();
     private Fad fad;
@@ -19,7 +19,6 @@ public class Destillat {
         Destillat.totalAntal++;
         this.id = totalAntal;
         this.dato = LocalDate.now();
-        this.kommentar = "";
         this.fad = fad;
         fad.saetDestillat(this);
         this.medarbejder = medarbejder;
@@ -28,8 +27,8 @@ public class Destillat {
     private void kontrollerMaengdeIFad(Fad fad) {
     }
 
-    public void saetKommentar(String kommentar) {
-        this.kommentar = kommentar;
+    public void tilfoejKommentar(String kommentar) {
+        this.kommentar.add(kommentar);
     }
 
     public void tilfoejVaeskeTilDestillat(VaeskeTilDestillat vaeskeTilDestillat) {
@@ -85,8 +84,8 @@ public class Destillat {
                 medarbejder;
     }
 
-    public String getKommentar() {
-        return kommentar;
+    public List<String> getKommentar() {
+        return new ArrayList<>(kommentar);
     }
 
     public LocalDate getDato() {
@@ -94,5 +93,10 @@ public class Destillat {
     }
     public void setDato(LocalDate dato) {
         this.dato = dato;
+    }
+
+    public void fjernVaeske(int index) {
+        vaeskeTilDestillater.get(index).fjernVaeske();
+        vaeskeTilDestillater.remove(index);
     }
 }

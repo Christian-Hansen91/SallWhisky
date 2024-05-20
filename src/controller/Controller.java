@@ -14,11 +14,13 @@ public class Controller {
         Storage.addMedarbejder(medarbejder);
         return medarbejder;
     }
+
     public static Maltning opretMaltning(double maengde, String korntype, String marknavn, Medarbejder medarbejder) {
         Maltning maltning = new Maltning(maengde, korntype, marknavn, medarbejder);
         Storage.addMaltning(maltning);
         return maltning;
     }
+
     public static Maltning opretMaltning(double maengde, String korntype, String marknavn, String rygemateriale, Medarbejder medarbejder) {
         Maltning maltning = new Maltning(maengde, korntype, marknavn, rygemateriale, medarbejder);
         Storage.addMaltning(maltning);
@@ -37,31 +39,35 @@ public class Controller {
         Storage.addWhiskydestillering(whiskydestillering);
         return whiskydestillering;
     }
+
     public static Whisky opretWhisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
                                      double vandTilfoejet, double alkoholprocent, Lager lager, Medarbejder medarbejder) {
         Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder);
         Storage.addWhisky(whisky);
         return whisky;
     }
+
     public static Gindestillering opretGindestillering(LocalDate startdato, LocalDate slutdato,
                                                        double vandTilfoejet, double alkoholprocent, double liter, double maengdeEnebaer, Medarbejder medarbejder) {
         Gindestillering gindestillering = new Gindestillering(startdato, slutdato, vandTilfoejet, alkoholprocent, liter, maengdeEnebaer, medarbejder);
         Storage.addGindestillering(gindestillering);
         return gindestillering;
     }
-    public static Lager opretLager(String navn, Lagerenhed[][] reolliste, Medarbejder medarbejder){
+
+    public static Lager opretLager(String navn, Lagerenhed[][] reolliste, Medarbejder medarbejder) {
         Lager lager = new Lager(navn, reolliste, medarbejder);
         Storage.addLager(lager);
         return lager;
     }
-    public static Destillat opretDestillat(Fad fad, Medarbejder medarbejder){
+
+    public static Destillat opretDestillat(Fad fad, Medarbejder medarbejder) {
         Destillat destillat = new Destillat(fad, medarbejder);
         Storage.addDestillat(destillat);
         return destillat;
     }
 
     public static void tilfoejIngrediensmaengde(Ingrediens ingrediens, double maengde, Gindestillering gindestillering) {
-        gindestillering.tilfoejIngrediensmaengde(ingrediens,maengde);
+        gindestillering.tilfoejIngrediensmaengde(ingrediens, maengde);
     }
 
     public static ArrayList<Medarbejder> getMedarbejdere() {
@@ -71,9 +77,11 @@ public class Controller {
     public static ArrayList<Whisky> getWhiskyer() {
         return Storage.getWhiskyer();
     }
+
     public static ArrayList<Gindestillering> getGindestilleringer() {
         return Storage.getGindestilleringer();
     }
+
     public static ArrayList<Maltning> getMaltninger() {
         return Storage.getMaltninger();
     }
@@ -90,6 +98,7 @@ public class Controller {
     public static ArrayList<Lager> getLagre() {
         return Storage.getLagre();
     }
+
     public static ArrayList<Destillat> getDestillater() {
         ArrayList<Destillat> destillater = new ArrayList<>();
         for (int i = 0; i < getFade().size(); i++) {
@@ -97,22 +106,29 @@ public class Controller {
         }
         return destillater;
     }
-    public static void addMedarbejder(Medarbejder medarbejder) { Storage.addMedarbejder(medarbejder);
+
+    public static void addMedarbejder(Medarbejder medarbejder) {
+        Storage.addMedarbejder(medarbejder);
     }
 
-    public static void addMaltning(Maltning maltning) { Storage.addMaltning(maltning);
+    public static void addMaltning(Maltning maltning) {
+        Storage.addMaltning(maltning);
     }
 
-    public static void addWhiskydestillering(Whiskydestillering whiskydestillering) { Storage.addWhiskydestillering(whiskydestillering);
+    public static void addWhiskydestillering(Whiskydestillering whiskydestillering) {
+        Storage.addWhiskydestillering(whiskydestillering);
     }
 
-    public static void addGindestillering(Gindestillering gindestillering) { Storage.addGindestillering(gindestillering);
+    public static void addGindestillering(Gindestillering gindestillering) {
+        Storage.addGindestillering(gindestillering);
     }
 
-    public static void addFad(Fad fad) { Storage.addFad(fad);
+    public static void addFad(Fad fad) {
+        Storage.addFad(fad);
     }
 
-    public static void addLager(Lager lager) { Storage.addLager(lager);
+    public static void addLager(Lager lager) {
+        Storage.addLager(lager);
     }
 
     public static ArrayList<Whisky> soegWhiskyBeskrivelse(String beskrivelse) {
@@ -154,6 +170,7 @@ public class Controller {
         }
         return destillater;
     }
+
     public static ArrayList<Destillat> soegDestillatId(int id) {
         ArrayList<Destillat> destillater = new ArrayList<>();
         for (Destillat destillat : Storage.getDestillater()) {
@@ -167,7 +184,7 @@ public class Controller {
     public static List<Destillat> fjernUnderTre(List<Destillat> alleDestillat) {
         ArrayList<Destillat> gamleDestillater = new ArrayList<>();
         for (Destillat destillat : alleDestillat) {
-            if (ChronoUnit.YEARS.between(destillat.getDato(),LocalDate.now()) >= 3) {
+            if (ChronoUnit.YEARS.between(destillat.getDato(), LocalDate.now()) >= 3) {
                 gamleDestillater.add(destillat);
             }
         }
@@ -204,4 +221,27 @@ public class Controller {
         }
         return fade;
     }
+
+    public static String skabVaeskeoversigt(Destillat destillat, Medarbejder medarbejder) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Destillat lavet af "+ medarbejder.getNavn() + ":\n");
+        for (VaeskeTilDestillat vaeskeTilDestillat : destillat.getVaeskeTilDestillater()) {
+            sb.append("\t" + vaeskeTilDestillat + "\n");
+        }
+        sb.append("---------\n");
+        if (!destillat.getKommentar().isEmpty()) {
+            sb.append("Kommentarer:\n");
+            for (String s : destillat.getKommentar()) {
+                sb.append("\t"+s+"\n");
+            }
+        }
+
+        return sb.toString();
+    }
+
+    public static boolean tjekKapacitetFad(Fad fad, double maengde) {
+        return fad.tjekPlads(maengde);
+    }
 }
+

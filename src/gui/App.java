@@ -35,10 +35,8 @@ public class App {
 
         Destillat destillat1 = Controller.opretDestillat(fad1, medarbejder2);
         destillat1.tilfoejVaeskeTilDestillat(whiskydestillering1.opretVaeskeTilDestillat(100));
-        destillat1.saetKommentar("Sall præst har velsignet dette fad");
         Destillat destillat2 = Controller.opretDestillat(fad2, medarbejder1);
         destillat2.tilfoejVaeskeTilDestillat(whiskydestillering2.opretVaeskeTilDestillat(50));
-        destillat2.saetKommentar("Special Edition");
         destillat2.setDato(LocalDate.of(2018,1,2));
         lager1.addLagerenhedAt(2, 1, fad2);
         lager1.addReol(6);

@@ -9,7 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.*;
-import storage.Storage;
 
 import java.time.LocalDate;
 
@@ -20,7 +19,7 @@ public class OpretDestillatVindue extends Stage {
     private Label lblKommentar = new Label("Kommentar: ");
     private TextField txfKommentar = new TextField();
     private Label lblDestillat = new Label("Destillat");
-    private ListView<VaeskeTilDestillat> lvwDestillat = new ListView<>();
+    private ListView<String> lvwDestillat = new ListView<>();
     private Button btnOpretTapning = new Button("Opret tapning til destillat");
     private Label lblTapning = new Label("Tapning ");
     private Button btnOpretDestillat = new Button("Opret destillat");
@@ -36,6 +35,7 @@ public class OpretDestillatVindue extends Stage {
 
     public OpretDestillatVindue(String title, Stage owner, StartVindue startVindue) {
         this.startVindue = startVindue;
+        medarbejder = startVindue.getMedarbejder();
         this.initOwner(owner);
 
         setTitle("Opret destilleringstapning");
@@ -89,7 +89,10 @@ public class OpretDestillatVindue extends Stage {
         lvwDestillat.setMaxWidth(200);
         lvwDestillat.setMinHeight(100);
 
-        pane.add(lblTilfoejTilFad, 3, 6, 2, 1);
+        Button btnFjernSidste = new Button("Fjern sidste");
+        btnFjernSidste.setOnAction(e -> fjernSidste());
+        pane.add(btnFjernSidste,3,6);
+        pane.add(lblTilfoejTilFad, 4, 6);
         pane.setHalignment(lblTilfoejTilFad, HPos.RIGHT);
         pane.add(cbFade, 3, 7, 2, 1);
         cbFade.setMaxWidth(200);
@@ -100,30 +103,61 @@ public class OpretDestillatVindue extends Stage {
         btnOpretDestillat.setOnAction(event -> gemDestillatAction());
     }
 
-    private void opretVaeskeTilDestillatAction() {
-        LocalDate dagsdato = dato.getValue();
-        double maengde = Double.parseDouble(txfMaengdeILiter.getText().trim());
-        String kommentar = txfKommentar.getText().trim();
+    private void fjernSidste() {
+        if (destillat != null && !destillat.getVaeskeTilDestillater().isEmpty()) {
+            destillat.fjernVaeske(destillat.getVaeskeTilDestillater().size()-1);
+        }
+        opdaterLvDestillat();
+    }
 
-        whiskydestillering = cbDestilleringer.getSelectionModel().getSelectedItem();
-        vaeskeTilDestillat = whiskydestillering.opretVaeskeTilDestillat(maengde);
-        //destillat.tilfoejVaeskeTilDestillat(vaeskeTilDestillat); HJÆLP
-        //lvwDestillat.getItems().setAll(destillat.getVaeskeTilDestillater());
+    private void opretVaeskeTilDestillatAction() {
+        if (destillat == null) {
+            if (cbFade.getSelectionModel().getSelectedItem() == null) {
+                StartVindue.fejlIOprettelseAlert("Vælg et passende fad fra listen");
+            } else {
+                fad = cbFade.getSelectionModel().getSelectedItem();
+                destillat = Controller.opretDestillat(fad, medarbejder);
+                opdaterLvDestillat();
+            }
+        }
+        if (cbDestilleringer.getSelectionModel().getSelectedItem() == null) {
+            StartVindue.fejlIOprettelseAlert("Vælg en whiskydestillering");
+        } else if (destillat != null) {
+            whiskydestillering = cbDestilleringer.getSelectionModel().getSelectedItem();
+            double maengde = 0;
+            try {
+                maengde = Double.parseDouble(txfMaengdeILiter.getText().trim());
+                vaeskeTilDestillat = whiskydestillering.opretVaeskeTilDestillat(maengde);
+                destillat.tilfoejVaeskeTilDestillat(vaeskeTilDestillat);
+                if (!(txfKommentar.getText().isEmpty())) {
+                    destillat.tilfoejKommentar(txfKommentar.getText().trim());
+                }
+            } catch (NumberFormatException e) {
+                StartVindue.kommafejlAlert();
+            } catch (IllegalArgumentException e) {
+                StartVindue.fejlIOprettelseAlert("Der er ikke nok tilgængelig destillering");
+            }
+
+            opdaterLvDestillat();
+        }
     }
 
     private void gemDestillatAction() {
         LocalDate dato1 = dato.getValue();
         String kommentar = txfKommentar.getText().trim();
         fad = cbFade.getSelectionModel().getSelectedItem();
-        medarbejder = startVindue.getMedarbejder();
 
-        if (!(dato1.isBefore(LocalDate.now())) && !(fad == null)) {
+        if (Controller.tjekKapacitetFad(fad,destillat.hentTotalMaengde())) {
             destillat = Controller.opretDestillat(fad, medarbejder);
-            Controller.getDestillater().add(destillat);
             this.hide();
             StartVindue.succesIOprettelseAlert();
         } else {
-            StartVindue.fejlIOprettelseAlert("Udfyld alle felter for at oprette destillatet.");
+            StartVindue.fejlIOprettelseAlert("Der er ikke plads i fadet til destillatet");
         }
+    }
+
+    public void opdaterLvDestillat() {
+        lvwDestillat.getItems().clear();
+        lvwDestillat.getItems().setAll(Controller.skabVaeskeoversigt(destillat, medarbejder));
     }
 }
