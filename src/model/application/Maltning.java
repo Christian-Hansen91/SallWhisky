@@ -40,6 +40,7 @@ public class Maltning {
         this.maengde = maengde;
         this.medarbejder = medarbejder;
     }
+
     public Maltning(double maengde, String kornsort, String marknavn, String rygemateriale, Medarbejder medarbejder) {
         Maltning.totalAntal++;
         this.id = totalAntal;
@@ -57,13 +58,20 @@ public class Maltning {
 
     @Override
     public String toString() {
-        return "Maltning, ID: " + id + "\n" +
+        StringBuilder s = new StringBuilder();
+        s.append("Maltning, ID: " + id + "\n" +
                 "Dato: " + dato + "\n" +
                 "Korntype: " + kornsort +
                 ", marknavn: " + marknavn + "\n" +
-                "Mængde: " + maengde + "\n" +
-                "Rygemateriale: " + rygemateriale + "\n" +
-                "Kommentar: " + kommentar + "\n" +
-                "Medarbejder: " + medarbejder;
+                "Mængde: " + maengde + "\n");
+        if (!(rygemateriale == null)) {
+            s.append("Rygemateriale: " + rygemateriale + "\n");
+        }
+        if (!(kommentar == null)) {
+            s.append( "Kommentar: " + kommentar + "\n");
+        }
+        s.append( "Medarbejder: " + medarbejder);
+
+        return s.toString();
     }
 }
