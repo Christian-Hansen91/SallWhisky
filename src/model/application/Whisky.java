@@ -67,8 +67,18 @@ public class Whisky implements Lagerenhed{
         LocalDate foersteDestillering;
         return dage;
     }
+
+    @Override
     public String toString() {
-        return "#" + nr + ": " + navn + " - \"" + beskrivelse + "\" på " + flaskeStr + " liter";
+        return "WHISKY: " + navn + ", #" + nr + "\n" +
+                "Dato: " + dato + "\n" +
+                "Beskrivelse: " + beskrivelse + "\n" +
+                "Flaskestørrelse: " + flaskeStr + "\n" +
+                "Vand tilføjet: " + vandTilfoejet + "\n" +
+                "Betegnelse: " + whiskyBetegnelse + "\n" +
+                "Alkoholprocent: " + alkoholprocent + "\n" +
+                lager + "\n" +
+                medarbejder;
     }
 
     @Override

@@ -145,6 +145,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         pane.add(txfantalFlasker, 5, 2);
         txfantalFlasker.setMaxWidth(75);
         pane.setHalignment(txfantalFlasker, HPos.RIGHT);
+        cbFlaskestr.setOnAction(event -> antalFlaskerAction());
 
         Button btnVaelgLager = new Button("Vælg lagerplads her");
         pane.add(btnVaelgLager, 4,5, 2, 1);
@@ -155,6 +156,11 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         pane.setHalignment(btnOpretWhisky, HPos.RIGHT);
         btnOpretWhisky.setOnAction(event -> gemWhiskyAction());
     }
+
+    private void antalFlaskerAction() {
+        antalFlaskerForAtTappe();
+    }
+
     private void vaelgLager() {
         LagerVindue lagerVindue = new LagerVindue(this);
         lagerVindue.showAndWait();
@@ -189,7 +195,6 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             VaeskeTilWhisky vaeskeTilWhisky = destillat.opretVaeskeTilWhisky(maengdeWhisky);
             listVaeskeTilWhiskyAdded.add(vaeskeTilWhisky);
 
-
             listDestillater.addAll(Controller.getDestillater());
             lvVaeskeTilWhisky.setItems(listVaeskeTilWhiskyAdded);
             cbDestillater.setItems(listDestillater);
@@ -210,8 +215,8 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             String navn = txfNavn.getText().trim();
             if (navn == "" || beskrivelse == "" || txfVandTilfoejet.getText().trim() == "" || txfAlkoholprocent.getText().trim() == "" || cbFlaskestr.getValue() == "")
                 throw new NullPointerException("Udfyld alle felterne");
-            double vandTilfoejet = 0;
-            double alkoholprocent = 0;
+            double vandTilfoejet = 0.0;
+            double alkoholprocent = 0.0;
             double flaskeStr = Double.parseDouble((cbFlaskestr.getSelectionModel().getSelectedItem()));
             vandTilfoejet = Double.parseDouble(txfVandTilfoejet.getText().trim());
             alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
@@ -219,11 +224,12 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
                 throw new IllegalArgumentException("Fejl i alkoholsprocent, enten for høj eller for lav");
             Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, lager, medarbejder);
             antalFlaskerForAtTappe();
+            this.hide();
+            StartVindue.succesIOprettelseAlert();
         } catch (Exception e) {
             StartVindue.fejlIOprettelseAlert(e.getMessage());
         }
     }
-
 
     public void setValgtLager(Lager lager) {
         this.lager = lager;

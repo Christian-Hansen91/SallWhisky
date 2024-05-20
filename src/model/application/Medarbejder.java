@@ -34,7 +34,7 @@ public class Medarbejder {
 
     @Override
     public String toString() {
-        return "ID: " + id + ", Navn: " + navn + ", Tlf.:" + tlfNr + ".";
+        return "ID: " + id + ", Navn: " + navn + ", Tlf.:" + tlfNr + "\n";
     }
     public void tilfoejDestillering(Whiskydestillering whiskydestillering) {
         this.whiskydestilleringer.add(whiskydestillering);

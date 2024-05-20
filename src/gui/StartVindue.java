@@ -1,6 +1,5 @@
 package gui;
 
-import controller.Controller;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -108,10 +107,10 @@ public class StartVindue extends Application {
         btnOpretMaltning.setOnAction(event -> opretMaltningAction());
         btnOpretLager.setOnAction(event -> opretLagerAction());
         btnOpretFad.setOnAction(event -> opretFadAction());
-        btnOpretDestilleringsTapning.setOnAction(event -> opretDestilleringsTapningAction());
+        btnOpretDestilleringsTapning.setOnAction(event -> opretVaeskeTilDestillatAction());
         btnOpretWhiskyDestillering.setOnAction(event -> opretWhiskydestilleringsAction());
         btnSoeg.setOnAction(event -> soegningAction());
-        btnOpretWhiskyTapning.setOnAction(event -> opretWhiskyTapningAction());
+        btnOpretWhiskyTapning.setOnAction(event -> opretVaeskeTilWhiskyAction());
         btnOpretGinDestillering.setOnAction(event -> opretGindestilleringVindueAction());
         opdaterKnapper();
     }
@@ -136,7 +135,7 @@ public class StartVindue extends Application {
         opdaterMedarbejderLabel();
     }
 
-    private void opdaterKnapper() {
+    public void opdaterKnapper() {
             boolean loggedIn = medarbejder == null;
             btnOpretFad.setDisable(loggedIn);
             btnOpretMaltning.setDisable(loggedIn);
@@ -180,11 +179,11 @@ public class StartVindue extends Application {
         opretGindestilleringVindue.showAndWait();
     }
 
-    private void opretDestilleringsTapningAction() {
+    private void opretVaeskeTilDestillatAction() {
         opretDestillatVindue = new OpretDestillatVindue("Opret destilleringstapning", stage, this);
         opretDestillatVindue.showAndWait();
     }
-    private void opretWhiskyTapningAction() {
+    private void opretVaeskeTilWhiskyAction() {
         opretWhiskyVindue = new OpretWhiskyVindue("Opret whiskytapning", stage, this);
         opretWhiskyVindue.showAndWait();
     }

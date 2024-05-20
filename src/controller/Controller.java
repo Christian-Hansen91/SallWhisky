@@ -126,7 +126,6 @@ public class Controller {
                 }
             }
         }
-
         return whiskyer;
     }
 
@@ -141,7 +140,6 @@ public class Controller {
                 }
             }
         }
-
         return whiskyer;
     }
 
@@ -154,7 +152,6 @@ public class Controller {
                 }
             }
         }
-
         return destillater;
     }
     public static ArrayList<Destillat> soegDestillatId(int id) {
@@ -164,7 +161,6 @@ public class Controller {
                 destillater.add(destillat);
             }
         }
-
         return destillater;
     }
 
@@ -181,5 +177,31 @@ public class Controller {
 
     public static boolean lagerpladsLedig(Lager lager, int reol, int hylde) {
         return lager.lagerpladsLedig(reol, hylde);
+    }
+
+    public static ArrayList<Fad> soegFadId(int id) {
+        ArrayList<Fad> alleFade = Storage.getFade();
+        ArrayList<Fad> fade = new ArrayList<>();
+
+        if (id != 0) {
+            for (Fad fad : alleFade) {
+                if (fad.getId() == id) {
+                    fade.add(fad);
+                }
+            }
+        }
+        return fade;
+    }
+
+    public static ArrayList<Fad> soegFadtype(String fadtype) {
+        ArrayList<Fad> fade = new ArrayList<>();
+        if (!fadtype.isEmpty()) {
+            for (Fad fad : Storage.getFade()) {
+                if (fad.getFadtype().contains(fadtype)) {
+                    fade.add(fad);
+                }
+            }
+        }
+        return fade;
     }
 }

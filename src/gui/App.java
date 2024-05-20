@@ -33,15 +33,19 @@ public class App {
         Whiskydestillering whiskydestillering2 = Controller.opretWhiskydestillering(maltning2, LocalDate.of(2024, 4, 16), LocalDate.of(2024, 4, 16), 30.0, 8.0, 100.0, 25.0, "OBS, tåler fortynding", 59.9, medarbejder2);
         Whiskydestillering whiskydestillering3 = Controller.opretWhiskydestillering(maltning4, null, null, 0.0, 0.0, 0.0, 0.0, "Andet. Destilleringen kommer udefra", 0.0, medarbejder3);
 
-        Destillat destilla1 = Controller.opretDestillat(fad1, medarbejder2);
-        destilla1.tilfoejVaeskeTilDestillat(whiskydestillering1.opretVaeskeTilDestillat(100));
-        destilla1.saetKommentar("Sall præst har velsignet dette fad");
+        Destillat destillat1 = Controller.opretDestillat(fad1, medarbejder2);
+        destillat1.tilfoejVaeskeTilDestillat(whiskydestillering1.opretVaeskeTilDestillat(100));
+        destillat1.saetKommentar("Sall præst har velsignet dette fad");
         Destillat destillat2 = Controller.opretDestillat(fad2, medarbejder1);
         destillat2.tilfoejVaeskeTilDestillat(whiskydestillering2.opretVaeskeTilDestillat(50));
         destillat2.saetKommentar("Special Edition");
         destillat2.setDato(LocalDate.of(2018,1,2));
         lager1.addLagerenhedAt(2, 1, fad2);
         lager1.addReol(6);
+
+        Whisky whisky1 = Controller.opretWhisky(LocalDate.of(2024, 5, 19), "Wild Whisky", "1. Edition", 0.7, 10.0, 45.9, lager1, medarbejder3);
+        Whisky whisky2 = Controller.opretWhisky(LocalDate.of(2024, 5, 14), "Wild Whisky", "2. Edition", 0.7, 5.0, 59.9, lager2, medarbejder2);
+
 
     }
 }

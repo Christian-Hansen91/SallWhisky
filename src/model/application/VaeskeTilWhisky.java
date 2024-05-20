@@ -21,10 +21,9 @@ public class VaeskeTilWhisky {
 
     @Override
     public String toString() {
-        return "VaeskeTilWhisky{" +
-                "destillat=" + destillat.getId() +
-                ", maengde=" + maengde +
-                '}';
+        return "VÆSKE TIL WHISKY: " + "\n" +
+                destillat.getId() +
+                "Mængde: " + maengde;
     }
 
     public Destillat getDestillat() {

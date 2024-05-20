@@ -80,6 +80,7 @@ public class OpretMedarbejderVindue extends Stage {
             txfTlfNr.clear();
 
             startVindue.setMedarbejder(medarbejder);
+            startVindue.opdaterKnapper();
             this.hide();
             StartVindue.succesIOprettelseAlert();
         } else {

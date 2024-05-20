@@ -108,7 +108,7 @@ public class OpretDestillatVindue extends Stage {
         whiskydestillering = cbDestilleringer.getSelectionModel().getSelectedItem();
         vaeskeTilDestillat = whiskydestillering.opretVaeskeTilDestillat(maengde);
         //destillat.tilfoejVaeskeTilDestillat(vaeskeTilDestillat); HJÆLP
-        lvwDestillat.getItems().setAll(destillat.getVaeskeTilDestillater());
+        //lvwDestillat.getItems().setAll(destillat.getVaeskeTilDestillater());
     }
 
     private void gemDestillatAction() {

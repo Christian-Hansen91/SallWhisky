@@ -75,14 +75,14 @@ public class Destillat {
 
     @Override
     public String toString() {
-        return "Destillat, ID: " + id + "\n" +
+        return "DESTILLAT #" + id + "\n" +
                 "Dato: " + dato + "\n" +
                 "Blanding: " + vaeskeTilDestillater + "\n" +
                 "Mængde: " + hentTotalMaengde() + "\n" +
-                "Fad: " + fad + "\n" +
-                "Kommentar: " + kommentar + "\n" +
                 "Angel share: " + angelShare + "\n" +
-                "Medarbejder: " + medarbejder;
+                "Kommentar: " + kommentar + "\n" +
+                fad + "\n" +
+                medarbejder;
     }
 
     public String getKommentar() {

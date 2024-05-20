@@ -59,7 +59,7 @@ public class Maltning {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append("Maltning, ID: " + id + "\n" +
+        s.append("MALTNING #" + id + "\n" +
                 "Dato: " + dato + "\n" +
                 "Korntype: " + kornsort +
                 ", marknavn: " + marknavn + "\n" +
@@ -70,7 +70,7 @@ public class Maltning {
         if (!(kommentar == null)) {
             s.append( "Kommentar: " + kommentar + "\n");
         }
-        s.append( "Medarbejder: " + medarbejder);
+        s.append(medarbejder);
 
         return s.toString();
     }

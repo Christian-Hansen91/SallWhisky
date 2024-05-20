@@ -106,14 +106,14 @@ public class Gindestillering implements Lagerenhed {
 
     @Override
     public String toString() {
-        return "Gindestillering, Nr:" + ginNr + "\n" +
-                "Startdato: " + startdato + "\n" +
-                "Slutdato: " + slutdato + "\n" +
-                "Vand Ttlføjet: " + vandTilfoejet + "\n" +
+        return "GINDESTILLERING #" + ginNr + "\n" +
+                "Startdato: " + startdato +
+                ", slutdato: " + slutdato + "\n" +
+                "Vand tilføjet: " + vandTilfoejet + "\n" +
                 "Alkoholprocent: " + alkoholprocent + "\n" +
                 "Liter: " + liter + "\n" +
                 "Ingredienser: " + ingredienser + "\n" +
-                "Lager: " + lager + "\n" +
-                "Medarbejder: " + medarbejder;
+                lager + "\n" +
+                medarbejder;
     }
 }

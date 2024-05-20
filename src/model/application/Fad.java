@@ -27,6 +27,14 @@ public class Fad implements Lagerenhed{
         this.medarbejder = medarbejder;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getFadtype() {
+        return fadtype;
+    }
+
     public void saetDestillat(Destillat destillat) {
         this.destillat = destillat;
     }
@@ -47,14 +55,14 @@ public class Fad implements Lagerenhed{
 
     @Override
     public String toString() {
-        return "Fad, ID: " + id + "\n" +
+        return "FAD #" + id + "\n" +
                 "Indkøbsdato: " + indkoebsdato + "\n" +
                 "Fadtype: " + fadtype + "\n" +
                 "Kapacitet: " + kapacitet + "\n" +
                 "Ophavsland: " + ophavsland +
-                ", leverandør: " + leverandoer + "\n" +
+                ", Leverandør: " + leverandoer + "\n" +
                 "Historik: " + historik + "\n" +
-                "Medarbejder: " + medarbejder;
+                medarbejder;
     }
 
     @Override
