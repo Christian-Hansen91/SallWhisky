@@ -11,9 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.*;
-import model.application.Destillat;
-import model.application.Lager;
-import model.application.VaeskeTilWhisky;
 
 import java.time.LocalDate;
 
@@ -130,6 +127,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         pane.add(lblVandTilfoejet, 2, 7);
         pane.add(txfVandTilfoejet, 3, 7);
         txfVandTilfoejet.setMaxWidth(75);
+        txfVandTilfoejet.setOnAction(event -> antalFlaskerAction());
         pane.add(lblAlcoholprocent, 2, 8);
         pane.add(txfAlkoholprocent, 3, 8);
         txfAlkoholprocent.setMaxWidth(75);
@@ -148,7 +146,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         cbFlaskestr.setOnAction(event -> antalFlaskerAction());
 
         Button btnVaelgLager = new Button("Vælg lagerplads her");
-        pane.add(btnVaelgLager, 4,5, 2, 1);
+        pane.add(btnVaelgLager, 4, 5, 2, 1);
         pane.setHalignment(btnVaelgLager, HPos.RIGHT);
         btnVaelgLager.setOnAction(e -> vaelgLager());
 
@@ -158,7 +156,10 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     }
 
     private void antalFlaskerAction() {
-        antalFlaskerForAtTappe();
+        try {
+            if (txfVandTilfoejet.getText() != "")
+                antalFlaskerForAtTappe();
+        } catch(Exception e){StartVindue.fejlIOprettelseAlert("Du skal skrive et tal i vand tilføjet, for at udregne antal flasker");}
     }
 
     private void vaelgLager() {
@@ -220,7 +221,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             double flaskeStr = Double.parseDouble((cbFlaskestr.getSelectionModel().getSelectedItem()));
             vandTilfoejet = Double.parseDouble(txfVandTilfoejet.getText().trim());
             alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
-            if(alkoholprocent>100 || alkoholprocent<40)
+            if (alkoholprocent > 100 || alkoholprocent < 40)
                 throw new IllegalArgumentException("Fejl i alkoholsprocent, enten for høj eller for lav");
             Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, lager, medarbejder);
             antalFlaskerForAtTappe();
@@ -234,6 +235,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     public void setValgtLager(Lager lager) {
         this.lager = lager;
     }
+
     @Override
     public void setValgtReolHylde(Lager lager, int reol, int hylde) {
         this.lager = lager;
