@@ -3,13 +3,13 @@ package gui;
 import controller.Controller;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.*;
-import storage.Storage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,6 +46,7 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
     private ArrayList<Ingrediensmaengde> ingredienser = new ArrayList<>();
     private ListView<Ingrediensmaengde> lvIngrediensmaengder;
     private ComboBox<Ingrediens> cbIngredienser;
+    private Button btnTilfoejIngrediens, btnOpret;
 
 
     public OpretGindestilleringVindue(String title, Stage owner, StartVindue startVindue, Medarbejder medarbejder) {
@@ -62,7 +63,7 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
     }
 
     private void initContent(GridPane pane) {
-        pane.setGridLinesVisible(true);
+        pane.setGridLinesVisible(false);
         pane.setPadding(new Insets(20));
         pane.setPrefHeight(315);
         pane.setPrefWidth(600);
@@ -82,7 +83,7 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
         lblIngrediensMaengde.setTextFill(Color.BURLYWOOD);
         lblNavn.setTextFill(Color.BURLYWOOD);
 
-        pane.add(lblOverskrift, 0, 0, 8, 1);
+        pane.add(lblOverskrift, 0, 0, 9, 1);
         pane.setHalignment(lblOverskrift, HPos.CENTER);
 
         //pane.add(lblDatoer, 0,1,2,1);
@@ -116,77 +117,72 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
 
 
         //pane.add(lblMaengdeEnebaer, 2, 1);
-        pane.add(txfEnebaer, 2, 1, 2, 1);
+        pane.add(txfEnebaer, 2, 1);
         txfEnebaer.setPromptText("Enebær (g):");
         pane.setHalignment(txfEnebaer, HPos.RIGHT);
+        btnOpret = new Button("Opret");
+        pane.add(btnOpret, 3, 2);
+        btnOpret.setOnAction(e -> opretGindestillering());
+        pane.add(txfLiter, 2, 2);
+        txfLiter.setPromptText("Liter i alt:");
+        pane.setHalignment(txfLiter, HPos.LEFT);
+        txfLiter.setMaxWidth(75);
 
-        pane.add(lblTilfoejIngrediens, 2, 2, 2, 1);
+        pane.add(lblTilfoejIngrediens, 2, 3, 2, 1);
+        pane.setHalignment(lblTilfoejIngrediens, HPos.CENTER);
         cbIngredienser = new ComboBox<>();
         cbIngredienser.setPromptText("Vælg ingrediens");
         pane.setHalignment(cbIngredienser, HPos.RIGHT);
-        cbIngredienser.setPrefWidth(150);
-        pane.add(cbIngredienser, 2, 3, 2, 1);
+        cbIngredienser.setPrefWidth(225);
+        pane.add(cbIngredienser, 2, 4, 2, 1);
         cbIngredienser.getItems().setAll(Ingrediens.values());
+        cbIngredienser.setDisable(true);
 
         //Tilføj combobox eller lignende med enum ingredienser, måske man kan skrive hvad
         // som helst og så oprettes ny enum automatisk?? Sejt
         //man kan ikke lave enum på runtime :(
 
         //pane.add(lblIngrediensMaengde, 2, 5);
-        pane.add(txfIngrediensMaengde, 2, 4, 2, 1);
+        pane.add(txfIngrediensMaengde, 2, 5, 2, 1);
         txfIngrediensMaengde.setPromptText("Mængde (g):");
+        txfIngrediensMaengde.setDisable(true);
         pane.setHalignment(txfIngrediensMaengde, HPos.RIGHT);
 
-        Button btnTilfoejIngrediens = new Button("Tilføj ingrediens");
-        pane.add(btnTilfoejIngrediens, 2, 5, 2, 1);
+        btnTilfoejIngrediens = new Button("Tilføj ingrediens");
+        pane.add(btnTilfoejIngrediens, 2, 6, 2, 1);
         pane.setHalignment(btnTilfoejIngrediens, HPos.RIGHT);
-        btnTilfoejIngrediens.setOnAction(e -> opdaterIngrediensLv());
+        btnTilfoejIngrediens.setOnAction(e -> tilfoejIngrediens());
+        btnTilfoejIngrediens.setDisable(true);
 
 
         //pane.add(lblVandTilfoejet, 2, 6);
         //pane.add(lblLiter, 4,1);
-        pane.add(txfLiter, 2, 6);
-        txfLiter.setPromptText("Liter i alt:");
-        pane.setHalignment(txfLiter, HPos.RIGHT);
-        txfLiter.setMaxWidth(75);
+
 
         //pane.add(lblKommentar, 4, 2, 2, 1);
 
         lvIngrediensmaengder = new ListView<>();
-        pane.add(lvIngrediensmaengder, 4, 1, 3, 4);
+        pane.add(lvIngrediensmaengder, 5, 1, 3, 4);
 
 
-        pane.add(btnVaelgLager, 4, 5);
+        pane.add(btnVaelgLager, 5, 5);
         pane.setHalignment(btnVaelgLager, HPos.LEFT);
-        pane.add(lblLager, 5, 5, 2, 1);
+        btnVaelgLager.setDisable(true);
+        pane.add(lblLager, 6, 5, 2, 1);
 
-        pane.add(btnGem, 6, 6);
-        pane.add(btnAnnuller, 4, 6);
+        pane.add(btnGem, 7, 6);
+        pane.add(btnAnnuller, 5, 6);
         pane.setHalignment(btnGem, HPos.RIGHT);
         pane.setHalignment(btnAnnuller, HPos.LEFT);
-
+        btnGem.setDisable(true);
         btnGem.setOnAction(event -> gemAction());
         btnAnnuller.setOnAction(event -> annullerAction());
         btnVaelgLager.setOnAction(event -> vaelgLagerAction());
     }
 
     private void opdaterIngrediensLv() {
-        if (this.gindestillering == null) {
-            opretGindestillering();
-        }
-        try {
-            if (cbIngredienser.getSelectionModel().getSelectedItem() == null) {
-                StartVindue.fejlIOprettelseAlert("Vælg en ingrediens i listen");
-            } else {
-                gindestillering.tilfoejIngrediensmaengde(cbIngredienser.getSelectionModel().getSelectedItem(), Double.parseDouble(txfIngrediensMaengde.getText()));
-                lvIngrediensmaengder.getItems().clear();
-                lvIngrediensmaengder.getItems().setAll(gindestillering.hentIngredienser());
-            }
-        } catch (NumberFormatException e) {
-            StartVindue.kommafejlAlert();
-        } catch (NullPointerException e) {
-            StartVindue.fejlIOprettelseAlert("Du skal udfylde alle felter før du kan oprette en gindestillering");
-        }
+        lvIngrediensmaengder.getItems().clear();
+        lvIngrediensmaengder.getItems().setAll(gindestillering.hentIngredienser());
     }
 
     private void vaelgLagerAction() {
@@ -228,35 +224,56 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
             StartVindue.kommafejlAlert();
         }
         String kommentar = txaKommentar.getText().trim();
-        medarbejder = startVindue.getMedarbejder();
 
         if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(vandTilfoejet == 0.0) && !(liter == 0.0) && !(alkoholprocent == 0.0) && !(maengdeEnebaer == 0.0)) {
             gindestillering = Controller.opretGindestillering(startdato, slutdato, vandTilfoejet, alkoholprocent, liter, maengdeEnebaer, medarbejder);
+            opdaterIngrediensLv();
+            flipInputtilgaengelighed();
         } else {
-            StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette gindestilleringen.");
-            String medarbejder1 = medarbejder.getNavn().trim();
-            try {
-                if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(vandTilfoejet == 0.0) && !(liter == 0.0) && !(alkoholprocent == 0.0) && !(maengdeEnebaer == 0.0)) {
-                    gindestillering = Controller.opretGindestillering(startdato, slutdato, vandTilfoejet, alkoholprocent, liter, maengdeEnebaer, medarbejder);
-                    Controller.addGindestillering(gindestillering);
-                    this.hide();
-                    StartVindue.succesIOprettelseAlert();
-                } else {
-                    StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette gindestilleringen.");
-                }
-            } catch (NullPointerException e) {
-                StartVindue.fejlIOprettelseAlert("Udfyld alle felter for at oprette en destillering");
+            StartVindue.fejlIOprettelseAlert("Udfyld alle felter før oprettelse");
+        }
+    }
+
+    private void tilfoejIngrediens() {
+        try {
+            if (cbIngredienser.getSelectionModel().getSelectedItem() == null) {
+                StartVindue.fejlIOprettelseAlert("Vælg først en ingrediens i listen");
+            } else {
+                gindestillering.tilfoejIngrediensmaengde(cbIngredienser.getSelectionModel().getSelectedItem(), Double.parseDouble(txfIngrediensMaengde.getText()));
+                opdaterIngrediensLv();
             }
+        } catch (NumberFormatException e) {
+            StartVindue.kommafejlAlert();
+        } catch (NullPointerException e) {
+            StartVindue.fejlIOprettelseAlert("Du skal udfylde alle felter");
         }
     }
 
     private void gemAction() {
-        if (!lager.equals(null)) {
+        if (!(lager == null)) {
             lager.addLagerenhedAt(reol, hylde, gindestillering);
             this.hide();
             StartVindue.succesIOprettelseAlert();
         } else {
             StartVindue.fejlIOprettelseAlert("Vælg en lagerplads");
         }
+    }
+
+    public void flipInputtilgaengelighed() {
+        txfNavn.setDisable(true);
+        dpStartdato.setDisable(true);
+        dpSlutdato.setDisable(true);
+        txaKommentar.setDisable(true);
+        txfAlkoholprocent.setDisable(true);
+        txfLiter.setDisable(true);
+        txfVandtilfoejet.setDisable(true);
+        txfEnebaer.setDisable(true);
+        btnOpret.setDisable(true);
+
+        cbIngredienser.setDisable(false);
+        txfIngrediensMaengde.setDisable(false);
+        btnVaelgLager.setDisable(false);
+        btnTilfoejIngrediens.setDisable(false);
+        btnGem.setDisable(false);
     }
 }
