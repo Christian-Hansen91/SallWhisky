@@ -265,7 +265,7 @@ public class Controller {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Destillat lavet af " + medarbejder.getNavn() + ":\n");
-        for (VaeskeInterface vaeskeTilDestillat : destillat.getVaeskeTilDestillater()) {
+        for (VaeskeInterface vaeskeTilDestillat : destillat.getVaeskerTilDestillat()) {
             sb.append("\t" + vaeskeTilDestillat + "\n");
         }
         sb.append("---------\n");
