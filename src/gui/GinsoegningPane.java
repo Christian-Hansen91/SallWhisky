@@ -9,38 +9,40 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import model.application.Destillat;
 import model.application.Gindestillering;
 
-public class GinsoegningPane extends SoegningPane{
+import java.util.HashSet;
+import java.util.Set;
+
+public class GinsoegningPane extends SoegningPane {
     private ListView<Gindestillering> lvResultater;
-    private TextField txfId, txfKommentar, txfFad;
+    private TextField txfId, txfIngrediens, txfFad;
     private Label lblFejl;
+
     GinsoegningPane() {
         super();
     }
+
     @Override
     void initContent(GridPane gridPane) {
         Label lblOverskrift = new Label("Indtast de parametre, du vil søge på:");
         Label lblId = new Label("ID: ");
-        Label lblKommentar = new Label("Kommentar: ");
-        Label lblFad = new Label("Fad: ");
+        Label lblIngrediens = new Label("Ingrediens: ");
         Label lblResultater = new Label("Resultater");
         lblOverskrift.setTextFill(Color.BURLYWOOD);
         lblId.setTextFill(Color.BURLYWOOD);
-        lblKommentar.setTextFill(Color.BURLYWOOD);
-        lblFad.setTextFill(Color.BURLYWOOD);
+        lblIngrediens.setTextFill(Color.BURLYWOOD);
         lblResultater.setTextFill(Color.BURLYWOOD);
-        add(new Label("                           "),2, 0, 2, 1);
+        add(new Label("                           "), 2, 0, 2, 1);
 
         add(lblOverskrift, 0, 0, 2, 2);
         setValignment(lblOverskrift, VPos.CENTER);
         add(lblId, 0, 3);
         txfId = new TextField();
         add(txfId, 1, 3);
-        add(lblKommentar, 0, 4);
-        txfKommentar = new TextField();
-        add(txfKommentar, 1, 4);
+        add(lblIngrediens, 0, 4);
+        txfIngrediens = new TextField();
+        add(txfIngrediens, 1, 4);
 
 
         add(lblResultater, 4, 0, 1, 2);
@@ -56,9 +58,34 @@ public class GinsoegningPane extends SoegningPane{
         add(btnSoeg, 1, 11);
         setHalignment(btnSoeg, HPos.RIGHT);
         btnSoeg.setOnAction(e -> soegningAction());
+
+        Button btnAlle = new Button("Vis alle");
+        add(btnAlle, 1, 12);
+        btnAlle.setOnAction(e -> findAlle());
+        setHalignment(btnAlle, HPos.RIGHT);
+    }
+
+    private void findAlle() {
+        lvResultater.getItems().clear();
+        lvResultater.getItems().setAll(Controller.getGindestilleringer());
     }
 
     private void soegningAction() {
-        lvResultater.getItems().setAll(Controller.getGindestilleringer());
+        lvResultater.getItems().clear();
+        Set<Gindestillering> ginSet = new HashSet<>();
+        ginSet.addAll(Controller.soegGinid(saniterInputId()));
+        ginSet.addAll(Controller.soegGiningrediens(txfIngrediens.getText()));
+        lvResultater.getItems().setAll(ginSet);
+    }
+    private int saniterInputId() {
+        int id = 0;
+        if (!txfId.getText().isEmpty()) {
+            try {
+                id = Integer.parseInt(txfId.getText());
+            } catch (NumberFormatException e) {
+                lblFejl.setText("Du må kun taste heltal i id-feltet");
+            }
+        }
+        return id;
     }
 }

@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class DestillatSoegningPane extends SoegningPane {
     private ListView<Destillat> lvResultater;
-    private TextField txfId, txfKommentar, txfFad;
+    private TextField txfId, txfKommentar;
     private Label lblFejl;
     private CheckBox chkTreAar;
 
@@ -31,12 +31,10 @@ public class DestillatSoegningPane extends SoegningPane {
         Label lblOverskrift = new Label("Indtast de parametre, du vil søge på:");
         Label lblId = new Label("ID: ");
         Label lblKommentar = new Label("Kommentar: ");
-        Label lblFad = new Label("Fad: ");
         Label lblResultater = new Label("Resultater");
         lblOverskrift.setTextFill(Color.BURLYWOOD);
         lblId.setTextFill(Color.BURLYWOOD);
         lblKommentar.setTextFill(Color.BURLYWOOD);
-        lblFad.setTextFill(Color.BURLYWOOD);
         lblResultater.setTextFill(Color.BURLYWOOD);
 
         add(new Label("                           "),2, 0, 2, 1);
@@ -49,9 +47,6 @@ public class DestillatSoegningPane extends SoegningPane {
         add(lblKommentar, 0, 4);
         txfKommentar = new TextField();
         add(txfKommentar, 1, 4);
-        add(lblFad, 0, 5);
-        txfFad = new TextField();
-        add(txfFad, 1, 5);
 
         add(lblResultater, 4, 0, 1, 2);
         setValignment(lblResultater, VPos.CENTER);
@@ -67,10 +62,20 @@ public class DestillatSoegningPane extends SoegningPane {
         setHalignment(btnSoeg, HPos.RIGHT);
         btnSoeg.setOnAction(e -> soegningAction());
 
+        Button btnAlle = new Button("Vis alle");
+        add(btnAlle, 1, 12);
+        btnAlle.setOnAction(e -> findAlle());
+        setHalignment(btnAlle, HPos.RIGHT);
+
         chkTreAar = new CheckBox("Lagret mindst tre år:");
         chkTreAar.setTextFill(Color.BURLYWOOD);
         add(chkTreAar, 0, 11, 2, 1);
         chkTreAar.setOnAction(e -> soegningAction());
+    }
+
+    private void findAlle() {
+        lvResultater.getItems().clear();
+        lvResultater.getItems().setAll(Controller.getDestillater());
     }
 
     private void soegningAction() {

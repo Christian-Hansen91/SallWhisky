@@ -41,7 +41,7 @@ public class Maltning {
         this.medarbejder = medarbejder;
     }
 
-    public Maltning(double maengde, String kornsort, String marknavn, String rygemateriale, Medarbejder medarbejder) {
+    public Maltning(double maengde, String kornsort, String marknavn, String rygemateriale, String kommentar, Medarbejder medarbejder) {
         Maltning.totalAntal++;
         this.id = totalAntal;
         this.dato = LocalDate.now();
@@ -50,6 +50,7 @@ public class Maltning {
         this.maengde = maengde;
         this.rygemateriale = rygemateriale;
         this.medarbejder = medarbejder;
+        this.kommentar = kommentar;
     }
 
     public static int getTotalAntal() {
@@ -64,10 +65,10 @@ public class Maltning {
                 "Korntype: " + kornsort +
                 ", marknavn: " + marknavn + "\n" +
                 "Mængde: " + maengde + "\n");
-        if (!(rygemateriale == null)) {
+        if (!(rygemateriale == null || rygemateriale.equals(""))) {
             s.append("Rygemateriale: " + rygemateriale + "\n");
         }
-        if (!(kommentar == null)) {
+        if (!(kommentar == null || kommentar.equals(""))) {
             s.append( "Kommentar: " + kommentar + "\n");
         }
         s.append(medarbejder);

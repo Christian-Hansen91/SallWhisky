@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Controller {
     public static Medarbejder opretMedarbejder(String navn, int tlfNr) {
@@ -21,8 +22,8 @@ public class Controller {
         return maltning;
     }
 
-    public static Maltning opretMaltning(double maengde, String korntype, String marknavn, String rygemateriale, Medarbejder medarbejder) {
-        Maltning maltning = new Maltning(maengde, korntype, marknavn, rygemateriale, medarbejder);
+    public static Maltning opretMaltning(double maengde, String korntype, String marknavn, String rygemateriale, String kommentar, Medarbejder medarbejder) {
+        Maltning maltning = new Maltning(maengde, korntype, marknavn, rygemateriale, kommentar, medarbejder);
         Storage.addMaltning(maltning);
         return maltning;
     }
@@ -41,7 +42,7 @@ public class Controller {
     }
 
     public static Whisky opretWhisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
-                                     double vandTilfoejet, double alkoholprocent, Lager lager, Medarbejder medarbejder) {
+                                     double vandTilfoejet, double alkoholprocent, Medarbejder medarbejder) {
         Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder);
         Storage.addWhisky(whisky);
         return whisky;
@@ -62,8 +63,10 @@ public class Controller {
 
     public static Destillat opretDestillat(Fad fad, Medarbejder medarbejder) {
         Destillat destillat = new Destillat(fad, medarbejder);
-        Storage.addDestillat(destillat);
         return destillat;
+    }
+    public static void tilfoejDestillatTilSTorage(Destillat destillat) {
+        Storage.addDestillat(destillat);
     }
 
     public static void tilfoejIngrediensmaengde(Ingrediens ingrediens, double maengde, Gindestillering gindestillering) {
@@ -222,6 +225,29 @@ public class Controller {
         return fade;
     }
 
+    public static List<Gindestillering> soegGinid(int id) {
+        ArrayList<Gindestillering> gindestilleringer = new ArrayList<>();
+        for (Gindestillering gindestillering : Storage.getGindestilleringer()) {
+            if (gindestillering.getGinNr() == id) {
+                gindestilleringer.add(gindestillering);
+            }
+        }
+
+        return gindestilleringer;
+    }
+    public static List<Gindestillering> soegGiningrediens(String ingrediens) {
+        ArrayList<Gindestillering> gindestilleringer = new ArrayList<>();
+        if (!ingrediens.isEmpty()) {
+            for (Gindestillering gindestillering : Storage.getGindestilleringer()) {
+                for (Ingrediensmaengde ingrediensmaengde : gindestillering.hentIngredienser()) {
+                    if (ingrediensmaengde.hentIngrediens().toString().equals(ingrediens.toUpperCase())) {
+                        gindestilleringer.add(gindestillering);
+                    }
+                }
+            }
+        }
+        return gindestilleringer;
+    }
     public static String skabVaeskeoversigt(Destillat destillat, Medarbejder medarbejder) {
         StringBuilder sb = new StringBuilder();
 

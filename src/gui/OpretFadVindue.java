@@ -106,7 +106,7 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
         pane.setHalignment(btnVaelgLager, HPos.RIGHT);
         pane.setHalignment(lblLagerplads, HPos.RIGHT);
 
-        pane.add(lblLager,24,3,3,1);
+        pane.add(lblLager, 24, 3, 3, 1);
         pane.add(btnGem, 24, 7, 2, 1);
         pane.setHalignment(btnGem, HPos.RIGHT);
         btnGem.setOnAction(event -> gemAction());
@@ -114,6 +114,7 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
         pane.setHalignment(btnAnnuller, HPos.RIGHT);
         btnAnnuller.setOnAction(event -> annullerAction());
     }
+
     private void vaelgLager() {
         LagerVindue lagerVindue = new LagerVindue(this);
         lagerVindue.showAndWait();
@@ -137,12 +138,12 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
         String leverandoer = txfLeverandoer.getText().trim();
         LocalDate indkoebsdato = dpIndkoebsdato.getValue();
         String historik = txaHistorik.getText().trim();
-        Lager lager1 = cbLager.getValue();
         medarbejder = startVindue.getMedarbejder();
 
-        if (!fadtype.isEmpty()&& !ophavsland.isEmpty()&& !leverandoer.isEmpty()) {
-            fad = Controller.opretFad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik, medarbejder);
 
+        if (!fadtype.isEmpty() && !ophavsland.isEmpty() && !leverandoer.isEmpty() && indkoebsdato != null && lager != null) {
+            fad = Controller.opretFad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik, medarbejder);
+            lager.addLagerenhedAt(reol, hylde, fad);
             txfFadetype.clear();
             txfOphavsland.clear();
             txfLeverandoer.clear();
@@ -153,8 +154,8 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
             StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette fadet.");
         }
 
-        //OBS MANGLER VALG AF LAGERPLADS. NU VÆLGER MAN BARE ET LAGER
     }
+
     @Override
     public void setValgtReolHylde(Lager lager, int reol, int hylde) {
         this.lager = lager;

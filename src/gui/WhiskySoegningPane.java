@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class WhiskySoegningPane extends SoegningPane {
     private ListView<Whisky> lvResultater;
-    private TextField txfId, txfBeskrivelse, txfFad;
+    private TextField txfId, txfBeskrivelse;
     private Label lblFejl;
 
     public WhiskySoegningPane() {
@@ -27,12 +27,10 @@ public class WhiskySoegningPane extends SoegningPane {
         Label lblOverskrift = new Label("Indtast de parametre, du vil søge på:");
         Label lblId = new Label("ID: ");
         Label lblBeskrivelse = new Label("Beskrivelse: ");
-        Label lblFad = new Label("Fad: ");
         Label lblResultater = new Label("Resultater");
         lblOverskrift.setTextFill(Color.BURLYWOOD);
         lblId.setTextFill(Color.BURLYWOOD);
         lblBeskrivelse.setTextFill(Color.BURLYWOOD);
-        lblFad.setTextFill(Color.BURLYWOOD);
         lblResultater.setTextFill(Color.BURLYWOOD);
 
         add(new Label("                           "),2, 0, 2, 1);
@@ -45,9 +43,6 @@ public class WhiskySoegningPane extends SoegningPane {
         add(lblBeskrivelse, 0, 4);
         txfBeskrivelse = new TextField();
         add(txfBeskrivelse, 1, 4);
-        add(lblFad, 0, 5);
-        txfFad = new TextField();
-        add(txfFad, 1, 5);
 
         add(lblResultater, 4, 0, 1, 2);
         setValignment(lblResultater, VPos.CENTER);
@@ -62,7 +57,19 @@ public class WhiskySoegningPane extends SoegningPane {
         add(btnSoeg, 1, 11);
         setHalignment(btnSoeg, HPos.RIGHT);
         btnSoeg.setOnAction(e -> soegAction());
+
+        Button btnAlle = new Button("Vis alle");
+        add(btnAlle,1,12);
+        btnAlle.setOnAction(e -> findAlle());
+        setHalignment(btnAlle,HPos.RIGHT);
+
     }
+
+    private void findAlle() {
+        lvResultater.getItems().clear();
+        lvResultater.getItems().setAll(Controller.getWhiskyer());
+    }
+
     private void soegAction() {
         lvResultater.getItems().clear();
         lvResultater.getItems().addAll(Controller.soegWhiskyBeskrivelse(txfBeskrivelse.getText()));

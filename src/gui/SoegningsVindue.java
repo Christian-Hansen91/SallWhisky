@@ -13,9 +13,6 @@ import javafx.stage.StageStyle;
 public class SoegningsVindue extends Stage {
     public SoegningsVindue(String title, Stage stage) {
         setTitle(title);
-        initStyle(StageStyle.UTILITY);
-        initModality(Modality.APPLICATION_MODAL);
-
         BorderPane pane = new BorderPane();
         initContent(pane);
 

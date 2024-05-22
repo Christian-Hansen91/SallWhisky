@@ -21,9 +21,9 @@ public class App {
         Lager lager1 = Controller.opretLager("Lars' lager", new Lagerenhed[10][4], medarbejder1);
         Lager lager2 = Controller.opretLager("Container lager", new Lagerenhed[2][2], medarbejder1);
 
-        Maltning maltning1 = Controller.opretMaltning(800.0, "Evergreen", "Stadsgaard", "Tørv", medarbejder1);
+        Maltning maltning1 = Controller.opretMaltning(800.0, "Evergreen", "Stadsgaard", "Tørv", "Lækker maltning", medarbejder1);
         Maltning maltning2 = Controller.opretMaltning(500.0, "Stairway", "Mosevang", medarbejder2);
-        Maltning maltning3 = Controller.opretMaltning(600.0, "Irina", "Mosevang", "Tørv", medarbejder3);
+        Maltning maltning3 = Controller.opretMaltning(600.0, "Irina", "Mosevang", "Tørv", "", medarbejder3);
         Maltning maltning4 = Controller.opretMaltning(0.0, null, null, null);
 
         Fad fad1 = Controller.opretFad(LocalDate.of(2023, 03, 10), "EX-Bourbon", 60, "USA", "American Whisky Company", "Bourbon", medarbejder2);
@@ -41,9 +41,8 @@ public class App {
         lager1.addLagerenhedAt(2, 1, fad2);
         lager1.addReol(6);
 
-        Whisky whisky1 = Controller.opretWhisky(LocalDate.of(2024, 5, 19), "Wild Whisky", "1. Edition", 0.7, 10.0, 45.9, lager1, medarbejder3);
-        Whisky whisky2 = Controller.opretWhisky(LocalDate.of(2024, 5, 14), "Wild Whisky", "2. Edition", 0.7, 5.0, 59.9, lager2, medarbejder2);
-
+        Whisky whisky1 = Controller.opretWhisky(LocalDate.of(2024, 5, 19), "Wild Whisky", "1. Edition", 0.7, 10.0, 45.9, medarbejder3);
+        Whisky whisky2 = Controller.opretWhisky(LocalDate.of(2024, 5, 14), "Wild Whisky", "2. Edition", 0.7, 5.0, 59.9, medarbejder2);
 
     }
 }

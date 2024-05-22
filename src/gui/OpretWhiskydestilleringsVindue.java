@@ -79,7 +79,7 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         cbMaltning.setMaxWidth(175);
         cbMaltning.getItems().setAll(Storage.getMaltninger());
         cbMaltning.setPromptText("Vælg maltning");
-
+        cbMaltning.setVisibleRowCount(2);
         pane.add(dpStartdato, 0, 2, 2, 1);
         dpStartdato.setPromptText("Vælg startdato");
         pane.add(dpSlutdato, 0, 3, 2, 1);
@@ -126,6 +126,10 @@ public class OpretWhiskydestilleringsVindue extends Stage {
 
     private void gemAction() {
         LocalDate startdato = dpStartdato.getValue();
+        if(startdato==null)
+            StartVindue.fejlIOprettelseAlert("Husk at vælge en startdato");
+        if(cbMaltning.getSelectionModel().getSelectedItem()==null)
+            StartVindue.fejlIOprettelseAlert("Husk at tilføje en maltning");
         LocalDate slutdato = dpSlutdato.getValue();
         int maengdeVaeske = 0;
         double head = 0;
