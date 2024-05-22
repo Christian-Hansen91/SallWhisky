@@ -10,7 +10,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.*;
 
+import javax.xml.stream.events.Comment;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class OpretDestillatVindue extends Stage {
     private DatePicker dato = new DatePicker(LocalDate.now());
@@ -32,6 +34,9 @@ public class OpretDestillatVindue extends Stage {
     private StartVindue startVindue;
     private Fad fad = null;
     private Medarbejder medarbejder;
+    private ArrayList<Boolean> kommentarCounter= new ArrayList<>();
+    private int kommentarCount = 0;
+
 
     public OpretDestillatVindue(String title, Stage owner, StartVindue startVindue) {
         this.startVindue = startVindue;
@@ -97,15 +102,25 @@ public class OpretDestillatVindue extends Stage {
         pane.add(cbFade, 3, 7, 2, 1);
         cbFade.setMaxWidth(200);
         cbFade.getItems().addAll(Controller.getFade());
+        cbFade.setOnAction(event -> fadValgt());
 
         pane.add(btnOpretDestillat, 3, 9, 2, 1);
         pane.setHalignment(btnOpretDestillat, HPos.RIGHT);
         btnOpretDestillat.setOnAction(event -> gemDestillatAction());
     }
 
+    private void fadValgt() {
+        cbFade.setDisable(true);
+    }
+
     private void fjernSidste() {
         if (destillat != null && !destillat.getVaeskeTilDestillater().isEmpty()) {
             destillat.fjernVaeske(destillat.getVaeskeTilDestillater().size() - 1);
+            if (kommentarCounter.get(kommentarCount-1) == true) {
+                destillat.fjernSindsteKommentar();
+            }
+            kommentarCounter.remove(kommentarCount-1);
+            kommentarCount--;
         }
         opdaterLvDestillat();
     }
@@ -131,6 +146,11 @@ public class OpretDestillatVindue extends Stage {
                 destillat.tilfoejVaeskeTilDestillat(vaeskeTilDestillat);
                 if (!(txfKommentar.getText().isEmpty())) {
                     destillat.tilfoejKommentar(txfKommentar.getText().trim());
+                    kommentarCounter.add(true);
+                    kommentarCount++;
+                } else {
+                    kommentarCounter.add(false);
+                    kommentarCount++;
                 }
             } catch (NumberFormatException e) {
                 StartVindue.kommafejlAlert();
@@ -139,6 +159,7 @@ public class OpretDestillatVindue extends Stage {
             }
 
             opdaterLvDestillat();
+
         }
     }
 
@@ -149,6 +170,7 @@ public class OpretDestillatVindue extends Stage {
         try {
             if (Controller.tjekKapacitetFad(fad, destillat.hentTotalMaengde())) {
                 destillat = Controller.opretDestillat(fad, medarbejder);
+                destillat.tjekOmVaeskeErPåfyldt();
                 this.hide();
                 StartVindue.succesIOprettelseAlert();
             } else {

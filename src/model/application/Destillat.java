@@ -22,6 +22,7 @@ public class Destillat {
         this.fad = fad;
         fad.saetDestillat(this);
         this.medarbejder = medarbejder;
+
     }
 
     private void kontrollerMaengdeIFad(Fad fad) {
@@ -98,5 +99,13 @@ public class Destillat {
     public void fjernVaeske(int index) {
         vaeskeTilDestillater.get(index).fjernVaeske();
         vaeskeTilDestillater.remove(index);
+    }
+    public void fjernSindsteKommentar() {
+        kommentar.remove(kommentar.size()-1);
+    }
+    public void tjekOmVaeskeErPåfyldt(){
+        if(vaeskeTilDestillater.size()==0){
+            throw new IllegalArgumentException("Der er endnu ikke tilføjet væsker til destillatet");
+        }
     }
 }
