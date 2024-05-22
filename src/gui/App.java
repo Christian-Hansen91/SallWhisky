@@ -21,9 +21,9 @@ public class App {
         Lager lager1 = Controller.opretLager("Lars' lager", new Lagerenhed[10][4], medarbejder1);
         Lager lager2 = Controller.opretLager("Container lager", new Lagerenhed[2][2], medarbejder1);
 
-        Maltning maltning1 = Controller.opretMaltning(800.0, "Evergreen", "Stadsgaard", "Tørv", medarbejder1);
+        Maltning maltning1 = Controller.opretMaltning(800.0, "Evergreen", "Stadsgaard", "Tørv", "Lækker maltning", medarbejder1);
         Maltning maltning2 = Controller.opretMaltning(500.0, "Stairway", "Mosevang", medarbejder2);
-        Maltning maltning3 = Controller.opretMaltning(600.0, "Irina", "Mosevang", "Tørv", medarbejder3);
+        Maltning maltning3 = Controller.opretMaltning(600.0, "Irina", "Mosevang", "Tørv", "", medarbejder3);
         Maltning maltning4 = Controller.opretMaltning(0.0, null, null, null);
 
         Fad fad1 = Controller.opretFad(LocalDate.of(2023, 03, 10), "EX-Bourbon", 60, "USA", "American Whisky Company", "Bourbon", medarbejder2);

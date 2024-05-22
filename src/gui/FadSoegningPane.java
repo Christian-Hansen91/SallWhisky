@@ -63,13 +63,19 @@ public class FadSoegningPane extends SoegningPane {
         add(btnSoeg, 1, 11);
         setHalignment(btnSoeg, HPos.RIGHT);
         btnSoeg.setOnAction(e -> soegAction());
+
+        Button btnAlle = new Button("Vis alle");
+        add(btnAlle,1,12);
+        btnAlle.setOnAction(e -> findAlle());
+        setHalignment(btnAlle,HPos.RIGHT);
+    }
+
+    private void findAlle() {
+        lvResultater.getItems().clear();
+        lvResultater.getItems().setAll(Controller.getFade());
     }
 
     private void soegAction() {
-        lvResultater.getItems().clear();
-        lvResultater.getItems().addAll(Controller.soegFadtype(txfFadtype.getText()));
-        lvResultater.getItems().addAll(Controller.soegFadId(saniterInputId()));
-
         lvResultater.getItems().clear();
         Set<Fad> fadSet = new HashSet<Fad>();
         fadSet.addAll(Controller.soegFadtype(txfFadtype.getText()));

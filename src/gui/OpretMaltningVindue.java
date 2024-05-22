@@ -107,9 +107,8 @@ public class OpretMaltningVindue extends Stage {
             maengde = Double.parseDouble(txfMaengde.getText().trim());
             String rygemateriale = txfRygemateriale.getText().trim();
             String kommentar = txaKommentar.getText().trim();
-
             if (!kornsort.isEmpty() && !marknavn.isEmpty() && !(maengde == 0.0)) {
-                maltning = Controller.opretMaltning(maengde, kornsort, marknavn, medarbejder);
+                maltning = Controller.opretMaltning(maengde, kornsort, marknavn,rygemateriale,kommentar,medarbejder);
 
                 txfKornsort.clear();
                 txfMaengde.clear();

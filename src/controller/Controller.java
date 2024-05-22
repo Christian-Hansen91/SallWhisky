@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Controller {
     public static Medarbejder opretMedarbejder(String navn, int tlfNr) {
@@ -21,8 +22,8 @@ public class Controller {
         return maltning;
     }
 
-    public static Maltning opretMaltning(double maengde, String korntype, String marknavn, String rygemateriale, Medarbejder medarbejder) {
-        Maltning maltning = new Maltning(maengde, korntype, marknavn, rygemateriale, medarbejder);
+    public static Maltning opretMaltning(double maengde, String korntype, String marknavn, String rygemateriale, String kommentar, Medarbejder medarbejder) {
+        Maltning maltning = new Maltning(maengde, korntype, marknavn, rygemateriale, kommentar, medarbejder);
         Storage.addMaltning(maltning);
         return maltning;
     }
@@ -222,6 +223,29 @@ public class Controller {
         return fade;
     }
 
+    public static List<Gindestillering> soegGinid(int id) {
+        ArrayList<Gindestillering> gindestilleringer = new ArrayList<>();
+        for (Gindestillering gindestillering : Storage.getGindestilleringer()) {
+            if (gindestillering.getGinNr() == id) {
+                gindestilleringer.add(gindestillering);
+            }
+        }
+
+        return gindestilleringer;
+    }
+    public static List<Gindestillering> soegGiningrediens(String ingrediens) {
+        ArrayList<Gindestillering> gindestilleringer = new ArrayList<>();
+        if (!ingrediens.isEmpty()) {
+            for (Gindestillering gindestillering : Storage.getGindestilleringer()) {
+                for (Ingrediensmaengde ingrediensmaengde : gindestillering.hentIngredienser()) {
+                    if (ingrediensmaengde.hentIngrediens().toString().equals(ingrediens.toUpperCase())) {
+                        gindestilleringer.add(gindestillering);
+                    }
+                }
+            }
+        }
+        return gindestilleringer;
+    }
     public static String skabVaeskeoversigt(Destillat destillat, Medarbejder medarbejder) {
         StringBuilder sb = new StringBuilder();
 

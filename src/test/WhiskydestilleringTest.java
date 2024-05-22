@@ -42,7 +42,7 @@ class WhiskydestilleringTest {
         Maltning maltning = new Maltning(500, "byg","Lars", medarbejder);
         assertEquals("Lars",maltning.getMarknavn());
         assertNull(maltning.getRygemateriale());
-        maltning = new Maltning(250,"også byg","Lars mark 2", "tørv", medarbejder);
+        maltning = new Maltning(250,"også byg","Lars mark 2", "tørv","", medarbejder);
         assertEquals("tørv", maltning.getRygemateriale());
     }
 
