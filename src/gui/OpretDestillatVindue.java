@@ -91,7 +91,7 @@ public class OpretDestillatVindue extends Stage {
 
         Button btnFjernSidste = new Button("Fjern sidste");
         btnFjernSidste.setOnAction(e -> fjernSidste());
-        pane.add(btnFjernSidste,3,6);
+        pane.add(btnFjernSidste, 3, 6);
         pane.add(lblTilfoejTilFad, 4, 6);
         pane.setHalignment(lblTilfoejTilFad, HPos.RIGHT);
         pane.add(cbFade, 3, 7, 2, 1);
@@ -105,7 +105,7 @@ public class OpretDestillatVindue extends Stage {
 
     private void fjernSidste() {
         if (destillat != null && !destillat.getVaeskeTilDestillater().isEmpty()) {
-            destillat.fjernVaeske(destillat.getVaeskeTilDestillater().size()-1);
+            destillat.fjernVaeske(destillat.getVaeskeTilDestillater().size() - 1);
         }
         opdaterLvDestillat();
     }
@@ -146,13 +146,16 @@ public class OpretDestillatVindue extends Stage {
         LocalDate dato1 = dato.getValue();
         String kommentar = txfKommentar.getText().trim();
         fad = cbFade.getSelectionModel().getSelectedItem();
-
-        if (Controller.tjekKapacitetFad(fad,destillat.hentTotalMaengde())) {
-            destillat = Controller.opretDestillat(fad, medarbejder);
-            this.hide();
-            StartVindue.succesIOprettelseAlert();
-        } else {
-            StartVindue.fejlIOprettelseAlert("Der er ikke plads i fadet til destillatet");
+        try {
+            if (Controller.tjekKapacitetFad(fad, destillat.hentTotalMaengde())) {
+                destillat = Controller.opretDestillat(fad, medarbejder);
+                this.hide();
+                StartVindue.succesIOprettelseAlert();
+            } else {
+                StartVindue.fejlIOprettelseAlert("Der er ikke plads i fadet til destillatet");
+            }
+        } catch (Exception e) {
+            StartVindue.fejlIOprettelseAlert("Husk at tilføje mindst en tapning");
         }
     }
 

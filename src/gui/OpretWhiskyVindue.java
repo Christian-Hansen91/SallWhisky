@@ -225,7 +225,13 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
             if (alkoholprocent > 100 || alkoholprocent < 40)
                 throw new IllegalArgumentException("Fejl i alkoholsprocent, enten for høj eller for lav");
-            Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, lager, medarbejder);
+            Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder);
+            if (!(lager == null)) {
+                lager.addLagerenhedAt(reol, hylde, whisky);
+                this.hide();
+            } else {
+                StartVindue.fejlIOprettelseAlert("Vælg en lagerplads");
+            }
             antalFlaskerForAtTappe();
             this.hide();
             StartVindue.succesIOprettelseAlert();

@@ -41,7 +41,7 @@ public class Controller {
     }
 
     public static Whisky opretWhisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
-                                     double vandTilfoejet, double alkoholprocent, Lager lager, Medarbejder medarbejder) {
+                                     double vandTilfoejet, double alkoholprocent, Medarbejder medarbejder) {
         Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder);
         Storage.addWhisky(whisky);
         return whisky;
