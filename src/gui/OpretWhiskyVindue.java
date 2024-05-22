@@ -203,6 +203,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             listDestillater.addAll(Controller.getModneDestillater());
             lvVaeskeTilWhisky.setItems(listVaeskeTilWhiskyAdded);
             cbDestillater.setItems(listDestillater);
+            cbDestillater.setVisibleRowCount(2);
             if (toemDestilat == true) {
                 destillat.saetAngelShare();
                 toemDestilat = false;
