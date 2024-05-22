@@ -16,13 +16,10 @@ public class Lager {
         this.medarbejder = medarbejder;
     }
 
-    public static void tilfoejFad(Fad fad) {
-        if (!fade.contains(fad)) {
-            fade.add(fad);
-        }
-    }
-
     public void addReol(int antalHylder) {
+        if (antalHylder < 1) {
+            throw new IllegalArgumentException("Tilføj mindst én hylde");
+        }
         Lagerenhed[][] newArray = new Lagerenhed[reolliste.length + 1][];
         for (int i = 0; i < reolliste.length; i++) {
             newArray[i] = reolliste[i];
@@ -32,13 +29,13 @@ public class Lager {
     }
 
     public void addLagerenhedAt(int reol, int hylde, Lagerenhed lagerenhed) {
+        if (reol < 0 || hylde < 0 || reol > reolliste.length || hylde > reolliste[reol - 1].length || !lagerpladsLedig(reol, hylde)) {
+            throw new IllegalArgumentException("Angivne hylde er optaget eller findes ikke");
+        }
         reolliste[reol][hylde] = lagerenhed;
         lagerenhed.tilfoejLager(this, reol, hylde);
     }
 
-    public Lagerenhed getLagerenhedAt(int row, int column) {
-        return reolliste[row][column];
-    }
 
     public String getNavn() {
         return navn;
@@ -50,6 +47,9 @@ public class Lager {
     }
 
     public boolean lagerpladsLedig(int reol, int hylde) {
+        if (reol < 0 || hylde < 0 || reol >= reolliste.length || hylde >= reolliste[reol].length) {
+            throw new IllegalArgumentException("Angivne hylde er optaget eller findes ikke");
+        }
         return reolliste[reol][hylde] == null;
     }
 
