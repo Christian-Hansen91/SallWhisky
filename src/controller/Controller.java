@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public class Controller {
     public static Medarbejder opretMedarbejder(String navn, int tlfNr) {
@@ -42,8 +41,8 @@ public class Controller {
     }
 
     public static Whisky opretWhisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
-                                     double vandTilfoejet, double alkoholprocent, Medarbejder medarbejder) {
-        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder);
+                                     double vandTilfoejet, double alkoholprocent, Medarbejder medarbejder, String whiskyBetegnelse) {
+        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder, whiskyBetegnelse);
         Storage.addWhisky(whisky);
         return whisky;
     }
@@ -65,6 +64,7 @@ public class Controller {
         Destillat destillat = new Destillat(fad, medarbejder);
         return destillat;
     }
+
     public static void tilfoejDestillatTilSTorage(Destillat destillat) {
         Storage.addDestillat(destillat);
     }
@@ -110,6 +110,16 @@ public class Controller {
         return destillater;
     }
 
+    public static ArrayList<Destillat> getModneDestillater() {
+        ArrayList<Destillat> destillater = new ArrayList<>();
+        for (int i = 0; i < getFade().size(); i++) {
+            if (getFade().get(i).getDestillat().getDato().isBefore(LocalDate.now().minusYears(3))) {
+                destillater.add(getFade().get(i).getDestillat());
+            }
+        }
+        return destillater;
+    }
+
     public static void addMedarbejder(Medarbejder medarbejder) {
         Storage.addMedarbejder(medarbejder);
     }
@@ -149,11 +159,9 @@ public class Controller {
     }
 
     public static ArrayList<Whisky> soegWhiskyId(int nr) {
-        ArrayList<Whisky> alleWhiskyer = Storage.getWhiskyer();
         ArrayList<Whisky> whiskyer = new ArrayList<>();
-
         if (nr != 0) {
-            for (Whisky whisky : alleWhiskyer) {
+            for (Whisky whisky : Storage.getWhiskyer()) {
                 if (whisky.getNr() == nr) {
                     whiskyer.add(whisky);
                 }
@@ -162,7 +170,7 @@ public class Controller {
         return whiskyer;
     }
 
-    public static ArrayList<Destillat> soegDestillatKommentar(String kommentar) {
+    public static List<Destillat> soegDestillatKommentar(String kommentar) {
         ArrayList<Destillat> destillater = new ArrayList<>();
         if (!kommentar.isEmpty()) {
             for (Destillat destillat : Storage.getDestillater()) {
@@ -174,11 +182,13 @@ public class Controller {
         return destillater;
     }
 
-    public static ArrayList<Destillat> soegDestillatId(int id) {
+    public static List<Destillat> soegDestillatId(int id) {
         ArrayList<Destillat> destillater = new ArrayList<>();
-        for (Destillat destillat : Storage.getDestillater()) {
-            if (destillat.getId() == id) {
-                destillater.add(destillat);
+        if (id != 0) {
+            for (Destillat destillat : Storage.getDestillater()) {
+                if (destillat.getId() == id) {
+                    destillater.add(destillat);
+                }
             }
         }
         return destillater;
@@ -235,6 +245,7 @@ public class Controller {
 
         return gindestilleringer;
     }
+
     public static List<Gindestillering> soegGiningrediens(String ingrediens) {
         ArrayList<Gindestillering> gindestilleringer = new ArrayList<>();
         if (!ingrediens.isEmpty()) {
@@ -248,10 +259,11 @@ public class Controller {
         }
         return gindestilleringer;
     }
+
     public static String skabVaeskeoversigt(Destillat destillat, Medarbejder medarbejder) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Destillat lavet af "+ medarbejder.getNavn() + ":\n");
+        sb.append("Destillat lavet af " + medarbejder.getNavn() + ":\n");
         for (VaeskeTilDestillat vaeskeTilDestillat : destillat.getVaeskeTilDestillater()) {
             sb.append("\t" + vaeskeTilDestillat + "\n");
         }
@@ -259,7 +271,7 @@ public class Controller {
         if (!destillat.getKommentar().isEmpty()) {
             sb.append("Kommentarer:\n");
             for (String s : destillat.getKommentar()) {
-                sb.append("\t"+s+"\n");
+                sb.append("\t" + s + "\n");
             }
         }
 
@@ -268,6 +280,26 @@ public class Controller {
 
     public static boolean tjekKapacitetFad(Fad fad, double maengde) {
         return fad.tjekPlads(maengde);
+    }
+    public static List<Whiskydestillering> hentIkkeTommeDestilleringer() {
+        List<Whiskydestillering> ikkeTomme = new ArrayList<>();
+        for (Whiskydestillering whiskydestillering : Storage.getWhiskydestilleringer()) {
+            if (whiskydestillering.hentTilgaengeligVaeske() > 0) {
+                ikkeTomme.add(whiskydestillering);
+            }
+        }
+
+        return ikkeTomme;
+    }
+    public static List<Destillat> hentIkkeTommeDestillater() {
+        List<Destillat> ikkeTomme = new ArrayList<>();
+        for (Destillat destillat : Storage.getDestillater()) {
+            if (destillat.hentTotalMaengde() > 0) {
+                ikkeTomme.add(destillat);
+            }
+        }
+
+        return ikkeTomme;
     }
 }
 

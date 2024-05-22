@@ -70,13 +70,11 @@ public class OpretDestillatVindue extends Stage {
         pane.add(lblTapning, 0, 0);
         pane.setHalignment(lblTapning, HPos.CENTER);
 
-        pane.add(dato, 0, 1);
-        dato.setMinWidth(200);
-
         pane.add(cbDestilleringer, 0, 2, 2, 1);
         cbDestilleringer.setMaxWidth(200);
         cbDestilleringer.getItems().addAll(Controller.getWhiskydestilleringer());
         cbDestilleringer.setPromptText("Vælg destillering");
+        cbDestilleringer.setVisibleRowCount(2);
 
         pane.add(lblMaengdeILiter, 0, 3);
         pane.add(txfMaengdeILiter, 0, 4);
@@ -167,7 +165,6 @@ public class OpretDestillatVindue extends Stage {
     }
 
     private void gemDestillatAction() {
-        LocalDate dato1 = dato.getValue();
         String kommentar = txfKommentar.getText().trim();
         fad = cbFade.getSelectionModel().getSelectedItem();
         if (Controller.tjekKapacitetFad(fad,destillat.hentTotalMaengde())) {
