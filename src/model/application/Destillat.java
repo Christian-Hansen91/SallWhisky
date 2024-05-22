@@ -79,7 +79,7 @@ public class Destillat {
         return id;
     }
 
-    public List<VaeskeInterface> getVaeskeTilDestillater() {
+    public List<VaeskeInterface> getVaeskerTilDestillat() {
         List<VaeskeInterface> vaeskeTilDestillater = this.vaeskeTilDestillater;
         return vaeskeTilDestillater;
     }
