@@ -73,4 +73,8 @@ public class Fad implements Lagerenhed{
             //lager.addLagerenhedAt(reol, hylde, this);
         }
     }
+
+    public void fjernDestilat() {
+        destillat=null;
+    }
 }

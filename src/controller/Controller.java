@@ -112,13 +112,17 @@ public class Controller {
     }
 
     public static ArrayList<Destillat> getModneDestillater() {
-        ArrayList<Destillat> destillater = new ArrayList<>();
-        for (int i = 0; i < getFade().size(); i++) {
-            if (getFade().get(i).getDestillat().getDato().isBefore(LocalDate.now().minusYears(3))) {
-                destillater.add(getFade().get(i).getDestillat());
+        try {
+            ArrayList<Destillat> destillater = new ArrayList<>();
+            for (int i = 0; i < getFade().size(); i++) {
+                if (getFade().get(i).getDestillat().getDato().isBefore(LocalDate.now().minusYears(3))) {
+                    destillater.add(getFade().get(i).getDestillat());
+                }
             }
+            return destillater;
+        } catch (Exception e) {
         }
-        return destillater;
+        return null;
     }
 
     public static void addMedarbejder(Medarbejder medarbejder) {
@@ -282,6 +286,7 @@ public class Controller {
     public static boolean tjekKapacitetFad(Fad fad, double maengde) {
         return fad.tjekPlads(maengde);
     }
+
     public static List<Whiskydestillering> hentIkkeTommeDestilleringer() {
         List<Whiskydestillering> ikkeTomme = new ArrayList<>();
         for (Whiskydestillering whiskydestillering : Storage.getWhiskydestilleringer()) {
@@ -292,6 +297,7 @@ public class Controller {
 
         return ikkeTomme;
     }
+
     public static List<Destillat> hentIkkeTommeDestillater() {
         List<Destillat> ikkeTomme = new ArrayList<>();
         for (Destillat destillat : Storage.getDestillater()) {
