@@ -2,6 +2,7 @@ package controller;
 
 import model.application.*;
 import storage.Storage;
+import test.fake_classes.VaeskeInterface;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -264,7 +265,7 @@ public class Controller {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Destillat lavet af " + medarbejder.getNavn() + ":\n");
-        for (VaeskeTilDestillat vaeskeTilDestillat : destillat.getVaeskeTilDestillater()) {
+        for (VaeskeInterface vaeskeTilDestillat : destillat.getVaeskeTilDestillater()) {
             sb.append("\t" + vaeskeTilDestillat + "\n");
         }
         sb.append("---------\n");

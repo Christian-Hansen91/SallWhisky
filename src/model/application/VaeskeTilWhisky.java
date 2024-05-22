@@ -1,6 +1,9 @@
 package model.application;
 
-public class VaeskeTilWhisky {
+import test.fake_classes.VaeskeInterface;
+import test.fake_classes.VaeskeWhiskyInterface;
+
+public class VaeskeTilWhisky implements VaeskeWhiskyInterface {
     private Destillat destillat;
     private double maengde;
 

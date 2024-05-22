@@ -1,5 +1,8 @@
 package model.application;
 
+import test.fake_classes.VaeskeInterface;
+import test.fake_classes.VaeskeWhiskyInterface;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +12,8 @@ public class Destillat {
     private int id;
     private LocalDate dato;
     private List<String> kommentar = new ArrayList<>();
-    private List<VaeskeTilDestillat> vaeskeTilDestillater = new ArrayList<>();
-    private List<VaeskeTilWhisky> vaeskeTilWhiskyer = new ArrayList<>();
+    private List<VaeskeInterface> vaeskeTilDestillater = new ArrayList<>();
+    private List<VaeskeWhiskyInterface> vaeskeTilWhiskyer = new ArrayList<>();
     private Fad fad;
     private double angelShare = 0;
     private Medarbejder medarbejder;
@@ -22,7 +25,6 @@ public class Destillat {
         this.fad = fad;
         fad.saetDestillat(this);
         this.medarbejder = medarbejder;
-
     }
 
     private void kontrollerMaengdeIFad(Fad fad) {
@@ -32,10 +34,14 @@ public class Destillat {
         this.kommentar.add(kommentar);
     }
 
-    public void tilfoejVaeskeTilDestillat(VaeskeTilDestillat vaeskeTilDestillat) {
+    public void tilfoejVaeskeTilDestillat(VaeskeInterface vaeskeTilDestillat) {
         if (!this.vaeskeTilDestillater.contains(vaeskeTilDestillat)) {
             this.vaeskeTilDestillater.add(vaeskeTilDestillat);
         }
+    }
+
+    public void setAngelShare(double angelShare) {
+        this.angelShare = angelShare;
     }
 
     public void saetAngelShare() {
@@ -43,15 +49,19 @@ public class Destillat {
     }
 
     public double hentTotalMaengde() {
-        double liter = 0;
-        for (VaeskeTilDestillat vaeskeTilDestillat : vaeskeTilDestillater) {
-            liter += vaeskeTilDestillat.getMaengde();
+        double vaeskeDestillat = 0;
+        double vaeskeWhisky = 0;
+        for (VaeskeInterface vaeskeTilDestillat : vaeskeTilDestillater) {
+            vaeskeDestillat += vaeskeTilDestillat.getMaengde();
         }
-        for (VaeskeTilWhisky vaeskeTilWhisky : vaeskeTilWhiskyer) {
-            liter -= vaeskeTilWhisky.getMaengde();
+        for (VaeskeWhiskyInterface vaeskeTilWhisky : vaeskeTilWhiskyer) {
+            vaeskeWhisky += vaeskeTilWhisky.getMaengde();
         }
-        liter-=angelShare;
-        return liter;
+        if (vaeskeDestillat < 0 || vaeskeWhisky < 0 || angelShare < 0
+                || vaeskeDestillat - vaeskeWhisky < 0) {
+            throw new IllegalArgumentException("Mængde i produkter overskrider mængde tappet til destillat");
+        }
+        return vaeskeDestillat - vaeskeWhisky - angelShare;
     }
 
     public Fad getFad() {
@@ -68,8 +78,8 @@ public class Destillat {
         return id;
     }
 
-    public List<VaeskeTilDestillat> getVaeskeTilDestillater() {
-        List<VaeskeTilDestillat> vaeskeTilDestillater = this.vaeskeTilDestillater;
+    public List<VaeskeInterface> getVaeskeTilDestillater() {
+        List<VaeskeInterface> vaeskeTilDestillater = this.vaeskeTilDestillater;
         return vaeskeTilDestillater;
     }
 
@@ -107,5 +117,8 @@ public class Destillat {
         if(vaeskeTilDestillater.size()==0){
             throw new IllegalArgumentException("Der er endnu ikke tilføjet væsker til destillatet");
         }
+    }
+    public void tilfoejVaeskeTilWhisky(VaeskeWhiskyInterface whiskyMaengde) {
+        this.vaeskeTilWhiskyer.add(whiskyMaengde);
     }
 }

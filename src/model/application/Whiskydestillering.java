@@ -1,5 +1,7 @@
 package model.application;
 
+import test.fake_classes.VaeskeInterface;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -14,7 +16,7 @@ public class Whiskydestillering {
     private double tail;
     private double alkoholprocent;
     private String kommentar;
-    private List<VaeskeTilDestillat> tapninger = new ArrayList<>();
+    private List<VaeskeInterface> tapninger = new ArrayList<>();
     private Maltning maltning;
     private Medarbejder medarbejder;
 
@@ -36,7 +38,7 @@ public class Whiskydestillering {
     }
 
     public VaeskeTilDestillat opretVaeskeTilDestillat(double maengde) {
-        if (tjekNokMaengde(maengde)) {
+        if (maengde > 0 && tjekNokMaengde(maengde)) {
             VaeskeTilDestillat vaeskeTilDestillat = new VaeskeTilDestillat(maengde, this);
             return vaeskeTilDestillat;
         } else {
@@ -49,7 +51,7 @@ public class Whiskydestillering {
 
     private boolean tjekNokMaengde(double liter) {
         double maengde = 0;
-        for (VaeskeTilDestillat vaeskeTilDestillat : tapninger) {
+        for (VaeskeInterface vaeskeTilDestillat : tapninger) {
             maengde += vaeskeTilDestillat.getMaengde();
         }
         return maengde + liter <= heart;
@@ -57,7 +59,7 @@ public class Whiskydestillering {
 
     public double hentTilgaengeligVaeske() {
         double vaeskeTilbage = heart;
-        for (VaeskeTilDestillat vaeskeTilDestillat : tapninger) {
+        for (VaeskeInterface vaeskeTilDestillat : tapninger) {
             vaeskeTilbage -= vaeskeTilDestillat.getMaengde();
         }
         return vaeskeTilbage;
@@ -75,16 +77,20 @@ public class Whiskydestillering {
                 "Medarbejder: " + medarbejder;
     }
 
-    public void tilfoejVaeskemaengde(VaeskeTilDestillat vaeskeTilDestillat) {
+    public void tilfoejVaeskemaengde(VaeskeInterface vaeskeTilDestillat) {
         if (!tapninger.contains(vaeskeTilDestillat)) {
             tapninger.add(vaeskeTilDestillat);
         }
     }
 
-    public void fjernVaeske(VaeskeTilDestillat vaeskeTilDestillat) {
+    public void fjernVaeske(VaeskeInterface vaeskeTilDestillat) {
         if (tapninger.contains(vaeskeTilDestillat)) {
             tapninger.remove(vaeskeTilDestillat);
             vaeskeTilDestillat.fjernVaeske();
         }
+    }
+
+    public List<VaeskeInterface> getTapninger() {
+        return new ArrayList<>(tapninger);
     }
 }

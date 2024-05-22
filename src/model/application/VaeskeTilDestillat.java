@@ -1,8 +1,10 @@
 package model.application;
 
+import test.fake_classes.VaeskeInterface;
+
 import java.time.LocalDate;
 
-public class VaeskeTilDestillat {
+public class VaeskeTilDestillat implements VaeskeInterface {
     private Whiskydestillering whiskydestillering;
     private LocalDate dato;
     private double maengde;
