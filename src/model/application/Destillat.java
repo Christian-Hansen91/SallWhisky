@@ -25,6 +25,7 @@ public class Destillat {
         this.fad = fad;
         fad.saetDestillat(this);
         this.medarbejder = medarbejder;
+
     }
 
     private void kontrollerMaengdeIFad(Fad fad) {

@@ -16,7 +16,7 @@ public class Whisky implements Lagerenhed{
     private Medarbejder medarbejder;
 
     public Whisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
-                  double vandTilfoejet, double alkoholprocent, Medarbejder medarbejder, String whiskyBetegnelse ) {
+                  double vandTilfoejet, double alkoholprocent, Medarbejder medarbejder, String whiskyBetegnelse) {
         Whisky.totalAntal++;
         this.nr = totalAntal;
         this.dato = dato;
@@ -36,6 +36,7 @@ public class Whisky implements Lagerenhed{
     public int getNr() {
         return nr;
     }
+
     public static int getTotalAntal() {
         return totalAntal;
     }
