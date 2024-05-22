@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public class Controller {
     public static Medarbejder opretMedarbejder(String navn, int tlfNr) {
@@ -149,11 +148,9 @@ public class Controller {
     }
 
     public static ArrayList<Whisky> soegWhiskyId(int nr) {
-        ArrayList<Whisky> alleWhiskyer = Storage.getWhiskyer();
         ArrayList<Whisky> whiskyer = new ArrayList<>();
-
         if (nr != 0) {
-            for (Whisky whisky : alleWhiskyer) {
+            for (Whisky whisky : Storage.getWhiskyer()) {
                 if (whisky.getNr() == nr) {
                     whiskyer.add(whisky);
                 }
@@ -162,7 +159,7 @@ public class Controller {
         return whiskyer;
     }
 
-    public static ArrayList<Destillat> soegDestillatKommentar(String kommentar) {
+    public static List<Destillat> soegDestillatKommentar(String kommentar) {
         ArrayList<Destillat> destillater = new ArrayList<>();
         if (!kommentar.isEmpty()) {
             for (Destillat destillat : Storage.getDestillater()) {
@@ -174,11 +171,13 @@ public class Controller {
         return destillater;
     }
 
-    public static ArrayList<Destillat> soegDestillatId(int id) {
+    public static List<Destillat> soegDestillatId(int id) {
         ArrayList<Destillat> destillater = new ArrayList<>();
-        for (Destillat destillat : Storage.getDestillater()) {
-            if (destillat.getId() == id) {
-                destillater.add(destillat);
+        if (id != 0) {
+            for (Destillat destillat : Storage.getDestillater()) {
+                if (destillat.getId() == id) {
+                    destillater.add(destillat);
+                }
             }
         }
         return destillater;
@@ -268,6 +267,26 @@ public class Controller {
 
     public static boolean tjekKapacitetFad(Fad fad, double maengde) {
         return fad.tjekPlads(maengde);
+    }
+    public static List<Whiskydestillering> hentIkkeTommeDestilleringer() {
+        List<Whiskydestillering> ikkeTomme = new ArrayList<>();
+        for (Whiskydestillering whiskydestillering : Storage.getWhiskydestilleringer()) {
+            if (whiskydestillering.hentTilgaengeligVaeske() > 0) {
+                ikkeTomme.add(whiskydestillering);
+            }
+        }
+
+        return ikkeTomme;
+    }
+    public static List<Destillat> hentIkkeTommeDestillater() {
+        List<Destillat> ikkeTomme = new ArrayList<>();
+        for (Destillat destillat : Storage.getDestillater()) {
+            if (destillat.hentTotalMaengde() > 0) {
+                ikkeTomme.add(destillat);
+            }
+        }
+
+        return ikkeTomme;
     }
 }
 

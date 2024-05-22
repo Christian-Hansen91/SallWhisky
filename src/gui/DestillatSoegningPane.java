@@ -76,6 +76,9 @@ public class DestillatSoegningPane extends SoegningPane {
     private void findAlle() {
         lvResultater.getItems().clear();
         lvResultater.getItems().setAll(Controller.getDestillater());
+        for (Destillat destillat : Controller.getDestillater()) {
+            System.out.println(destillat.getId());
+        }
     }
 
     private void soegningAction() {
@@ -83,11 +86,9 @@ public class DestillatSoegningPane extends SoegningPane {
         Set<Destillat> destillatSet = new HashSet<Destillat>();
         destillatSet.addAll(Controller.soegDestillatKommentar(txfKommentar.getText()));
         destillatSet.addAll(Controller.soegDestillatId(saniterInputId()));
-        ArrayList<Destillat> destillater = new ArrayList<>(destillatSet);
-        lvResultater.getItems().addAll(destillater);
+        lvResultater.getItems().addAll(destillatSet);
         if (chkTreAar.isSelected()) {
             List<Destillat> temp = lvResultater.getItems();
-            System.out.println(temp.size());
             lvResultater.getItems().setAll(Controller.fjernUnderTre(temp));
         }
     }

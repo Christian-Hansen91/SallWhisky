@@ -44,9 +44,6 @@ public class Whiskydestillering {
         }
     }
 
-    public static int getTotalAntal() {
-        return totalAntal;
-    }
 
     public int getNewMakeNr() {
         return newMakeNr;

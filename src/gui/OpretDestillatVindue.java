@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.*;
 
-import javax.xml.stream.events.Comment;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -74,7 +73,7 @@ public class OpretDestillatVindue extends Stage {
 
         pane.add(cbDestilleringer, 0, 2, 2, 1);
         cbDestilleringer.setMaxWidth(175);
-        cbDestilleringer.getItems().addAll(Controller.getWhiskydestilleringer());
+        cbDestilleringer.getItems().addAll(Controller.hentIkkeTommeDestilleringer());
         cbDestilleringer.setPromptText("Vælg destillering");
 
         pane.add(lblMaengdeILiter, 0, 3);

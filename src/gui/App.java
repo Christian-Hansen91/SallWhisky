@@ -38,6 +38,8 @@ public class App {
         Destillat destillat2 = Controller.opretDestillat(fad2, medarbejder1);
         destillat2.tilfoejVaeskeTilDestillat(whiskydestillering2.opretVaeskeTilDestillat(50));
         destillat2.setDato(LocalDate.of(2018,1,2));
+        Controller.tilfoejDestillatTilSTorage(destillat1);
+        Controller.tilfoejDestillatTilSTorage(destillat2);
         lager1.addLagerenhedAt(2, 1, fad2);
         lager1.addReol(6);
 

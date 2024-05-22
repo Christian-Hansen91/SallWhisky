@@ -94,7 +94,8 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         pane.add(cbDestillater, 0, 1, 2, 3);
         cbDestillater.setMaxWidth(175);
         cbDestillater.setMinHeight(70);
-        cbDestillater.getItems().addAll(Controller.getDestillater());
+        cbDestillater.getItems().addAll(Controller.hentIkkeTommeDestillater());
+        cbDestillater.setVisibleRowCount(2);
 
         pane.add(lblMaengdeILiter, 0, 4);
         pane.add(txfMaengdeILiter, 1, 4);
