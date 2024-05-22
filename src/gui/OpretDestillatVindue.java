@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.*;
 
+import javax.xml.stream.events.Comment;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -19,10 +20,10 @@ public class OpretDestillatVindue extends Stage {
     private ComboBox<Fad> cbFade = new ComboBox<>();
     private Label lblKommentar = new Label("Kommentar: ");
     private TextField txfKommentar = new TextField();
-    private Label lblDestillat = new Label("Destillat");
+    private Label lblDestillat = new Label("Opret destillat");
     private ListView<String> lvwDestillat = new ListView<>();
     private Button btnOpretTapning = new Button("Opret tapning til destillat");
-    private Label lblTapning = new Label("Tapning ");
+    private Label lblTapning = new Label("Tilføj væske til destillat");
     private Button btnOpretDestillat = new Button("Opret destillat");
     private Label lblTilfoejTilFad = new Label("Tilføj til fad:");
     private Label lblMaengdeILiter = new Label("Mængde (L): ");
@@ -42,7 +43,7 @@ public class OpretDestillatVindue extends Stage {
         medarbejder = startVindue.getMedarbejder();
         this.initOwner(owner);
 
-        setTitle("Opret destilleringstapning");
+        setTitle("Opret destillat (til fad)");
         GridPane pane = new GridPane();
         this.initContent(pane);
 
@@ -65,23 +66,23 @@ public class OpretDestillatVindue extends Stage {
         lblTilfoejTilFad.setTextFill(Color.BURLYWOOD);
         lblMaengdeILiter.setTextFill(Color.BURLYWOOD);
 
-        pane.add(new Label("                                  "), 2, 0);
+        pane.add(new Label("                                       "), 2, 0);
         pane.add(lblTapning, 0, 0);
         pane.setHalignment(lblTapning, HPos.CENTER);
 
-        pane.add(dato, 0, 1);
-
         pane.add(cbDestilleringer, 0, 2, 2, 1);
-        cbDestilleringer.setMaxWidth(175);
-        cbDestilleringer.getItems().addAll(Controller.hentIkkeTommeDestilleringer());
+        cbDestilleringer.setMaxWidth(200);
+        cbDestilleringer.getItems().addAll(Controller.getWhiskydestilleringer());
         cbDestilleringer.setPromptText("Vælg destillering");
         cbDestilleringer.setVisibleRowCount(2);
 
         pane.add(lblMaengdeILiter, 0, 3);
         pane.add(txfMaengdeILiter, 0, 4);
         pane.add(lblKommentar, 0, 5);
-        pane.add(txfKommentar, 0, 6);
-        txfKommentar.setMaxWidth(200);
+        pane.add(txfKommentar, 0, 6, 1, 3);
+        txfKommentar.setMinWidth(200);
+        txfKommentar.setMinHeight(60);
+        txfMaengdeILiter.setMinWidth(200);
 
         pane.add(btnOpretTapning, 0, 9);
         pane.setHalignment(btnOpretTapning, HPos.RIGHT);
@@ -164,7 +165,6 @@ public class OpretDestillatVindue extends Stage {
     }
 
     private void gemDestillatAction() {
-        LocalDate dato1 = dato.getValue();
         String kommentar = txfKommentar.getText().trim();
         fad = cbFade.getSelectionModel().getSelectedItem();
         if (Controller.tjekKapacitetFad(fad,destillat.hentTotalMaengde())) {

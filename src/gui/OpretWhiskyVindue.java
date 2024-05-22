@@ -94,8 +94,8 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         pane.add(cbDestillater, 0, 1, 2, 3);
         cbDestillater.setMaxWidth(175);
         cbDestillater.setMinHeight(70);
-        cbDestillater.getItems().addAll(Controller.hentIkkeTommeDestillater());
         cbDestillater.setVisibleRowCount(2);
+        cbDestillater.getItems().addAll(Controller.getModneDestillater());
 
         pane.add(lblMaengdeILiter, 0, 4);
         pane.add(txfMaengdeILiter, 1, 4);
@@ -160,7 +160,9 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         try {
             if (txfVandTilfoejet.getText() != "")
                 antalFlaskerForAtTappe();
-        } catch(Exception e){StartVindue.fejlIOprettelseAlert("Du skal skrive et tal i vand tilføjet, for at udregne antal flasker");}
+        } catch (Exception e) {
+            StartVindue.fejlIOprettelseAlert("Du skal skrive et tal i vand tilføjet, for at udregne antal flasker");
+        }
     }
 
     private void vaelgLager() {
@@ -199,7 +201,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             VaeskeTilWhisky vaeskeTilWhisky = destillat.opretVaeskeTilWhisky(maengdeWhisky);
             listVaeskeTilWhiskyAdded.add(vaeskeTilWhisky);
 
-            listDestillater.addAll(Controller.getDestillater());
+            listDestillater.addAll(Controller.getModneDestillater());
             lvVaeskeTilWhisky.setItems(listVaeskeTilWhiskyAdded);
             cbDestillater.setItems(listDestillater);
             cbDestillater.setVisibleRowCount(2);
@@ -218,28 +220,44 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             String beskrivelse = txfBeskrivelse.getText().trim();
             LocalDate localDate = dpDato.getValue();
             String navn = txfNavn.getText().trim();
-            if (navn == "" || beskrivelse == "" || txfVandTilfoejet.getText().trim() == "" || txfAlkoholprocent.getText().trim() == "" || cbFlaskestr.getValue() == "")
+            if (navn == "" || beskrivelse == "" || txfAlkoholprocent.getText().trim() == "" || cbFlaskestr.getValue() == "")
                 throw new NullPointerException("Udfyld alle felterne");
             double vandTilfoejet = 0.0;
             double alkoholprocent = 0.0;
             double flaskeStr = Double.parseDouble((cbFlaskestr.getSelectionModel().getSelectedItem()));
-            vandTilfoejet = Double.parseDouble(txfVandTilfoejet.getText().trim());
+            if (txfVandTilfoejet.getText() != "") {
+                vandTilfoejet = Double.parseDouble(txfVandTilfoejet.getText().trim());
+            }
             alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
             if (alkoholprocent > 100 || alkoholprocent < 40)
                 throw new IllegalArgumentException("Fejl i alkoholsprocent, enten for høj eller for lav");
-            Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder);
+            Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder, beregnWhiskyBetegnelse());
             if (!(lager == null)) {
                 lager.addLagerenhedAt(reol, hylde, whisky);
                 this.hide();
             } else {
                 StartVindue.fejlIOprettelseAlert("Vælg en lagerplads");
             }
-            antalFlaskerForAtTappe();
             this.hide();
             StartVindue.succesIOprettelseAlert();
         } catch (Exception e) {
             StartVindue.fejlIOprettelseAlert(e.getMessage());
         }
+        System.out.println(txfVandTilfoejet.getText());
+    }
+
+    private String beregnWhiskyBetegnelse() {
+        if (listVaeskeTilWhiskyAdded.size() == 1)
+            if (txfVandTilfoejet.getText() == "" || txfVandTilfoejet.getText() == "0")
+                return "Cast strength";
+            else
+                return "Single cast";
+        if (listVaeskeTilWhiskyAdded.size() > 1)
+            if (erEksternDestilat())
+                return "Blended";
+            else
+                return "Single malt";
+        return null;
     }
 
     public void setValgtLager(Lager lager) {
@@ -251,5 +269,17 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         this.lager = lager;
         this.reol = reol;
         this.hylde = hylde;
+    }
+
+    public boolean erEksternDestilat() {
+        boolean erEksternDestilat = false;
+        for (int i = 0; i < listVaeskeTilWhiskyAdded.size(); i++) {
+            for (int j = 0; j < listVaeskeTilWhiskyAdded.get(i).getDestillat().getVaeskeTilDestillater().size(); j++) {
+                if (listVaeskeTilWhiskyAdded.get(i).getDestillat().getVaeskeTilDestillater().get(j).getWhiskydestillering() == Controller.getWhiskydestilleringer().get(0)) {
+                    erEksternDestilat = true;
+                }
+            }
+        }
+        return erEksternDestilat;
     }
 }
