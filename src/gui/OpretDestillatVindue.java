@@ -15,7 +15,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class OpretDestillatVindue extends Stage {
-    private DatePicker dato = new DatePicker(LocalDate.now());
     private ComboBox<Whiskydestillering> cbDestilleringer = new ComboBox<>();
     private ComboBox<Fad> cbFade = new ComboBox<>();
     private Label lblKommentar = new Label("Kommentar: ");
@@ -69,8 +68,6 @@ public class OpretDestillatVindue extends Stage {
         pane.add(new Label("                                  "), 2, 0);
         pane.add(lblTapning, 0, 0);
         pane.setHalignment(lblTapning, HPos.CENTER);
-
-        pane.add(dato, 0, 1);
 
         pane.add(cbDestilleringer, 0, 2, 2, 1);
         cbDestilleringer.setMaxWidth(175);
@@ -163,7 +160,6 @@ public class OpretDestillatVindue extends Stage {
     }
 
     private void gemDestillatAction() {
-        LocalDate dato1 = dato.getValue();
         String kommentar = txfKommentar.getText().trim();
         fad = cbFade.getSelectionModel().getSelectedItem();
         if (Controller.tjekKapacitetFad(fad,destillat.hentTotalMaengde())) {
