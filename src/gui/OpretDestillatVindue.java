@@ -103,6 +103,7 @@ public class OpretDestillatVindue extends Stage {
         cbFade.setMaxWidth(200);
         cbFade.getItems().addAll(Controller.getFade());
         cbFade.setOnAction(event -> fadValgt());
+        cbFade.setVisibleRowCount(2);
 
         pane.add(btnOpretDestillat, 3, 9, 2, 1);
         pane.setHalignment(btnOpretDestillat, HPos.RIGHT);
