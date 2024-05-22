@@ -43,8 +43,6 @@ public class Whiskydestillering {
             throw new IllegalArgumentException("Der er ikke nok destillat til at lave denne tapning");
         }
     }
-
-
     public int getNewMakeNr() {
         return newMakeNr;
     }

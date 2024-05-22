@@ -75,6 +75,7 @@ public class OpretDestillatVindue extends Stage {
         cbDestilleringer.setMaxWidth(175);
         cbDestilleringer.getItems().addAll(Controller.hentIkkeTommeDestilleringer());
         cbDestilleringer.setPromptText("Vælg destillering");
+        cbDestilleringer.setVisibleRowCount(2);
 
         pane.add(lblMaengdeILiter, 0, 3);
         pane.add(txfMaengdeILiter, 0, 4);
