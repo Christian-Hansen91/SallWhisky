@@ -48,7 +48,7 @@ public class GinsoegningPane extends SoegningPane {
         add(lblResultater, 4, 0, 1, 2);
         setValignment(lblResultater, VPos.CENTER);
         lvResultater = new ListView<>();
-        add(lvResultater, 4, 3, 4, 9);
+        add(lvResultater, 4, 3, 4, 11);
         lvResultater.setPrefWidth(220);
         lvResultater.setPrefHeight(200);
         lblFejl = new Label("");
