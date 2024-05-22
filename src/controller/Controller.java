@@ -63,8 +63,10 @@ public class Controller {
 
     public static Destillat opretDestillat(Fad fad, Medarbejder medarbejder) {
         Destillat destillat = new Destillat(fad, medarbejder);
-        Storage.addDestillat(destillat);
         return destillat;
+    }
+    public static void tilfoejDestillatTilSTorage(Destillat destillat) {
+        Storage.addDestillat(destillat);
     }
 
     public static void tilfoejIngrediensmaengde(Ingrediens ingrediens, double maengde, Gindestillering gindestillering) {

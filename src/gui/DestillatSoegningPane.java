@@ -62,10 +62,20 @@ public class DestillatSoegningPane extends SoegningPane {
         setHalignment(btnSoeg, HPos.RIGHT);
         btnSoeg.setOnAction(e -> soegningAction());
 
+        Button btnAlle = new Button("Vis alle");
+        add(btnAlle, 1, 12);
+        btnAlle.setOnAction(e -> findAlle());
+        setHalignment(btnAlle, HPos.RIGHT);
+
         chkTreAar = new CheckBox("Lagret mindst tre år:");
         chkTreAar.setTextFill(Color.BURLYWOOD);
         add(chkTreAar, 0, 11, 2, 1);
         chkTreAar.setOnAction(e -> soegningAction());
+    }
+
+    private void findAlle() {
+        lvResultater.getItems().clear();
+        lvResultater.getItems().setAll(Controller.getDestillater());
     }
 
     private void soegningAction() {

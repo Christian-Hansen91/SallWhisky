@@ -141,21 +141,16 @@ public class OpretDestillatVindue extends Stage {
             opdaterLvDestillat();
         }
     }
-
     private void gemDestillatAction() {
-        LocalDate dato1 = dato.getValue();
-        String kommentar = txfKommentar.getText().trim();
         fad = cbFade.getSelectionModel().getSelectedItem();
-
         if (Controller.tjekKapacitetFad(fad,destillat.hentTotalMaengde())) {
-            destillat = Controller.opretDestillat(fad, medarbejder);
+            Controller.tilfoejDestillatTilSTorage(destillat);
             this.hide();
             StartVindue.succesIOprettelseAlert();
         } else {
             StartVindue.fejlIOprettelseAlert("Der er ikke plads i fadet til destillatet");
         }
     }
-
     public void opdaterLvDestillat() {
         lvwDestillat.getItems().clear();
         lvwDestillat.getItems().setAll(Controller.skabVaeskeoversigt(destillat, medarbejder));
