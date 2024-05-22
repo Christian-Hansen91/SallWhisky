@@ -41,8 +41,8 @@ public class App {
         lager1.addLagerenhedAt(2, 1, fad2);
         lager1.addReol(6);
 
-        Whisky whisky1 = Controller.opretWhisky(LocalDate.of(2024, 5, 19), "Wild Whisky", "1. Edition", 0.7, 10.0, 45.9, lager1, medarbejder3);
-        Whisky whisky2 = Controller.opretWhisky(LocalDate.of(2024, 5, 14), "Wild Whisky", "2. Edition", 0.7, 5.0, 59.9, lager2, medarbejder2);
+        Whisky whisky1 = Controller.opretWhisky(LocalDate.of(2024, 5, 19), "Wild Whisky", "1. Edition", 0.7, 10.0, 45.9, medarbejder3);
+        Whisky whisky2 = Controller.opretWhisky(LocalDate.of(2024, 5, 14), "Wild Whisky", "2. Edition", 0.7, 5.0, 59.9, medarbejder2);
 
     }
 }

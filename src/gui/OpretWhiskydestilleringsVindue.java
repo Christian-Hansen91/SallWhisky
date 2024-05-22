@@ -126,6 +126,10 @@ public class OpretWhiskydestilleringsVindue extends Stage {
 
     private void gemAction() {
         LocalDate startdato = dpStartdato.getValue();
+        if(startdato==null)
+            StartVindue.fejlIOprettelseAlert("Husk at vælge en startdato");
+        if(cbMaltning.getSelectionModel().getSelectedItem()==null)
+            StartVindue.fejlIOprettelseAlert("Husk at tilføje en maltning");
         LocalDate slutdato = dpSlutdato.getValue();
         int maengdeVaeske = 0;
         double head = 0;

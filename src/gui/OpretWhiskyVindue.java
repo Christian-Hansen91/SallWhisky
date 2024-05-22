@@ -173,14 +173,16 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     }
 
     private void antalFlaskerForAtTappe() {
-        double antalFlasker = 0;
+        int antalFlasker = 0;
         double meangdeLiter = 0;
+        double beregnetAntalFlasker = 0;
         for (int i = 0; i < listVaeskeTilWhiskyAdded.size(); i++) {
             meangdeLiter += listVaeskeTilWhiskyAdded.get(i).getMaengde();
         }
         meangdeLiter += Double.parseDouble(txfVandTilfoejet.getText());
         double kapacitet = Double.parseDouble((cbFlaskestr.getSelectionModel().getSelectedItem()));
-        antalFlasker = meangdeLiter / kapacitet;
+        beregnetAntalFlasker = meangdeLiter / kapacitet;
+        antalFlasker = (int) beregnetAntalFlasker;
         txfantalFlasker.setText("" + antalFlasker);
     }
 
@@ -223,7 +225,13 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
             if (alkoholprocent > 100 || alkoholprocent < 40)
                 throw new IllegalArgumentException("Fejl i alkoholsprocent, enten for høj eller for lav");
-            Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, lager, medarbejder);
+            Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder);
+            if (!(lager == null)) {
+                lager.addLagerenhedAt(reol, hylde, whisky);
+                this.hide();
+            } else {
+                StartVindue.fejlIOprettelseAlert("Vælg en lagerplads");
+            }
             antalFlaskerForAtTappe();
             this.hide();
             StartVindue.succesIOprettelseAlert();
