@@ -284,8 +284,8 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     public boolean erEksternDestillat() {
         boolean erEksternDestillat = false;
         for (int i = 0; i < listVaeskeTilWhiskyAdded.size(); i++) {
-            for (int j = 0; j < listVaeskeTilWhiskyAdded.get(i).getDestillat().getVaeskeTilDestillater().size(); j++) {
-                if (listVaeskeTilWhiskyAdded.get(i).getDestillat().getVaeskeTilDestillater().get(j).getWhiskydestillering() == Controller.getWhiskydestilleringer().get(0)) {
+            for (int j = 0; j < listVaeskeTilWhiskyAdded.get(i).getDestillat().getVaeskerTilDestillat().size(); j++) {
+                if (listVaeskeTilWhiskyAdded.get(i).getDestillat().getVaeskerTilDestillat().get(j).getWhiskydestillering() == Controller.getWhiskydestilleringer().get(0)) {
                     erEksternDestillat = true;
                 }
             }

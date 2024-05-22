@@ -14,7 +14,7 @@ public class Whiskydestillering {
     private double tail;
     private double alkoholprocent;
     private String kommentar;
-    private List<VaeskeTilDestillat> tapninger = new ArrayList<>();
+    private List<VaeskeTilDestillat> VaeskerTilDestillat = new ArrayList<>();
     private Maltning maltning;
     private Medarbejder medarbejder;
 
@@ -49,7 +49,7 @@ public class Whiskydestillering {
 
     private boolean tjekNokMaengde(double liter) {
         double maengde = 0;
-        for (VaeskeTilDestillat vaeskeTilDestillat : tapninger) {
+        for (VaeskeTilDestillat vaeskeTilDestillat : VaeskerTilDestillat) {
             maengde += vaeskeTilDestillat.getMaengde();
         }
         return maengde + liter <= heart;
@@ -57,7 +57,7 @@ public class Whiskydestillering {
 
     public double hentTilgaengeligVaeske() {
         double vaeskeTilbage = heart;
-        for (VaeskeTilDestillat vaeskeTilDestillat : tapninger) {
+        for (VaeskeTilDestillat vaeskeTilDestillat : VaeskerTilDestillat) {
             vaeskeTilbage -= vaeskeTilDestillat.getMaengde();
         }
         return vaeskeTilbage;
@@ -76,14 +76,14 @@ public class Whiskydestillering {
     }
 
     public void tilfoejVaeskemaengde(VaeskeTilDestillat vaeskeTilDestillat) {
-        if (!tapninger.contains(vaeskeTilDestillat)) {
-            tapninger.add(vaeskeTilDestillat);
+        if (!VaeskerTilDestillat.contains(vaeskeTilDestillat)) {
+            VaeskerTilDestillat.add(vaeskeTilDestillat);
         }
     }
 
     public void fjernVaeske(VaeskeTilDestillat vaeskeTilDestillat) {
-        if (tapninger.contains(vaeskeTilDestillat)) {
-            tapninger.remove(vaeskeTilDestillat);
+        if (VaeskerTilDestillat.contains(vaeskeTilDestillat)) {
+            VaeskerTilDestillat.remove(vaeskeTilDestillat);
             vaeskeTilDestillat.fjernVaeske();
         }
     }

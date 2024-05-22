@@ -9,8 +9,8 @@ public class Destillat {
     private int id;
     private LocalDate dato;
     private List<String> kommentar = new ArrayList<>();
-    private List<VaeskeTilDestillat> vaeskeTilDestillater = new ArrayList<>();
-    private List<VaeskeTilWhisky> vaeskeTilWhiskyer = new ArrayList<>();
+    private List<VaeskeTilDestillat> vaeskerTilDestillat = new ArrayList<>();
+    private List<VaeskeTilWhisky> vaeskerTilWhisky = new ArrayList<>();
     private Fad fad;
     private double angelShare = 0;
     private Medarbejder medarbejder;
@@ -33,8 +33,8 @@ public class Destillat {
     }
 
     public void tilfoejVaeskeTilDestillat(VaeskeTilDestillat vaeskeTilDestillat) {
-        if (!this.vaeskeTilDestillater.contains(vaeskeTilDestillat)) {
-            this.vaeskeTilDestillater.add(vaeskeTilDestillat);
+        if (!this.vaeskerTilDestillat.contains(vaeskeTilDestillat)) {
+            this.vaeskerTilDestillat.add(vaeskeTilDestillat);
         }
     }
 
@@ -44,10 +44,10 @@ public class Destillat {
 
     public double hentTotalMaengde() {
         double liter = 0;
-        for (VaeskeTilDestillat vaeskeTilDestillat : vaeskeTilDestillater) {
+        for (VaeskeTilDestillat vaeskeTilDestillat : vaeskerTilDestillat) {
             liter += vaeskeTilDestillat.getMaengde();
         }
-        for (VaeskeTilWhisky vaeskeTilWhisky : vaeskeTilWhiskyer) {
+        for (VaeskeTilWhisky vaeskeTilWhisky : vaeskerTilWhisky) {
             liter -= vaeskeTilWhisky.getMaengde();
         }
         liter-=angelShare;
@@ -60,7 +60,7 @@ public class Destillat {
 
     public VaeskeTilWhisky opretVaeskeTilWhisky(double maengde) {
         VaeskeTilWhisky vaeskeTilWhisky = new VaeskeTilWhisky(this, maengde);
-        vaeskeTilWhiskyer.add(vaeskeTilWhisky);
+        vaeskerTilWhisky.add(vaeskeTilWhisky);
         return vaeskeTilWhisky;
     }
 
@@ -68,8 +68,8 @@ public class Destillat {
         return id;
     }
 
-    public List<VaeskeTilDestillat> getVaeskeTilDestillater() {
-        List<VaeskeTilDestillat> vaeskeTilDestillater = this.vaeskeTilDestillater;
+    public List<VaeskeTilDestillat> getVaeskerTilDestillat() {
+        List<VaeskeTilDestillat> vaeskeTilDestillater = this.vaeskerTilDestillat;
         return vaeskeTilDestillater;
     }
 
@@ -77,7 +77,7 @@ public class Destillat {
     public String toString() {
         return "DESTILLAT #" + id + "\n" +
                 "Dato: " + dato + "\n" +
-                "Blanding: " + vaeskeTilDestillater + "\n" +
+                "Blanding: " + vaeskerTilDestillat + "\n" +
                 "Mængde: " + hentTotalMaengde() + "\n" +
                 "Angel share: " + angelShare + "\n" +
                 "Kommentar: " + kommentar + "\n" +
@@ -97,14 +97,14 @@ public class Destillat {
     }
 
     public void fjernVaeske(int index) {
-        vaeskeTilDestillater.get(index).fjernVaeske();
-        vaeskeTilDestillater.remove(index);
+        vaeskerTilDestillat.get(index).fjernVaeske();
+        vaeskerTilDestillat.remove(index);
     }
     public void fjernSindsteKommentar() {
         kommentar.remove(kommentar.size()-1);
     }
-    public void tjekOmVaeskeErPåfyldt(){
-        if(vaeskeTilDestillater.size()==0){
+    public void tjekOmVaeskeErPaafyldt(){
+        if(vaeskerTilDestillat.size()==0){
             throw new IllegalArgumentException("Der er endnu ikke tilføjet væsker til destillatet");
         }
     }

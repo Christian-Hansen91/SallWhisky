@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.*;
 
-import javax.xml.stream.events.Comment;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -116,8 +115,8 @@ public class OpretDestillatVindue extends Stage {
     }
 
     private void fjernSidste() {
-        if (destillat != null && !destillat.getVaeskeTilDestillater().isEmpty()) {
-            destillat.fjernVaeske(destillat.getVaeskeTilDestillater().size() - 1);
+        if (destillat != null && !destillat.getVaeskerTilDestillat().isEmpty()) {
+            destillat.fjernVaeske(destillat.getVaeskerTilDestillat().size() - 1);
             if (kommentarCounter.get(kommentarCount-1) == true) {
                 destillat.fjernSindsteKommentar();
             }
