@@ -254,7 +254,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             if (!(lager == null)) {
                 int antalFlasker = antalFlaskerNoedvendige();
                 Flaskekasse flaskekasse = Controller.opretFlasker(antalFlasker, whisky);
-                flaskekasse.tilfoejLager(lager,reol,hylde);
+                Controller.tilfoejLagerenhedTilLager(reol,hylde,flaskekasse,lager);
                 this.hide();
             } else {
                 StartVindue.fejlIOprettelseAlert("Vælg en lagerplads");

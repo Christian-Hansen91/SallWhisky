@@ -79,8 +79,7 @@ public class WhiskySoegningPane extends SoegningPane {
         Set<Whisky> whiskySet = new HashSet<Whisky>();
         whiskySet.addAll(Controller.soegWhiskyBeskrivelse(txfBeskrivelse.getText()));
         whiskySet.addAll(Controller.soegWhiskyId(saniterInputId()));
-        ArrayList<Whisky> whiskyer = new ArrayList<>(whiskySet);
-        lvResultater.getItems().addAll(whiskyer);
+        lvResultater.getItems().addAll(whiskySet);
     }
 
     private int saniterInputId() {
