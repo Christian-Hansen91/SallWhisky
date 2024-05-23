@@ -18,7 +18,7 @@ public class App {
         Medarbejder medarbejder3 = Controller.opretMedarbejder("Martin", 30102040);
 
         Lager lager1 = Controller.opretLager("Lars' lager", new Lagerenhed[10][4], medarbejder1);
-        Lager lager2 = Controller.opretLager("Container lager", new Lagerenhed[2][2], medarbejder1);
+        Lager lager2 = Controller.opretLager("Container lager", new Lagerenhed[8][2], medarbejder1);
 
         Maltning maltning1 = Controller.opretMaltning(800.0, "Evergreen", "Stadsgaard", "Tørv", "Lækker maltning", medarbejder1);
         Maltning maltning2 = Controller.opretMaltning(500.0, "Stairway", "Mosevang", medarbejder2);
@@ -43,6 +43,9 @@ public class App {
 
         Whisky whisky1 = Controller.opretWhisky(LocalDate.of(2024, 5, 19), "Wild Whisky", "1. Edition", 0.7, 10.0, 45.9, medarbejder3, "Single cast");
         Whisky whisky2 = Controller.opretWhisky(LocalDate.of(2024, 5, 14), "Wild Whisky", "2. Edition", 0.7, 5.0, 59.9, medarbejder2, "Cast strength");
+        Whisky whisky3 = Controller.opretWhisky(LocalDate.of(2024, 5, 22), "Wonder Whisky", "1. Edition", 0.5, 8.0, 42.5, medarbejder1, "Blended");
+
+        Gindestillering gindestillering1 = Controller.opretGindestillering(LocalDate.of(2024, 5, 15), LocalDate.of(2024, 5, 18), 14.0, 38.0, 110.0, 2000.0, medarbejder3);
 
     }
 }

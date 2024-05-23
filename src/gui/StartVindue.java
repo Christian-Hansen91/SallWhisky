@@ -60,6 +60,8 @@ public class StartVindue extends Application {
         pane.setVgap(10);
         pane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
 
+        btnOpretOmhaeldning.setDisable(true);
+
         Label lblVelkommen = new Label("     Velkommen til Sall Whisky Distillery    ");
         pane.setHalignment(lblVelkommen, HPos.CENTER);
         lblVelkommen.setTextFill(Color.BURLYWOOD);
@@ -140,7 +142,6 @@ public class StartVindue extends Application {
             btnOpretFad.setDisable(loggedIn);
             btnOpretMaltning.setDisable(loggedIn);
             btnOpretDestilleringsTapning.setDisable(loggedIn);
-            btnOpretOmhaeldning.setDisable(loggedIn);
             btnOpretWhiskyDestillering.setDisable(loggedIn);
             btnOpretWhiskyTapning.setDisable(loggedIn);
             btnOpretGinDestillering.setDisable(loggedIn);
