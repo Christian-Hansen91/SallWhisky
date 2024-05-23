@@ -67,7 +67,6 @@ public class LagerVindue extends Stage {
     }
 
     private void opdaterLagerVindue() {
-        //skaber lagervinduet med knapper
         lagerPane.getChildren().clear();
         for (int i = 0; i < lager.getReolliste().length; i++) {
             for (int j = 0; j < lager.getReolliste()[i].length; j++) {

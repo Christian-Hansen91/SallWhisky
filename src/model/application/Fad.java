@@ -69,12 +69,11 @@ public class Fad implements Lagerenhed {
 
     public void fjernDestilat() {
         if (!(destillat.getKommentar().isEmpty())) {
-            historik += ". På fadet har destillatet #" + destillat.getId() + " lagt, som blandt andet " + destillat.getKommentar().get(0);
+            historik += ". På fadet har destillatet #" + destillat.getId() + " ligget, som blandt andet " + destillat.getKommentar().get(0);
         } else {
-            historik += ". På fadet har destillatet #" + destillat.getId() + " lagt";
+            historik += ". På fadet har destillatet #" + destillat.getId() + " ligget";
         }
         destillat = null;
-        System.out.println(historik);
     }
 
     public double getKapacitet() {
