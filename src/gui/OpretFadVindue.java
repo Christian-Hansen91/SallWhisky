@@ -20,7 +20,6 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
     private Label lblKapacitet = new Label("Kapacitet (L): ");
     private ComboBox<Integer> cbKapacitet = new ComboBox<>();
     private Label lblLagerplads = new Label("Vælg en lagerplads:");
-    private ComboBox<Lager> cbLager = new ComboBox<>();
     private Lager lager = null;
     private Label lblOphavsland = new Label("Ophavsland: ");
     private TextField txfOphavsland = new TextField();

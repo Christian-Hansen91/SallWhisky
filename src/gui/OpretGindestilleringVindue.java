@@ -216,7 +216,7 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
             if (cbIngredienser.getSelectionModel().getSelectedItem() == null) {
                 StartVindue.fejlIOprettelseAlert("Vælg først en ingrediens i listen");
             } else {
-                gindestillering.tilfoejIngrediensmaengde(cbIngredienser.getSelectionModel().getSelectedItem(), Double.parseDouble(txfIngrediensMaengde.getText()));
+                Controller.tilfoejIngrediensmaengde(cbIngredienser.getSelectionModel().getSelectedItem(), Double.parseDouble(txfIngrediensMaengde.getText()),gindestillering);
                 opdaterIngrediensLv();
             }
         } catch (NumberFormatException e) {

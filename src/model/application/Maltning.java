@@ -15,10 +15,6 @@ public class Maltning {
     private static int totalAntal;
     private Medarbejder medarbejder;
 
-    public String getKornsort() {
-        return kornsort;
-    }
-
     public String getMarknavn() {
         return marknavn;
     }
@@ -51,10 +47,6 @@ public class Maltning {
         this.rygemateriale = rygemateriale;
         this.medarbejder = medarbejder;
         this.kommentar = kommentar;
-    }
-
-    public static int getTotalAntal() {
-        return totalAntal;
     }
 
     @Override

@@ -1,12 +1,10 @@
 package test;
 
-import model.application.Fad;
 import model.application.Lager;
 import model.application.Lagerenhed;
 import model.application.Medarbejder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import test.fake_classes.FakeDestillat;
 import test.fake_classes.FakeLagerenhed;
 
 import static org.junit.jupiter.api.Assertions.*;

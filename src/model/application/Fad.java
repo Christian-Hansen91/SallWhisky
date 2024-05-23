@@ -27,11 +27,6 @@ public class Fad implements Lagerenhed {
         this.historik = historik;
         this.medarbejder = medarbejder;
     }
-
-    public static int getTotalAntal() {
-        return totalAntal;
-    }
-
     public int getId() {
         return id;
     }
@@ -44,9 +39,6 @@ public class Fad implements Lagerenhed {
         this.destillat = destillat;
     }
 
-    public boolean tjekPlads(double liter) {
-        return hentOpbrugtKapacitet() + liter <= kapacitet;
-    }
 
     public Destillat getDestillat() {
         return destillat;

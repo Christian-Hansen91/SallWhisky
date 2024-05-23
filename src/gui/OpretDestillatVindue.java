@@ -14,7 +14,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class OpretDestillatVindue extends Stage {
-    private DatePicker dato = new DatePicker(LocalDate.now());
     private ComboBox<Whiskydestillering> cbDestilleringer = new ComboBox<>();
     private ComboBox<Fad> cbFade = new ComboBox<>();
     private Label lblKommentar = new Label("Kommentar: ");

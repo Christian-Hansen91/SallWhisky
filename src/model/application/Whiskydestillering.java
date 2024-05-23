@@ -10,10 +10,7 @@ public class Whiskydestillering {
     private int newMakeNr;
     private LocalDate startdato;
     private LocalDate slutdato;
-    private double head;
-    private double heart;
-    private double tail;
-    private double alkoholprocent;
+    private double head, heart, tail, alkoholprocent;
     private String kommentar;
     private List<VaeskeInterface> tapninger = new ArrayList<>();
     private Maltning maltning;

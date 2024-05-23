@@ -1,6 +1,9 @@
 package model.application;
 
+import test.fake_classes.VaeskeInterface;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Whisky {
     private LocalDate dato;
@@ -14,11 +17,13 @@ public class Whisky {
     private double alkoholprocent;
     private Lager lager;
     private Medarbejder medarbejder;
+    private VaeskeTilWhisky vaeskeTilWhisky;
 
     public Whisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
-                  double vandTilfoejet, double alkoholprocent, Medarbejder medarbejder, String whiskyBetegnelse) {
+                  double vandTilfoejet, double alkoholprocent, Medarbejder medarbejder, String whiskyBetegnelse, VaeskeTilWhisky vaeskeTilWhisky) {
         Whisky.totalAntal++;
         this.nr = totalAntal;
+        this.vaeskeTilWhisky = vaeskeTilWhisky;
         this.dato = dato;
         this.navn = navn;
         this.beskrivelse = beskrivelse;
@@ -29,17 +34,11 @@ public class Whisky {
         this.whiskyBetegnelse = whiskyBetegnelse;
     }
 
-    public LocalDate getDato() {
-        return dato;
-    }
 
     public int getNr() {
         return nr;
     }
 
-    public static int getTotalAntal() {
-        return totalAntal;
-    }
 
     public String getNavn() {
         return navn;
@@ -49,34 +48,26 @@ public class Whisky {
         return beskrivelse;
     }
 
-    public double getFlaskeStr() {
-        return flaskeStr;
-    }
-
-    public double getVandTilfoejet() {
-        return vandTilfoejet;
-    }
-
-    public String getWhiskyBetegnelse() {
-        return whiskyBetegnelse;
-    }
-
-    public double getAlkoholprocent() {
-        return alkoholprocent;
-    }
-    public int lagringsdage() {
-        int dage = 0;
-        LocalDate foersteDestillering;
-        return dage;
-    }
 
     @Override
     public String toString() {
+        ArrayList<Whiskydestillering> destilleringer = new ArrayList<>();
+        for (VaeskeInterface vaeskeInterface : vaeskeTilWhisky.getDestillat().getVaeskerTilDestillat()) {
+            destilleringer.add(vaeskeInterface.getWhiskydestillering());
+        }
+        String destilleringString = "Destilleringer:";
+        for (Whiskydestillering whiskydestillering : destilleringer) {
+            destilleringString+="\n\t"+whiskydestillering.toString();
+        }
+        ArrayList<Fad> fadliste = new ArrayList<>();
         return "WHISKY: " + navn + ", #" + nr + "\n" +
                 "Dato: " + dato + "\n" +
                 "Beskrivelse: " + beskrivelse + "\n" +
                 "Flaskestørrelse: " + flaskeStr + "\n" +
                 "Vand tilføjet: " + vandTilfoejet + "\n" +
+                "Fad: " + vaeskeTilWhisky.getDestillat().getFad()+
+                vaeskeTilWhisky+ "\n"+
+                destilleringString+
                 "Betegnelse: " + whiskyBetegnelse + "\n" +
                 "Alkoholprocent: " + alkoholprocent + "\n" +
                 medarbejder;

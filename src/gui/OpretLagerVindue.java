@@ -15,7 +15,6 @@ import model.application.Lagerenhed;
 import model.application.Medarbejder;
 
 public class OpretLagerVindue extends Stage {
-    private Label lblId = new Label("ID: ");
     private Label lblReol = new Label("Antal reoler: ");
     private Label lblHylde = new Label("Antal hylder: ");
     private Label lblNavn = new Label("Navn: ");

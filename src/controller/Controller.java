@@ -42,8 +42,8 @@ public class Controller {
     }
 
     public static Whisky opretWhisky(LocalDate dato, String navn, String beskrivelse, double flaskeStr,
-                                     double vandTilfoejet, double alkoholprocent, Medarbejder medarbejder, String whiskyBetegnelse) {
-        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder, whiskyBetegnelse);
+                                     double vandTilfoejet, double alkoholprocent, Medarbejder medarbejder, String whiskyBetegnelse, VaeskeTilWhisky vaeskeTilWhisky) {
+        Whisky whisky = new Whisky(dato, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder, whiskyBetegnelse, vaeskeTilWhisky);
         Storage.addWhisky(whisky);
         return whisky;
     }
@@ -117,30 +117,6 @@ public class Controller {
         return destillater;
     }
 
-    public static void addMedarbejder(Medarbejder medarbejder) {
-        Storage.addMedarbejder(medarbejder);
-    }
-
-    public static void addMaltning(Maltning maltning) {
-        Storage.addMaltning(maltning);
-    }
-
-    public static void addWhiskydestillering(Whiskydestillering whiskydestillering) {
-        Storage.addWhiskydestillering(whiskydestillering);
-    }
-
-    public static void addGindestillering(Gindestillering gindestillering) {
-        Storage.addGindestillering(gindestillering);
-    }
-
-    public static void addFad(Fad fad) {
-        Storage.addFad(fad);
-    }
-
-    public static void addLager(Lager lager) {
-        Storage.addLager(lager);
-    }
-
     public static ArrayList<Whisky> soegWhiskyBeskrivelse(String beskrivelse) {
         ArrayList<Whisky> alleWhiskyer = Storage.getWhiskyer();
         ArrayList<Whisky> whiskyer = new ArrayList<>();
@@ -154,6 +130,7 @@ public class Controller {
         }
         return whiskyer;
     }
+
     public static ArrayList<Whisky> soegWhiskyId(int nr) {
         ArrayList<Whisky> whiskyer = new ArrayList<>();
         if (nr != 0) {
@@ -165,6 +142,7 @@ public class Controller {
         }
         return whiskyer;
     }
+
     public static List<Destillat> soegDestillatKommentar(String kommentar) {
         ArrayList<Destillat> destillater = new ArrayList<>();
         if (!kommentar.isEmpty()) {
@@ -176,6 +154,7 @@ public class Controller {
         }
         return destillater;
     }
+
     public static List<Destillat> soegDestillatId(int id) {
         ArrayList<Destillat> destillater = new ArrayList<>();
         if (id != 0) {
@@ -187,6 +166,7 @@ public class Controller {
         }
         return destillater;
     }
+
     public static List<Destillat> fjernUnderTre(List<Destillat> alleDestillat) {
         ArrayList<Destillat> modneDestillater = new ArrayList<>();
         for (Destillat destillat : alleDestillat) {
@@ -274,27 +254,6 @@ public class Controller {
     public static boolean tjekKapacitetFad(Fad fad, double maengde) {
         return fad.getKapacitet() > maengde;
     }
-    public static List<Whiskydestillering> hentIkkeTommeDestilleringer() {
-        List<Whiskydestillering> ikkeTomme = new ArrayList<>();
-        for (Whiskydestillering whiskydestillering : Storage.getWhiskydestilleringer()) {
-            if (whiskydestillering.hentTilgaengeligVaeske() > 0) {
-                ikkeTomme.add(whiskydestillering);
-            }
-        }
-
-        return ikkeTomme;
-    }
-    public static List<Destillat> hentIkkeTommeDestillater() {
-        List<Destillat> ikkeTomme = new ArrayList<>();
-        for (Destillat destillat : Storage.getDestillater()) {
-            if (destillat.hentTotalMaengde() > 0) {
-                ikkeTomme.add(destillat);
-            }
-        }
-
-        return ikkeTomme;
-    }
-
     public static ArrayList<Fad> getTommeFade() {
         ArrayList<Fad> tommeFade = new ArrayList<>();
         for (int i = 0; i < Storage.getFade().size(); i++) {
@@ -314,9 +273,11 @@ public class Controller {
         }
         return WhiskydestilleringerMedTilgængeligVæske;
     }
+
     public static void tilfoejLagerenhedTilLager(int reol, int hylde, Lagerenhed lagerenhed, Lager lager) {
-        lagerenhed.tilfoejLager(lager, reol,hylde);
+        lagerenhed.tilfoejLager(lager, reol, hylde);
     }
+
     public static Flaskekasse opretFlasker(int antal, Whisky whisky) {
         Flaskekasse flaskekasse = new Flaskekasse(whisky);
         flaskekasse.opretFlasker(antal);

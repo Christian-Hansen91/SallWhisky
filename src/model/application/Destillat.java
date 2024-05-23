@@ -28,9 +28,6 @@ public class Destillat {
 
     }
 
-    private void kontrollerMaengdeIFad(Fad fad) {
-    }
-
     public void tilfoejKommentar(String kommentar) {
         this.kommentar.add(kommentar);
     }
@@ -114,11 +111,6 @@ public class Destillat {
     }
     public void fjernSindsteKommentar() {
         kommentar.remove(kommentar.size()-1);
-    }
-    public void tjekOmVaeskeErPåfyldt(){
-        if(vaeskeTilDestillater.size()==0){
-            throw new IllegalArgumentException("Der er endnu ikke tilføjet væsker til destillatet");
-        }
     }
     public void tilfoejVaeskeTilWhisky(VaeskeWhiskyInterface whiskyMaengde) {
         this.vaeskeTilWhiskyer.add(whiskyMaengde);

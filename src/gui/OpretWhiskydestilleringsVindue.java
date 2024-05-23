@@ -35,7 +35,6 @@ public class OpretWhiskydestilleringsVindue extends Stage {
     private Label lblOverskrift = new Label("Opret whiskydestillering");
     private Button btnGem = new Button("Gem");
     private Button btnAnnuller = new Button("Anuller");
-    private Maltning maltning = null;
     private Whiskydestillering whiskydestillering = null;
     private Medarbejder medarbejder;
     private StartVindue startVindue;
@@ -74,7 +73,7 @@ public class OpretWhiskydestilleringsVindue extends Stage {
 
         pane.add(cbMaltning, 0, 1, 4, 1);
         cbMaltning.setMaxWidth(175);
-        cbMaltning.getItems().setAll(Storage.getMaltninger());
+        cbMaltning.getItems().setAll(Controller.getMaltninger());
         cbMaltning.setPromptText("Vælg maltning");
         cbMaltning.setVisibleRowCount(2);
         pane.add(dpStartdato, 0, 2, 2, 1);

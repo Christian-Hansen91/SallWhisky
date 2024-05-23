@@ -126,9 +126,6 @@ public class StartVindue extends Application {
         return medarbejder;
     }
 
-    private void txfMedarbejderAction() {
-        txfMedarbejder.setText(medarbejder.getNavn());
-    }
 
     private void logIndAction() {
         logIndVindue = new LogIndVindue("Log ind", stage, this);

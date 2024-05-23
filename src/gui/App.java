@@ -37,15 +37,19 @@ public class App {
         destillat1.tilfoejVaeskeTilDestillat(whiskydestillering2.opretVaeskeTilDestillat(100));
         Destillat destillat2 = Controller.opretDestillat(fad2, medarbejder1);
         destillat2.tilfoejVaeskeTilDestillat(whiskydestillering3.opretVaeskeTilDestillat(50));
+        destillat1.tilfoejKommentar("Destillat 1");
+        destillat2.tilfoejKommentar("Destillat 2");
         Controller.tilfoejDestillatTilSTorage(destillat1);
         Controller.tilfoejDestillatTilSTorage(destillat2);
         destillat2.setDato(LocalDate.of(2018,1,2));
         Controller.tilfoejLagerenhedTilLager(2,1,fad2,lager1);
         lager1.addReol(6);
 
-        Whisky whisky1 = Controller.opretWhisky(LocalDate.of(2024, 5, 19), "Wild Whisky", "1. Edition", 0.7, 10.0, 45.9, medarbejder3, "Single cast");
-        Whisky whisky2 = Controller.opretWhisky(LocalDate.of(2024, 5, 14), "Wild Whisky", "2. Edition", 0.7, 5.0, 59.9, medarbejder2, "Cast strength");
-        Whisky whisky3 = Controller.opretWhisky(LocalDate.of(2024, 5, 22), "Wonder Whisky", "1. Edition", 0.5, 8.0, 42.5, medarbejder1, "Blended");
+        VaeskeTilWhisky vaeskeTilWhisky1 = new VaeskeTilWhisky(destillat1, 60);
+        VaeskeTilWhisky vaeskeTilWhisky2 = new VaeskeTilWhisky(destillat2,40);
+        Whisky whisky1 = Controller.opretWhisky(LocalDate.of(2024, 5, 19), "Wild Whisky", "1. Edition", 0.7, 10.0, 45.9, medarbejder3, "Single cast",vaeskeTilWhisky1);
+        Whisky whisky2 = Controller.opretWhisky(LocalDate.of(2024, 5, 14), "Wild Whisky", "2. Edition", 0.7, 5.0, 59.9, medarbejder2, "Cast strength",vaeskeTilWhisky2);
+        Whisky whisky3 = Controller.opretWhisky(LocalDate.of(2024, 5, 22), "Wonder Whisky", "1. Edition", 0.5, 8.0, 42.5, medarbejder1, "Blended",vaeskeTilWhisky1);
 
         Gindestillering gindestillering1 = Controller.opretGindestillering(LocalDate.of(2024, 5, 15), LocalDate.of(2024, 5, 18), 14.0, 38.0, 110.0, 2000.0, medarbejder3);
 

@@ -16,9 +16,6 @@ public class Medarbejder {
         this.tlfNr = tlfNr;
     }
 
-    public static int getTotalAntal() {
-        return totalAntal;
-    }
 
     public String getNavn() {
         return navn;
@@ -28,9 +25,6 @@ public class Medarbejder {
         return id;
     }
 
-    public int getTlfNr() {
-        return tlfNr;
-    }
 
     @Override
     public String toString() {

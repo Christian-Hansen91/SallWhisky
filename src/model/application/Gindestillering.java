@@ -84,26 +84,6 @@ public class Gindestillering implements Lagerenhed {
         return ginNr;
     }
 
-    public LocalDate getStartdato() {
-        return startdato;
-    }
-
-    public LocalDate getSlutdato() {
-        return slutdato;
-    }
-
-    public double getVandTilfoejet() {
-        return vandTilfoejet;
-    }
-
-    public double getAlkoholprocent() {
-        return alkoholprocent;
-    }
-
-    public double getLiter() {
-        return liter;
-    }
-
     @Override
     public String toString() {
         return "GINDESTILLERING #" + ginNr + "\n" +

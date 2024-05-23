@@ -39,9 +39,6 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     private ObservableList<VaeskeTilWhisky> listVaeskeTilWhiskyAdded = FXCollections.observableArrayList();
     private ObservableList<Destillat> listDestillater = FXCollections.observableArrayList();
     private TextField txfantalFlasker = new TextField();
-    private ListView<String> lvLedigeLagerPladser = new ListView<>();
-    private ComboBox<Lager> cbLager = new ComboBox<>();
-    private ObservableList<Lager> listLager = FXCollections.observableArrayList();
     private Label lblAntalFlasker = new Label("Antal flasker: ");
     private Label lbl1 = new Label("Vælg destillat(er)");
     private Label lbl2 = new Label("Lav din whisky");
@@ -52,6 +49,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     private StartVindue startVindue;
     private Medarbejder medarbejder;
     private Exception manglendeOplysningerException = new Exception("Et eller flere felter er ikke udfyldt");
+    private VaeskeTilWhisky vaeskeTilWhisky;
 
     public OpretWhiskyVindue(String title, Stage owner, StartVindue startVindue, Medarbejder medarbejder) {
         this.startVindue = startVindue;
@@ -167,6 +165,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         pane.add(btnAnnuller,5,8);
         btnAnnuller.setOnAction(e -> annullerAction());
         pane.setHalignment(btnAnnuller, HPos.RIGHT);
+        cbDestillater.setVisibleRowCount(2);
     }
 
     private void antalFlaskerAction() {
@@ -219,13 +218,12 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             maengdeWhisky = Double.parseDouble(txfMaengdeILiter.getText());
             destillat = cbDestillater.getValue();
 
-            VaeskeTilWhisky vaeskeTilWhisky = destillat.opretVaeskeTilWhisky(maengdeWhisky);
+            vaeskeTilWhisky = destillat.opretVaeskeTilWhisky(maengdeWhisky);
             listVaeskeTilWhiskyAdded.add(vaeskeTilWhisky);
 
             listDestillater.addAll(Controller.getModneDestillater());
             lvVaeskeTilWhisky.setItems(listVaeskeTilWhiskyAdded);
             cbDestillater.setItems(listDestillater);
-            cbDestillater.setVisibleRowCount(2);
             if (toemDestilat == true) {
                 destillat.saetAngelShare();
                 toemDestilat = false;
@@ -252,8 +250,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
             if (alkoholprocent > 100 || alkoholprocent < 40)
                 throw new IllegalArgumentException("Fejl i alkoholsprocent, skal være mellem 40 og 100");
-            medarbejder = startVindue.getMedarbejder();
-            Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder, beregnWhiskyBetegnelse());
+            Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder, beregnWhiskyBetegnelse(),vaeskeTilWhisky);
             if (!(lager == null)) {
                 int antalFlasker = antalFlaskerNoedvendige();
                 Flaskekasse flaskekasse = Controller.opretFlasker(antalFlasker, whisky);
@@ -284,9 +281,6 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         return null;
     }
 
-    public void setValgtLager(Lager lager) {
-        this.lager = lager;
-    }
 
     @Override
     public void setValgtReolHylde(Lager lager, int reol, int hylde) {
