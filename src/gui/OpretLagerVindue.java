@@ -26,6 +26,8 @@ public class OpretLagerVindue extends Stage {
     private Button btnOpretLager = new Button("Opret lager");
     private Medarbejder medarbejder;
     private StartVindue startVindue;
+    private Button btnAnnuller = new Button("Anuller");
+
 
     public OpretLagerVindue(String title, Stage owner, StartVindue startVindue) {
         this.startVindue = startVindue;
@@ -62,7 +64,10 @@ public class OpretLagerVindue extends Stage {
         btnOpretLager.setOnAction(event -> opretLager());
 
         txfId.setMaxWidth(175);
+        pane.add(btnAnnuller,2,5);
+        btnAnnuller.setOnAction(e -> annullerAction());
         pane.setHalignment(txfId, HPos.RIGHT);
+        pane.setHalignment(btnAnnuller, HPos.RIGHT);
 
     }
     public void opretLager(){
@@ -83,5 +88,8 @@ public class OpretLagerVindue extends Stage {
             alert.setContentText(e.getMessage());
             alert.show();
         }
+    }
+    private void annullerAction() {
+        this.hide();
     }
 }

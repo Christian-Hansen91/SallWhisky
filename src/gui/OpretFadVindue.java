@@ -143,7 +143,7 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
 
         if (!fadtype.isEmpty() && !ophavsland.isEmpty() && !leverandoer.isEmpty() && indkoebsdato != null && lager != null) {
             fad = Controller.opretFad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik, medarbejder);
-            lager.addLagerenhedAt(reol, hylde, fad);
+            Controller.tilfoejLagerenhedTilLager(reol,hylde,fad,lager);
             txfFadetype.clear();
             txfOphavsland.clear();
             txfLeverandoer.clear();

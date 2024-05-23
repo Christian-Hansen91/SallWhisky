@@ -2,7 +2,7 @@ package model.application;
 
 import java.time.LocalDate;
 
-public class Whisky implements Lagerenhed{
+public class Whisky {
     private LocalDate dato;
     private static int totalAntal;
     private int nr;
@@ -81,13 +81,5 @@ public class Whisky implements Lagerenhed{
                 "Alkoholprocent: " + alkoholprocent + "\n" +
                 lager + "\n" +
                 medarbejder;
-    }
-
-    @Override
-    public void tilfoejLager(Lager lager, int reol, int hylde) {
-        if (!lager.equals(this.lager)) {
-            this.lager = lager;
-            lager.addLagerenhedAt(reol, hylde, this);
-        }
     }
 }

@@ -105,9 +105,14 @@ public class OpretDestillatVindue extends Stage {
         cbFade.setOnAction(event -> fadValgt());
         cbFade.setVisibleRowCount(2);
 
-        pane.add(btnOpretDestillat, 3, 9, 2, 1);
+        pane.add(btnOpretDestillat, 3, 9);
         pane.setHalignment(btnOpretDestillat, HPos.RIGHT);
         btnOpretDestillat.setOnAction(event -> gemDestillatAction());
+        Button btnAnnuller = new Button("Annuller");
+        btnAnnuller.setOnAction(e -> annullerAction());
+        pane.add(btnAnnuller,4,9);
+        pane.setHalignment(btnAnnuller, HPos.RIGHT);
+
     }
 
     private void fadValgt() {
@@ -179,4 +184,8 @@ public class OpretDestillatVindue extends Stage {
         lvwDestillat.getItems().clear();
         lvwDestillat.getItems().setAll(Controller.skabVaeskeoversigt(destillat, medarbejder));
     }
+    private void annullerAction() {
+        this.hide();
+    }
+
 }

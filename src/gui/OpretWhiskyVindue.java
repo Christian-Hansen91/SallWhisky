@@ -154,9 +154,13 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         btnVaelgLager.setOnAction(e -> vaelgLager());
         pane.add(lblLager, 4, 6, 2, 1);
 
-        pane.add(btnOpretWhisky, 4, 8, 2, 1);
+        pane.add(btnOpretWhisky, 4, 8);
         pane.setHalignment(btnOpretWhisky, HPos.RIGHT);
         btnOpretWhisky.setOnAction(event -> gemWhiskyAction());
+        Button btnAnnuller = new Button("Annuller");
+        pane.add(btnAnnuller,5,8);
+        btnAnnuller.setOnAction(e -> annullerAction());
+        pane.setHalignment(btnAnnuller, HPos.RIGHT);
     }
 
     private void antalFlaskerAction() {
@@ -185,7 +189,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         lblToemDestillat.setText("Du har tømt destillatet");
     }
 
-    private void antalFlaskerNoedvendige() {
+    private int antalFlaskerNoedvendige() {
         int antalFlasker = 0;
         double meangdeLiter = 0;
         double beregnetAntalFlasker = 0;
@@ -197,6 +201,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         beregnetAntalFlasker = meangdeLiter / kapacitet;
         antalFlasker = (int) beregnetAntalFlasker;
         txfantalFlasker.setText("" + antalFlasker);
+        return antalFlasker;
     }
 
     private void opretVaeskeTilWhiskyAction() {
@@ -243,7 +248,9 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
                 throw new IllegalArgumentException("Fejl i alkoholsprocent, enten for høj eller for lav");
             Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder, beregnWhiskyBetegnelse());
             if (!(lager == null)) {
-                lager.addLagerenhedAt(reol, hylde, whisky);
+                int antalFlasker = antalFlaskerNoedvendige();
+                Flaskekasse flaskekasse = Controller.opretFlasker(antalFlasker, whisky);
+                flaskekasse.tilfoejLager(lager,reol,hylde);
                 this.hide();
             } else {
                 StartVindue.fejlIOprettelseAlert("Vælg en lagerplads");
@@ -292,4 +299,8 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         }
         return erEksternDestillat;
     }
+    private void annullerAction() {
+        this.hide();
+    }
+
 }

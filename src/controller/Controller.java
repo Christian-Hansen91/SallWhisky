@@ -302,5 +302,13 @@ public class Controller {
 
         return ikkeTomme;
     }
+    public static void tilfoejLagerenhedTilLager(int reol, int hylde, Lagerenhed lagerenhed, Lager lager) {
+        lagerenhed.tilfoejLager(lager, reol,hylde);
+    }
+    public static Flaskekasse opretFlasker(int antal, Whisky whisky) {
+        Flaskekasse flaskekasse = new Flaskekasse(whisky);
+        flaskekasse.opretFlasker(antal);
+        return flaskekasse;
+    }
 }
 

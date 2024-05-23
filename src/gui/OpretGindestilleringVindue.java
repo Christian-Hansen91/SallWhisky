@@ -229,7 +229,7 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
 
     private void gemAction() {
         if (!(lager == null)) {
-            lager.addLagerenhedAt(reol, hylde, gindestillering);
+            Controller.tilfoejLagerenhedTilLager(reol, hylde, gindestillering,lager);
             this.hide();
             StartVindue.succesIOprettelseAlert();
         } else {
