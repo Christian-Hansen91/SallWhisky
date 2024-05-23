@@ -52,6 +52,7 @@ public class App {
         Whisky whisky3 = Controller.opretWhisky(LocalDate.of(2024, 5, 22), "Wonder Whisky", "1. Edition", 0.5, 8.0, 42.5, medarbejder1, "Blended",vaeskeTilWhisky1);
 
         Gindestillering gindestillering1 = Controller.opretGindestillering(LocalDate.of(2024, 5, 15), LocalDate.of(2024, 5, 18), 14.0, 38.0, 110.0, 2000.0, medarbejder3);
+        Controller.tilfoejGindestillgeringTilStorage(gindestillering1);
 
     }
 }

@@ -51,8 +51,10 @@ public class Controller {
     public static Gindestillering opretGindestillering(LocalDate startdato, LocalDate slutdato,
                                                        double vandTilfoejet, double alkoholprocent, double liter, double maengdeEnebaer, Medarbejder medarbejder) {
         Gindestillering gindestillering = new Gindestillering(startdato, slutdato, vandTilfoejet, alkoholprocent, liter, maengdeEnebaer, medarbejder);
-        Storage.addGindestillering(gindestillering);
         return gindestillering;
+    }
+    public static void tilfoejGindestillgeringTilStorage(Gindestillering gindestillering) {
+        Storage.addGindestillering(gindestillering);
     }
 
     public static Lager opretLager(String navn, Lagerenhed[][] reolliste, Medarbejder medarbejder) {

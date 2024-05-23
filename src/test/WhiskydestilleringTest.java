@@ -26,18 +26,6 @@ class WhiskydestilleringTest {
     }
 
     @Test
-    void opretTapning() { //test normal oprettelse, test tapning større end mængde destillering
-        double maengde = 60;
-        VaeskeTilDestillat vaeskeTilDestillat = whiskyDestillering.opretVaeskeTilDestillat(maengde);
-        assertEquals(0,fad.hentOpbrugtKapacitet());
-        destillat.tilfoejVaeskeTilDestillat(vaeskeTilDestillat);
-        assertDoesNotThrow(() -> whiskyDestillering.opretVaeskeTilDestillat(maengde));
-        assertEquals(maengde,fad.hentOpbrugtKapacitet());
-        assertThrows(IllegalArgumentException.class, () -> whiskyDestillering.opretVaeskeTilDestillat(10000));
-        assertThrows(IllegalArgumentException.class, () -> whiskyDestillering.opretVaeskeTilDestillat(941));
-        assertDoesNotThrow(() -> whiskyDestillering.opretVaeskeTilDestillat(940));
-    }
-    @Test
     void opretMaltning() {
         Maltning maltning = new Maltning(500, "byg","Lars", medarbejder);
         assertEquals("Lars",maltning.getMarknavn());

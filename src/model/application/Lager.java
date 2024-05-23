@@ -25,7 +25,7 @@ public class Lager {
         reolliste[reolliste.length - 1] = new Lagerenhed[antalHylder];
     }
     public void addLagerenhedAt(int reol, int hylde, Lagerenhed lagerenhed) {
-        if (reol < 0 || hylde < 0 || reol > reolliste.length || hylde > reolliste[reol - 1].length || !lagerpladsLedig(reol, hylde)) {
+        if (reol < 0 || hylde < 0 || reol > reolliste.length || hylde > reolliste[reol].length || !lagerpladsLedig(reol, hylde)) {
             throw new IllegalArgumentException("Angivne hylde er optaget eller findes ikke");
         }
         reolliste[reol][hylde] = lagerenhed;

@@ -53,6 +53,7 @@ public class LagerTest {
         FakeLagerenhed lagerenhed = new FakeLagerenhed();
         //TC1
         lager.addLagerenhedAt(reoler, hylder, lagerenhed);
+        lagerenhed.tilfoejLager(lager,reoler,hylder);
         assertEquals(lagerenhed, lager.getReolliste()[reoler][hylder]);
         assertEquals(lager, lagerenhed.getLager());
         //TC2
