@@ -76,7 +76,7 @@ public class Gindestillering implements Lagerenhed {
     public void tilfoejLager(Lager lager, int reol, int hylde) {
         if (!lager.equals(this.lager)) {
             this.lager = lager;
-            lager.addLagerenhedAt(reol, hylde, this);
+            //lager.addLagerenhedAt(reol, hylde, this);
         }
     }
 
