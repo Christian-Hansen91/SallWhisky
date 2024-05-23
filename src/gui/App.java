@@ -23,12 +23,13 @@ public class App {
         Maltning maltning1 = Controller.opretMaltning(800.0, "Evergreen", "Stadsgaard", "Tørv", "Lækker maltning", medarbejder1);
         Maltning maltning2 = Controller.opretMaltning(500.0, "Stairway", "Mosevang", medarbejder2);
         Maltning maltning3 = Controller.opretMaltning(600.0, "Irina", "Mosevang", "Tørv", "", medarbejder3);
-        Maltning maltning4 = Controller.opretMaltning(999999.0, null, null, null);
+        Maltning maltning4 = Controller.opretMaltning(900.0, null, null, null);
 
         Fad fad1 = Controller.opretFad(LocalDate.of(2023, 03, 10), "EX-Bourbon", 60, "USA", "American Whisky Company", "Bourbon", medarbejder2);
         Fad fad2 = Controller.opretFad(LocalDate.of(2023, 8, 05), "EX-Oloroso", 120, "Spanien", "Espania Whisky", "Cherry, 3. lagring", medarbejder3);
+        Fad fad3 = Controller.opretFad(LocalDate.of(2023, 02, 10), "EX-Redwine", 60, "Italien", "Whine Company Italiano", "Eg fra Uganda", medarbejder2);
 
-        Whiskydestillering whiskydestillering1 = Controller.opretWhiskydestillering(maltning4, null, null, 0.0, 0.0, 0.0, 0.0, "Andet. Destilleringen kommer udefra", 0.0, medarbejder3);
+        Whiskydestillering whiskydestillering1 = Controller.opretWhiskydestillering(maltning4, null, null, 0.0, 90000.0, 0.0, 0.0, "Andet. Destilleringen kommer udefra", 0.0, medarbejder3);
         Whiskydestillering whiskydestillering2 = Controller.opretWhiskydestillering(maltning1, LocalDate.of(2024, 5, 1), LocalDate.of(2024, 5, 2), 10.0, 22.0, 100.0, 28.0, "OK", 52.5, medarbejder1);
         Whiskydestillering whiskydestillering3 = Controller.opretWhiskydestillering(maltning2, LocalDate.of(2024, 4, 16), LocalDate.of(2024, 4, 16), 30.0, 8.0, 100.0, 25.0, "OBS, tåler fortynding", 59.9, medarbejder2);
 

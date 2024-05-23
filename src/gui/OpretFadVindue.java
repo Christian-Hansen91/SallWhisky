@@ -133,6 +133,8 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
 
     private void gemAction() {
         String fadtype = txfFadetype.getText().trim();
+        if(cbKapacitet.getSelectionModel().getSelectedItem()==null)
+            StartVindue.fejlIOprettelseAlert("husk at vælge kapacitet");
         int kapacitet = (cbKapacitet.getSelectionModel().getSelectedItem());
         String ophavsland = txfOphavsland.getText().trim();
         String leverandoer = txfLeverandoer.getText().trim();

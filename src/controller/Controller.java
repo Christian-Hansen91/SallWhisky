@@ -114,8 +114,10 @@ public class Controller {
     public static ArrayList<Destillat> getModneDestillater() {
         ArrayList<Destillat> destillater = new ArrayList<>();
         for (int i = 0; i < getFade().size(); i++) {
-            if (getFade().get(i).getDestillat().getDato().isBefore(LocalDate.now().minusYears(3))) {
-                destillater.add(getFade().get(i).getDestillat());
+            if (!(getFade().get(i).getDestillat() == null)) {
+                if (getFade().get(i).getDestillat().getDato().isBefore(LocalDate.now().minusYears(3))) {
+                    destillater.add(getFade().get(i).getDestillat());
+                }
             }
         }
         return destillater;
@@ -280,7 +282,7 @@ public class Controller {
     }
 
     public static boolean tjekKapacitetFad(Fad fad, double maengde) {
-        return fad.tjekPlads(maengde);
+        return fad.getKapacitet() > maengde;
     }
     public static List<Whiskydestillering> hentIkkeTommeDestilleringer() {
         List<Whiskydestillering> ikkeTomme = new ArrayList<>();
@@ -301,6 +303,27 @@ public class Controller {
         }
 
         return ikkeTomme;
+    }
+
+    public static ArrayList<Fad> getTommeFade() {
+        ArrayList<Fad> tommeFade = new ArrayList<>();
+        for (int i = 0; i < Storage.getFade().size(); i++) {
+            if (Storage.getFade().get(i).getDestillat() == null) {
+                tommeFade.add(Storage.getFade().get(i));
+            }
+        }
+        return tommeFade;
+    }
+
+    public static ArrayList<Whiskydestillering> getWhiskydestilleringerMedTilgængeligVæske() {
+        ArrayList<Whiskydestillering> WhiskydestilleringerMedTilgængeligVæske = new ArrayList<>();
+        for (int i = 0; i < Storage.getWhiskydestilleringer().size(); i++) {
+            if (!(Storage.getWhiskydestilleringer().get(i).hentTilgaengeligVaeske() == 0)) {
+                System.out.println(Storage.getWhiskydestilleringer().get(i).hentTilgaengeligVaeske());
+                WhiskydestilleringerMedTilgængeligVæske.add(Storage.getWhiskydestilleringer().get(i));
+            }
+        }
+        return WhiskydestilleringerMedTilgængeligVæske;
     }
     public static void tilfoejLagerenhedTilLager(int reol, int hylde, Lagerenhed lagerenhed, Lager lager) {
         lagerenhed.tilfoejLager(lager, reol,hylde);

@@ -208,7 +208,7 @@ public class StartVindue extends Application {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Fejl i oprettelse");
         alert.setHeaderText("Hov!");
-        alert.setContentText("Kommafejl. Skriv \".\" i stedet for \",\" ved talmængder.");
+        alert.setContentText("Du må kun taste tal. Skriv \".\" i stedet for \",\" ved kommatal.");
         alert.show();
     }
 

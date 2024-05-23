@@ -47,6 +47,7 @@ public class Destillat {
 
     public void saetAngelShare() {
         this.angelShare = hentTotalMaengde();
+        fad.fjernDestilat();
     }
 
     public double hentTotalMaengde() {

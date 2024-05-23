@@ -97,7 +97,10 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         cbDestillater.setMaxWidth(175);
         cbDestillater.setMinHeight(70);
         cbDestillater.setVisibleRowCount(2);
-        cbDestillater.getItems().addAll(Controller.getModneDestillater());
+        try {
+            cbDestillater.getItems().addAll(Controller.getModneDestillater());
+        } catch (Exception e) {
+        }
 
         pane.add(lblMaengdeILiter, 0, 4);
         pane.add(txfMaengdeILiter, 1, 4);
@@ -245,7 +248,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             }
             alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
             if (alkoholprocent > 100 || alkoholprocent < 40)
-                throw new IllegalArgumentException("Fejl i alkoholsprocent, enten for høj eller for lav");
+                throw new IllegalArgumentException("Fejl i alkoholsprocent, skal være mellem 40 og 100");
             Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder, beregnWhiskyBetegnelse());
             if (!(lager == null)) {
                 int antalFlasker = antalFlaskerNoedvendige();

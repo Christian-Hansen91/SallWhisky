@@ -73,6 +73,8 @@ public class OpretLagerVindue extends Stage {
     public void opretLager(){
         try {
             String navn = txtNavn.getText();
+            if(navn=="")
+                throw new IllegalArgumentException("Husk at give dit lager et navn");
             int reoler = Integer.parseInt(txtReoler.getText());
             int hylder = Integer.parseInt(txtHylder.getText());
             medarbejder = startVindue.getMedarbejder();
