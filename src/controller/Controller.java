@@ -284,7 +284,6 @@ public class Controller {
     public static boolean tjekKapacitetFad(Fad fad, double maengde) {
         return fad.getKapacitet() > maengde;
     }
-
     public static List<Whiskydestillering> hentIkkeTommeDestilleringer() {
         List<Whiskydestillering> ikkeTomme = new ArrayList<>();
         for (Whiskydestillering whiskydestillering : Storage.getWhiskydestilleringer()) {
@@ -295,7 +294,6 @@ public class Controller {
 
         return ikkeTomme;
     }
-
     public static List<Destillat> hentIkkeTommeDestillater() {
         List<Destillat> ikkeTomme = new ArrayList<>();
         for (Destillat destillat : Storage.getDestillater()) {
@@ -326,6 +324,13 @@ public class Controller {
         }
         return WhiskydestilleringerMedTilgængeligVæske;
     }
+    public static void tilfoejLagerenhedTilLager(int reol, int hylde, Lagerenhed lagerenhed, Lager lager) {
+        lagerenhed.tilfoejLager(lager, reol,hylde);
+    }
+    public static Flaskekasse opretFlasker(int antal, Whisky whisky) {
+        Flaskekasse flaskekasse = new Flaskekasse(whisky);
+        flaskekasse.opretFlasker(antal);
+        return flaskekasse;
+    }
 }
-
 

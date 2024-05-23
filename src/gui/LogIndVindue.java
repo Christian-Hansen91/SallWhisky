@@ -53,7 +53,7 @@ public class LogIndVindue extends Stage {
         pane.add(btnAnnuller, 30, 16);
         pane.setHalignment(btnLogInd, HPos.RIGHT);
         pane.setHalignment(btnAnnuller, HPos.RIGHT);
-        btnAnnuller.setOnAction(event -> annullerAction());
+        btnAnnuller.setOnAction(e -> annullerAction());
 
         btnLogInd.setOnAction(event -> logIndAction());
     }
