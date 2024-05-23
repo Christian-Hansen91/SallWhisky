@@ -264,12 +264,11 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
         } catch (Exception e) {
             StartVindue.fejlIOprettelseAlert(e.getMessage());
         }
-        System.out.println(txfVandTilfoejet.getText());
     }
 
     private String beregnWhiskyBetegnelse() {
         if (listVaeskeTilWhiskyAdded.size() == 1)
-            if (txfVandTilfoejet.getText() == "" || txfVandTilfoejet.getText() == "0")
+            if (Double.parseDouble(txfVandTilfoejet.getText().trim()) == 0.0 || txfVandTilfoejet.getText() == "0")
                 return "Cast strength";
             else
                 return "Single cast";
