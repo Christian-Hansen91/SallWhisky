@@ -21,8 +21,6 @@ import java.util.List;
 public class OpretWhiskydestilleringsVindue extends Stage {
     private DatePicker dpStartdato = new DatePicker();
     private DatePicker dpSlutdato = new DatePicker(LocalDate.now());
-    private Label lblVaeskeMaengde = new Label("Væskemængde: ");
-    private TextField txfVaeskeMaengde = new TextField();
     private Label lblHead = new Label("Head: ");
     private TextField txfHead = new TextField();
     private Label lblHeart = new Label("Heart: ");
@@ -64,7 +62,6 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         pane.setVgap(10);
         pane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
 
-        lblVaeskeMaengde.setTextFill(Color.BURLYWOOD);
         lblHead.setTextFill(Color.BURLYWOOD);
         lblHeart.setTextFill(Color.BURLYWOOD);
         lblTail.setTextFill(Color.BURLYWOOD);
@@ -84,10 +81,6 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         dpStartdato.setPromptText("Vælg startdato");
         pane.add(dpSlutdato, 0, 3, 2, 1);
 
-        pane.add(lblVaeskeMaengde, 0, 4);
-        pane.add(txfVaeskeMaengde, 1, 4);
-        txfVaeskeMaengde.setMaxWidth(75);
-        pane.setHalignment(txfVaeskeMaengde, HPos.RIGHT);
         pane.add(lblHead, 0, 5);
         pane.add(txfHead, 1, 5);
         txfHead.setMaxWidth(75);
@@ -131,13 +124,11 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         if(cbMaltning.getSelectionModel().getSelectedItem()==null)
             StartVindue.fejlIOprettelseAlert("Husk at tilføje en maltning");
         LocalDate slutdato = dpSlutdato.getValue();
-        int maengdeVaeske = 0;
         double head = 0;
         double heart = 0;
         double tail = 0;
         double alkoholprocent = 0;
         try {
-            maengdeVaeske = Integer.parseInt(txfVaeskeMaengde.getText().trim());
             head = Double.parseDouble(txfHead.getText().trim());
             heart = Double.parseDouble(txfHeart.getText().trim());
             tail = Double.parseDouble(txfTail.getText().trim());
@@ -149,26 +140,23 @@ public class OpretWhiskydestilleringsVindue extends Stage {
         String kommentar = txaKommentar.getText().trim();
         medarbejder = startVindue.getMedarbejder();
 
-        if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(maengdeVaeske == 0) && !(head == 0) && !(heart == 0) && !(tail == 0) && !(alkoholprocent == 0)) {
-            whiskydestillering = Controller.opretWhiskydestillering(maltning, startdato, slutdato, maengdeVaeske, head, heart, tail, kommentar, alkoholprocent, medarbejder);
+        if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(head == 0) && !(heart == 0) && !(tail == 0) && !(alkoholprocent == 0)) {
+            whiskydestillering = Controller.opretWhiskydestillering(maltning, startdato, slutdato, head, heart, tail, kommentar, alkoholprocent, medarbejder);
 
             txfHead.clear();
             txfHeart.clear();
             txfTail.clear();
-            txfVaeskeMaengde.clear();
             txaKommentar.clear();
             txfAlkoholprocent.clear();
 
-            Controller.addWhiskydestillering(whiskydestillering);
             this.hide();
             StartVindue.succesIOprettelseAlert();
         } else {
             StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette whiskydestilleringen.");
             String medarbejder1 = medarbejder.getNavn().trim();
             try {
-                if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(maengdeVaeske == 0) && !(head == 0) && !(heart == 0) && !(tail == 0) && !(alkoholprocent == 0)) {
-                    whiskydestillering = Controller.opretWhiskydestillering(maltning, startdato, slutdato, maengdeVaeske, head, heart, tail, kommentar, alkoholprocent, medarbejder);
-                    Controller.addWhiskydestillering(whiskydestillering);
+                if (!startdato.isAfter(slutdato) && !slutdato.isBefore(startdato) && !(head == 0) && !(heart == 0) && !(tail == 0) && !(alkoholprocent == 0)) {
+                    whiskydestillering = Controller.opretWhiskydestillering(maltning, startdato, slutdato, head, heart, tail, kommentar, alkoholprocent, medarbejder);
                     this.hide();
                     StartVindue.succesIOprettelseAlert();
                 } else {

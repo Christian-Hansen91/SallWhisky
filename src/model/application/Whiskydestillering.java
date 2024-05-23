@@ -10,7 +10,6 @@ public class Whiskydestillering {
     private int newMakeNr;
     private LocalDate startdato;
     private LocalDate slutdato;
-    private double maengdeVaeske;
     private double head;
     private double heart;
     private double tail;
@@ -20,14 +19,13 @@ public class Whiskydestillering {
     private Maltning maltning;
     private Medarbejder medarbejder;
 
-    public Whiskydestillering(Maltning maltning, LocalDate startdato, LocalDate slutdato, double maengdeVaeske,
+    public Whiskydestillering(Maltning maltning, LocalDate startdato, LocalDate slutdato,
                               double head, double heart, double tail, String kommentar, double alkoholprocent, Medarbejder medarbejder) {
         Whiskydestillering.totalAntal++;
         this.newMakeNr = totalAntal;
         this.maltning = maltning;
         this.startdato = startdato;
         this.slutdato = slutdato;
-        this.maengdeVaeske = maengdeVaeske;
         this.head = head;
         this.heart = heart;
         this.tail = tail;
