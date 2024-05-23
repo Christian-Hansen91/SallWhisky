@@ -77,8 +77,9 @@ public class DestillatSoegningPane extends SoegningPane {
     private void findAlle() {
         lvResultater.getItems().clear();
         lvResultater.getItems().setAll(Controller.getDestillater());
-        for (Destillat destillat : Controller.getDestillater()) {
-            System.out.println(destillat.getId());
+        if (chkTreAar.isSelected()) {
+            List<Destillat> temp = lvResultater.getItems();
+            lvResultater.getItems().setAll(Controller.fjernUnderTre(temp));
         }
     }
 

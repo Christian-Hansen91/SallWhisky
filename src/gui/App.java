@@ -37,8 +37,10 @@ public class App {
         destillat1.tilfoejVaeskeTilDestillat(whiskydestillering2.opretVaeskeTilDestillat(100));
         Destillat destillat2 = Controller.opretDestillat(fad2, medarbejder1);
         destillat2.tilfoejVaeskeTilDestillat(whiskydestillering3.opretVaeskeTilDestillat(50));
+        Controller.tilfoejDestillatTilSTorage(destillat1);
+        Controller.tilfoejDestillatTilSTorage(destillat2);
         destillat2.setDato(LocalDate.of(2018,1,2));
-        lager1.addLagerenhedAt(2, 1, fad2);
+        Controller.tilfoejLagerenhedTilLager(2,1,fad2,lager1);
         lager1.addReol(6);
 
         Whisky whisky1 = Controller.opretWhisky(LocalDate.of(2024, 5, 19), "Wild Whisky", "1. Edition", 0.7, 10.0, 45.9, medarbejder3, "Single cast");
