@@ -67,11 +67,11 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
         pane.add(lblOverskrift, 0, 0, 6, 1);
         pane.setHalignment(lblOverskrift, HPos.CENTER);
 
-        pane.add(dpStartdato, 0, 2, 2, 1);
+        pane.add(dpStartdato, 0, 1, 2, 1);
         dpStartdato.setPromptText("Startdato");
         dpStartdato.setPrefWidth(175);
         dpSlutdato.setPrefWidth(175);
-        pane.add(dpSlutdato, 0, 3, 2, 1);
+        pane.add(dpSlutdato, 0, 2, 2, 1);
         dpSlutdato.setPromptText("Slutdato");
 
         dpStartdato.getEditor().setDisable(true);
@@ -79,19 +79,19 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
 
 
 
-        pane.add(txaKommentar, 0, 4, 2, 2);
+        pane.add(txaKommentar, 0, 3, 2, 2);
         txaKommentar.setPromptText("Tilføj kommentar:");
         txaKommentar.setPrefWidth(175);
         txaKommentar.setMaxHeight(60);
-        pane.setHalignment(txaKommentar, HPos.LEFT);
+        pane.setHalignment(txaKommentar, HPos.CENTER);
 
-        pane.add(txfAlkoholprocent, 0, 6);
-        txfAlkoholprocent.setMaxWidth(85);
+        pane.add(txfAlkoholprocent, 0, 5);
+        txfAlkoholprocent.setPrefWidth(175);
         txfAlkoholprocent.setPromptText("Alkoholprocent:");
         pane.setHalignment(txfAlkoholprocent, HPos.RIGHT);
-        pane.add(txfVandtilfoejet, 1, 6);
+        pane.add(txfVandtilfoejet, 0, 6);
         txfVandtilfoejet.setPromptText("Vand tilføjet:");
-        txfVandtilfoejet.setMaxWidth(85);
+        txfVandtilfoejet.setPrefWidth(175);
         pane.setHalignment(txfVandtilfoejet, HPos.RIGHT);
 
         pane.add(txfEnebaer, 2, 1, 2, 1);
