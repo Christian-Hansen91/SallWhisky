@@ -53,6 +53,7 @@ public class LogIndVindue extends Stage {
         pane.add(btnAnnuller, 30, 16);
         pane.setHalignment(btnLogInd, HPos.RIGHT);
         pane.setHalignment(btnAnnuller, HPos.RIGHT);
+        btnAnnuller.setOnAction(event -> annullerAction());
 
         btnLogInd.setOnAction(event -> logIndAction());
     }
@@ -71,5 +72,8 @@ public class LogIndVindue extends Stage {
             alert.setContentText("Vælg en medarbejder på listen for at logge ind.");
             alert.show();
         }
+    }
+    private void annullerAction() {
+        this.hide();
     }
 }

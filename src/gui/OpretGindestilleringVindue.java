@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class OpretGindestilleringVindue extends Stage implements LagerenhedsVindue {
     private DatePicker dpStartdato = new DatePicker();
     private DatePicker dpSlutdato = new DatePicker(LocalDate.now());
-    private TextField txfNavn = new TextField();
     private TextField txfVandtilfoejet = new TextField();
     private TextField txfAlkoholprocent = new TextField();
     private TextField txfLiter = new TextField();
@@ -78,9 +77,7 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
         dpStartdato.getEditor().setDisable(true);
         dpSlutdato.getEditor().setDisable(true);
 
-        pane.add(txfNavn, 0, 1, 2, 1);
-        txfNavn.setPromptText("Navngiv gin:");
-        pane.setHalignment(txfNavn, HPos.RIGHT);
+
 
         pane.add(txaKommentar, 0, 4, 2, 2);
         txaKommentar.setPromptText("Tilføj kommentar:");
@@ -240,7 +237,6 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
     }
 
     public void flipInputtilgaengelighed() {
-        txfNavn.setDisable(true);
         dpStartdato.setDisable(true);
         dpSlutdato.setDisable(true);
         txaKommentar.setDisable(true);

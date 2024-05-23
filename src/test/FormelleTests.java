@@ -17,7 +17,7 @@ public class FormelleTests {
     @Test
     void testOpretVaeskeTilDestillat() {
         double startMaengde = 800;
-        Whiskydestillering whiskydestillering = new Whiskydestillering(maltning,LocalDate.now(),LocalDate.now(),1000,50,startMaengde,150,"",60,medarbejder);
+        Whiskydestillering whiskydestillering = new Whiskydestillering(maltning,LocalDate.now(),LocalDate.now(),50,startMaengde,150,"",60,medarbejder);
         double maengdeTilDestillat = 100;
         //TC1
         VaeskeInterface result = whiskydestillering.opretVaeskeTilDestillat(maengdeTilDestillat);

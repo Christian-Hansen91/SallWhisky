@@ -132,27 +132,31 @@ public class OpretFadVindue extends Stage implements LagerenhedsVindue {
     }
 
     private void gemAction() {
-        String fadtype = txfFadetype.getText().trim();
-        if(cbKapacitet.getSelectionModel().getSelectedItem()==null)
-            StartVindue.fejlIOprettelseAlert("husk at vælge kapacitet");
-        int kapacitet = (cbKapacitet.getSelectionModel().getSelectedItem());
-        String ophavsland = txfOphavsland.getText().trim();
-        String leverandoer = txfLeverandoer.getText().trim();
-        LocalDate indkoebsdato = dpIndkoebsdato.getValue();
-        String historik = txaHistorik.getText().trim();
-        medarbejder = startVindue.getMedarbejder();
+        try {
+            String fadtype = txfFadetype.getText().trim();
+            if (cbKapacitet.getSelectionModel().getSelectedItem() == null)
+                StartVindue.fejlIOprettelseAlert("husk at vælge kapacitet");
+            int kapacitet = (cbKapacitet.getSelectionModel().getSelectedItem());
+            String ophavsland = txfOphavsland.getText().trim();
+            String leverandoer = txfLeverandoer.getText().trim();
+            LocalDate indkoebsdato = dpIndkoebsdato.getValue();
+            String historik = txaHistorik.getText().trim();
+            medarbejder = startVindue.getMedarbejder();
 
 
-        if (!fadtype.isEmpty() && !ophavsland.isEmpty() && !leverandoer.isEmpty() && indkoebsdato != null && lager != null) {
-            fad = Controller.opretFad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik, medarbejder);
-            lager.addLagerenhedAt(reol, hylde, fad);
-            txfFadetype.clear();
-            txfOphavsland.clear();
-            txfLeverandoer.clear();
-            txaHistorik.clear();
-            this.hide();
-            StartVindue.succesIOprettelseAlert();
-        } else {
+            if (!fadtype.isEmpty() && !ophavsland.isEmpty() && !leverandoer.isEmpty() && indkoebsdato != null && lager != null) {
+                fad = Controller.opretFad(indkoebsdato, fadtype, kapacitet, ophavsland, leverandoer, historik, medarbejder);
+                lager.addLagerenhedAt(reol, hylde, fad);
+                txfFadetype.clear();
+                txfOphavsland.clear();
+                txfLeverandoer.clear();
+                txaHistorik.clear();
+                this.hide();
+                StartVindue.succesIOprettelseAlert();
+            } else {
+                StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette fadet.");
+            }
+        }catch(Exception e){
             StartVindue.fejlIOprettelseAlert("Der mangler noget information for at oprette fadet.");
         }
 

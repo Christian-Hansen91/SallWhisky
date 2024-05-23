@@ -34,9 +34,9 @@ public class Controller {
         return fad;
     }
 
-    public static Whiskydestillering opretWhiskydestillering(Maltning maltning, LocalDate startdato, LocalDate slutdato, double maengdeVand,
+    public static Whiskydestillering opretWhiskydestillering(Maltning maltning, LocalDate startdato, LocalDate slutdato,
                                                              double head, double heart, double tail, String kommentar, double alkoholprocent, Medarbejder medarbejder) {
-        Whiskydestillering whiskydestillering = new Whiskydestillering(maltning, startdato, slutdato, maengdeVand, head, heart, tail, kommentar, alkoholprocent, medarbejder);
+        Whiskydestillering whiskydestillering = new Whiskydestillering(maltning, startdato, slutdato, head, heart, tail, kommentar, alkoholprocent, medarbejder);
         Storage.addWhiskydestillering(whiskydestillering);
         return whiskydestillering;
     }
@@ -321,7 +321,6 @@ public class Controller {
         ArrayList<Whiskydestillering> WhiskydestilleringerMedTilgængeligVæske = new ArrayList<>();
         for (int i = 0; i < Storage.getWhiskydestilleringer().size(); i++) {
             if (!(Storage.getWhiskydestilleringer().get(i).hentTilgaengeligVaeske() == 0)) {
-                System.out.println(Storage.getWhiskydestilleringer().get(i).hentTilgaengeligVaeske());
                 WhiskydestilleringerMedTilgængeligVæske.add(Storage.getWhiskydestilleringer().get(i));
             }
         }

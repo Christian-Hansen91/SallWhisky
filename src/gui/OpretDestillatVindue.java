@@ -127,6 +127,7 @@ public class OpretDestillatVindue extends Stage {
     }
 
     private void opretVaeskeTilDestillatAction() {
+
         if (destillat == null) {
             if (cbFade.getSelectionModel().getSelectedItem() == null) {
                 StartVindue.fejlIOprettelseAlert("Vælg et passende fad fra listen");
@@ -164,14 +165,18 @@ public class OpretDestillatVindue extends Stage {
     }
 
     private void gemDestillatAction() {
-        String kommentar = txfKommentar.getText().trim();
-        fad = cbFade.getSelectionModel().getSelectedItem();
-        if (Controller.tjekKapacitetFad(fad,destillat.hentTotalMaengde())) {
-            Controller.tilfoejDestillatTilSTorage(destillat);
-            this.hide();
-            StartVindue.succesIOprettelseAlert();
-        } else {
-            StartVindue.fejlIOprettelseAlert("Der er ikke plads i fadet til destillatet");
+        try {
+            String kommentar = txfKommentar.getText().trim();
+            fad = cbFade.getSelectionModel().getSelectedItem();
+            if (Controller.tjekKapacitetFad(fad, destillat.hentTotalMaengde())) {
+                Controller.tilfoejDestillatTilSTorage(destillat);
+                this.hide();
+                StartVindue.succesIOprettelseAlert();
+            } else {
+                StartVindue.fejlIOprettelseAlert("Der er ikke plads i fadet til destillatet");
+            }
+        } catch(Exception e){
+            StartVindue.fejlIOprettelseAlert("Husk at tilføje væske til destilatet");
         }
     }
 

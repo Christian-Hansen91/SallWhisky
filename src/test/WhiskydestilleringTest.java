@@ -20,7 +20,7 @@ class WhiskydestilleringTest {
     void setup() {
         medarbejder = new Medarbejder("alice",5050);
         maltning = new Maltning(100, "Byg","Lars' Mark", medarbejder);
-        whiskyDestillering = new Whiskydestillering(maltning, LocalDate.now(), LocalDate.now(),1000,50,850,150,"test",60,medarbejder);
+        whiskyDestillering = new Whiskydestillering(maltning, LocalDate.now(), LocalDate.now(),50,850,150,"test",60,medarbejder);
         fad = new Fad(LocalDate.now(),"eg",70,"spanien","spanish cooperage","sherry", medarbejder);
         destillat = new Destillat(fad, medarbejder);
     }
@@ -48,7 +48,7 @@ class WhiskydestilleringTest {
 
     @Test
     void opretDestillering() {
-        whiskyDestillering = new Whiskydestillering(maltning,LocalDate.now(),LocalDate.now().plusDays(5),100,50,850,150,"testdestillering",60,medarbejder);
+        whiskyDestillering = new Whiskydestillering(maltning,LocalDate.now(),LocalDate.now().plusDays(5),50,850,150,"testdestillering",60,medarbejder);
         assertNotNull(whiskyDestillering);
         assertEquals(whiskyDestillering,medarbejder.getWhiskydestilleringer().get(medarbejder.getWhiskydestilleringer().size() - 1));
     }
