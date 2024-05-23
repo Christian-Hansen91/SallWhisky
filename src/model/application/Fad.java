@@ -2,7 +2,7 @@ package model.application;
 
 import java.time.LocalDate;
 
-public class Fad implements Lagerenhed{
+public class Fad implements Lagerenhed {
     private static int totalAntal;
     private int id;
     private LocalDate indkoebsdato;
@@ -28,6 +28,10 @@ public class Fad implements Lagerenhed{
         this.medarbejder = medarbejder;
     }
 
+    public static int getTotalAntal() {
+        return totalAntal;
+    }
+
     public int getId() {
         return id;
     }
@@ -43,15 +47,13 @@ public class Fad implements Lagerenhed{
     public boolean tjekPlads(double liter) {
         return hentOpbrugtKapacitet() + liter <= kapacitet;
     }
+
     public Destillat getDestillat() {
         return destillat;
     }
 
     public double hentOpbrugtKapacitet() {
         return destillat.hentTotalMaengde();
-    }
-    public static int getTotalAntal() {
-        return totalAntal;
     }
 
     @Override
@@ -75,6 +77,16 @@ public class Fad implements Lagerenhed{
     }
 
     public void fjernDestilat() {
-        destillat=null;
+        if (!(destillat.getKommentar().isEmpty())) {
+            historik += ". På fadet har destillatet #" + destillat.getId() + " lagt, som blandt andet " + destillat.getKommentar().get(0);
+        } else {
+            historik += ". På fadet har destillatet #" + destillat.getId() + " lagt";
+        }
+        destillat = null;
+        System.out.println(historik);
+    }
+
+    public double getKapacitet() {
+        return kapacitet;
     }
 }

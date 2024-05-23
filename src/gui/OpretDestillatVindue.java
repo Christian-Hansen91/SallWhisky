@@ -71,7 +71,7 @@ public class OpretDestillatVindue extends Stage {
 
         pane.add(cbDestilleringer, 0, 2, 2, 1);
         cbDestilleringer.setMaxWidth(200);
-        cbDestilleringer.getItems().addAll(Controller.getWhiskydestilleringer());
+        cbDestilleringer.getItems().addAll(Controller.getWhiskydestilleringerMedTilgængeligVæske());
         cbDestilleringer.setPromptText("Vælg destillering");
         cbDestilleringer.setVisibleRowCount(2);
 
@@ -101,7 +101,7 @@ public class OpretDestillatVindue extends Stage {
         pane.setHalignment(lblTilfoejTilFad, HPos.RIGHT);
         pane.add(cbFade, 3, 7, 2, 1);
         cbFade.setMaxWidth(200);
-        cbFade.getItems().addAll(Controller.getFade());
+        cbFade.getItems().addAll(Controller.getTommeFade());
         cbFade.setOnAction(event -> fadValgt());
         cbFade.setVisibleRowCount(2);
 

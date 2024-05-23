@@ -47,6 +47,7 @@ public class Destillat {
 
     public void saetAngelShare() {
         this.angelShare = hentTotalMaengde();
+        fad.fjernDestilat();
     }
 
     public double hentTotalMaengde() {
@@ -121,9 +122,5 @@ public class Destillat {
     }
     public void tilfoejVaeskeTilWhisky(VaeskeWhiskyInterface whiskyMaengde) {
         this.vaeskeTilWhiskyer.add(whiskyMaengde);
-    }
-    public void fjernFad(){
-        fad.fjernDestilat();
-        fad=null;
     }
 }

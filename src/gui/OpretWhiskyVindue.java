@@ -220,7 +220,6 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             cbDestillater.setVisibleRowCount(2);
             if (toemDestilat == true) {
                 destillat.saetAngelShare();
-                destillat.fjernFad();
                 toemDestilat = false;
                 lblToemDestillat.setText("");
             }
