@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.application.Lager;
@@ -44,6 +45,7 @@ public class LagerVindue extends Stage {
         gridPane.setHgap(5);
         gridPane.setStyle("-fx-background-image: url('https://migogaarhus.dk/wp-content/uploads/2021/01/Sall-whisky.jpg')");
         lblValg.setTextFill(Color.BURLYWOOD);
+        HBox hbox = new HBox();
         lagerPane = new GridPane();
         gridPane.add(lagerPane, 0, 3);
         gridPane.add(lblValg,0,2);
@@ -54,7 +56,6 @@ public class LagerVindue extends Stage {
         cbLager.setValue(cbLager.getItems().get(0));
         opdaterValgtLager();
         opdaterLagerVindue();
-        gridPane.add(cbLager, 0, 1);
         cbLager.setOnAction(e -> {
             opdaterValgtLager();
             opdaterLagerVindue();
@@ -62,8 +63,10 @@ public class LagerVindue extends Stage {
         gridPane.add(new Label("                                                           "), 1, 1);
         Button btnBekraeft = new Button("Bekræft");
         btnBekraeft.setOnAction(e -> bekraeftAction());
-        gridPane.add(btnBekraeft, 2,1);
         gridPane.setHalignment(btnBekraeft, HPos.RIGHT);
+        hbox.getChildren().add(cbLager);
+        hbox.getChildren().add(btnBekraeft);
+        gridPane.add(hbox,0,1);
     }
 
     private void opdaterLagerVindue() {
