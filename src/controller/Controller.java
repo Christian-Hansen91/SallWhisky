@@ -104,20 +104,14 @@ public class Controller {
     }
 
     public static ArrayList<Destillat> getDestillater() {
-        ArrayList<Destillat> destillater = new ArrayList<>();
-        for (int i = 0; i < getFade().size(); i++) {
-            destillater.add(getFade().get(i).getDestillat());
-        }
-        return destillater;
+        return Storage.getDestillater();
     }
 
     public static ArrayList<Destillat> getModneDestillater() {
         ArrayList<Destillat> destillater = new ArrayList<>();
-        for (int i = 0; i < getFade().size(); i++) {
-            if (!(getFade().get(i).getDestillat() == null)) {
-                if (getFade().get(i).getDestillat().getDato().isBefore(LocalDate.now().minusYears(3))) {
-                    destillater.add(getFade().get(i).getDestillat());
-                }
+        for (Destillat destillat : Storage.getDestillater()) {
+            if (destillat.getDato().isBefore(LocalDate.now().minusYears(3))) {
+                destillater.add(destillat);
             }
         }
         return destillater;
@@ -160,7 +154,6 @@ public class Controller {
         }
         return whiskyer;
     }
-
     public static ArrayList<Whisky> soegWhiskyId(int nr) {
         ArrayList<Whisky> whiskyer = new ArrayList<>();
         if (nr != 0) {
@@ -172,7 +165,6 @@ public class Controller {
         }
         return whiskyer;
     }
-
     public static List<Destillat> soegDestillatKommentar(String kommentar) {
         ArrayList<Destillat> destillater = new ArrayList<>();
         if (!kommentar.isEmpty()) {
@@ -184,7 +176,6 @@ public class Controller {
         }
         return destillater;
     }
-
     public static List<Destillat> soegDestillatId(int id) {
         ArrayList<Destillat> destillater = new ArrayList<>();
         if (id != 0) {
@@ -196,16 +187,15 @@ public class Controller {
         }
         return destillater;
     }
-
     public static List<Destillat> fjernUnderTre(List<Destillat> alleDestillat) {
-        ArrayList<Destillat> gamleDestillater = new ArrayList<>();
+        ArrayList<Destillat> modneDestillater = new ArrayList<>();
         for (Destillat destillat : alleDestillat) {
             if (ChronoUnit.YEARS.between(destillat.getDato(), LocalDate.now()) >= 3) {
-                gamleDestillater.add(destillat);
+                modneDestillater.add(destillat);
             }
         }
 
-        return gamleDestillater;
+        return modneDestillater;
     }
 
     public static boolean lagerpladsLedig(Lager lager, int reol, int hylde) {
