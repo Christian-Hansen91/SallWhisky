@@ -184,7 +184,7 @@ public class StartVindue extends Application {
         opretDestillatVindue.showAndWait();
     }
     private void opretVaeskeTilWhiskyAction() {
-        opretWhiskyVindue = new OpretWhiskyVindue("Opret whiskytapning", stage, this);
+        opretWhiskyVindue = new OpretWhiskyVindue("Opret whiskytapning", stage, this, this.medarbejder);
         opretWhiskyVindue.showAndWait();
     }
     public void setMedarbejder(Medarbejder medarbejder) {

@@ -49,10 +49,13 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
     private Label lblLager = new Label("");
     private Lager lager;
     private int reol, hylde;
+    private StartVindue startVindue;
     private Medarbejder medarbejder;
     private Exception manglendeOplysningerException = new Exception("Et eller flere felter er ikke udfyldt");
 
-    public OpretWhiskyVindue(String title, Stage owner, StartVindue startVindue) {
+    public OpretWhiskyVindue(String title, Stage owner, StartVindue startVindue, Medarbejder medarbejder) {
+        this.startVindue = startVindue;
+        this.medarbejder = medarbejder;
         this.initOwner(owner);
 
         setTitle("Opret whisky");
@@ -249,6 +252,7 @@ public class OpretWhiskyVindue extends Stage implements LagerenhedsVindue {
             alkoholprocent = Double.parseDouble(txfAlkoholprocent.getText().trim());
             if (alkoholprocent > 100 || alkoholprocent < 40)
                 throw new IllegalArgumentException("Fejl i alkoholsprocent, skal være mellem 40 og 100");
+            medarbejder = startVindue.getMedarbejder();
             Whisky whisky = Controller.opretWhisky(localDate, navn, beskrivelse, flaskeStr, vandTilfoejet, alkoholprocent, medarbejder, beregnWhiskyBetegnelse());
             if (!(lager == null)) {
                 int antalFlasker = antalFlaskerNoedvendige();

@@ -79,7 +79,6 @@ public class Whisky {
                 "Vand tilføjet: " + vandTilfoejet + "\n" +
                 "Betegnelse: " + whiskyBetegnelse + "\n" +
                 "Alkoholprocent: " + alkoholprocent + "\n" +
-                lager + "\n" +
                 medarbejder;
     }
 }
