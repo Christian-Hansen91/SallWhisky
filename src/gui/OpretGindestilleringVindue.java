@@ -187,6 +187,8 @@ public class OpretGindestilleringVindue extends Stage implements LagerenhedsVind
     }
 
     private void opretGindestillering() {
+        if(dpStartdato.getValue()==null)
+            StartVindue.fejlIOprettelseAlert("Husk at tilføje en dato");
         LocalDate startdato = dpStartdato.getValue();
         LocalDate slutdato = dpSlutdato.getValue();
         double vandTilfoejet = 0.0;
